@@ -1,0 +1,24 @@
+$susy: (
+	'columns': susy-repeat(12),
+	'gutters': 20px,
+	'container-spread': 'wide'
+);
+
+$mobile: (
+	'max-width': 640px,
+	'columns': susy-repeat(4),
+	'gutters': 20px,
+);
+
+$tablet: (
+	'min-width': 640px,
+	'max-width': 960px,
+	'columns': susy-repeat(8),
+	'gutters': 20px,
+);
+
+$desktop: (
+	'min-width': 960px,
+	'columns': susy-repeat(12),
+	'gutters': 20px,
+);

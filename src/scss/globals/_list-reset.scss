@@ -1,0 +1,19 @@
+//////////
+// List reset style mixin, can (should) be refactored to allow arguments so it can be expanded to full multi use
+// in example to call upon any type list like bullet list etc, normal list with padding, normal list without padding etc..
+//
+
+@mixin list-reset($margin-list: 0, $margin-list-item: 0, $padding-list: 0, $padding-list-item: 0) {
+  list-style: none;
+
+  @at-root #{&} {
+    @include rem(padding, $padding-list);
+    @include rem(margin, $margin-list);
+  }
+
+  li {
+    @include rem(padding, $padding-list-item);
+    @include rem(margin, $margin-list-item);
+  }
+
+}

@@ -1,0 +1,5 @@
+@mixin touch-action() {
+  // eliminate 300ms delay for click event on IE and chrome
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
