@@ -1,14 +1,3 @@
 @import "scss/susy";
 @import "scss/globals";
 @import "scss/globals/_libs/normalize";
-
-body {
-	background: #999;
-}
-
-div {
-	color: $pink-dark;
-	padding: 30px;
-	background: #fff;
-	@include border-radius(20px);
-}
