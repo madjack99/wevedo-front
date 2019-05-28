@@ -2,44 +2,45 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import icons from '../../images/social-networks.png'
+import icons from '../../images/social-networks.png';
 
 
 class Footer extends Component {
     state = {}
+
     render() {
-        return (
-            <FooterWrapper>
-                <Row>
-                    <ul>
-                        <li className='footer-elements'>
-                            <Link path='/'>
+      return (
+        <FooterWrapper>
+          <Row>
+            <ul>
+              <li className="footer-elements">
+                <Link path="/">
                                 2019 Wewedo
-                                </Link>
-                        </li>
-                        <div className='footer-dot'></div>
-                        <li className='footer-elements'>
-                            <Link path='/'>
+                </Link>
+              </li>
+              <div className="footer-dot" />
+              <li className="footer-elements">
+                <Link path="/">
                                 Contact
-                                </Link>
-                        </li>
-                        <div className='footer-dot'></div>
-                        <li className='footer-elements'>
-                            <Link path='/'>
-                                {`Terms & Conditions`}
-                            </Link>
-                        </li>
-                        <div className='footer-dot'></div>
-                        <li className='footer-elements'>
-                            <Link path='/'>
+                </Link>
+              </li>
+              <div className="footer-dot" />
+              <li className="footer-elements">
+                <Link path="/">
+                  {'Terms & Conditions'}
+                </Link>
+              </li>
+              <div className="footer-dot" />
+              <li className="footer-elements">
+                <Link path="/">
                                 Privacy Policy
-                                </Link>
-                        </li>
-                    </ul>
-                    <img className='display-right' src={icons} alt='logo' />
-                </Row>
-            </FooterWrapper>
-        );
+                </Link>
+              </li>
+            </ul>
+            <img className="display-right" src={icons} alt="logo" />
+          </Row>
+        </FooterWrapper>
+      );
     }
 }
 
@@ -78,6 +79,6 @@ a {
     margin-right: 20px;
     margin-top: 42px;
     border-radius : 50%;
-}`
+}`;
 
 export default Footer;
