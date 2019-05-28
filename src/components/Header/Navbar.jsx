@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ButtonToolbar, Button, Row } from 'react-bootstrap';
+import { ButtonToolbar, Button, Row, Col, Container } from 'react-bootstrap';
 import logo from "../../images/symbol.png";
+import '../../../src/index.scss';
 
 
 class Navbar extends Component {
     render() {
         return (
             <NavWrapper>
-                <div className=''>
-                    <Row>
-                        <ul className='menu d-flex'>
+                <Row>
+                    <Col md={4}>
+                    <ul className='menu d-flex'>
                             <li >
                                 <Link path='/'>
                                     Wedding tools
@@ -28,16 +29,25 @@ class Navbar extends Component {
                                 </Link>
                             </li>
                         </ul>
+                    </Col>
+                    <Col md={4}>
+                        <div style={{ display: 'flex', justifyContent: 'center'}}>
                         <img src={logo} alt='logo' />
+                        </div>
+                    </Col>
+                    <Col md={4} style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '15px' }}>
                         <Button className='login_button'>Login</Button>
                         <Button className='business_button'>Business Login</Button>
+                    </Col>
                     </Row>
-                </div>
             </NavWrapper>);
     }
 }
 
-const NavWrapper = styled.nav`
+const centeredRow = styled(Row)`
+`;
+
+const NavWrapper = styled(Container)`
     background-color: #ffffff;
     height: 100px;
     border-bottom: 1px ridge;
@@ -47,7 +57,6 @@ const NavWrapper = styled.nav`
 
     img {
         margin-top: 27px;
-        margin-left : 450px;
         height: 33px;
     }
 

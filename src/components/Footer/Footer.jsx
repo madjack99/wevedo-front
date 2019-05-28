@@ -36,7 +36,7 @@ class Footer extends Component {
                                 </Link>
                         </li>
                     </ul>
-                    <img src={icons} alt='logo' />
+                    <img className='display-right' src={icons} alt='logo' />
                 </Row>
             </FooterWrapper>
         );
@@ -44,24 +44,22 @@ class Footer extends Component {
 }
 
 const FooterWrapper = styled.footer`
-    bottom: 0;
     height: 80px;
     background-color: #ffffff;
     border-top: 1px ridge;
         
-img {
-    height: 16px;
-    margin-top:38px;
-}
+    img {
+        height: 16px;
+        margin-top:38px;
+    }
             
 .footer-elements{
     font-size: 12px;
     letter-spacing: 1.2px;
 }
-ul {
-    margin-left: 100px;
-    margin-right:740px;
+ul {    
     display: flex;
+
 }
 li {
     margin-top: 36px;
@@ -72,7 +70,6 @@ a {
     text-decoration: none;
     color: #898989;
 }
-
 .footer-dot {
     width: 4px;
     height: 4px;
