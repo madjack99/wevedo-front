@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ckurban/wevedo-website/static/css/main.4799ec34.chunk.css",
+    "main.js": "/ckurban/wevedo-website/static/js/main.eba61678.chunk.js",
+    "main.js.map": "/ckurban/wevedo-website/static/js/main.eba61678.chunk.js.map",
+    "runtime~main.js": "/ckurban/wevedo-website/static/js/runtime~main.7440e2b7.js",
+    "runtime~main.js.map": "/ckurban/wevedo-website/static/js/runtime~main.7440e2b7.js.map",
+    "static/js/2.036b5b7d.chunk.js": "/ckurban/wevedo-website/static/js/2.036b5b7d.chunk.js",
+    "static/js/2.036b5b7d.chunk.js.map": "/ckurban/wevedo-website/static/js/2.036b5b7d.chunk.js.map",
+    "index.html": "/ckurban/wevedo-website/index.html",
+    "precache-manifest.85b1f69b4ba61fb095cc4466a63543d6.js": "/ckurban/wevedo-website/precache-manifest.85b1f69b4ba61fb095cc4466a63543d6.js",
+    "service-worker.js": "/ckurban/wevedo-website/service-worker.js",
+    "static/css/main.4799ec34.chunk.css.map": "/ckurban/wevedo-website/static/css/main.4799ec34.chunk.css.map",
+    "static/media/wevedo.scss": "/ckurban/wevedo-website/static/media/ProximaNova-Regular.410504d4.otf",
+    "static/media/decoration.png": "/ckurban/wevedo-website/static/media/decoration.608c7f30.png",
+    "static/media/florist.png": "/ckurban/wevedo-website/static/media/florist.98b739cb.png",
+    "static/media/main-page1.png": "/ckurban/wevedo-website/static/media/main-page1.8c1489dc.png",
+    "static/media/music.png": "/ckurban/wevedo-website/static/media/music.a05a8080.png",
+    "static/media/photography.png": "/ckurban/wevedo-website/static/media/photography.4520fa7b.png",
+    "static/media/wedding dress.png": "/ckurban/wevedo-website/static/media/wedding dress.1560aaef.png"
+  }
+}

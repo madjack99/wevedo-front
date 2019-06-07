@@ -1,24 +1,39 @@
 @font-face {
-    font-family: 'Proxima Nova Regular';
-    src : local('Proxima Nova Regular'), url(./Font/ProximaNova-Regular.otf) format('otf'); 
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: 300;
+    src : url(./Font/ProximaNova-Regular.otf) format('opentype'); 
+}
+@font-face {
+    font-family: Proxima Nova;
+    font-style: bold;
+    src : url(./Font/ProximaNova-Bold.otf) format('opentype'); 
 }
 
 @font-face {
-    font-family: 'Butler Black';
-    src: local('Butler Black'), url(./Font/Butler_Black.otf);   
+    font-family: Butler Black;
+    src: url(./Font/Butler_Black.otf) format("opentype");   
 }
 
 @font-face {
-    font-family: 'Butler Bold';
-    src: local('Butler-Bold') , url(./Font/Butler_Bold.otf);
+    font-family: Butler Bold;
+    src: url(./Font/Butler_Bold.otf) format("opentype");
 }
 
 body {
-    font-family: 'Proxima Nova Regular';
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
 }
-.Butler {
-    font-family: 'Butler Black';
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Butler Bold';
 }
-.Butler-bold {
-    font-family: 'Butler-Bold';
+
+.navbar-wevedo {
+	height: 80px;
+	.nav-wevedo {
+		letter-spacing: 1px;
+	}
 }

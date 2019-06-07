@@ -1,0 +1,21 @@
+.navbar {
+	padding: 1rem 2.2rem;
+	letter-spacing: 1px;
+	.navbar-nav {
+		.nav-link {
+			color: #333;
+			padding: 13px;
+		}
+		.dropdown {
+			font-weight: bold;
+			.dropdown-toggle:after { content: none }
+		}
+	}
+	.navbar-brand {
+		top: 10px;
+		img { width: 135px }
+		position: absolute;
+	  left: 50%;
+	  transform: translateX(-50%);
+	}
+}

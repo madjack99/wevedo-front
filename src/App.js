@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './index.scss';
-import Navbar from './components/Header/Navbar';
+import './sass/wevedo.scss';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MainPage from './components/MainPage';
 
@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <Header />
         <MainPage />
         <Footer />
       </React.Fragment>
