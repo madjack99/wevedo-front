@@ -28,93 +28,55 @@ class MainPage extends Component {
           </Container>
         </div>
 
-        <HowItWorks>
-          <h1>how it works</h1>
-          <hr />
+        <div className="howitworks">
           <Container>
             <Row>
-              <Col className="col-first">
-                <Image src={searchicon} alt="search-icon" className="center" />
-                <p>Search for your perfect venue or supplier by category, location and budget.</p>
+              <Col><h2 className="text-uppercase">How it works</h2><hr /></Col>
+            </Row>
+          
+            <Row className="howitworks-boxes">
+              <Col>
+                <div>
+                  <Image src={searchicon} alt="search-icon"/>
+                  <p>Search for your perfect venue or supplier by category, location and budget.</p>
+                </div>
               </Col>
-              <Col className="col-first">
-                <Image src={calendar} alt="calendar-icon" className="center" />
-                <p>See real time availability for your venue or supplier booking.</p>
+              <Col>
+                <div>
+                  <Image src={calendar} alt="calendar-icon"/>
+                  <p>See real time availability for your venue or supplier booking.</p>
+                </div>
               </Col>
-              <Col className="col-first">
-                <Image src={chat} alt="chat-icon" className="center" />
-                <p>Message suppliers directly through the app to make enquiries or bookings.</p>
+              <Col>
+                <div>
+                  <Image src={chat} alt="chat-icon"/>
+                  <p>Message suppliers directly through the app to make enquiries or bookings.</p>
+                </div>
               </Col>
             </Row>
-          </Container>
-          <Container>
-            <Row style={{ marginTop: '100px' }}>
-              <Col xs lg="5" className="col-second">
+          
+            <Row className="howitworks-img">
+              <Col md={5}>
                 <Image src={weddingdress} alt="wedding-dress" />
               </Col>
-              <Col xs lg="4" className="col-second">
-                <Image src={musicphoto} alt="music-photo" />
-                <Image src={florist} alt="florist-photo" />
+              <Col md={4}>
+                <Row>
+                  <Col sm={12} className="mb-4"><Image src={musicphoto} alt="music-photo" /></Col>
+                  <Col sm={12}><Image src={florist} alt="florist-photo" /></Col>
+                </Row>
               </Col>
-              <Col xs lg="3" className="col-second">
-                <Image src={photography} alt="photo-icon" />
-                <Image src={decoration} alt="decoration-photo" />
+              <Col md={3}>
+                <Row>
+                  <Col sm={12} className="mb-4"><Image src={photography} alt="photo-icon" /></Col>
+                  <Col sm={12}><Image src={decoration} alt="decoration-photo" /></Col>
+                </Row>
               </Col>
             </Row>
           </Container>
-        </HowItWorks>
+        </div>
       </React.Fragment>
     );
   }
 }
-
-const HowItWorks = styled.div`
-
-  margin-top: 200px;
-  margin-bottom:100px;
-  .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-      margin-top:30px;
-    }
-
-
-
-  .col-second img {
-
-  }
-
-   p{
-        margin-top:30px;
-        font-size: 16px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.75;
-        letter-spacing: normal;
-        text-align: center;
-        color: var(--black);
-    }
-  .col-first {
-      height:310px;
-      width: 320px;
-      margin: 40px;
-      border-radius: 5px;
-      border: solid 1px #9b9b9b;
-  }
-
-  h1{
-      text-align: center;
-      font-size:35px;
-      text-transform : uppercase;
-  }
-  hr{
-      width: 71px;
-    height: 3px;
-    background-image: linear-gradient(60deg, #ffafbd, #ffc3a0);
-  }
-  `;
 
 export default MainPage;
