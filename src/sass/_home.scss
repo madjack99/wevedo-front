@@ -102,10 +102,52 @@ hr {
   .weddingtools-boxes {
     border: 1px solid $gray-300;
     border-radius: 5px;
+    img { width: 40px }
     h3 {
       font-family: 'Proxima Nova Bold';
       font-size: 1rem;
-      letter-spacing: 1.2px;
+    }
+  }
+}
+
+.popularserches {
+  background-color: #f4f7fc;
+  padding-top: 70px;
+  ul {
+    li {
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.8rem;
+    }
+  }
+  img { width: 100%; }
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: all .3s ease;
+    background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+  }
+  .overlayed {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    &:hover { 
+      .overlay { opacity: .85; }
+    }
+    .fa {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
     }
   }
 }

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import icons from '../../images/social-networks.png';
 
 class Footer extends Component {
   render() {
@@ -21,8 +19,12 @@ class Footer extends Component {
                 <Nav.Link href="">Privacy Policy</Nav.Link>
               </Nav>            
             </Col>
-            <Col sm={2}>
-              <img className="display-right" src={icons} alt="logo" />
+            <Col sm={2} className="text-right">
+              <Row className="text-right">
+                <Col className="p-0"><i className="fab fa-instagram"></i></Col>
+                <Col className="p-0"><i className="fab fa-facebook"></i></Col>
+                <Col className="p-0"><i className="fab fa-twitter"></i></Col>
+              </Row>
             </Col>
           </Row>
         </Container>

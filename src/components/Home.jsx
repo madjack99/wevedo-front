@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'; // to be taken out
-
 import { Image, Row, Container, Col, Form, Button } from 'react-bootstrap';
 import '../sass/wevedo.scss';
-
 import searchicon from '../images/search-icon.png';
 import calendar from '../images/calendar.png';
 import chat from '../images/chat-icon.png';
@@ -12,6 +9,12 @@ import musicphoto from '../images/music.png';
 import florist from '../images/florist.png';
 import photography from '../images/photography.png';
 import decoration from '../images/decoration.png';
+import guestlist from '../images/guestlist-icon.png';
+import budget from '../images/budget-icon.png';
+import serches1 from '../images/serches1.png';
+import serches2 from '../images/serches2.png';
+import serches3 from '../images/serches3.png';
+import serches4 from '../images/serches4.png';
 
 class Home extends Component {
   render() {
@@ -106,7 +109,7 @@ class Home extends Component {
             <Col>
               <div className="weddingtools-boxes p-5">
                 <Row>
-                  <Col sm={1}>icon</Col>
+                  <Col sm={2}><img src={guestlist} alt=""/></Col>
                   <Col>
                     <h3 className="text-uppercase">Guestlist</h3>
                     <p>Seamlessly create and manage lists and RSVPs for all your events.</p>
@@ -117,7 +120,7 @@ class Home extends Component {
             <Col>
               <div className="weddingtools-boxes p-5">
                 <Row>
-                  <Col sm={1}>icon</Col>
+                  <Col sm={2}><img src={budget} alt=""/></Col>
                   <Col>
                     <h3 className="text-uppercase">Budget</h3>
                     <p>Manage your wedding budget and track your spending to ensure you stay on budget.</p>
@@ -127,6 +130,71 @@ class Home extends Component {
             </Col>
           </Row>
         </Container>
+
+        <Row className="popularserches">
+          <Container className="pb-5">
+            <Row>
+              <Col sm={6}>
+                <h3 className="text-uppercase">Popular venue serches</h3>
+                <p>
+                  At some stage in all our lives we want clearer, fresher, younger looking skin. Well it can be achieved without spending a lot of money.
+                </p>
+              </Col>
+              <Col sm={6}>
+                <Row>
+                  <Col>
+                    <ul>
+                      <li>Essex</li>
+                      <li>Hertforshire</li>
+                      <li>West Midlands</li>
+                      <li>Hampshire</li>
+                    </ul>
+                  </Col>
+                  <Col>
+                    <ul>
+                      <li>Essex</li>
+                      <li>Hertforshire</li>
+                      <li>West Midlands</li>
+                      <li>Hampshire</li>
+                    </ul>
+                  </Col>
+                  <Col>
+                    <ul>
+                      <li>Essex</li>
+                      <li>Hertforshire</li>
+                      <li>West Midlands</li>
+                      <li>Hampshire</li>
+                    </ul>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches1} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches2} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches3} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches4} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+        </Row>
           
       </React.Fragment>
     );
