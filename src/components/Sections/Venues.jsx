@@ -76,10 +76,10 @@ class Venues extends Component {
 		            <Button variant="dark">Clear</Button>
 		          </ButtonToolbar>
         		</Col>
-        		<Col sm={8} className="results-data h-100 align-items-center">
+        		<Col sm={8} className="results-data">
         			<Col>
         				<Row className="mb-4">
-        					<Col className="mr-auto text-uppercase"><h4>740 Wedding Venues</h4></Col>
+        					<Col className="mr-auto text-uppercase"><h4 className="pt-2">740 Wedding Venues</h4></Col>
         					<Col className="text-right">
         						<Button variant="secondary" className="mr-2">Show map</Button>
         						<Button variant="secondary" className="mr-2"><i class="fas fa-th-large"></i></Button>
@@ -127,7 +127,17 @@ class Venues extends Component {
         				</Row>
         				<Row className="mt-5">
         					<Col>
-	        					
+	        					<ButtonToolbar>
+	        						<Button variant="light" className="mr-2"><i className="fa fa-angle-double-left"></i></Button>
+	        						<Button variant="light" className="mr-2"><i className="fa fa-angle-left"></i></Button>
+	        						<Button className="mr-2">1</Button>
+	        						<Button className="mr-2" variant="secondary">2</Button>
+	        						<Button className="mr-2" variant="secondary">3</Button>
+	        						<Button variant="light" className="mr-2"><i className="fa fa-angle-right"></i></Button>
+	        					</ButtonToolbar>
+									</Col>
+									<Col className="text-right pt-2">
+										<span className="text-muted">Showing 1 - 6 of 8 results</span>
 									</Col>
         				</Row>
         			</Col>
