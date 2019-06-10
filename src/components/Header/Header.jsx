@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown, ButtonToolbar, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import logo from '../../images/symbol.png';
 
 class Header extends Component {
@@ -9,8 +10,8 @@ class Header extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="text-uppercase mr-auto">
-            <Nav.Link href="#weddingtools"><b>Wedding Tools</b></Nav.Link>
-            <Nav.Link href="/venues"><b>Venues</b></Nav.Link>
+            <Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link>
+            <Nav.Link><Link to="/venues"><b>Venues</b></Link></Nav.Link>
             <NavDropdown title="Suppliers">
               <NavDropdown.Item href="#action/3.1">Will</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">check</NavDropdown.Item>
@@ -22,7 +23,7 @@ class Header extends Component {
             <Button variant="dark">Bussiness Login</Button>
           </ButtonToolbar>
         </Navbar.Collapse>
-        <Navbar.Brand href="#home"><img src={logo} alt="logo"/></Navbar.Brand>
+        <Navbar.Brand href="#home"><Link to="/"><img src={logo} alt="logo"/></Link></Navbar.Brand>
       </Navbar>
     );
   }
