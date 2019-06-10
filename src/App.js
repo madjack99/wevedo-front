@@ -4,8 +4,8 @@ import './sass/wevedo.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './components/Home';
-import Venues from './components/Screens/Venues';
-import Weddingtools from './components/Screens/Weddingtools';
+import Venues from './components/Sections/Venues';
+import Weddingtools from './components/Sections/Weddingtools';
 
 class App extends Component {
   render() {

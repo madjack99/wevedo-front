@@ -1,0 +1,55 @@
+.venues {
+	background: url(../images/venues-bg.png);
+	background-size: cover;
+	background-position: center;
+	margin-top: 75px;
+	height: calc(100vh - 75px);
+	color: white;
+	h1 {
+		font-size: 3rem;
+		letter-spacing: 5px;
+		line-height: 70px;
+		text-shadow: 0px 2px 5px #222;
+	}
+}
+
+.findseparator-sm {
+  height: 120px;
+  margin: 0;
+  form {
+    margin: 30px 100px;
+  }
+}
+
+.results {
+	margin: 80px auto;
+	.results-filters {
+		b { font-size: 13px; }
+	}
+	.results-data {
+		img { 
+			width: 100%; 
+			border-radius: .25rem;
+		}
+		h4 {
+			font-family: 'Proxima Nova';
+			font-size: 1rem;
+		}
+		h5 {
+			font-family: 'Proxima Nova Bold';
+			font-size: 1rem;
+			letter-spacing: 0;
+		}
+		.results-data-location {
+			i {	color: $wevedo;	}
+			color: $gray-600;
+		}
+		b {
+			font-size: 13px;
+		}
+		.divider {
+			border-bottom: 1px solid $gray-200;
+			margin: 30px 0;
+		}
+	}
+}

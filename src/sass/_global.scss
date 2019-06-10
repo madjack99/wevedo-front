@@ -1,6 +1,7 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // transition: all .3s ease;
 }
 
 html, body {
@@ -26,4 +27,12 @@ p {
 	font-size: 13px;
 	line-height: 1.5rem;
 	color: $gray-700;
+}
+
+a {
+	color: $gray-700;
+	&:hover {
+		color: $gray-600;
+		text-decoration: none;
+	}
 }

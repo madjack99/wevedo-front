@@ -15,7 +15,7 @@ $black:    #000 !default;
 $blue:    #0871b9 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
+$pink:    #ffafbd !default;
 $red:     #dc3545 !default;
 $orange:  #fd7e14 !default;
 $yellow:  #fce35c !default;
@@ -23,7 +23,9 @@ $green:   #28a745 !default;
 $teal:    #0871b9 !default;
 $cyan:    #17a2b8 !default;
 
-$primary:       $teal !default;
+$wevedo:  #ffafbd !default;
+
+$primary:       $pink !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
