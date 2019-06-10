@@ -1,8 +1,12 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
 @import "variables.scss";
-@import "mixins.scss";
-@import "global.scss";
 @import "typography.scss";
-@import "navbar.scss";
-@import "home.scss";
-@import "footer.scss";
+@import "mixins.scss";
 @import "bootstrap-overrides.scss";
+@import "global.scss";
+@import "navbar.scss";
+@import "footer.scss";
+@import "home.scss";
+@import "venues.scss";

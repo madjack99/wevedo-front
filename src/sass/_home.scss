@@ -114,6 +114,7 @@ hr {
   background-color: #f4f7fc;
   padding-top: 70px;
   ul {
+    padding: 0;
     li {
       list-style: none;
       font-size: 14px;
@@ -135,8 +136,6 @@ hr {
   }
   .overlayed {
     position: relative;
-    width: 100%;
-    max-width: 400px;
     &:hover { 
       .overlay { opacity: .85; }
     }

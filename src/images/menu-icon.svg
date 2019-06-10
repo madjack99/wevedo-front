@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.624" height="8" viewBox="0 0 17.624 8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Hamburger_Menu" data-name="Hamburger Menu" class="cls-1" d="M327,21h16a0.8,0.8,0,1,1,0,1.6H327A0.8,0.8,0,1,1,327,21Zm0,6.4h16a0.8,0.8,0,1,1,0,1.6H327A0.8,0.8,0,1,1,327,27.4Z" transform="translate(-326.188 -21)"/>
+</svg>

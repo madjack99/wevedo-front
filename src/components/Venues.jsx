@@ -22,10 +22,9 @@ class Home extends Component {
       <React.Fragment>
         <div className="mainpagebg">
           <Container className="h-100 w-100 align-items-center">
-            <Row className="h-100 align-items-center">
+            <Row className="h-100 w-100 align-items-center">
               <Col sm={12} className="text-center text-uppercase">
-                <h4>Special moment</h4>
-                <h1>We can make <br/> it happen</h1>
+                <h1>Wedding<br/> Venues</h1>
               </Col>
             </Row>
           </Container>
@@ -106,10 +105,10 @@ class Home extends Component {
             <Col><h2 className="text-center text-uppercase">Wedding Tools</h2><hr /></Col>
           </Row>
           <Row className="mt-5">
-            <Col className="pb-3">
+            <Col>
               <div className="weddingtools-boxes p-5">
                 <Row>
-                  <Col xs={2}><img src={guestlist} alt=""/></Col>
+                  <Col sm={2}><img src={guestlist} alt=""/></Col>
                   <Col>
                     <h3 className="text-uppercase">Guestlist</h3>
                     <p>Seamlessly create and manage lists and RSVPs for all your events.</p>
@@ -120,7 +119,7 @@ class Home extends Component {
             <Col>
               <div className="weddingtools-boxes p-5">
                 <Row>
-                  <Col xs={2}><img src={budget} alt=""/></Col>
+                  <Col sm={2}><img src={budget} alt=""/></Col>
                   <Col>
                     <h3 className="text-uppercase">Budget</h3>
                     <p>Manage your wedding budget and track your spending to ensure you stay on budget.</p>
@@ -131,12 +130,12 @@ class Home extends Component {
           </Row>
         </Container>
 
-        <div className="popularserches">
+        <Row className="popularserches">
           <Container className="pb-5">
             <Row>
               <Col sm={6}>
                 <h3 className="text-uppercase">Popular venue serches</h3>
-                <p className="d-none d-sm-block">
+                <p>
                   At some stage in all our lives we want clearer, fresher, younger looking skin. Well it can be achieved without spending a lot of money.
                 </p>
               </Col>
@@ -158,7 +157,7 @@ class Home extends Component {
                       <li>Hampshire</li>
                     </ul>
                   </Col>
-                  <Col className="d-none d-sm-block">
+                  <Col>
                     <ul>
                       <li>Essex</li>
                       <li>Hertforshire</li>
@@ -170,33 +169,31 @@ class Home extends Component {
               </Col>
             </Row>
           </Container>
-          <Row className="m-0">
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches1} alt=""/>
-              <div className="overlay">
-                <i className="fa fa-search fa-2x"></i>
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches2} alt=""/>
-              <div className="overlay">
-                <i className="fa fa-search fa-2x"></i>
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches3} alt=""/>
-              <div className="overlay">
-                <i className="fa fa-search fa-2x"></i>
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches4} alt=""/>
-              <div className="overlay">
-                <i className="fa fa-search fa-2x"></i>
-              </div>
-            </Col>
-          </Row>
-        </div>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches1} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches2} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches3} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+          <Col sm={3} className="p-0 overlayed">
+            <img src={serches4} alt=""/>
+            <div class="overlay">
+              <i className="fa fa-search fa-2x"></i>
+            </div>
+          </Col>
+        </Row>
           
       </React.Fragment>
     );

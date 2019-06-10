@@ -1,7 +1,6 @@
 .footer {
 	height: 75px;
 	font-size: 10px;
-	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 1.2px;
 	.nav-link {
@@ -22,4 +21,24 @@
 }
 .footer-border {
 	border-top: 1px solid $gray-200;
+}
+
+@include media-breakpoint-down(sm) {
+ 	.footer {
+ 		height: auto;
+ 		margin: 15px 0;
+	  .links {
+	  	margin-bottom: 10px;
+	  	.nav {
+		  	display: inline;
+		  	a {
+		  		margin-left: 0;
+		  	}
+		  }
+	  }
+	  .social-links {
+	  	border-top: 1px solid $gray-200;
+	  	padding-top: 15px; 
+	  }
+	}
 }
