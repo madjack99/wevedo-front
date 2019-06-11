@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { Row, Container, Col, Form, Button, ButtonToolbar, Carousel } from 'react-bootstrap';
+import { Row, Container, Col, Button, Carousel, Modal, Form } from 'react-bootstrap';
 import '../../sass/wevedo.scss';
 
 import slide from '../../images/supplier-slide.png';
 import map from '../../images/map.png';
+import modalimg from '../../images/wedding dress.png';
 import serches1 from '../../images/serches1.png';
 import serches2 from '../../images/serches2.png';
 import serches3 from '../../images/serches3.png';
 import serches4 from '../../images/serches4.png';
 
 class Venues extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = { modalShow: false };
+  }
   render() {
+    let modalClose = () => this.setState({ modalShow: false });
     return (
       <React.Fragment>
         <div className="supplier">
@@ -30,18 +36,21 @@ class Venues extends Component {
                   <img
                     className="d-block w-100"
                     src={slide}
+                    alt="supplier-slide"
                   />
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src={slide}
+                    alt="supplier-slide"
                   />
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src={slide}
+                    alt="supplier-slide"
                   />
                 </Carousel.Item>
               </Carousel>
@@ -79,13 +88,19 @@ class Venues extends Component {
               <b className="text-uppercase">Find us</b>
               <hr className="hr-xs"/>
               <Col className="p-0">
-                <img src={map} alt="" width="100%"/>
+                <img src={map} alt="map" width="100%"/>
               </Col>
             </Col>
             <Col>
               <Row>
                 <Col sm={12}>
-                  <Button block size="lg" className="text-uppercase">Send a message to supplier</Button>
+                  <Button block size="lg" className="text-uppercase"
+                  onClick={() => this.setState({ modalShow: true })}>
+                  Send a message to supplier</Button>
+                  <MsgToSupplier
+                    show={this.state.modalShow}
+                    onHide={modalClose}
+                  />
                 </Col>
                 <Col sm={12}>
                   <div className="supplier-results-side-box">
@@ -179,5 +194,58 @@ class Venues extends Component {
     );
   }
 }
-
 export default Venues;
+
+class MsgToSupplier extends React.Component {
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        size="lg"
+        aria-labelledby="send-a-message-to-supplier"
+        centered
+        className="supplier-modal-msg"
+      >
+        <Modal.Body className="p-0">
+          <Row>
+            <a className="modal-close-btn" onClick={this.props.onHide}><i class="fas fa-times fa-2x"></i></a>
+            <Col sm={4} className="p-0">
+              <img src={modalimg} alt=""/>
+            </Col>
+            <Col sm={8}>
+              <Form>
+                <h5>Send a message to Supplier Name</h5>
+                <hr className="hr-sm m-0 mt-3 mb-4"/>
+                <Row>
+                  <Col sm={12} className="mb-4">
+                    <Form.Group controlId="">
+                      <Form.Control type="text" placeholder="Name" />
+                    </Form.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <Form.Group controlId="">
+                      <Form.Control type="email" placeholder="Email" />
+                    </Form.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <Form.Group controlId="">
+                      <Form.Control type="number" placeholder="Mobile Number" />
+                    </Form.Group>
+                  </Col>
+                  <Col sm={12} className="mt-4 mb-4">
+                    <Form.Group controlId="">
+                      <Form.Control as="textarea" placeholder="Message" rows="3" />
+                    </Form.Group>
+                  </Col>
+                  <Col className="text-center text-uppercase">
+                    <Button size="lg">Send</Button>
+                  </Col>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+}

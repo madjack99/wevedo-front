@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Container, Col, Form, Button, ButtonToolbar, Pagination } from 'react-bootstrap';
+import { Row, Container, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
 import '../../sass/wevedo.scss';
 
 import sampleImg from '../../images/sample-list-img.png';
