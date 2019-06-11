@@ -5,12 +5,6 @@
 	margin-top: 75px;
 	height: calc(100vh - 75px);
 	color: white;
-	h1 {
-		font-size: 3rem;
-		letter-spacing: 5px;
-		line-height: 70px;
-		text-shadow: 0px 2px 5px #222;
-	}
 }
 
 .findseparator-sm {
@@ -21,7 +15,7 @@
   }
 }
 
-.results {
+.venues-results {
 	margin: 80px auto;
 	.results-filters {
 		b { font-size: 13px; }
@@ -47,9 +41,33 @@
 		b {
 			font-size: 13px;
 		}
-		.divider {
-			border-bottom: 1px solid $gray-200;
-			margin: 30px 0;
-		}
+	}
+}
+
+.supplier {
+	background: url(../images/supplier-bg.png);
+	background-size: cover;
+	background-position: center;
+	margin-top: 75px;
+	height: calc(60vh - 75px);
+	color: white;
+}
+
+.supplier-results {
+	h4 { font-family: 'Proxima Nova Bold'; }
+	b {	
+		font-size: 14px;
+		letter-spacing: .7px;
+	}
+	.supplier-results-side-box {
+		background: $gray-200;
+		margin-top: 30px;
+		border-radius: .3rem;
+		padding: 50px;
+	}
+	.supplier-results-next-btn {
+		font-size: 12px;
+		font-weight: bold;
+		text-transform: uppercase;
 	}
 }

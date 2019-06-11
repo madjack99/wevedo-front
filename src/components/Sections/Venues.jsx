@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Container, Col, Form, Button, ButtonToolbar, Pagination } from 'react-bootstrap';
 import '../../sass/wevedo.scss';
 
@@ -46,7 +47,7 @@ class Venues extends Component {
             </Form>
           </Col>
         </Row>
-        <Container className="results">
+        <Container className="venues-results">
         	<Row>
         		<Col sm={4} className="results-filters">
         			<Form>
@@ -86,15 +87,17 @@ class Venues extends Component {
 				            <Button variant="primary"><i class="fas fa-bars"></i></Button>
         					</Col>
         				</Row>
-        				<Row>
-        					<Col sm={5}><img src={sampleImg} alt=""/></Col>
-        					<Col sm={7}>
-        						<h5>Fulham Palace</h5>
-        						<span className="results-data-location"><i class="fas fa-map-marker-alt"></i> South London</span>
-        						<p className="mt-2 mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-        						<b>$985 - $85,000 | Up to 220 Capacity</b>
-        					</Col>
-        				</Row>
+        				<Link to="/supplier">
+                  <Row>
+          					<Col sm={5}><img src={sampleImg} alt=""/></Col>
+          					<Col sm={7}>
+          						<h5>Fulham Palace</h5>
+          						<span className="results-data-location"><i class="fas fa-map-marker-alt"></i> South London</span>
+          						<p className="mt-2 mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+          						<b>$985 - $85,000 | Up to 220 Capacity</b>
+          					</Col>
+          				</Row>
+                </Link>
         				<div className="divider"></div>
         				<Row>
         					<Col sm={5}><img src={sampleImg} alt=""/></Col>
