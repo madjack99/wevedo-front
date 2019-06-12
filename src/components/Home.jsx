@@ -20,7 +20,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="mainpagebg">
+        <div className="section section-header-full mainpagebg">
           <Container className="h-100 w-100 align-items-center">
             <Row className="h-100 align-items-center">
               <Col sm={12} className="text-center text-uppercase">

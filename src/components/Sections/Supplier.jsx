@@ -19,7 +19,7 @@ class Venues extends Component {
     let modalClose = () => this.setState({ modalShow: false });
     return (
       <React.Fragment>
-        <div className="supplier">
+        <div className="section section-header-half supplier">
 	        <Container className="h-100 w-100 align-items-center">
             <Row className="h-100 align-items-center">
         	    <Col sm={12} className="text-center text-uppercase">
@@ -208,7 +208,7 @@ class MsgToSupplier extends React.Component {
       >
         <Modal.Body className="p-0">
           <Row>
-            <a className="modal-close-btn" onClick={this.props.onHide}><i class="fas fa-times fa-2x"></i></a>
+            <span className="modal-close-btn" onClick={this.props.onHide}><i class="fas fa-times fa-2x"></i></span>
             <Col sm={4} className="p-0">
               <img src={modalimg} alt=""/>
             </Col>

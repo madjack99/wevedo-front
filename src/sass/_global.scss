@@ -60,6 +60,15 @@ a {
 	}
 }
 
+form {
+	input, textarea {
+		font-size: 12px !important; 
+		border: 0 !important;
+		border-radius: 0 !important;
+		border-bottom: 1px solid $gray-400 !important;
+	}
+}
+
 .rc-slider {
 	.rc-slider-rail { height: 3px }
 	.rc-slider-track { height: 3px; background: $wevedo }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Container, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
 import '../../sass/wevedo.scss';
 import 'rc-slider/assets/index.css';
-import Slider, { Range } from 'rc-slider';
+import { Range } from 'rc-slider';
 
 import sampleImg from '../../images/sample-list-img.png';
 import serches1 from '../../images/serches1.png';
@@ -15,7 +15,7 @@ class Venues extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="venues">
+        <div className="section section-header-full venues">
 	        <Container className="h-100 w-100 align-items-center">
             <Row className="h-100 align-items-center">
         	    <Col sm={12} className="text-center text-uppercase">
