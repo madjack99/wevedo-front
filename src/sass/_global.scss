@@ -59,3 +59,15 @@ a {
 		text-decoration: none;
 	}
 }
+
+.rc-slider {
+	.rc-slider-rail { height: 3px }
+	.rc-slider-track { height: 3px; background: $wevedo }
+	.rc-slider-handle { 
+		border: 0; 
+		background-color: $wevedo; 
+		margin-top: -3.5px; 
+		width: 10px; 
+		height: 10px; 
+	}
+}

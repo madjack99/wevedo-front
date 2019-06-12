@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Container, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
 import '../../sass/wevedo.scss';
+import 'rc-slider/assets/index.css';
+import Slider, { Range } from 'rc-slider';
 
 import sampleImg from '../../images/sample-list-img.png';
 import serches1 from '../../images/serches1.png';
@@ -53,9 +55,23 @@ class Venues extends Component {
         			<Form>
 	        			<div className="mb-5">
 	        				<div className="mb-3"><b>Budget</b></div>
+                  <Row>
+                    <Col sm={12}><Range min={0} max={20} defaultValue={[3, 10]} /></Col>
+                    <Col sm={12} className="mt-3">
+                      <span className="text-muted">Price: </span> 
+                      $30 - $100
+                    </Col>
+                  </Row>
 	        			</div>
 	        			<div className="mb-5">
 	        				<div className="mb-3"><b>Seated Dining Capacity</b></div>
+                  <Row>
+                    <Col sm={12}><Range min={0} max={20} defaultValue={[3, 10]} /></Col>
+                    <Col sm={12} className="mt-3">
+                      <span className="text-muted">Seated: </span> 
+                      30 - 100
+                    </Col>
+                  </Row>
 	        			</div>
 	        			<div className="mb-5">
 	        				<div className="mb-3"><b>Venue Type</b></div>
