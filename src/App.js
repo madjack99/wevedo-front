@@ -7,17 +7,29 @@ import Home from './components/Home';
 import Venues from './components/Sections/Venues';
 import Weddingtools from './components/Sections/Weddingtools';
 import Supplier from './components/Sections/Supplier';
+import Login from './components/Login';
+
+const RouteMainLayout = ({ component: Component, ...rest }) => {
+  return (
+    <Route {...rest} render={matchProps => (
+      <React.Fragment>
+        <Header />
+        <Component {...matchProps} />
+        <Footer />
+      </React.Fragment> 
+    )} />
+  )
+};
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <Route exact path="/" component={Home} />
-        <Route path="/weddingtools" component={Weddingtools} />
-        <Route path="/venues" component={Venues} />
-        <Route path="/supplier" component={Supplier} />
-        <Footer />
+        <RouteMainLayout exact path="/" component={Home} />
+        <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+        <RouteMainLayout path="/venues" component={Venues} />
+        <RouteMainLayout path="/supplier" component={Supplier} />
+        <Route path="/login" component={Login} />
       </React.Fragment>
     );
   }
