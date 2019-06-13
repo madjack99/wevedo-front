@@ -19,7 +19,7 @@ class Header extends Component {
             </NavDropdown>
           </Nav>
           <ButtonToolbar>
-            <Button variant="primary" className="mr-2">Login</Button>
+            <Link to="/login"><Button variant="primary" className="mr-2">Login</Button></Link>
             <Button variant="dark">Bussiness Login</Button>
           </ButtonToolbar>
         </Navbar.Collapse>

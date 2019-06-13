@@ -10,20 +10,32 @@ import Supplier from './components/Sections/Supplier';
 import Contact from './components/Sections/Contact';
 import Terms from './components/Sections/Terms';
 import Privacy from './components/Sections/Privacy';
+import Login from './components/Login';
+
+const RouteMainLayout = ({ component: Component, ...rest }) => {
+  return (
+    <Route {...rest} render={matchProps => (
+      <React.Fragment>
+        <Header />
+        <Component {...matchProps} />
+        <Footer />
+      </React.Fragment> 
+    )} />
+  )
+};
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <Route exact path="/" component={Home} />
-        <Route path="/weddingtools" component={Weddingtools} />
-        <Route path="/venues" component={Venues} />
-        <Route path="/supplier" component={Supplier} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/terms" component={Terms} />
-        <Route path="/privacy" component={Privacy} />
-        <Footer />
+        <RouteMainLayout exact path="/" component={Home} />
+        <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+        <RouteMainLayout path="/venues" component={Venues} />
+        <RouteMainLayout path="/supplier" component={Supplier} />
+        <RouteMainLayout path="/contact" component={Contact} />
+        <RouteMainLayout path="/terms" component={Terms} />
+        <RouteMainLayout path="/privacy" component={Privacy} />
+        <Route path="/login" component={Login} />
       </React.Fragment>
     );
   }
