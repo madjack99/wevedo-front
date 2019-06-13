@@ -7,6 +7,9 @@ import Home from './components/Home';
 import Venues from './components/Sections/Venues';
 import Weddingtools from './components/Sections/Weddingtools';
 import Supplier from './components/Sections/Supplier';
+import Contact from './components/Sections/Contact';
+import Terms from './components/Sections/Terms';
+import Privacy from './components/Sections/Privacy';
 
 class App extends Component {
   render() {
@@ -17,6 +20,9 @@ class App extends Component {
         <Route path="/weddingtools" component={Weddingtools} />
         <Route path="/venues" component={Venues} />
         <Route path="/supplier" component={Supplier} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/terms" component={Terms} />
+        <Route path="/privacy" component={Privacy} />
         <Footer />
       </React.Fragment>
     );

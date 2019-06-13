@@ -1,11 +1,19 @@
-.venues {
-	background: url(../images/venues-bg.png);
+.section {
+	color: white;
+	margin-top: 75px;
 	background-size: cover;
 	background-position: center;
-	margin-top: 75px;
-	height: calc(100vh - 75px);
-	color: white;
 }
+.section-header-full {
+	height: calc(100vh - 75px);
+} 
+.section-header-half {
+	height: calc(60vh - 75px);
+}
+
+.venues { background: url(../images/venues-bg.png); }
+.supplier { background: url(../images/supplier-bg.png); }
+.contact, .terms, .privacy { background: url(../images/common-header.png); }
 
 .findseparator-sm {
   height: 120px;
@@ -42,15 +50,6 @@
 			font-size: 13px;
 		}
 	}
-}
-
-.supplier {
-	background: url(../images/supplier-bg.png);
-	background-size: cover;
-	background-position: center;
-	margin-top: 75px;
-	height: calc(60vh - 75px);
-	color: white;
 }
 
 .supplier-results {
@@ -95,15 +94,10 @@
 			top: 0; 
 			margin: 15px;
 			cursor: pointer;
+			z-index: 9;
 		}
 		form {
 			padding: 50px;
-			input, textarea {
-				font-size: 12px;
-				border: 0;
-				border-radius: 0;
-				border-bottom: 1px solid $gray-400;
-			}
 		}
 	}
 }
