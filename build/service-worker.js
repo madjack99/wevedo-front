@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ckurban/wevedo-website/precache-manifest.85b1f69b4ba61fb095cc4466a63543d6.js"
+  "/ckurban/wevedo-website/precache-manifest.0a1d022a51ea0862393feaa7658f056c.js"
 );
 
 self.addEventListener('message', (event) => {
