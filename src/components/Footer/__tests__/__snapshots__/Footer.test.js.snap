@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component testing 1`] = `
+Array [
+  <div
+    className="footer-border"
+  />,
+  <div
+    className="footer container"
+  >
+    <div
+      className="h-100 align-items-center row"
+    >
+      <div
+        className="links col-sm-10"
+      >
+        <div
+          className="text-uppercase nav"
+          onKeyDown={[Function]}
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="/"
+            href="/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            © 2019 Wewedo
+          </a>
+          <span
+            className="footer-dot"
+          />
+          <a
+            className="nav-link"
+            data-rb-event-key="/contact"
+            href="/contact"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Contact
+          </a>
+          <span
+            className="footer-dot"
+          />
+          <a
+            className="nav-link"
+            data-rb-event-key="/terms"
+            href="/terms"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Terms & Conditions
+          </a>
+          <span
+            className="footer-dot"
+          />
+          <a
+            className="nav-link"
+            data-rb-event-key="/privacy"
+            href="/privacy"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Privacy Policy
+          </a>
+        </div>
+      </div>
+      <div
+        className="text-center social-links col-sm-2 col"
+      >
+        <div
+          className="d-flex justify-content-center row"
+        >
+          <div
+            className="p-0 col-sm-4 col-2"
+          >
+            <a
+              href="/"
+            >
+              <i
+                className="fab fa-instagram"
+              />
+            </a>
+          </div>
+          <div
+            className="p-0 col-sm-4 col-2"
+          >
+            <a
+              href="/"
+            >
+              <i
+                className="fab fa-facebook"
+              />
+            </a>
+          </div>
+          <div
+            className="p-0 col-sm-4 col-2"
+          >
+            <a
+              href="/"
+            >
+              <i
+                className="fab fa-twitter"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
