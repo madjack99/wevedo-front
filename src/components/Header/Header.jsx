@@ -10,7 +10,7 @@ class Header extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="text-uppercase mr-auto">
-            <Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link>
+            {/*<Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link>*/}
             <Nav.Link><Link to="/venues"><b>Venues</b></Link></Nav.Link>
             <NavDropdown title="Suppliers">
               <NavDropdown.Item href="#action/3.1">Will</NavDropdown.Item>
