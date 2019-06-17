@@ -26,5 +26,7 @@
     font-family: 'Butler Bold' !important;
 }
 .text-wevedo {
-    color: $wevedo;
+    background: -webkit-linear-gradient(30deg, #ffafbd, #ffc3a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

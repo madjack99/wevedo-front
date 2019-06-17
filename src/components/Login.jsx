@@ -44,7 +44,7 @@ class Login extends Component {
                     <Form.Check label="Remember me"/>
                   </Col>
                   <Col sm={6} className="text-right text-muted">
-                    <a onClick={() => this.setState({ modalShow: true })}>Forgot password?</a>
+                    <a href onClick={() => this.setState({ modalShow: true })}>Forgot password?</a>
                     <PassReset
                       show={this.state.modalShow}
                       onHide={modalClose}

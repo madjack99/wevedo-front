@@ -12,6 +12,7 @@ import Terms from './components/Sections/Terms';
 import Privacy from './components/Sections/Privacy';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Pricing from './components/Pricing';
 
 const RouteMainLayout = ({ component: Component, ...rest }) => {
   return (
@@ -38,6 +39,7 @@ class App extends Component {
         <RouteMainLayout path="/privacy" component={Privacy} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/pricing" component={Pricing} />
       </React.Fragment>
     );
   }

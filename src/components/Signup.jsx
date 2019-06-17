@@ -39,7 +39,7 @@ class Login extends Component {
                     <Form.Check label="Remember me"/>
                   </Col>
                   <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                    <Button size="lg">Signup</Button>
+                    <Button href="/pricing" size="lg">Signup</Button>
                   </Col>
                 </Row>
               </Form>
