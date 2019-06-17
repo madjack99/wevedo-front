@@ -18,8 +18,8 @@ class Login extends Component {
   				<Row>
             <Col sm={12} className="mb-5"><a href="/"><img src={Logo} alt=""/></a></Col>
             <Col sm={12} className="text-center login-form-social-btn">
-              <Button className="login-form-social-btn-fb"><i class="fab fa-facebook-f"></i> Login with Facebook</Button>
-              <Button className="login-form-social-btn-g"><i class="fab fa-google"></i> Login with Google</Button>
+              <Button className="login-form-social-btn-fb"><i className="fab fa-facebook-f"></i> Login with Facebook</Button>
+              <Button className="login-form-social-btn-g"><i className="fab fa-google"></i> Login with Google</Button>
             </Col> 
             <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4"><hr/> <b className="text-muted text-butler-bold">OR</b> <hr/></Col>
             <Col sm={12} className="mt-4">

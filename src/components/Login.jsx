@@ -23,8 +23,8 @@ class Login extends Component {
   				<Row>
             <Col sm={12} className="mb-5"><a href="/"><img src={Logo} alt=""/></a></Col>
             <Col sm={12} className="text-center login-form-social-btn">
-              <Button className="login-form-social-btn-fb"><i class="fab fa-facebook-f"></i> Login with Facebook</Button>
-              <Button className="login-form-social-btn-g"><i class="fab fa-google"></i> Login with Google</Button>
+              <Button className="login-form-social-btn-fb"><i className="fab fa-facebook-f"></i> Login with Facebook</Button>
+              <Button className="login-form-social-btn-g"><i className="fab fa-google"></i> Login with Google</Button>
             </Col> 
             <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4"><hr/> <b className="text-muted text-butler-bold">OR</b> <hr/></Col>
             <Col sm={12} className="mt-4">
@@ -77,7 +77,7 @@ class PassReset extends React.Component {
       >
         <Modal.Body className="p-0">
           <Row>
-            <span className="modal-close-btn" onClick={this.props.onHide}><i class="fas fa-times fa-2x"></i></span>
+            <span className="modal-close-btn" onClick={this.props.onHide}><i className="fas fa-times fa-2x"></i></span>
             <Col sm={12} className="p-5 text-center">
               <h5 className="text-uppercase">Reset Password</h5>
               <hr/>
