@@ -204,7 +204,7 @@ class MsgToSupplier extends React.Component {
         size="lg"
         aria-labelledby="send-a-message-to-supplier"
         centered
-        className="supplier-modal-msg"
+        className="global-modal"
       >
         <Modal.Body className="p-0">
           <Row>

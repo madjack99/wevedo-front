@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import '../sass/wevedo.scss';
 import Logo from '../images/symbol.png';
 
 class Login extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = { modalShow: false };
+  }
   render() {
+    let modalClose = () => this.setState({ modalShow: false });
     return (
     	<Row className="w-100 m-0 login">
   			<Col sm={6} className="login-img">
@@ -39,7 +44,11 @@ class Login extends Component {
                     <Form.Check label="Remember me"/>
                   </Col>
                   <Col sm={6} className="text-right text-muted">
-                    Forgot password?
+                    <a onClick={() => this.setState({ modalShow: true })}>Forgot password?</a>
+                    <PassReset
+                      show={this.state.modalShow}
+                      onHide={modalClose}
+                    />
                   </Col>
                   <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
                     <Button size="lg">Login</Button>
@@ -54,5 +63,29 @@ class Login extends Component {
 		)
   }
 }
-
 export default Login;
+
+class PassReset extends React.Component {
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        size="md"
+        aria-labelledby="Password reset"
+        centered
+        className="global-modal"
+      >
+        <Modal.Body className="p-0">
+          <Row>
+            <span className="modal-close-btn" onClick={this.props.onHide}><i class="fas fa-times fa-2x"></i></span>
+            <Col sm={12} className="p-5 text-center">
+              <h5 className="text-uppercase">Reset Password</h5>
+              <hr/>
+              <p className="mb-0">Reset password has been sent to user@email.com address.<br/>Please check your e-mail.</p>
+            </Col>
+          </Row>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+}
