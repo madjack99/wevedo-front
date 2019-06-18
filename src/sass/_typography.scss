@@ -19,6 +19,14 @@
     src: url(../Font/Butler_Bold.otf) format("opentype");
 }
 
-.text-butler-bold {
+.text-proxima-bold {
     font-family: 'Proxima Nova Bold' !important;
+}
+.text-butler-bold {
+    font-family: 'Butler Bold' !important;
+}
+.text-wevedo {
+    background: -webkit-linear-gradient(30deg, #ffafbd, #ffc3a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

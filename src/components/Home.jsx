@@ -9,8 +9,6 @@ import musicphoto from '../images/music.png';
 import florist from '../images/florist.png';
 import photography from '../images/photography.png';
 import decoration from '../images/decoration.png';
-import guestlist from '../images/guestlist-icon.png';
-import budget from '../images/budget-icon.png';
 import serches1 from '../images/serches1.png';
 import serches2 from '../images/serches2.png';
 import serches3 from '../images/serches3.png';
@@ -101,7 +99,7 @@ class Home extends Component {
           </Col>
         </Row>
 
-        <Container className="weddingtools">
+        {/*<Container className="weddingtools">
           <Row>
             <Col><h2 className="text-center text-uppercase">Wedding Tools</h2><hr /></Col>
           </Row>
@@ -129,7 +127,7 @@ class Home extends Component {
               </div>
             </Col>
           </Row>
-        </Container>
+        </Container>*/}
 
         <div className="popularserches">
           <Container className="pb-5">

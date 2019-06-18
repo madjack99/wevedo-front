@@ -26,7 +26,7 @@ class Venues extends Component {
             <Col sm={8} className="text-center">
               <h4 className="text-uppercase">Contact to wevedo</h4>
               <hr/>
-              <p className="text-muted">
+              <p className="mr-5 pr-5 ml-5 pl-5 text-muted">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               </p>
