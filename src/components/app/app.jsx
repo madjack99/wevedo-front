@@ -8,6 +8,7 @@ import Footer from '../footer';
 import Home from '../home';
 import Venues from '../pages/venues';
 import Weddingtools from '../pages/wedding-tools';
+import Weddingsuppliers from './components/Sections/Weddingsuppliers';
 import Supplier from '../pages/supplier';
 import Contact from '../pages/contact';
 import Terms from '../pages/terms-and-conditions';
@@ -33,6 +34,7 @@ const App = () => (
   <React.Fragment>
     <RouteMainLayout exact path="/" component={Home} />
     <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+    <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
     <RouteMainLayout path="/venues" component={Venues} />
     <RouteMainLayout path="/supplier" component={Supplier} />
     <RouteMainLayout path="/contact" component={Contact} />
