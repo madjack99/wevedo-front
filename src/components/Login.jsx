@@ -13,9 +13,10 @@ class Login extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
+      phoneNumber : '', 
       modalShow: false,
       login: false,
-      password: false,
+      password: '',
       isPasswordIncorect: false,
       isLoginIncorrect: false,
       error: false,
@@ -101,6 +102,8 @@ class Login extends Component {
                       <Form.Control
                         type="email"
                         placeholder="Email Address"
+                        name="phoneNumber"
+                        value={this.state.phoneNumber}
                         onChange={this.handleUserInput}
                       />
                     </Form.Group>
@@ -110,6 +113,8 @@ class Login extends Component {
                       <Form.Control
                         type="password"
                         placeholder="Password"
+                        name="password"
+                        value={this.state.password}
                         onChange={this.handleUserInput}
                       />
                     </Form.Group>

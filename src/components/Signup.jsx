@@ -128,6 +128,7 @@ class Signup extends Component {
                         type="email"
                         placeholder="Email Address"
                         name="phoneNumber"
+                        value={this.state.phoneNumber}
                         onChange={this.handleUserInput}
                       />
                     </Form.Group>
@@ -138,6 +139,7 @@ class Signup extends Component {
                         type="password"
                         placeholder="Password"
                         name="password"
+                        value={this.state.password}
                         onChange={this.handleUserInput}
                       />
                     </Form.Group>
