@@ -41,7 +41,7 @@ class BusinessSignup extends Component {
                       <Form.Control type="" placeholder="Business Name" />
                     </Form.Group>
                   </Col>
-                  <Col sm={12} className="mb-4">
+                  <Col sm={12} className="mb-5">
                     <Form.Control as="select">
                       <option>Select Category</option>
                       <option>...</option>
@@ -86,7 +86,7 @@ class BusinessSignup extends Component {
               </Form>
             </Col>
             <Col sm={12} className="text-center text-uppercase mt-2 mb-4">
-              <Button href="/pricing" size="lg">Next stap <i className="fa fa-arrow-right"></i></Button>
+              <Button href="/businesssignup-step1" size="lg">Next stap <i className="fa fa-arrow-right"></i></Button>
             </Col>
           </Row>
   			</Col>

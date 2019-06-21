@@ -110,3 +110,20 @@
 		}
 	}
 }
+
+.business-signup-config {
+
+	input,
+	textarea {
+		background-color: #f4f7fc;
+		border: 0;
+	}
+
+	input::placeholder {
+		font-size: 11px;
+	}
+
+	p {
+		margin-bottom: 10px;
+	}
+}
