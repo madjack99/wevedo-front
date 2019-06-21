@@ -49,7 +49,7 @@ class Header extends Component {
           </Nav>
           <ButtonToolbar>
             <Link to="/login"><Button variant="primary" className="mr-2">Login</Button></Link>
-            <Button variant="dark">Bussiness Login</Button>
+            <Link to="/businesslogin"><Button variant="dark">Business Login</Button></Link>
           </ButtonToolbar>
         </Navbar.Collapse>
         <Navbar.Brand href="#home"><Link to="/"><img src={logo} alt="logo"/></Link></Navbar.Brand>

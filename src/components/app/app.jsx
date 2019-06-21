@@ -16,6 +16,8 @@ import Privacy from '../pages/privacy';
 import Login from '../login';
 import Signup from '../sign-up';
 import Pricing from '../pricing';
+import BusinessLogin from './components/BusinessLogin';
+import BusinessSignup from './components/BusinessSignup';
 
 const RouteMainLayout = ({ component: Component, ...rest }) => (
   <Route
@@ -43,6 +45,8 @@ const App = () => (
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/pricing" component={Pricing} />
+    <Route path="/businesslogin" component={BusinessLogin} />
+    <Route path="/businesssignup" component={BusinessSignup} />
   </React.Fragment>
 );
 
