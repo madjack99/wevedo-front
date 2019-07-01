@@ -5,7 +5,7 @@ import {
 import { Link } from 'react-router-dom';
 import '../sass/wevedo.scss';
 import Logo from '../images/symbol.png';
-import AuthApi from '../api/auth.api';
+import AuthApi from '../api/modules/auth.api';
 
 const api = new AuthApi('api');
 
