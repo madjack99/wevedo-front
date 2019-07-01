@@ -1,4 +1,3 @@
 export default {
-    backendUrl: 'http://localhost:8000',
-  };
-  
+  backendUrl: 'http://localhost:8000',
+};

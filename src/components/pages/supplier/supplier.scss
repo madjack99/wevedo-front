@@ -1,0 +1,39 @@
+@import '../../../assets/styles/wevedo.scss';
+
+.section {
+  color: white;
+  margin-top: 75px;
+  background-size: cover;
+  background-position: center;
+}
+
+.section-header-full {
+  height: calc(100vh - 75px);
+}
+
+.section-header-half {
+  height: calc(60vh - 75px);
+}
+
+.supplier {
+  background: url(../../../assets/images/supplier-bg.png);
+}
+
+.supplier-results {
+	h4 { font-family: 'Proxima Nova Bold'; }
+	b {	
+		font-size: 14px;
+		letter-spacing: .7px;
+	}
+	.supplier-results-side-box {
+		background: $gray-200;
+		margin-top: 30px;
+		border-radius: .3rem;
+		padding: 50px;
+	}
+	.supplier-results-next-btn {
+		font-size: 12px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+}
