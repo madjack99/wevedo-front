@@ -7,13 +7,11 @@ import { Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import Logo from '../../assets/images/symbol.png';
-import WevedoService from '../../api/services/wevedo-service';
+import { withWevedoService } from '../hoc';
 
 class SignUp extends Component {
   constructor() {
     super();
-
-    this.wevedoService = new WevedoService();
 
     this.state = {
       phoneNumber: '',
@@ -27,6 +25,7 @@ class SignUp extends Component {
   }
 
   onSignUp = async e => {
+    const { wevedoService } = this.props;
     const { formValid } = this.state;
 
     e.preventDefault();
@@ -34,7 +33,7 @@ class SignUp extends Component {
     if (formValid) {
       const { phoneNumber, password } = this.state;
 
-      const res = await this.wevedoService.register({
+      const res = await wevedoService.register({
         phoneNumber,
         password,
         deviceOS: 'android', // TODO: 'web' should be later
@@ -178,4 +177,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withWevedoService()(SignUp);
