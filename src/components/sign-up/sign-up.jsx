@@ -7,13 +7,14 @@ import { Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import Logo from '../../assets/images/symbol.png';
-import AuthApi from '../../api/modules/auth.api';
-
-const api = new AuthApi('api');
+import WevedoService from '../../api/modules/api-auth';
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
+    this.wevedoService = new WevedoService();
+
     this.state = {
       phoneNumber: '',
       password: '',
@@ -25,28 +26,22 @@ class SignUp extends Component {
     };
   }
 
-  handleSignUp = async e => {
+  onSignUp = async e => {
     const { formValid } = this.state;
 
     e.preventDefault();
 
     if (formValid) {
       const { phoneNumber, password } = this.state;
-      const body = {
+
+      const res = await this.wevedoService.register({
         phoneNumber,
         password,
-        fullName: '',
-        firstName: '',
-        lastName: '',
-        countryCode: '',
-        regionName: '',
-        appearInCountries: '',
-        eulaAccepted: true,
-        deviceToken: 'somerandomtoken',
-      };
+        deviceOS: 'android', // TODO: 'web' should be later
+      });
 
-      const response = await api.signupUserByEmailOrPhone(body);
-      console.log('response', response);
+      // TODO: make something after the user is registered
+      console.log('RESPONSE: ', res.data);
     }
   };
 
@@ -159,7 +154,7 @@ class SignUp extends Component {
                     <Form.Check label="Remember me" />
                   </Col>
                   <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                    <Button size="lg" onClick={this.handleSignUp}>
+                    <Button size="lg" onClick={this.onSignUp}>
                       SignUp
                     </Button>
                   </Col>

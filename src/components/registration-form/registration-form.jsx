@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './registration-form.scss';
 
-import { registerRequest } from '../../requests/auth.requests';
-import { FormErrors } from './error-form';
+import FormErrors from '../error-form';
 
 class RegistrationForm extends Component {
   constructor(props) {

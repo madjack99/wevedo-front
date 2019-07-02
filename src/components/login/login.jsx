@@ -7,17 +7,17 @@ import { Link } from 'react-router-dom';
 import './login.scss';
 
 import Logo from '../../assets/images/symbol.png';
-import AuthApi from '../../api/modules/auth.api';
-
-const api = new AuthApi('api');
+import WevedoService from '../../api/modules/api-auth';
 
 class Login extends Component {
   constructor(...args) {
     super(...args);
+
+    this.wevedoService = new WevedoService();
+
     this.state = {
       phoneNumber: '',
       modalShow: false,
-      login: false,
       password: '',
       // isPasswordIncorect: false,
       // isLoginIncorrect: false,
@@ -44,14 +44,22 @@ class Login extends Component {
     }
   };
 
-  handleLogIn = async e => {
-    this.setState({ error: false });
+  onLogIn = async e => {
     e.preventDefault();
-    const { login, password } = this.state;
-    const resp = await api.loginUserByEmailOrPhone({ login, password });
-    if (resp.error) {
-      this.setState({ error: resp.error });
-    }
+
+    this.setState({
+      error: false,
+    });
+
+    const { phoneNumber, password } = this.state;
+
+    const res = await this.wevedoService.login({
+      phoneNumber,
+      password,
+      deviceOS: 'android', // TODO: 'web' should be later
+    });
+
+    console.log(`TOKEN: ${res.data}`); // TODO: save to redux
   };
 
   render() {
@@ -134,7 +142,7 @@ class Login extends Component {
                     <PassReset show={modalShow} onHide={modalClose} />
                   </Col>
                   <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                    <Button size="lg" onClick={this.handleLogIn}>
+                    <Button size="lg" onClick={this.onLogIn}>
                       Login
                     </Button>
                   </Col>
