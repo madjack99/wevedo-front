@@ -19,6 +19,7 @@ module.exports = {
       'react',
     ],
     rules: {
-      'arrow-parens': ['error', 'as-needed']
+      'arrow-parens': ['error', 'as-needed'],
+      'react/prop-types': 0
     },
   };
