@@ -7,13 +7,11 @@ import { Link } from 'react-router-dom';
 import './login.scss';
 
 import Logo from '../../assets/images/symbol.png';
-import WevedoService from '../../api/services/wevedo-service';
+import { withWevedoService } from '../hoc';
 
 class Login extends Component {
   constructor(...args) {
     super(...args);
-
-    this.wevedoService = new WevedoService();
 
     this.state = {
       phoneNumber: '',
@@ -45,6 +43,8 @@ class Login extends Component {
   };
 
   onLogIn = async e => {
+    const { wevedoService } = this.props;
+
     e.preventDefault();
 
     this.setState({
@@ -53,7 +53,7 @@ class Login extends Component {
 
     const { phoneNumber, password } = this.state;
 
-    const res = await this.wevedoService.login({
+    const res = await wevedoService.login({
       phoneNumber,
       password,
       deviceOS: 'android', // TODO: 'web' should be later
@@ -166,7 +166,7 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default withWevedoService()(Login);
 
 const PassReset = props => (
   <Modal
