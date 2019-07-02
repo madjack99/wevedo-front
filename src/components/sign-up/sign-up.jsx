@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import Logo from '../../assets/images/symbol.png';
-import WevedoService from '../../api/modules/api-auth';
+import WevedoService from '../../api/services/wevedo-service';
 
 class SignUp extends Component {
   constructor() {
