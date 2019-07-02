@@ -6,5 +6,6 @@ export default class WevedoService extends ApiBase {
 
     this.login = async body => this.create('login', body);
     this.register = async body => this.create('register', body);
+    this.signOut = async token => this.read('signout', token);
   }
 }
