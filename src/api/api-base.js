@@ -12,17 +12,16 @@ export default class ApiBase {
       },
     });
 
-    this.create = (path, body, token) => instance
-      .post(path, body, { Authorization: token });
+    this.create = async (path, body, token) => instance
+      .post(path, body, { headers: { Authorization: token } });
 
     this.read = async (path, token) => instance
-      .get(path, { Authorization: token });
+      .get(path, { headers: { Authorization: token } });
 
     this.update = async (path, body, token) => instance
-      .patch(path, body, { Authorization: token });
-
+      .patch(path, body, { headers: { Authorization: token } });
 
     this.remove = async (path, token) => instance
-      .delete(path, { Authorization: token });
+      .delete(path, { headers: { Authorization: token } });
   }
 }
