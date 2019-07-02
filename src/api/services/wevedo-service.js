@@ -1,6 +1,6 @@
 import ApiBase from '../api-base';
 
-export default class ApiAuth extends ApiBase {
+export default class WevedoService extends ApiBase {
   constructor() {
     super('api');
 
