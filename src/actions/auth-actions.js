@@ -14,7 +14,19 @@ const loginFailed = error => ({
   payload: error,
 });
 
-// eslint-disable-next-line import/prefer-default-export
+const signOutRequested = () => ({
+  type: actionTypes.FETCH_SIGNOUT_REQUEST,
+});
+
+const signOutSucceed = () => ({
+  type: actionTypes.FETCH_SIGNOUT_SUCCESS,
+});
+
+const signOutFailed = error => ({
+  type: actionTypes.FETCH_SIGNOUT_FAILURE,
+  payload: error,
+});
+
 export const fetchLogin = dispatch => async (service, body) => {
   dispatch(loginRequested());
 
@@ -23,5 +35,17 @@ export const fetchLogin = dispatch => async (service, body) => {
     dispatch(loginSucceed(token));
   } catch (error) {
     dispatch(loginFailed(error));
+  }
+};
+
+export const fetchSignOut = dispatch => async (service, token) => {
+  dispatch(signOutRequested());
+
+  try {
+    const { data: { status } } = await service.signOut(token);
+    console.log(`IS EXIT: ${status}`);
+    dispatch(signOutSucceed());
+  } catch (error) {
+    dispatch(signOutFailed(error));
   }
 };

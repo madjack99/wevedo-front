@@ -1,5 +1,9 @@
-import { fetchLogin } from './auth-actions';
+import {
+  fetchLogin,
+  fetchSignOut,
+} from './auth-actions';
 
 export {
   fetchLogin,
+  fetchSignOut,
 };
