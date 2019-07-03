@@ -39,11 +39,11 @@ export const fetchLogin = dispatch => async (service, body) => {
   }
 };
 
-export const fetchSignOut = dispatch => async (service, token) => {
+export const fetchSignOut = dispatch => async service => {
   dispatch(signOutRequested());
 
   try {
-    const { data: { status } } = await service.signOut(token);
+    const { data: { status } } = await service.signOut();
     console.log(`IS EXIT: ${status}`);
     dispatch(signOutSucceed());
   } catch (error) {

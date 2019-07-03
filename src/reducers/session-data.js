@@ -30,18 +30,20 @@ const updateSessionData = (state, action) => {
       };
     case actionTypes.FETCH_SIGNOUT_REQUEST:
       return {
-        ...state,
+        ...state.sessionData,
+        isLoggedIn: false,
+        // token: state.sessionData.token,
+        // error: null,
       };
     case actionTypes.FETCH_SIGNOUT_SUCCESS:
       return {
-        ...state,
-        isLoggedIn: false,
+        ...state.sessionData,
         token: null,
-        error: null,
       };
     case actionTypes.FETCH_SIGNOUT_FAILURE:
       return {
-        ...state,
+        ...state.sessionData,
+        token: null,
         error: action.payload,
       };
     default:

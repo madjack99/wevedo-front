@@ -60,14 +60,14 @@ function Buttons() {
   );
 }
 
-function ProfileArea({ token, signOut }) {
+function ProfileArea({ signOut }) {
   const wevedoService = useContext(WevedoServiceContext);
 
   return (
     <ButtonToolbar>
       <Button
         variant="dark"
-        onClick={() => signOut(wevedoService, token)}
+        onClick={() => signOut(wevedoService)}
       >
         Sign Out
       </Button>

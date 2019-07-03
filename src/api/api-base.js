@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import store from '../store';
 import config from '../config';
 
 export default class ApiBase {
@@ -12,16 +13,28 @@ export default class ApiBase {
       },
     });
 
-    this.create = async (path, body, token) => instance
-      .post(path, body, { headers: { Authorization: token } });
+    this.withToken = instance => {
+      instance.interceptors.request.use(config => ({
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: store.getState().sessionData.token,
+        },
+      }));
 
-    this.get = async (path, token) => instance
-      .get(path, { headers: { Authorization: token } });
+      return instance;
+    };
 
-    this.update = async (path, body, token) => instance
-      .patch(path, body, { headers: { Authorization: token } });
+    this.create = async (path, body) => this.withToken(instance)
+      .post(path, body);
 
-    this.remove = async (path, token) => instance
-      .delete(path, { headers: { Authorization: token } });
+    this.get = async path => this.withToken(instance)
+      .get(path);
+
+    this.update = async (path, body) => this.withToken(instance)
+      .patch(path, body);
+
+    this.remove = async path => this.withToken(instance)
+      .delete(path);
   }
 }
