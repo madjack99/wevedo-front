@@ -13,9 +13,7 @@ import { WevedoServiceContext } from '../contexts';
 
 import Logo from '../../assets/images/symbol.png';
 
-function Login({
-  login, isLoggedIn, token, error,
-}) {
+function Login({ login, error }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [modalShow, setModalShow] = useState(false);
@@ -181,8 +179,8 @@ const PassReset = props => (
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 
-const mapDispatchToProps = dispach => ({
-  login: fetchLogin(dispach),
+const mapDispatchToProps = dispatch => ({
+  login: fetchLogin(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
