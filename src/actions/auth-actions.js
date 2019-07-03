@@ -32,6 +32,7 @@ export const fetchLogin = dispatch => async (service, body) => {
 
   try {
     const { data: token } = await service.login(body);
+    console.log(`ENTERED. TOKEN: ${token}`);
     dispatch(loginSucceed(token));
   } catch (error) {
     dispatch(loginFailed(error));
