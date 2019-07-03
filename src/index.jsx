@@ -4,14 +4,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './components/app';
 import WevedoService from './api/services/wevedo-service';
-import { WevedoServiceProvider } from './components/wevedo-service-context';
+import { WevedoServiceContext } from './components/contexts';
 
 const wevedoService = new WevedoService();
 
 ReactDOM.render((
-  <WevedoServiceProvider value={wevedoService}>
+  <WevedoServiceContext.Provider value={wevedoService}>
     <Router>
       <App />
     </Router>
-  </WevedoServiceProvider>
+  </WevedoServiceContext.Provider>
 ), document.getElementById('root'));
