@@ -15,7 +15,7 @@ export default class ApiBase {
     this.create = async (path, body, token) => instance
       .post(path, body, { headers: { Authorization: token } });
 
-    this.read = async (path, token) => instance
+    this.get = async (path, token) => instance
       .get(path, { headers: { Authorization: token } });
 
     this.update = async (path, body, token) => instance
