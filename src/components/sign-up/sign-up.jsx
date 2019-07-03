@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
@@ -9,7 +11,7 @@ import './sign-up.scss';
 import Logo from '../../assets/images/symbol.png';
 import { WevedoServiceContext } from '../contexts';
 
-export default function SignUp() {
+function SignUp({ isLoggedIn, token }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -127,3 +129,7 @@ export default function SignUp() {
     </Row>
   );
 }
+
+const mapStateToProps = ({ sessionData }) => sessionData;
+
+export default connect(mapStateToProps)(SignUp);

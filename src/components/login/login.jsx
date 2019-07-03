@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+
 import {
   Row, Col, Form, Button, Modal,
 } from 'react-bootstrap';
@@ -6,14 +8,17 @@ import { Link } from 'react-router-dom';
 
 import './login.scss';
 
+import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
+
 import Logo from '../../assets/images/symbol.png';
 
-export default function Login() {
+function Login({
+  login, isLoggedIn, token, error,
+}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [modalShow, setModalShow] = useState(false);
-  const [error, setError] = useState(false);
 
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -32,18 +37,16 @@ export default function Login() {
     }
   };
 
-  const handleLogIn = async event => {
+  const handleLogIn = event => {
     event.preventDefault();
 
-    setError(false);
-
-    const res = await wevedoService.login({
+    login(wevedoService, {
       phoneNumber,
       password,
       deviceOS: 'android', // TODO: 'web' should be later
     });
 
-    console.log(`TOKEN: ${res.data}`); // TODO: save to redux
+    // console.log(`TOKEN: ${login}`); // TODO: save to redux
   };
 
   const modalClose = () => setModalShow(false);
@@ -175,3 +178,11 @@ const PassReset = props => (
     </Modal.Body>
   </Modal>
 );
+
+const mapStateToProps = ({ sessionData }) => sessionData;
+
+const mapDispatchToProps = dispach => ({
+  login: fetchLogin(dispach),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
