@@ -9,5 +9,5 @@ jobs:
           name: Setup dependencies
           command: npm install
       - run:
-          name: Run tests and coverage
-          command: npm run test:coverage
+          name: Run tests 
+          command: npm run test
