@@ -22,7 +22,7 @@ function Header({ isLoggedIn, token, signOut }) {
       setCategories(newCategories);
     };
     fetchCategories();
-  }, [categories, wevedoService]);
+  }, [categories.length, wevedoService]);
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
