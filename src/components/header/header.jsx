@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -13,6 +13,17 @@ import { WevedoServiceContext } from '../contexts';
 import logo from '../../assets/images/symbol.png';
 
 function Header({ isLoggedIn, token, signOut }) {
+  const [categories, setCategories] = useState([]);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data: newCategories } = await wevedoService.getCategories();
+      setCategories(newCategories);
+    };
+    fetchCategories();
+  }, [categories.length]); // TO-DO: change dependency condition on array check with hash function
+
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
       <Navbar.Toggle />
@@ -25,11 +36,7 @@ function Header({ isLoggedIn, token, signOut }) {
               <b>Venues</b>
             </Link>
           </Nav.Link>
-          <NavDropdown title="Suppliers">
-            <NavDropdown.Item href="#action/3.1">Will</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">check</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">later</NavDropdown.Item>
-          </NavDropdown>
+          <CategoriesDropdown categories={categories} />
         </Nav>
         {
           isLoggedIn
@@ -45,6 +52,20 @@ function Header({ isLoggedIn, token, signOut }) {
       </Navbar.Brand>
     </Navbar>
   );
+}
+
+function CategoriesDropdown({ categories }) {
+  return (
+    <NavDropdown title="Suppliers">
+      {
+        categories.map(({ name }) => <CategoryDropDownItem name={name} />)
+      }
+    </NavDropdown>
+  );
+}
+
+function CategoryDropDownItem({ name }) {
+  return <NavDropdown.Item href={name.toLowerCase()}>{name}</NavDropdown.Item>;
 }
 
 function Buttons() {
