@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  Nav, Navbar, NavDropdown, ButtonToolbar, Button,
+  Row, Col, Nav, Navbar, NavDropdown, ButtonToolbar, Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -55,11 +55,37 @@ function Header({ isLoggedIn, token, signOut }) {
 }
 
 function CategoriesDropdown({ categories }) {
+  const leftCategoryColumns = categories.slice(0, categories.length / 2);
+  const rightCategoryColumns = categories.slice(categories.length / 2);
+
   return (
     <NavDropdown title="Suppliers">
-      {
-        categories.map(({ name }) => <CategoryDropDownItem name={name} />)
-      }
+      <Row>
+        <Col sm={8}>
+          <Row className="pt-3">
+            <Col sm={6}>
+              {
+                leftCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+              }
+            </Col>
+            <Col sm={6}>
+              {
+                rightCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+              }
+            </Col>
+            <Col sm={12}>
+              <Link to="/weddingsuppliers" className="dropdown-view-all-btn">
+                View all suppliers
+                {' '}
+                <i className="fa fa-arrow-right" />
+              </Link>
+            </Col>
+          </Row>
+        </Col>
+        <Col>
+          <div className="dropdown-img" />
+        </Col>
+      </Row>
     </NavDropdown>
   );
 }
