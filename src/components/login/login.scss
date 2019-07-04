@@ -1,8 +1,15 @@
 @import '../../assets/styles/wevedo.scss';
 
 .login {
+	.login-img__user {
+		background-image: url(../images/login-img.png);
+	}
+
+	.login-img__business {
+		background-image: url(../images/businesslogin.png);
+	}
+
 	.login-img {
-		background-image: url(../../assets/images/login-img.png);
 		background-repeat: no-repeat;
 		background-size: cover;
 		height: 100vh;
@@ -25,10 +32,18 @@
 			hr {
 				background: white;
 			}
+
+			p {
+				font-size: 15px;
+				font-weight: bold;
+				color: white;
+			}
 		}
 	}
 
 	.login-form {
+		padding: 3rem 3rem 0 3rem;
+
 		b {
 			font-size: 14px;
 		}
@@ -45,6 +60,31 @@
 				font-size: 14px !important;
 				padding-left: 0;
 			}
+
+			select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-webkit-border-radius: 0px;
+				background-image: url("../images/arrow-down.svg");
+				background-position: 99% 50%;
+				background-repeat: no-repeat;
+				background-size: 12px;
+				padding-left: 0;
+				border: 0;
+				border-bottom: 1px solid $gray-400 !important;
+				font-size: 14px !important;
+				color: #495057;
+			}
+
+			select::placeholder {
+				color: red;
+			}
+		}
+
+		.login-form-scrollable {
+			overflow-y: scroll;
+			height: calc(100vh - 250px);
+			padding-right: 15px;
 		}
 
 		.login-form-social-btn {
@@ -68,5 +108,22 @@
 				}
 			}
 		}
+	}
+}
+
+.business-signup-config {
+
+	input,
+	textarea {
+		background-color: #f4f7fc;
+		border: 0;
+	}
+
+	input::placeholder {
+		font-size: 11px;
+	}
+
+	p {
+		margin-bottom: 10px;
 	}
 }
