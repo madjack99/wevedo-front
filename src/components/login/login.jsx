@@ -92,24 +92,26 @@ function Login({ login, error }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="username">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
                       name="phone-number"
                       value={phoneNumber}
                       onChange={handleUserInput}
+                      autoComplete="username"
                     />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mb-3">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="password">
                     <Form.Control
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={password}
                       onChange={handleUserInput}
+                      autoComplete="current-password"
                     />
                   </Form.Group>
                 </Col>

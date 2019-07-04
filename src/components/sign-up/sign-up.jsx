@@ -11,7 +11,7 @@ import './sign-up.scss';
 import Logo from '../../assets/images/symbol.png';
 import { WevedoServiceContext } from '../contexts';
 
-function SignUp({ isLoggedIn, token }) {
+function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -82,24 +82,26 @@ function SignUp({ isLoggedIn, token }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="uesrname">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
                       name="phone-number"
                       value={phoneNumber}
                       onChange={handleUserInput}
+                      autoComplete="username"
                     />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mb-3">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="password">
                     <Form.Control
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={password}
                       onChange={handleUserInput}
+                      autoComplete="password"
                     />
                   </Form.Group>
                 </Col>
