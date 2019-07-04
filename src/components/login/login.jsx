@@ -50,8 +50,8 @@ function Login({ login, error }) {
   const modalClose = () => setModalShow(false);
 
   return (
-    <Row className="w-100 m-0 login">
-      <Col sm={6} className="login-img">
+    <Row className="w-100 m-0 login logi">
+      <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
           <h1 className="mb-0">Welcome Back,</h1>
           <h2>Please login to your account</h2>
