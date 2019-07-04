@@ -22,7 +22,7 @@ function Header({ isLoggedIn, token, signOut }) {
       setCategories(newCategories);
     };
     fetchCategories();
-  }, [categories.length]); // TO-DO: change dependency condition on array check with hash function
+  }, [categories, wevedoService]);
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
