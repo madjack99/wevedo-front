@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import * as actionTypes from './types';
 
 const loginRequested = () => ({
@@ -33,6 +35,7 @@ export const fetchLogin = dispatch => async (service, body) => {
   try {
     const { data: token } = await service.login(body);
     console.log(`ENTERED. TOKEN: ${token}`);
+    Cookies.set('token', token);
     dispatch(loginSucceed(token));
   } catch (error) {
     dispatch(loginFailed(error));
@@ -45,6 +48,7 @@ export const fetchSignOut = dispatch => async service => {
   try {
     const { data: { status } } = await service.signOut();
     console.log(`IS EXIT: ${status}`);
+    Cookies.remove('token');
     dispatch(signOutSucceed());
   } catch (error) {
     dispatch(signOutFailed(error));
