@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  Nav, Navbar, NavDropdown, ButtonToolbar, Button,
+  Row, Col, Nav, Navbar, NavDropdown, ButtonToolbar, Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,17 @@ import { WevedoServiceContext } from '../contexts';
 import logo from '../../assets/images/symbol.png';
 
 function Header({ isLoggedIn, token, signOut }) {
+  const [categories, setCategories] = useState([]);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data: newCategories } = await wevedoService.getCategories();
+      setCategories(newCategories);
+    };
+    fetchCategories();
+  }, [categories.length]); // TO-DO: change dependency condition on array check with hash function
+
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
       <Navbar.Toggle />
@@ -25,11 +36,7 @@ function Header({ isLoggedIn, token, signOut }) {
               <b>Venues</b>
             </Link>
           </Nav.Link>
-          <NavDropdown title="Suppliers">
-            <NavDropdown.Item href="#action/3.1">Will</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">check</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">later</NavDropdown.Item>
-          </NavDropdown>
+          <CategoriesDropdown categories={categories} />
         </Nav>
         {
           isLoggedIn
@@ -47,6 +54,46 @@ function Header({ isLoggedIn, token, signOut }) {
   );
 }
 
+function CategoriesDropdown({ categories }) {
+  const leftCategoryColumns = categories.slice(0, categories.length / 2);
+  const rightCategoryColumns = categories.slice(categories.length / 2);
+
+  return (
+    <NavDropdown title="Suppliers">
+      <Row>
+        <Col sm={8}>
+          <Row className="pt-3">
+            <Col sm={6}>
+              {
+                leftCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+              }
+            </Col>
+            <Col sm={6}>
+              {
+                rightCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+              }
+            </Col>
+            <Col sm={12}>
+              <Link to="/weddingsuppliers" className="dropdown-view-all-btn">
+                View all suppliers
+                {' '}
+                <i className="fa fa-arrow-right" />
+              </Link>
+            </Col>
+          </Row>
+        </Col>
+        <Col>
+          <div className="dropdown-img" />
+        </Col>
+      </Row>
+    </NavDropdown>
+  );
+}
+
+function CategoryDropDownItem({ name }) {
+  return <NavDropdown.Item href={name.toLowerCase()}>{name}</NavDropdown.Item>;
+}
+
 function Buttons() {
   return (
     <ButtonToolbar>
@@ -55,7 +102,9 @@ function Buttons() {
           Login
         </Button>
       </Link>
-      <Button variant="dark">Bussiness Login</Button>
+      <Link to="/business-login">
+        <Button variant="dark">Bussiness Login</Button>
+      </Link>
     </ButtonToolbar>
   );
 }
