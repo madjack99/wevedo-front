@@ -1,0 +1,57 @@
+@import '../../assets/styles/wevedo.scss';
+
+@font-face {
+  font-family: Proxima Nova;
+  font-style: normal;
+  src:
+    url(./fonts/proxima-nova-regular/ProximaNova-Regular.eot) format('embedded-opentype'),
+    url(./fonts/proxima-nova-regular/ProximaNova-Regular.otf) format('opentype'),
+    url(./fonts/proxima-nova-regular/ProximaNova-Regular.svg) format('svg'),
+    url(./fonts/proxima-nova-regular/ProximaNova-Regular.ttf) format('truetype'),
+    url(./fonts/proxima-nova-regular/ProximaNova-Regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: Proxima Nova Bold;
+  font-style: bold;
+  src:
+    url(./fonts/proxima-nova-bold/ProximaNova-Bold.eot) format('embedded-opentype'),
+    url(./fonts/proxima-nova-bold/ProximaNova-Bold.otf) format('opentype'),
+    url(./fonts/proxima-nova-bold/ProximaNova-Bold.svg) format('svg'),
+    url(./fonts/proxima-nova-bold/ProximaNova-Bold.ttf) format('truetype'),
+    url(./fonts/proxima-nova-bold/ProximaNova-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: Butler Black;
+  src:
+    url(./fonts/butler-black/Butler_Black.eot) format('embedded-opentype'),
+    url(./fonts/butler-black/Butler_Black.otf) format('opentype'),
+    url(./fonts/butler-black/Butler_Black.svg) format('svg'),
+    url(./fonts/butler-black/Butler_Black.ttf) format('truetype'),
+    url(./fonts/butler-black/Butler_Black.woff) format('woff');
+}
+
+@font-face {
+  font-family: Butler Bold;
+  src:
+    url(./fonts/butler-bold/Butler_Bold.eot) format('embedded-opentype'),
+    url(./fonts/butler-bold/Butler_Bold.otf) format('opentype'),
+    url(./fonts/butler-bold/Butler_Bold.svg) format('svg'),
+    url(./fonts/butler-bold/Butler_Bold.ttf) format('truetype'),
+    url(./fonts/butler-bold/Butler_Bold.woff) format('woff');
+}
+
+.text-proxima-bold {
+  font-family: 'Proxima Nova Bold' !important;
+}
+
+.text-butler-bold {
+  font-family: 'Butler Bold' !important;
+}
+
+.text-wevedo {
+  background: -webkit-linear-gradient(30deg, #ffafbd, #ffc3a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
