@@ -117,9 +117,13 @@ function Login({ login, error }) {
                   <Form.Check label="Remember me" />
                 </Col>
                 <Col sm={6} className="text-right text-muted">
-                  <a href onClick={() => setModalShow(true)}>
+                  <Button
+                    className="button-password"
+                    onClick={() => setModalShow(true)}
+                    variant="link"
+                  >
                     Forgot password?
-                  </a>
+                  </Button>
                   <PassReset show={modalShow} onHide={modalClose} />
                 </Col>
                 <Col sm={12} className="text-center text-uppercase mt-5 mb-4">

@@ -123,3 +123,13 @@
 		margin-bottom: 10px;
 	}
 }
+
+.button-password {
+	color: $gray-500;
+	text-transform: none !important;
+}
+
+.button-password:hover {
+	color: $gray-600;
+	text-decoration: none;
+}
