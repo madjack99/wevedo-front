@@ -10,6 +10,12 @@ const updateSessionData = (state, action) => {
   }
 
   switch (action.type) {
+    case actionTypes.EXTRACT_TOKEN_FROM_COOKIES:
+      return {
+        isLoggedIn: !!action.payload,
+        token: action.payload,
+        error: null,
+      };
     case actionTypes.FETCH_LOGIN_REQUEST:
       return {
         isLoggedIn: false,
