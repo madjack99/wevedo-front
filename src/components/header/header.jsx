@@ -76,7 +76,9 @@ function Buttons() {
           Login
         </Button>
       </Link>
-      <Button variant="dark">Bussiness Login</Button>
+      <Link to="/business-login">
+        <Button variant="dark">Bussiness Login</Button>
+      </Link>
     </ButtonToolbar>
   );
 }
