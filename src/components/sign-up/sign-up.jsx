@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 
 import './sign-up.scss';
 
-import Logo from '../../assets/images/symbol.png';
+import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
-function SignUp() {
+import Logo from '../../assets/images/symbol.png';
+
+function SignUp({ login }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,14 +37,17 @@ function SignUp() {
   const handleSignUp = async event => {
     event.preventDefault();
 
-    const res = await wevedoService.register({
+    await wevedoService.register({
       phoneNumber,
       password,
-      deviceOS: 'android', // TODO: 'web' should be later
+      deviceOS: 'android', // TO-DO: 'web' should be later
     });
 
-    // TODO: make something after the user is registered
-    console.log('RESPONSE: ', res.data);
+    login(wevedoService, {
+      phoneNumber,
+      password,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
   };
 
   return (
@@ -134,4 +139,8 @@ function SignUp() {
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 
-export default connect(mapStateToProps)(SignUp);
+const mapDispatchToProps = dispatch => ({
+  login: fetchLogin(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
