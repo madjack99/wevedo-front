@@ -11,6 +11,8 @@ import './sign-up.scss';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
+import SocialButton from '../social-button';
+
 import Logo from '../../assets/images/symbol.png';
 
 function SignUp({ login, isLoggedIn }) {
@@ -50,6 +52,24 @@ function SignUp({ login, isLoggedIn }) {
     });
   };
 
+  const handleSocialSignUp = async ({ _profile: profile }) => {
+    await wevedoService.register({
+      email: profile.email,
+      password: profile.id,
+      fullName: profile.fullName,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      profileImageURL: profile.profilePicURL,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
+
+    login(wevedoService, {
+      email: profile.email,
+      password: profile.id,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
+  };
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
@@ -71,14 +91,24 @@ function SignUp({ login, isLoggedIn }) {
             </Link>
           </Col>
           <Col sm={12} className="text-center login-form-social-btn">
-            <Button className="login-form-social-btn-fb">
+            <SocialButton
+              className="login-form-social-btn-fb"
+              provider="facebook"
+              appId="348292309185098"
+              onLoginSuccess={handleSocialSignUp}
+            >
               <i className="fab fa-facebook-f" />
-              {' Login with Facebook'}
-            </Button>
-            <Button className="login-form-social-btn-g">
+              {' Register with Facebook'}
+            </SocialButton>
+            <SocialButton
+              className="login-form-social-btn-g"
+              provider="google"
+              appId="692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com"
+              onLoginSuccess={handleSocialSignUp}
+            >
               <i className="fab fa-google" />
-              {' Login with Google'}
-            </Button>
+              {' Register with Google'}
+            </SocialButton>
           </Col>
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />

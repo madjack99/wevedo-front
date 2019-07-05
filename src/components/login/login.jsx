@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
-import validator from 'validator';
-
 import {
   Row, Col, Form, Button, Modal,
 } from 'react-bootstrap';
@@ -12,6 +10,8 @@ import './login.scss';
 
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
+
+import SocialButton from '../social-button';
 
 import Logo from '../../assets/images/symbol.png';
 
@@ -40,16 +40,17 @@ function Login({ login, isLoggedIn, error }) {
   const handleLogIn = event => {
     event.preventDefault();
 
-    // if (validator.isMobilePhone(value)) {
-    //   console.log('PHONE: ', validator.isMobilePhone(value));
-    // }
-    // if (validator.isEmail(value)) {
-    //   console.log('EMAIL: ', validator.isEmail(value));
-    // }
-
     login(wevedoService, {
       email,
       password,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
+  };
+
+  const handleSocialLogIn = ({ _profile: profile }) => {
+    login(wevedoService, {
+      email: profile.email,
+      password: profile.id,
       deviceOS: 'android', // TO-DO: 'web' should be later
     });
   };
@@ -77,14 +78,24 @@ function Login({ login, isLoggedIn, error }) {
             </Link>
           </Col>
           <Col sm={12} className="text-center login-form-social-btn">
-            <Button className="login-form-social-btn-fb">
+            <SocialButton
+              className="login-form-social-btn-fb"
+              provider="facebook"
+              appId="348292309185098"
+              onLoginSuccess={handleSocialLogIn}
+            >
               <i className="fab fa-facebook-f" />
               {' Login with Facebook'}
-            </Button>
-            <Button className="login-form-social-btn-g">
+            </SocialButton>
+            <SocialButton
+              className="login-form-social-btn-g"
+              provider="google"
+              appId="692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com"
+              onLoginSuccess={handleSocialLogIn}
+            >
               <i className="fab fa-google" />
               {' Login with Google'}
-            </Button>
+            </SocialButton>
           </Col>
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
