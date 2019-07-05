@@ -6,7 +6,7 @@ import validator from 'validator';
 import {
   Row, Col, Form, Button, Modal,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './login.scss';
 
@@ -15,7 +15,7 @@ import { WevedoServiceContext } from '../contexts';
 
 import Logo from '../../assets/images/symbol.png';
 
-function Login({ login, error }) {
+function Login({ login, isLoggedIn, error }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [modalShow, setModalShow] = useState(false);
@@ -55,6 +55,10 @@ function Login({ login, error }) {
   };
 
   const modalClose = () => setModalShow(false);
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Row className="w-100 m-0 login logi">

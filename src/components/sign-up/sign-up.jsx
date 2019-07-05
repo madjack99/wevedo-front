@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './sign-up.scss';
 
@@ -13,7 +13,7 @@ import { WevedoServiceContext } from '../contexts';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({ login }) {
+function SignUp({ login, isLoggedIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -49,6 +49,10 @@ function SignUp({ login }) {
       deviceOS: 'android', // TO-DO: 'web' should be later
     });
   };
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Row className="w-100 m-0 login">
