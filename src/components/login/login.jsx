@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
+import validator from 'validator';
+
 import {
   Row, Col, Form, Button, Modal,
 } from 'react-bootstrap';
@@ -14,7 +16,7 @@ import { WevedoServiceContext } from '../contexts';
 import Logo from '../../assets/images/symbol.png';
 
 function Login({ login, error }) {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [modalShow, setModalShow] = useState(false);
 
@@ -24,8 +26,8 @@ function Login({ login, error }) {
     const { name, value } = target;
 
     switch (name) {
-      case 'phone-number':
-        setPhoneNumber(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -38,13 +40,18 @@ function Login({ login, error }) {
   const handleLogIn = event => {
     event.preventDefault();
 
-    login(wevedoService, {
-      phoneNumber,
-      password,
-      deviceOS: 'android', // TODO: 'web' should be later
-    });
+    // if (validator.isMobilePhone(value)) {
+    //   console.log('PHONE: ', validator.isMobilePhone(value));
+    // }
+    // if (validator.isEmail(value)) {
+    //   console.log('EMAIL: ', validator.isEmail(value));
+    // }
 
-    // console.log(`TOKEN: ${login}`); // TODO: save to redux
+    login(wevedoService, {
+      email,
+      password,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
   };
 
   const modalClose = () => setModalShow(false);
@@ -92,14 +99,14 @@ function Login({ login, error }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="username">
+                  <Form.Group controlId="email">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
-                      name="phone-number"
-                      value={phoneNumber}
+                      name="email"
+                      value={email}
                       onChange={handleUserInput}
-                      autoComplete="username"
+                      autoComplete="email"
                     />
                   </Form.Group>
                 </Col>

@@ -14,7 +14,7 @@ import { WevedoServiceContext } from '../contexts';
 import Logo from '../../assets/images/symbol.png';
 
 function SignUp({ login }) {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const wevedoService = useContext(WevedoServiceContext);
@@ -23,8 +23,8 @@ function SignUp({ login }) {
     const { name, value } = target;
 
     switch (name) {
-      case 'phone-number':
-        setPhoneNumber(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -38,13 +38,13 @@ function SignUp({ login }) {
     event.preventDefault();
 
     await wevedoService.register({
-      phoneNumber,
+      email,
       password,
       deviceOS: 'android', // TO-DO: 'web' should be later
     });
 
     login(wevedoService, {
-      phoneNumber,
+      email,
       password,
       deviceOS: 'android', // TO-DO: 'web' should be later
     });
@@ -87,14 +87,14 @@ function SignUp({ login }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="uesrname">
+                  <Form.Group controlId="email">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
-                      name="phone-number"
-                      value={phoneNumber}
+                      name="email"
+                      value={email}
                       onChange={handleUserInput}
-                      autoComplete="username"
+                      autoComplete="email"
                     />
                   </Form.Group>
                 </Col>
