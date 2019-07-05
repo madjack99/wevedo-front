@@ -17,9 +17,6 @@ jobs:
       - run:
           name: Run tests and coverage
           command: npm test -- --coverage
-      - run:
-          name: Run eslint
-          command: npm run lint:check 
 
 workflows:
   version: 2
