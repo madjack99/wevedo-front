@@ -9,5 +9,8 @@ jobs:
           name: Setup dependencies
           command: npm install
       - run:
+          name: Run eslint
+          command: npm run lint:check 
+      - run:
           name: Run tests and coverage
           command: npm test -- --coverage
