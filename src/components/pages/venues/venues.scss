@@ -67,3 +67,29 @@
     margin: 30px 100px;
   }
 }
+
+.paginationItem.active {
+  background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+
+  a {
+    color: white;
+  }
+
+}
+
+.paginationItem {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 9.5px 13px;
+  font-family: 'Proxima Nova Bold';
+  border: 0;
+  border-radius: .25rem;
+  background: #e9ecef;
+  margin-right: .5rem;
+}
+
+.paginationIcon {
+  background-color: #f8f9fa;
+  margin-right: .5rem;
+}
