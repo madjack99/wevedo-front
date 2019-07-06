@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 import {
   Row, Col, Form, Button, Modal,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './login.scss';
 
+import config from '../../config';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
+import SocialButton from '../social-button';
+
 import Logo from '../../assets/images/symbol.png';
 
-function Login({ login, error }) {
-  const [phoneNumber, setPhoneNumber] = useState('');
+function Login({ login, isLoggedIn, error }) {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [modalShow, setModalShow] = useState(false);
 
@@ -24,8 +27,8 @@ function Login({ login, error }) {
     const { name, value } = target;
 
     switch (name) {
-      case 'phone-number':
-        setPhoneNumber(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -39,19 +42,29 @@ function Login({ login, error }) {
     event.preventDefault();
 
     login(wevedoService, {
-      phoneNumber,
+      email,
       password,
-      deviceOS: 'android', // TODO: 'web' should be later
+      deviceOS: 'android', // TO-DO: 'web' should be later
     });
+  };
 
-    // console.log(`TOKEN: ${login}`); // TODO: save to redux
+  const handleSocialLogIn = ({ _profile: profile }) => {
+    login(wevedoService, {
+      email: profile.email,
+      password: profile.id,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
   };
 
   const modalClose = () => setModalShow(false);
 
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <Row className="w-100 m-0 login">
-      <Col sm={6} className="login-img">
+    <Row className="w-100 m-0 login logi">
+      <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
           <h1 className="mb-0">Welcome Back,</h1>
           <h2>Please login to your account</h2>
@@ -66,14 +79,24 @@ function Login({ login, error }) {
             </Link>
           </Col>
           <Col sm={12} className="text-center login-form-social-btn">
-            <Button className="login-form-social-btn-fb">
+            <SocialButton
+              className="login-form-social-btn-fb"
+              provider="facebook"
+              appId={config.facebookAppId}
+              onLoginSuccess={handleSocialLogIn}
+            >
               <i className="fab fa-facebook-f" />
               {' Login with Facebook'}
-            </Button>
-            <Button className="login-form-social-btn-g">
+            </SocialButton>
+            <SocialButton
+              className="login-form-social-btn-g"
+              provider="google"
+              appId={config.googleAppId}
+              onLoginSuccess={handleSocialLogIn}
+            >
               <i className="fab fa-google" />
               {' Login with Google'}
-            </Button>
+            </SocialButton>
           </Col>
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
@@ -92,24 +115,26 @@ function Login({ login, error }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="email">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
-                      name="phone-number"
-                      value={phoneNumber}
+                      name="email"
+                      value={email}
                       onChange={handleUserInput}
+                      autoComplete="email"
                     />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mb-3">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="password">
                     <Form.Control
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={password}
                       onChange={handleUserInput}
+                      autoComplete="current-password"
                     />
                   </Form.Group>
                 </Col>
@@ -117,9 +142,13 @@ function Login({ login, error }) {
                   <Form.Check label="Remember me" />
                 </Col>
                 <Col sm={6} className="text-right text-muted">
-                  <a href onClick={() => setModalShow(true)}>
+                  <Button
+                    className="button-password"
+                    onClick={() => setModalShow(true)}
+                    variant="link"
+                  >
                     Forgot password?
-                  </a>
+                  </Button>
                   <PassReset show={modalShow} onHide={modalClose} />
                 </Col>
                 <Col sm={12} className="text-center text-uppercase mt-5 mb-4">

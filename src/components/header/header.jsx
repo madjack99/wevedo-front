@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   Row, Col, Nav, Navbar, NavDropdown, ButtonToolbar, Button,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import './header.scss';
 
@@ -22,7 +22,7 @@ function Header({ isLoggedIn, token, signOut }) {
       setCategories(newCategories);
     };
     fetchCategories();
-  }, [categories.length]); // TO-DO: change dependency condition on array check with hash function
+  }, [wevedoService]);
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
@@ -31,11 +31,9 @@ function Header({ isLoggedIn, token, signOut }) {
       <Navbar.Collapse>
         <Nav className="text-uppercase mr-auto">
           {/* <Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link> */}
-          <Nav.Link>
-            <Link to="/venues">
-              <b>Venues</b>
-            </Link>
-          </Nav.Link>
+          <NavLink className="nav-link" to="./venues">
+            <b>Venues</b>
+          </NavLink>
           <CategoriesDropdown categories={categories} />
         </Nav>
         {
@@ -45,11 +43,9 @@ function Header({ isLoggedIn, token, signOut }) {
         }
       </Navbar.Collapse>
 
-      <Navbar.Brand href="#home">
-        <Link to="/">
-          <img src={logo} alt="logo " />
-        </Link>
-      </Navbar.Brand>
+      <NavLink className="navbar-brand" to="/">
+        <img src={logo} alt="logo " />
+      </NavLink>
     </Navbar>
   );
 }
@@ -65,12 +61,16 @@ function CategoriesDropdown({ categories }) {
           <Row className="pt-3">
             <Col sm={6}>
               {
-                leftCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+                leftCategoryColumns.map(({ _id, name }) => (
+                  <CategoryDropDownItem key={_id} name={name} />
+                ))
               }
             </Col>
             <Col sm={6}>
               {
-                rightCategoryColumns.map(({ name }) => <CategoryDropDownItem name={name} />)
+                rightCategoryColumns.map(({ _id, name }) => (
+                  <CategoryDropDownItem key={_id} name={name} />
+                ))
               }
             </Col>
             <Col sm={12}>
@@ -91,7 +91,11 @@ function CategoriesDropdown({ categories }) {
 }
 
 function CategoryDropDownItem({ name }) {
-  return <NavDropdown.Item href={name.toLowerCase()}>{name}</NavDropdown.Item>;
+  return (
+    <NavLink className="dropdown-item" to={name.toLowerCase()}>
+      {name}
+    </NavLink>
+  );
 }
 
 function Buttons() {

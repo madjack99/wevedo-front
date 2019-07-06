@@ -30,13 +30,21 @@ export default function BusinessLogin() {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
-                    <Form.Control type="email" placeholder="Email Address" />
+                  <Form.Group controlId="username">
+                    <Form.Control
+                      type="email"
+                      placeholder="Email Address"
+                      autoComplete="username"
+                    />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mb-3">
-                  <Form.Group controlId="">
-                    <Form.Control type="password" placeholder="Password" />
+                  <Form.Group controlId="password">
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      autoComplete="password"
+                    />
                   </Form.Group>
                 </Col>
                 <Col sm={6}>

@@ -4,15 +4,20 @@ import { connect } from 'react-redux';
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './sign-up.scss';
 
-import Logo from '../../assets/images/symbol.png';
+import config from '../../config';
+import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
-function SignUp({ isLoggedIn, token }) {
-  const [phoneNumber, setPhoneNumber] = useState('');
+import SocialButton from '../social-button';
+
+import Logo from '../../assets/images/symbol.png';
+
+function SignUp({ login, isLoggedIn }) {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const wevedoService = useContext(WevedoServiceContext);
@@ -21,8 +26,8 @@ function SignUp({ isLoggedIn, token }) {
     const { name, value } = target;
 
     switch (name) {
-      case 'phone-number':
-        setPhoneNumber(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -35,19 +40,44 @@ function SignUp({ isLoggedIn, token }) {
   const handleSignUp = async event => {
     event.preventDefault();
 
-    const res = await wevedoService.register({
-      phoneNumber,
+    await wevedoService.register({
+      email,
       password,
-      deviceOS: 'android', // TODO: 'web' should be later
+      deviceOS: 'android', // TO-DO: 'web' should be later
     });
 
-    // TODO: make something after the user is registered
-    console.log('RESPONSE: ', res.data);
+    login(wevedoService, {
+      email,
+      password,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
   };
+
+  const handleSocialSignUp = async ({ _profile: profile }) => {
+    await wevedoService.register({
+      email: profile.email,
+      password: profile.id,
+      fullName: profile.fullName,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      profileImageURL: profile.profilePicURL,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
+
+    login(wevedoService, {
+      email: profile.email,
+      password: profile.id,
+      deviceOS: 'android', // TO-DO: 'web' should be later
+    });
+  };
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Row className="w-100 m-0 login">
-      <Col sm={6} className="login-img">
+      <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
           <h1 className="mb-0">Hey,</h1>
           <h2>Glad to see you...</h2>
@@ -62,14 +92,24 @@ function SignUp({ isLoggedIn, token }) {
             </Link>
           </Col>
           <Col sm={12} className="text-center login-form-social-btn">
-            <Button className="login-form-social-btn-fb">
+            <SocialButton
+              className="login-form-social-btn-fb"
+              provider="facebook"
+              appId={config.facebookAppId}
+              onLoginSuccess={handleSocialSignUp}
+            >
               <i className="fab fa-facebook-f" />
-              {' Login with Facebook'}
-            </Button>
-            <Button className="login-form-social-btn-g">
+              {' Register with Facebook'}
+            </SocialButton>
+            <SocialButton
+              className={config.googleAppId}
+              provider="google"
+              appId="692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com"
+              onLoginSuccess={handleSocialSignUp}
+            >
               <i className="fab fa-google" />
-              {' Login with Google'}
-            </Button>
+              {' Register with Google'}
+            </SocialButton>
           </Col>
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
@@ -82,24 +122,26 @@ function SignUp({ isLoggedIn, token }) {
             <Form>
               <Row>
                 <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="email">
                     <Form.Control
                       type="email"
                       placeholder="Email Address"
-                      name="phone-number"
-                      value={phoneNumber}
+                      name="email"
+                      value={email}
                       onChange={handleUserInput}
+                      autoComplete="email"
                     />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mb-3">
-                  <Form.Group controlId="">
+                  <Form.Group controlId="password">
                     <Form.Control
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={password}
                       onChange={handleUserInput}
+                      autoComplete="password"
                     />
                   </Form.Group>
                 </Col>
@@ -132,4 +174,8 @@ function SignUp({ isLoggedIn, token }) {
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 
-export default connect(mapStateToProps)(SignUp);
+const mapDispatchToProps = dispatch => ({
+  login: fetchLogin(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
