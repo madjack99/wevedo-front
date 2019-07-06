@@ -8,6 +8,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 import './sign-up.scss';
 
+import config from '../../config';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
@@ -94,14 +95,14 @@ function SignUp({ login, isLoggedIn }) {
             <SocialButton
               className="login-form-social-btn-fb"
               provider="facebook"
-              appId="348292309185098"
+              appId={config.facebookAppId}
               onLoginSuccess={handleSocialSignUp}
             >
               <i className="fab fa-facebook-f" />
               {' Register with Facebook'}
             </SocialButton>
             <SocialButton
-              className="login-form-social-btn-g"
+              className={config.googleAppId}
               provider="google"
               appId="692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com"
               onLoginSuccess={handleSocialSignUp}

@@ -8,6 +8,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 import './login.scss';
 
+import config from '../../config';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
@@ -81,7 +82,7 @@ function Login({ login, isLoggedIn, error }) {
             <SocialButton
               className="login-form-social-btn-fb"
               provider="facebook"
-              appId="348292309185098"
+              appId={config.facebookAppId}
               onLoginSuccess={handleSocialLogIn}
             >
               <i className="fab fa-facebook-f" />
@@ -90,7 +91,7 @@ function Login({ login, isLoggedIn, error }) {
             <SocialButton
               className="login-form-social-btn-g"
               provider="google"
-              appId="692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com"
+              appId={config.googleAppId}
               onLoginSuccess={handleSocialLogIn}
             >
               <i className="fab fa-google" />
