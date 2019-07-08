@@ -27,6 +27,11 @@ export default function SupplierList({ history, location, match }) {
   const supplierName = match.params.name;
 
   useEffect(() => {
+    const pageNumber = location.search.match(/^\?page=(\d*)$/);
+    setCurrentPage(pageNumber ? +pageNumber[1] : 1);
+  }, [location.search]);
+
+  useEffect(() => {
     const fetchProviders = async () => {
       const {
         data: newProviders,
@@ -44,11 +49,6 @@ export default function SupplierList({ history, location, match }) {
     };
     fetchProviders();
   }, [wevedoService, currentPage, supplierName]);
-
-  useEffect(() => {
-    const pageNumber = location.search.match(/^\?page=(\d*)$/);
-    setCurrentPage(pageNumber ? pageNumber[1] : 1);
-  }, [location.search]);
 
   const onPaginationChange = pageNumber => {
     setCurrentPage(pageNumber);
