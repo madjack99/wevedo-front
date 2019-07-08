@@ -200,7 +200,7 @@ function Providers({
               nextPageText={<i className="fa fa-angle-right" />}
               lastPageText={<i className="fa fa-angle-double-right" />}
               pageRangeDisplayed={3}
-              activePage={currentPage}
+              activePage={+currentPage}
               totalItemsCount={numberOfProviders}
               onChange={onPaginationChange}
               itemClass="paginationItem"
