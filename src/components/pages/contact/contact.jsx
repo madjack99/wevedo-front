@@ -25,8 +25,17 @@ class Contact extends React.Component {
     });
   };
 
-  render() {
+  handleSubmit = e => {
+    e.preventDefault();
     console.log(this.state);
+    this.setState(prevState => ({
+      name: "",
+      email: "",
+      message: ""
+    }));
+  };
+
+  render() {
     return (
       <React.Fragment>
         <div className="section section-header-half contact">
@@ -48,7 +57,7 @@ class Contact extends React.Component {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <Form className="mt-5">
+              <Form className="mt-5" onSubmit={this.handleSubmit}>
                 <Row>
                   <Col sm={6}>
                     <Form.Group controlId="name">
@@ -56,6 +65,7 @@ class Contact extends React.Component {
                         onChange={this.handleChange}
                         type="text"
                         placeholder="Name"
+                        value={this.state.name}
                       />
                     </Form.Group>
                   </Col>
@@ -65,6 +75,7 @@ class Contact extends React.Component {
                         onChange={this.handleChange}
                         type="email"
                         placeholder="Email"
+                        value={this.state.email}
                       />
                     </Form.Group>
                   </Col>
@@ -75,11 +86,14 @@ class Contact extends React.Component {
                         as="textarea"
                         placeholder="Message"
                         rows="3"
+                        value={this.state.message}
                       />
                     </Form.Group>
                   </Col>
                   <Col className="text-center text-uppercase mt-5 mb-5">
-                    <Button size="lg">Send</Button>
+                    <Button size="lg" type="submit">
+                      Send
+                    </Button>
                   </Col>
                 </Row>
               </Form>
