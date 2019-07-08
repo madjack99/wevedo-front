@@ -19,7 +19,14 @@ class Contact extends React.Component {
     };
   }
 
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
+
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <div className="section section-header-half contact">
@@ -44,18 +51,27 @@ class Contact extends React.Component {
               <Form className="mt-5">
                 <Row>
                   <Col sm={6}>
-                    <Form.Group controlId="">
-                      <Form.Control type="text" placeholder="Name" />
+                    <Form.Group controlId="name">
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="text"
+                        placeholder="Name"
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={6}>
-                    <Form.Group controlId="">
-                      <Form.Control type="email" placeholder="Email" />
+                    <Form.Group controlId="email">
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="email"
+                        placeholder="Email"
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mt-5">
-                    <Form.Group controlId="">
+                    <Form.Group controlId="message">
                       <Form.Control
+                        onChange={this.handleChange}
                         as="textarea"
                         placeholder="Message"
                         rows="3"
