@@ -14,5 +14,6 @@ export default class WevedoService extends ApiBase {
       `providers/categories/${category}?page=${page}`,
     );
     this.getNumberOfProvidersByCategory = category => this.get(`providers/number/${category}`);
+    this.getProvidersPerPage = () => this.get('providers/categories/per-page');
   }
 }
