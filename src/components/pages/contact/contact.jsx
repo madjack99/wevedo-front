@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Container, Col, Form, Button } from "react-bootstrap";
+import { Row, Container, Col, Form, Button, Alert } from "react-bootstrap";
 
 import "./contact.scss";
 
@@ -15,7 +15,8 @@ class Contact extends React.Component {
     this.state = {
       name: "",
       email: "",
-      message: ""
+      message: "",
+      errorMsg: ""
     };
   }
 
@@ -27,12 +28,23 @@ class Contact extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { name, email, message } = this.state;
     console.log(this.state);
-    this.setState(prevState => ({
-      name: "",
-      email: "",
-      message: ""
-    }));
+    if (!name || !email || !message) {
+      this.setState({
+        errorMsg: "Please, fill all the fields!",
+        name: "",
+        email: "",
+        message: ""
+      });
+    } else {
+      this.setState({
+        name: "",
+        email: "",
+        message: "",
+        errorMsg: ""
+      });
+    }
   };
 
   render() {
@@ -91,6 +103,9 @@ class Contact extends React.Component {
                     </Form.Group>
                   </Col>
                   <Col className="text-center text-uppercase mt-5 mb-5">
+                    {this.state.errorMsg ? (
+                      <Alert variant="danger">{this.state.errorMsg}</Alert>
+                    ) : null}
                     <Button size="lg" type="submit">
                       Send
                     </Button>
