@@ -31,7 +31,7 @@ function Header({ isLoggedIn, token, signOut }) {
       <Navbar.Collapse>
         <Nav className="text-uppercase mr-auto">
           {/* <Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link> */}
-          <NavLink className="nav-link" to="./venues">
+          <NavLink className="nav-link" to="/suppliers/Venue">
             <b>Venues</b>
           </NavLink>
           <CategoriesDropdown categories={categories} />
