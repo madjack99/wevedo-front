@@ -17,7 +17,7 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/ckurban/wevedo-website#readme",
+  "homepage": "",
   "devDependencies": {
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
