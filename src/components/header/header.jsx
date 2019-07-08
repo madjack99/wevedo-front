@@ -92,7 +92,7 @@ function CategoriesDropdown({ categories }) {
 
 function CategoryDropDownItem({ name }) {
   return (
-    <NavLink className="dropdown-item" to={name.toLowerCase()}>
+    <NavLink className="dropdown-item" to={`/suppliers/${name}`}>
       {name}
     </NavLink>
   );

@@ -6,7 +6,7 @@ import './app.scss';
 import Header from '../header';
 import Footer from '../footer';
 import Home from '../home';
-import Venues from '../pages/venues';
+import SupplierList from '../pages/supplier-list';
 import Weddingtools from '../pages/wedding-tools';
 import Weddingsuppliers from '../pages/wedding-supliers';
 import Supplier from '../pages/supplier';
@@ -37,7 +37,7 @@ const App = () => (
     <RouteMainLayout exact path="/" component={Home} />
     <RouteMainLayout path="/weddingtools" component={Weddingtools} />
     <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
-    <RouteMainLayout path="/suppliers/Venue" component={Venues} />
+    <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
     <RouteMainLayout path="/supplier" component={Supplier} />
     <RouteMainLayout path="/contact" component={Contact} />
     <RouteMainLayout path="/terms" component={Terms} />

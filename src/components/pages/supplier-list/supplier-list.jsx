@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 
-import './venues.scss';
+import './supplier-list.scss';
 
 import 'rc-slider/assets/index.css';
 import { Range } from 'rc-slider';
@@ -17,39 +17,45 @@ import serches2 from '../../../assets/images/serches2.png';
 import serches3 from '../../../assets/images/serches3.png';
 import serches4 from '../../../assets/images/serches4.png';
 
-function Venues({ history, location }) {
+export default function SupplierList({ history, location, match }) {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   const wevedoService = useContext(WevedoServiceContext);
+  const supplierName = match.params.name;
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const { data: newProviders } = await wevedoService.getListByCategory('Venue', currentPage);
-      const { data: newNumberOfProviders } = await wevedoService.getNumberOfProvidersByCategory('Venue');
+      const {
+        data: newProviders,
+      } = await wevedoService.getListByCategory(supplierName, currentPage);
+      const {
+        data: newNumberOfProviders,
+      } = await wevedoService.getNumberOfProvidersByCategory(supplierName);
+
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
     };
     fetchProviders();
-  }, [wevedoService, currentPage]);
+  }, [wevedoService, currentPage, supplierName]);
 
   useEffect(() => {
-    const match = location.search.match(/^\?page=(\d*)$/);
-    setCurrentPage(match ? match[1] : 1);
-  }, [location.pathname]);
+    const pageNumber = location.search.match(/^\?page=(\d*)$/);
+    setCurrentPage(pageNumber ? pageNumber[1] : 1);
+  }, [location.search]);
 
   const onPaginationChange = pageNumber => {
     setCurrentPage(pageNumber);
-    history.push(`/venues?page=${pageNumber}`);
+    history.push(`${location.pathname}?page=${pageNumber}`);
     window.scrollTo(0, 0);
   };
 
   return (
     <React.Fragment>
-      <Hero />
+      <Hero supplierName={supplierName} />
       <SearchForm />
-      <Container className="venues-results">
+      <Container className="supplier-list-results">
         <Row>
           <Col sm={4} className="results-filters">
             <Filters />
@@ -69,18 +75,13 @@ function Venues({ history, location }) {
   );
 }
 
-function Hero() {
+function Hero({ supplierName }) {
   return (
-    <div className="section section-header-full venues">
+    <div className="section section-header-full supplier-list">
       <Container className="h-100 w-100 align-items-center">
         <Row className="h-100 align-items-center">
           <Col sm={12} className="text-center text-uppercase">
-            <h1>
-              Wedding
-              <br />
-              {' '}
-              Venues
-            </h1>
+            <h1>{ supplierName }</h1>
           </Col>
         </Row>
       </Container>
@@ -314,5 +315,3 @@ function PopularSearches() {
     </div>
   );
 }
-
-export default Venues;
