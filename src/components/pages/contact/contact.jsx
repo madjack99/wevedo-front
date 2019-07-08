@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Container, Col, Form, Button, Alert } from "react-bootstrap";
 
+import ApiBase from "../../../api/api-base";
 import "./contact.scss";
 
 import serches1 from "../../../assets/images/serches1.png";
@@ -38,6 +39,12 @@ class Contact extends React.Component {
         message: ""
       });
     } else {
+      const contactPageApi = new ApiBase();
+      contactPageApi
+        .create("/contact", { name, email, message })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+
       this.setState({
         name: "",
         email: "",
