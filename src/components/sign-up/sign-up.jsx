@@ -9,14 +9,16 @@ import { Redirect, Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import config from '../../config';
-import { fetchLogin } from '../../actions';
+import { fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 import SocialButton from '../social-button';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({ login, isLoggedIn }) {
+function SignUp({
+  login, existingEmail, isLoggedIn, error,
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,17 +42,19 @@ function SignUp({ login, isLoggedIn }) {
   const handleSignUp = async event => {
     event.preventDefault();
 
-    await wevedoService.register({
+    const isNewEmail = await wevedoService.checkEmail({ email });
+    const body = {
       email,
       password,
       deviceOS: 'android', // TO-DO: 'web' should be later
-    });
+    };
 
-    login(wevedoService, {
-      email,
-      password,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
+    if (isNewEmail) {
+      await wevedoService.register(body);
+      return login(wevedoService, body);
+    }
+
+    return existingEmail('Email is already in use');
   };
 
   const handleSocialSignUp = async ({ _profile: profile }) => {
@@ -176,6 +180,7 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
+  existingEmail: error => dispatch(existingEmail(error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
