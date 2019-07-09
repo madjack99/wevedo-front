@@ -122,6 +122,9 @@ function SignUp({
             {' '}
             <hr />
           </Col>
+          <Col sm={12} className="d-flex align-items-center justify-content-center my-2">
+            {error}
+          </Col>
           <Col sm={12} className="mt-4">
             <Form>
               <Row>

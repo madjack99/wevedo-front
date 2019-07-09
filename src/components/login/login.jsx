@@ -105,12 +105,9 @@ function Login({ login, isLoggedIn, error }) {
             {' '}
             <hr />
           </Col>
-          {error && (
-            <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
-              {error}
-            </Col>
-          )}
-
+          <Col sm={12} className="d-flex align-items-center justify-content-center my-2">
+            {error}
+          </Col>
           <Col sm={12} className="mt-4">
             <Form>
               <Row>
