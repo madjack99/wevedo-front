@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
 
@@ -34,19 +34,21 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
 
 const App = () => (
   <React.Fragment>
-    <RouteMainLayout exact path="/" component={Home} />
-    <RouteMainLayout path="/weddingtools" component={Weddingtools} />
-    <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
-    <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
-    <RouteMainLayout path="/supplier" component={Supplier} />
-    <RouteMainLayout path="/contact" component={Contact} />
-    <RouteMainLayout path="/terms" component={Terms} />
-    <RouteMainLayout path="/privacy" component={Privacy} />
-    <Route path="/login" component={Login} />
-    <Route path="/signup" component={Signup} />
-    <Route path="/pricing" component={Pricing} />
-    <Route path="/business-login" component={BusinessLogin} />
-    <Route path="/business-signup" component={BusinessSignup} />
+    <Switch>
+      <RouteMainLayout exact path="/" component={Home} />
+      <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+      <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
+      <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
+      <RouteMainLayout path="/supplier" component={Supplier} />
+      <RouteMainLayout path="/contact" component={Contact} />
+      <RouteMainLayout path="/terms" component={Terms} />
+      <RouteMainLayout path="/privacy" component={Privacy} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/business-login" component={BusinessLogin} />
+      <Route path="/business-signup" component={BusinessSignup} />
+    </Switch>
   </React.Fragment>
 );
 
