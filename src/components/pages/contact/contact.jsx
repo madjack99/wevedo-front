@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Container, Col, Form, Button, Alert } from 'react-bootstrap';
 
 import ApiBase from '../../../api/api-base';
+import config from '../../../config';
 import './contact.scss';
 
 import serches1 from '../../../assets/images/serches1.png';
@@ -30,6 +31,7 @@ class Contact extends React.Component {
   };
 
   handleSubmit = e => {
+    const { backendUrl } = config;
     e.preventDefault();
     const { name, email, message } = this.state;
     console.log(this.state);
@@ -42,7 +44,7 @@ class Contact extends React.Component {
       });
     } else {
       this.contactPageApi
-        .create('/contact', { name, email, message })
+        .create(`${backendUrl}/api/contact`, { name, email, message })
         .then(res => console.log(res))
         .catch(err => console.log(err));
 
