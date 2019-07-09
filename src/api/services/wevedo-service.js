@@ -13,6 +13,6 @@ export default class WevedoService extends ApiBase {
     this.getListByCategory = (category, page = 1) => this.get(
       `providers/categories/${category}?page=${page}`,
     );
-    this.getNumberOfProvidersByCategory = category => this.get(`providers/number/${category}`);
+    this.getProvidersByFilters = category => this.get(`providers/by-category/${category}`);
   }
 }

@@ -18,18 +18,13 @@ import serches2 from '../../../assets/images/serches2.png';
 import serches3 from '../../../assets/images/serches3.png';
 import serches4 from '../../../assets/images/serches4.png';
 
-export default function SupplierList({ history, location, match }) {
+export default function SupplierList({ history, match }) {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierName = match.params.name;
-
-  useEffect(() => {
-    const pageNumber = location.search.match(/^\?page=(\d*)$/);
-    setCurrentPage(pageNumber ? +pageNumber[1] : 1);
-  }, [location.search]);
+  const currentPage = +match.params.pageNumber || 1;
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -38,7 +33,7 @@ export default function SupplierList({ history, location, match }) {
       } = await wevedoService.getListByCategory(supplierName, currentPage);
       const {
         data: newNumberOfProviders,
-      } = await wevedoService.getNumberOfProvidersByCategory(supplierName);
+      } = await wevedoService.getProvidersByFilters(supplierName);
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
@@ -47,8 +42,7 @@ export default function SupplierList({ history, location, match }) {
   }, [wevedoService, currentPage, supplierName]);
 
   const onPaginationChange = pageNumber => {
-    setCurrentPage(pageNumber);
-    history.push(`${location.pathname}?page=${pageNumber}`);
+    history.push(`/suppliers/${supplierName}/${pageNumber}`);
     window.scrollTo(0, 0);
   };
 
