@@ -11,6 +11,7 @@ import 'rc-slider/assets/index.css';
 import { Range } from 'rc-slider';
 
 import { WevedoServiceContext } from '../../contexts';
+import config from '../../../config';
 
 import serches1 from '../../../assets/images/serches1.png';
 import serches2 from '../../../assets/images/serches2.png';
@@ -21,7 +22,6 @@ export default function SupplierList({ history, location, match }) {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [providersPerPage, setProvidersPerPage] = useState(1);
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierName = match.params.name;
@@ -39,13 +39,9 @@ export default function SupplierList({ history, location, match }) {
       const {
         data: newNumberOfProviders,
       } = await wevedoService.getNumberOfProvidersByCategory(supplierName);
-      const {
-        data: newProvidersPerPage,
-      } = await wevedoService.getProvidersPerPage();
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
-      setProvidersPerPage(newProvidersPerPage);
     };
     fetchProviders();
   }, [wevedoService, currentPage, supplierName]);
@@ -68,7 +64,6 @@ export default function SupplierList({ history, location, match }) {
           <Col sm={8} className="results-data">
             <Providers
               providers={providers}
-              providersPerPage={providersPerPage}
               currentPage={currentPage}
               numberOfProviders={numberOfProviders}
               onPaginationChange={onPaginationChange}
@@ -173,7 +168,7 @@ function Filters() {
 }
 
 function Providers({
-  providers, providersPerPage, numberOfProviders, currentPage, onPaginationChange,
+  providers, numberOfProviders, currentPage, onPaginationChange,
 }) {
   function ProviderCard({ provider }) {
     return (
@@ -205,7 +200,7 @@ function Providers({
               prevPageText={<i className="fa fa-angle-left" />}
               nextPageText={<i className="fa fa-angle-right" />}
               lastPageText={<i className="fa fa-angle-double-right" />}
-              itemsCountPerPage={providersPerPage}
+              itemsCountPerPage={config.providersPerPage}
               pageRangeDisplayed={3}
               activePage={+currentPage}
               totalItemsCount={numberOfProviders}
