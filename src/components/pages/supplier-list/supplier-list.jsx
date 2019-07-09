@@ -185,6 +185,22 @@ function Providers({
   }
 
   function PaginationButtons() {
+    function ResultsArea() {
+      const numberOfProvidersShown = config.providersPerPage * currentPage;
+      const beginRangeCount = config.providersPerPage * (currentPage - 1) + 1;
+      const endRangeCount = numberOfProvidersShown > numberOfProviders
+        ? numberOfProviders
+        : numberOfProvidersShown;
+
+      return (
+        <span className="text-muted">
+          {
+            `Showing ${beginRangeCount} - ${endRangeCount} of ${numberOfProviders} results`
+          }
+        </span>
+      );
+    }
+
     return (
       <Row>
         <Col>
@@ -208,7 +224,7 @@ function Providers({
           </ButtonToolbar>
         </Col>
         <Col className="text-right pt-2">
-          <span className="text-muted">Showing 1 - 6 of 8 results</span>
+          <ResultsArea />
         </Col>
       </Row>
     );
