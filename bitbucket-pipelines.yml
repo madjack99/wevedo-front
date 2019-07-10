@@ -11,6 +11,6 @@ pipelines:
          - npm install -g firebase-tools 
          - npm test
          - npm rebuild node-sass
-         - npm run build
-         - ls -laR ./dist #recursively list directories
+         - REACT_APP_STAGE=QA npm run build
+         - ls -laR ./dist
          - firebase deploy --token=$FIREBASE_TOKEN --project wevedo-76b03 --non-interactive
