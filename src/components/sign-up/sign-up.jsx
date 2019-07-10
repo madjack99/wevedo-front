@@ -9,14 +9,16 @@ import { Redirect, Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import config from '../../config';
-import { fetchLogin } from '../../actions';
+import { fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 import SocialButton from '../social-button';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({ login, isLoggedIn }) {
+function SignUp({
+  login, existingEmail, isLoggedIn, error,
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,34 +42,25 @@ function SignUp({ login, isLoggedIn }) {
   const handleSignUp = async event => {
     event.preventDefault();
 
-    await wevedoService.register({
+    const isNewEmail = await wevedoService.checkEmail({ email });
+    const body = {
       email,
       password,
       deviceOS: 'android', // TO-DO: 'web' should be later
-    });
+    };
 
-    login(wevedoService, {
-      email,
-      password,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
+    if (isNewEmail) {
+      await wevedoService.register(body);
+      return login(wevedoService.login, body);
+    }
+
+    return existingEmail('Email is already in use');
   };
 
-  const handleSocialSignUp = async ({ _profile: profile }) => {
-    await wevedoService.register({
-      email: profile.email,
-      password: profile.id,
-      fullName: profile.fullName,
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      profileImageURL: profile.profilePicURL,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
-
-    login(wevedoService, {
-      email: profile.email,
-      password: profile.id,
-      deviceOS: 'android', // TO-DO: 'web' should be later
+  const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
+    login(wevedoService.socialLogin, {
+      ...profile,
+      provider,
     });
   };
 
@@ -117,6 +110,9 @@ function SignUp({ login, isLoggedIn }) {
             <b className="text-muted text-butler-bold">OR</b>
             {' '}
             <hr />
+          </Col>
+          <Col sm={12} className="d-flex align-items-center justify-content-center my-2">
+            {error}
           </Col>
           <Col sm={12} className="mt-4">
             <Form>
@@ -176,6 +172,7 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
+  existingEmail: error => dispatch(existingEmail(error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
