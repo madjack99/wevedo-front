@@ -41,18 +41,17 @@ function Login({ login, isLoggedIn, error }) {
   const handleLogIn = event => {
     event.preventDefault();
 
-    login(wevedoService, {
+    login(wevedoService.login, {
       email,
       password,
       deviceOS: 'android', // TO-DO: 'web' should be later
     });
   };
 
-  const handleSocialLogIn = ({ _profile: profile }) => {
-    login(wevedoService, {
-      email: profile.email,
-      password: profile.id,
-      deviceOS: 'android', // TO-DO: 'web' should be later
+  const handleSocialLogIn = ({ _profile: profile, _provider: provider }) => {
+    login(wevedoService.socialLogin, {
+      ...profile,
+      provider,
     });
   };
 

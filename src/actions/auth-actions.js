@@ -34,11 +34,11 @@ const signOutFailed = error => ({
   payload: error,
 });
 
-export const fetchLogin = dispatch => async (service, body) => {
+export const fetchLogin = dispatch => async (login, body) => {
   dispatch(loginRequested());
 
   try {
-    const { data: token } = await service.login(body);
+    const { data: token } = await login(body);
     console.log(`ENTERED. TOKEN: ${token}`);
     Cookies.set('token', token);
     dispatch(loginSucceed(token));

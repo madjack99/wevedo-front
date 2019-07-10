@@ -51,27 +51,16 @@ function SignUp({
 
     if (isNewEmail) {
       await wevedoService.register(body);
-      return login(wevedoService, body);
+      return login(wevedoService.login, body);
     }
 
     return existingEmail('Email is already in use');
   };
 
-  const handleSocialSignUp = async ({ _profile: profile }) => {
-    await wevedoService.register({
-      email: profile.email,
-      password: profile.id,
-      fullName: profile.fullName,
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      profileImageURL: profile.profilePicURL,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
-
-    login(wevedoService, {
-      email: profile.email,
-      password: profile.id,
-      deviceOS: 'android', // TO-DO: 'web' should be later
+  const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
+    login(wevedoService.socialLogin, {
+      ...profile,
+      provider,
     });
   };
 
