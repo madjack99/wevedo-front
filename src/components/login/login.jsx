@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  Row, Col, Form, Button, Modal,
+  Row, Col, Form, Button,
 } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ import config from '../../config';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
+import ResetPasswordWindow from '../reset-password-window';
 import SocialButton from '../social-button';
 
 import Logo from '../../assets/images/symbol.png';
@@ -54,8 +55,6 @@ function Login({ login, isLoggedIn, error }) {
       provider,
     });
   };
-
-  const modalClose = () => setModalShow(false);
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -145,7 +144,7 @@ function Login({ login, isLoggedIn, error }) {
                   >
                     Forgot password?
                   </Button>
-                  <PassReset show={modalShow} onHide={modalClose} />
+                  <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
                 </Col>
                 <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
                   <Button size="lg" onClick={handleLogIn}>
@@ -171,36 +170,6 @@ function Login({ login, isLoggedIn, error }) {
     </Row>
   );
 }
-
-const PassReset = props => (
-  <Modal
-    {...props}
-    size="md"
-    aria-labelledby="Password reset"
-    centered
-    className="global-modal"
-  >
-    <Modal.Body className="p-0">
-      <Row>
-        <span
-          className="modal-close-btn"
-          onClick={props.onHide}
-        >
-          <i className="fas fa-times fa-2x" />
-        </span>
-        <Col sm={12} className="p-5 text-center">
-          <h5 className="text-uppercase">Reset Password</h5>
-          <hr />
-          <p className="mb-0">
-            Reset password has been sent to user@email.com address.
-            <br />
-            Please check your e-mail.
-          </p>
-        </Col>
-      </Row>
-    </Modal.Body>
-  </Modal>
-);
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 
