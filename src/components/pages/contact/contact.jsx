@@ -40,9 +40,6 @@ class Contact extends React.Component {
     if (!name || !email || !message) {
       this.setState({
         errorMsg: 'Please, fill all the fields!',
-        name: '',
-        email: '',
-        message: '',
       });
     } else {
       this.contactPageApi
@@ -85,22 +82,12 @@ class Contact extends React.Component {
                 <Row>
                   <Col sm={6}>
                     <Form.Group controlId="name">
-                      <Form.Control
-                        onChange={this.handleChange}
-                        type="text"
-                        placeholder="Name"
-                        value={this.state.name}
-                      />
+                      <Form.Control onChange={this.handleChange} type="text" placeholder="Name" />
                     </Form.Group>
                   </Col>
                   <Col sm={6}>
                     <Form.Group controlId="email">
-                      <Form.Control
-                        onChange={this.handleChange}
-                        type="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                      />
+                      <Form.Control onChange={this.handleChange} type="email" placeholder="Email" />
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mt-5">
@@ -110,7 +97,6 @@ class Contact extends React.Component {
                         as="textarea"
                         placeholder="Message"
                         rows="3"
-                        value={this.state.message}
                       />
                     </Form.Group>
                   </Col>
