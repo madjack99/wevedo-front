@@ -3,15 +3,12 @@ import {
   Row, Container, Col, Button, Carousel, Modal, Form,
 } from 'react-bootstrap';
 
+import PopularSearches from '../popularSearches';
 import './supplier.scss';
 
 import slide from '../../../assets/images/supplier-slide.png';
 import map from '../../../assets/images/map.png';
 import modalimg from '../../../assets/images/wedding dress.png';
-import serches1 from '../../../assets/images/serches1.png';
-import serches2 from '../../../assets/images/serches2.png';
-import serches3 from '../../../assets/images/serches3.png';
-import serches4 from '../../../assets/images/serches4.png';
 
 class Supplier extends Component {
   constructor(...args) {
@@ -39,25 +36,13 @@ class Supplier extends Component {
             <Col>
               <Carousel>
                 <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src={slide}
-                    alt="supplier-slide"
-                  />
+                  <img className="d-block w-100" src={slide} alt="supplier-slide" />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src={slide}
-                    alt="supplier-slide"
-                  />
+                  <img className="d-block w-100" src={slide} alt="supplier-slide" />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src={slide}
-                    alt="supplier-slide"
-                  />
+                  <img className="d-block w-100" src={slide} alt="supplier-slide" />
                 </Carousel.Item>
               </Carousel>
             </Col>
@@ -68,21 +53,17 @@ class Supplier extends Component {
               <b>Church Road, Clearwell, Forest of Dean Gloucestershire, GL16 8LG</b>
               <hr className="hr-sm m-0 mt-4 mb-4" />
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit
-                esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-                Sed ut perspiciatis unde omnis iste natus error sit
-                voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quae ab illo inventore veritatis et quasi
-                architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                voluptatem quia voluptas sit aspernatur.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
+                natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+                sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
               </p>
               <div className="divider" />
               <b className="text-uppercase">Contact</b>
@@ -118,12 +99,9 @@ class Supplier extends Component {
                     className="text-uppercase"
                     onClick={() => this.setState({ modalShow: true })}
                   >
-                  Send a message to supplier
+                    Send a message to supplier
                   </Button>
-                  <MsgToSupplier
-                    show={modalShow}
-                    onHide={modalClose}
-                  />
+                  <MsgToSupplier show={modalShow} onHide={modalClose} />
                 </Col>
                 <Col sm={12}>
                   <div className="supplier-results-side-box">
@@ -136,8 +114,8 @@ class Supplier extends Component {
                       <b className="text-uppercase text-muted">Services</b>
                       <hr className="hr-xs" />
                       <b>
-                        Photography, pre wedding, post wedding, albums, mini albums,
-                        digital album, high resolution photos.
+                        Photography, pre wedding, post wedding, albums, mini albums, digital album,
+                        high resolution photos.
                       </b>
                     </div>
                   </div>
@@ -147,79 +125,13 @@ class Supplier extends Component {
             <Col sm={12} className="text-right">
               <div className="divider" />
               <b className="supplier-results-next-btn">
-Next result
+                Next result
                 <i className="fa fa-arrow-right" />
               </b>
             </Col>
           </Row>
         </Container>
-        <div className="popularserches">
-          <Container className="pb-5">
-            <Row>
-              <Col sm={6}>
-                <h3 className="text-uppercase">Popular venue serches</h3>
-                <p className="d-none d-sm-block">
-                  At some stage in all our lives we want clearer, fresher,
-                  younger looking skin. Well it can be achieved without spending a lot of money.
-                </p>
-              </Col>
-              <Col sm={6}>
-                <Row>
-                  <Col>
-                    <ul>
-                      <li>Essex</li>
-                      <li>Hertforshire</li>
-                      <li>West Midlands</li>
-                      <li>Hampshire</li>
-                    </ul>
-                  </Col>
-                  <Col>
-                    <ul>
-                      <li>Essex</li>
-                      <li>Hertforshire</li>
-                      <li>West Midlands</li>
-                      <li>Hampshire</li>
-                    </ul>
-                  </Col>
-                  <Col className="d-none d-sm-block">
-                    <ul>
-                      <li>Essex</li>
-                      <li>Hertforshire</li>
-                      <li>West Midlands</li>
-                      <li>Hampshire</li>
-                    </ul>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Container>
-          <Row className="m-0">
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches1} alt="" />
-              <div className="overlay">
-                <i className="fa fa-search fa-2x" />
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches2} alt="" />
-              <div className="overlay">
-                <i className="fa fa-search fa-2x" />
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches3} alt="" />
-              <div className="overlay">
-                <i className="fa fa-search fa-2x" />
-              </div>
-            </Col>
-            <Col xs={3} className="p-0 overlayed">
-              <img src={serches4} alt="" />
-              <div className="overlay">
-                <i className="fa fa-search fa-2x" />
-              </div>
-            </Col>
-          </Row>
-        </div>
+        <PopularSearches />
       </React.Fragment>
     );
   }
