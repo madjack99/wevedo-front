@@ -1,4 +1,4 @@
-@import '../../../assets/styles/wevedo.scss';
+@import "../../../assets/styles/wevedo.scss";
 
 .section {
   color: white;
@@ -31,16 +31,16 @@
   .results-data {
     img {
       width: 100%;
-      border-radius: .25rem;
+      border-radius: 0.25rem;
     }
 
     h4 {
-      font-family: 'Proxima Nova';
+      font-family: "Proxima Nova";
       font-size: 1rem;
     }
 
     h5 {
-      font-family: 'Proxima Nova Bold';
+      font-family: "Proxima Nova Bold";
       font-size: 1rem;
       letter-spacing: 0;
     }
@@ -74,7 +74,6 @@
   a {
     color: white;
   }
-
 }
 
 .paginationItem {
@@ -82,14 +81,14 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 9.5px 13px;
-  font-family: 'Proxima Nova Bold';
+  font-family: "Proxima Nova Bold";
   border: 0;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   background: #e9ecef;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .paginationIcon {
   background-color: #f8f9fa;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
