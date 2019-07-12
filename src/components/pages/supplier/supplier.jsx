@@ -148,7 +148,10 @@ const MsgToSupplier = props => (
   >
     <Modal.Body className="p-0">
       <Row>
-        <span className="modal-close-btn" onClick={this.props.onHide}>
+        <span
+          className="modal-close-btn"
+          onClick={props.onHide}
+        >
           <i className="fas fa-times fa-2x" />
         </span>
         <Col sm={4} className="p-0">

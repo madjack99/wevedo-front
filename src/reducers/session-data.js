@@ -34,6 +34,11 @@ const updateSessionData = (state, action) => {
         token: null,
         error: action.payload,
       };
+    case actionTypes.EXISTING_EMAIL:
+      return {
+        ...state.sessionData,
+        error: action.payload,
+      };
     case actionTypes.FETCH_SIGNOUT_REQUEST:
       return {
         ...state.sessionData,

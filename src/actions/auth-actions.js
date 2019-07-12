@@ -16,6 +16,11 @@ const loginFailed = error => ({
   payload: error,
 });
 
+export const existingEmail = error => ({
+  type: actionTypes.EXISTING_EMAIL,
+  payload: error,
+});
+
 const signOutRequested = () => ({
   type: actionTypes.FETCH_SIGNOUT_REQUEST,
 });
@@ -29,16 +34,16 @@ const signOutFailed = error => ({
   payload: error,
 });
 
-export const fetchLogin = dispatch => async (service, body) => {
+export const fetchLogin = dispatch => async (login, body) => {
   dispatch(loginRequested());
 
   try {
-    const { data: token } = await service.login(body);
+    const { data: token } = await login(body);
     console.log(`ENTERED. TOKEN: ${token}`);
     Cookies.set('token', token);
     dispatch(loginSucceed(token));
   } catch (error) {
-    dispatch(loginFailed(error));
+    dispatch(loginFailed(error.response.data.message));
   }
 };
 
