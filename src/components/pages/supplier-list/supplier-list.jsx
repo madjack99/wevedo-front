@@ -177,8 +177,9 @@ function Providers({
   providers, numberOfProviders, currentPage, onPaginationChange,
 }) {
   function ProviderCard({ provider }) {
+    const { _id: providerId } = provider;
     return (
-      <Link to="/supplier">
+      <Link to={`/supplier/${providerId}`}>
         <Row>
           <Col sm={5}>
             <img src={provider.profileImageURL} alt="" />
