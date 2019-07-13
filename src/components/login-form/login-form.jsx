@@ -23,6 +23,10 @@ const LoginForm = ({ login }) => {
   return (
     <Formik
       className="login-form"
+      initialValues={{
+        email: '',
+        password: '',
+      }}
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(false);
         login(storeService.login, {
