@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
+import { LinkContainer } from 'react-router-bootstrap';
 import {
   Row, Col, Nav, Navbar, NavDropdown, ButtonToolbar, Button,
 } from 'react-bootstrap';
@@ -92,9 +93,9 @@ function CategoriesDropdown({ categories }) {
 
 function CategoryDropDownItem({ name }) {
   return (
-    <NavLink className="dropdown-item" to={`/suppliers/${name}`}>
-      {name}
-    </NavLink>
+    <LinkContainer to={`/suppliers/${name}`}>
+      <NavDropdown.Item>{name}</NavDropdown.Item>
+    </LinkContainer>
   );
 }
 

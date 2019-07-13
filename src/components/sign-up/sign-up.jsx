@@ -1,61 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  Row, Col, Form, Button,
-} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 
 import './sign-up.scss';
 
 import config from '../../config';
-import { fetchLogin, existingEmail } from '../../actions';
+import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 import SocialButton from '../social-button';
+import SignUpForm from '../sign-up-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({
-  login, existingEmail, isLoggedIn, error,
-}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+function SignUp({ login, isLoggedIn, error }) {
   const wevedoService = useContext(WevedoServiceContext);
-
-  const handleUserInput = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleSignUp = async event => {
-    event.preventDefault();
-
-    const isNewEmail = await wevedoService.checkEmail({ email });
-    const body = {
-      email,
-      password,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    };
-
-    if (isNewEmail) {
-      await wevedoService.register(body);
-      return login(wevedoService.login, body);
-    }
-
-    return existingEmail('Email is already in use');
-  };
 
   const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
     login(wevedoService.socialLogin, {
@@ -115,42 +76,7 @@ function SignUp({
             {error}
           </Col>
           <Col sm={12} className="mt-4">
-            <Form>
-              <Row>
-                <Col sm={12} className="mb-4">
-                  <Form.Group controlId="email">
-                    <Form.Control
-                      type="email"
-                      placeholder="Email Address"
-                      name="email"
-                      value={email}
-                      onChange={handleUserInput}
-                      autoComplete="email"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={12} className="mb-3">
-                  <Form.Group controlId="password">
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      value={password}
-                      onChange={handleUserInput}
-                      autoComplete="password"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={6}>
-                  <Form.Check label="Remember me" />
-                </Col>
-                <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                  <Button size="lg" onClick={handleSignUp}>
-                    SignUp
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
+            <SignUpForm />
           </Col>
           <Col className="text-center">
             <p>
@@ -172,7 +98,6 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
-  existingEmail: error => dispatch(existingEmail(error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

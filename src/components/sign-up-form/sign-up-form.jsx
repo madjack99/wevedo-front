@@ -1,41 +1,46 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 
 import {
-  Row, Col, Form, Button, FormGroup,
+  Form, Button, FormGroup,
 } from 'react-bootstrap';
 
-import './login-form.scss';
+import './sign-up-form.scss';
 
-import { fetchLogin } from '../../actions';
+import { fetchSignUp, fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
-import { loginFormSchema } from '../../form-schemas';
+import { signUpFormSchema } from '../../form-schemas';
 
-import ResetPasswordWindow from '../reset-password-window';
-
-const LoginForm = ({ login }) => {
-  const [modalShow, setModalShow] = useState(false);
-
+const SignUpForm = ({ signUp, login, existingEmail }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   return (
     <Formik
-      className="login-form"
+      className="sign-up-form"
       initialValues={{
         email: '',
         password: '',
       }}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async ({ email, password }, { setSubmitting }) => {
         setSubmitting(false);
-        login(wevedoService.login, {
-          email: values.email,
-          password: values.password,
-          deviseOS: 'android',
-        });
+
+        const isNewEmail = await wevedoService.checkEmail({ email });
+        const body = {
+          email,
+          password,
+          deviceOS: 'android', // TO-DO: 'web' should be later
+        };
+
+        if (isNewEmail) {
+          await signUp(wevedoService.register, body);
+          return login(wevedoService.login, body);
+        }
+
+        return existingEmail('Email is already in use');
       }}
-      validationSchema={loginFormSchema}
+      validationSchema={signUpFormSchema}
       render={({
         handleSubmit,
         handleChange,
@@ -54,7 +59,7 @@ const LoginForm = ({ login }) => {
               onChange={handleChange}
               isValid={touched.email && !errors.email}
               isInvalid={!!errors.email}
-              autoComplete="current-email"
+              autoComplete="new-email"
             />
           </Form.Group>
 
@@ -67,26 +72,12 @@ const LoginForm = ({ login }) => {
               onChange={handleChange}
               isValid={touched.password && !errors.password}
               isInvalid={!!errors.password}
-              autoComplete="current-password"
+              autoComplete="new-password"
             />
           </Form.Group>
 
           <FormGroup>
-            <Row>
-              <Col sm={6}>
-                <Form.Check className="mr-auto" label="Remember me" />
-              </Col>
-              <Col className="text-right" sm={6}>
-                <Button
-                  className="button-password ml-auto"
-                  onClick={() => setModalShow(true)}
-                  variant="link"
-                >
-                  Forgot password?
-                </Button>
-              </Col>
-            </Row>
-            <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
+            <Form.Check className="mr-auto" label="Remember me" />
           </FormGroup>
 
           <FormGroup className="text-center text-uppercase">
@@ -96,7 +87,7 @@ const LoginForm = ({ login }) => {
               size="lg"
               disabled={isSubmitting}
             >
-              Login
+              Sign up
             </Button>
           </FormGroup>
         </Form>
@@ -108,7 +99,9 @@ const LoginForm = ({ login }) => {
 const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
+  signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
+  existingEmail: error => dispatch(existingEmail(error)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);

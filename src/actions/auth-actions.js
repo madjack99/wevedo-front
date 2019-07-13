@@ -2,6 +2,19 @@ import Cookies from 'js-cookie';
 
 import * as actionTypes from './types';
 
+const signUpRequested = () => ({
+  type: actionTypes.FETCH_SIGNUP_REQUEST,
+});
+
+const signUpSucceed = () => ({
+  type: actionTypes.FETCH_SIGNUP_SUCCESS,
+});
+
+const signUpFailed = error => ({
+  type: actionTypes.FETCH_SIGNUP_FAILURE,
+  payload: error,
+});
+
 const loginRequested = () => ({
   type: actionTypes.FETCH_LOGIN_REQUEST,
 });
@@ -33,6 +46,17 @@ const signOutFailed = error => ({
   type: actionTypes.FETCH_SIGNOUT_FAILURE,
   payload: error,
 });
+
+export const fetchSignUp = dispatch => async (register, body) => {
+  dispatch(signUpRequested());
+
+  try {
+    await register(body);
+    dispatch(signUpSucceed());
+  } catch (error) {
+    dispatch(signUpFailed(error.response.data.message));
+  }
+};
 
 export const fetchLogin = dispatch => async (login, body) => {
   dispatch(loginRequested());
