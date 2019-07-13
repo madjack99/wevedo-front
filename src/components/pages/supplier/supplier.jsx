@@ -129,9 +129,10 @@ const Supplier = () => {
   );
 };
 
-const MsgToSupplier = props => (
+const MsgToSupplier = ({ show, onHide }) => (
   <Modal
-    {...props}
+    show={show}
+    onHide={onHide}
     size="lg"
     aria-labelledby="send-a-message-to-supplier"
     centered
@@ -139,12 +140,13 @@ const MsgToSupplier = props => (
   >
     <Modal.Body className="p-0">
       <Row>
-        <span
+        <Button
           className="modal-close-btn"
-          onClick={props.onHide}
+          onClick={onHide}
+          variant="link"
         >
           <i className="fas fa-times fa-2x" />
-        </span>
+        </Button>
         <Col sm={4} className="p-0">
           <img src={modalimg} alt="" />
         </Col>
