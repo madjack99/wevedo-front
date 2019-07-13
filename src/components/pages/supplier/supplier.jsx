@@ -6,12 +6,29 @@ import {
 import PopularSearches from '../popularSearches';
 import './supplier.scss';
 
+import { WevedoServiceContext } from '../../contexts';
+
 import slide from '../../../assets/images/supplier-slide.png';
 import map from '../../../assets/images/map.png';
 import modalimg from '../../../assets/images/wedding dress.png';
 
-const Supplier = () => {
+const Supplier = ({ match }) => {
+  const [supplier, setSupplier] = useState({});
   const [modalShow, setModalShow] = useState(false);
+
+  const wevedoService = useContext(WevedoServiceContext);
+  const supplierId = match.params.id;
+
+  useEffect(() => {
+    const fetchSupplier = async () => {
+      const {
+        data: newSupplier,
+      } = await wevedoService.getSupplierById(supplierId);
+      setSupplier(newSupplier);
+      console.log(newSupplier);
+    };
+    fetchSupplier();
+  }, [wevedoService, supplierId]);
 
   return (
     <React.Fragment>
@@ -62,19 +79,33 @@ const Supplier = () => {
             <b className="text-uppercase">Contact</b>
             <hr className="hr-xs" />
             <div className="d-block mb-4">
-              <b className="text-uppercase text-muted">Website : </b>
-              {' '}
-              <b>www.fulhampalace.com</b>
-            </div>
-            <div className="d-block mb-4">
-              <b className="text-uppercase text-muted">Email : </b>
-              {' '}
-              <b>fulhampalace@gmail.com</b>
-            </div>
-            <div className="d-block mb-4">
-              <b className="text-uppercase text-muted">Number : </b>
-              {' '}
-              <b>+1 852 9520 696</b>
+              {
+                supplier.website
+                  ? (
+                    <b className="text-uppercase text-muted mb-4">
+                      {`Website: ${supplier.website}`}
+                    </b>
+                  )
+                  : null
+              }
+              {
+                supplier.email
+                  ? (
+                    <b className="text-uppercase text-muted mb-4">
+                      {`Email: ${supplier.email}`}
+                    </b>
+                  )
+                  : null
+              }
+              {
+                supplier.phoneNumber
+                  ? (
+                    <b className="text-uppercase text-muted mb-4">
+                      {`Number: ${supplier.phoneNumber}`}
+                    </b>
+                  )
+                  : null
+              }
             </div>
             <div className="divider" />
             <b className="text-uppercase">Find us</b>
