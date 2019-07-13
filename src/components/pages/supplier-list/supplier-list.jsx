@@ -22,13 +22,12 @@ export default function SupplierList({ history, match }) {
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const { data: newProviders } = await wevedoService.getListByCategory(
-        supplierName,
-        currentPage,
-      );
-      const { data: newNumberOfProviders } = await wevedoService.getProvidersByFilters(
-        supplierName,
-      );
+      const {
+        data: {
+          providers: newProviders,
+          numberOfProviders: newNumberOfProviders,
+        },
+      } = await wevedoService.getProvidersByFilters(supplierName);
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
