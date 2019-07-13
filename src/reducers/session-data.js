@@ -16,6 +16,24 @@ const updateSessionData = (state, action) => {
         token: action.payload,
         error: null,
       };
+    case actionTypes.FETCH_SIGNUP_REQUEST:
+      return {
+        isLoggedIn: false,
+        token: null,
+        error: null,
+      };
+    case actionTypes.FETCH_SIGNUP_SUCCESS:
+      return {
+        isLoggedIn: false,
+        token: null,
+        error: null,
+      };
+    case actionTypes.FETCH_SIGNUP_FAILURE:
+      return {
+        isLoggedIn: false,
+        token: null,
+        error: action.payload,
+      };
     case actionTypes.FETCH_LOGIN_REQUEST:
       return {
         isLoggedIn: false,
