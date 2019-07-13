@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 import {
   Form, Button, FormGroup,
@@ -12,6 +11,7 @@ import './sign-up-form.scss';
 
 import { fetchSignUp, fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
+import { signUpFormSchema } from '../../form-schemas';
 
 const SignUpForm = ({ signUp, login, existingEmail }) => {
   const wevedoService = useContext(WevedoServiceContext);
@@ -40,14 +40,7 @@ const SignUpForm = ({ signUp, login, existingEmail }) => {
 
         return existingEmail('Email is already in use');
       }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email()
-          .required('Email is required!'),
-        password: Yup.string()
-          .min(6)
-          .required('Password is required!'),
-      })}
+      validationSchema={signUpFormSchema}
       render={({
         handleSubmit,
         handleChange,

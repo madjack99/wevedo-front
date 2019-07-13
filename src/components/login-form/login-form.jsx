@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 import {
   Row, Col, Form, Button, FormGroup,
@@ -12,6 +11,7 @@ import './login-form.scss';
 
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
+import { loginFormSchema } from '../../form-schemas';
 
 import ResetPasswordWindow from '../reset-password-window';
 
@@ -35,14 +35,7 @@ const LoginForm = ({ login }) => {
           deviseOS: 'android',
         });
       }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email()
-          .required('Email is required!'),
-        password: Yup.string()
-          .min(6)
-          .required('Password is required!'),
-      })}
+      validationSchema={loginFormSchema}
       render={({
         handleSubmit,
         handleChange,
