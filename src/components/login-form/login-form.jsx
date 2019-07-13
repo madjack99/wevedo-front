@@ -18,7 +18,7 @@ import ResetPasswordWindow from '../reset-password-window';
 const LoginForm = ({ login }) => {
   const [modalShow, setModalShow] = useState(false);
 
-  const storeService = useContext(WevedoServiceContext);
+  const wevedoService = useContext(WevedoServiceContext);
 
   return (
     <Formik
@@ -29,7 +29,7 @@ const LoginForm = ({ login }) => {
       }}
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(false);
-        login(storeService.login, {
+        login(wevedoService.login, {
           email: values.email,
           password: values.password,
           deviseOS: 'android',
