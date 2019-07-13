@@ -76,7 +76,7 @@ function Login({ login, isLoggedIn, error }) {
             {error}
           </Col>
           <Col sm={12} className="mt-4">
-            <LoginForm login={login} />
+            <LoginForm />
           </Col>
           <Col className="text-center mt-4">
             <p>
