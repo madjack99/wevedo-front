@@ -9,7 +9,7 @@ import { Redirect, Link } from 'react-router-dom';
 import './sign-up.scss';
 
 import config from '../../config';
-import { fetchLogin, existingEmail } from '../../actions';
+import { fetchSignUp, fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 import SocialButton from '../social-button';
@@ -17,7 +17,7 @@ import SocialButton from '../social-button';
 import Logo from '../../assets/images/symbol.png';
 
 function SignUp({
-  login, existingEmail, isLoggedIn, error,
+  signUp, login, existingEmail, isLoggedIn, error,
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,7 +50,7 @@ function SignUp({
     };
 
     if (isNewEmail) {
-      await wevedoService.register(body);
+      await signUp(wevedoService.register, body);
       return login(wevedoService.login, body);
     }
 
@@ -171,6 +171,7 @@ function SignUp({
 const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
+  signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
   existingEmail: error => dispatch(existingEmail(error)),
 });
