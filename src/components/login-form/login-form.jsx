@@ -1,116 +1,117 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import {
+  Row, Col, Form, Button, FormGroup,
+} from 'react-bootstrap';
 
 import './login-form.scss';
 
-import { loginRequest } from '../../requests/auth.requests';
+import { fetchLogin } from '../../actions';
+import { WevedoServiceContext } from '../contexts';
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      phoneNumber: '',
-      password: '',
-      isPasswordIncorect: false,
-      isPhoneIncorrect: false,
-    };
-    this.loginRequest = loginRequest.bind(this);
-  }
+import ResetPasswordWindow from '../reset-password-window';
 
-    handleUserInput = e => {
-      const { name } = e.target;
-      const { value } = e.target;
-      this.setState({ [name]: value },
-        () => { this.validateField(name); });
-    }
+const LoginForm = ({ login }) => {
+  const [modalShow, setModalShow] = useState(false);
 
-    validateField = fieldName => {
-      switch (fieldName) {
-        case 'phoneNumber':
-          break;
-        case 'password':
-          break;
-        default:
-          break;
-      }
-    }
+  const storeService = useContext(WevedoServiceContext);
 
-    handleSubmit = e => {
-      const { phoneNumber, password } = this.state;
-
-      e.preventDefault();
-      const userSchema = {
-        phoneNumber,
-        password,
-      };
-      this.loginRequest(userSchema);
-    }
-
-    render() {
-      const {
-        phoneNumber, password, isPasswordIncorect, isPhoneIncorrect,
-      } = this.state;
-
-      return (
-        <form
-          className="demoForm"
-          onSubmit={this.handleSubmit}
-        >
-          <h2>Sign in</h2>
-          <div className="form-group ">
-            <label htmlFor="phoneNumber">
-              Phone number
-            </label>
-            <input
-              type="tel"
-              required
-              className="form-control"
-              name="phoneNumber"
-              placeholder="phone number"
-              value={phoneNumber}
-              onChange={this.handleUserInput}
+  return (
+    <Formik
+      className="login-form"
+      onSubmit={async (values, { setSubmitting }) => {
+        setSubmitting(false);
+        login(storeService.login, {
+          email: values.email,
+          password: values.password,
+          deviseOS: 'android',
+        });
+      }}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email()
+          .required('Email is required!'),
+        password: Yup.string()
+          .min(6)
+          .required('Password is required!'),
+      })}
+      render={({
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting,
+      }) => (
+        <Form noValidate onSubmit={handleSubmit}>
+          <Form.Group className="mb-5" controlId="formEmail">
+            <Form.Label className="mb-0">Email Address</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              isValid={touched.email && !errors.email}
+              isInvalid={!!errors.email}
+              autoComplete="current-email"
             />
-            <p>
-              {' '}
-              {isPhoneIncorrect
-                ? 'This phone number is not registered!'
-                : ''}
-            </p>
-            <p className="text-muted">
-              Right format is +447222555555   | +44 7222 555 555 | (0722) 5555555
-            </p>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label className="mb-0">Password</Form.Label>
+            <Form.Control
               type="password"
-              className="form-control"
               name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleUserInput}
+              value={values.password}
+              onChange={handleChange}
+              isValid={touched.password && !errors.password}
+              isInvalid={!!errors.password}
+              autoComplete="current-password"
             />
-            <p>
-              {' '}
-              {isPasswordIncorect
-                ? 'Invalid password. Please try again'
-                : ''}
-            </p>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-          >
-Sign in
-          </button>
-          <p>
-            <Link to="/register">
-              Don&apos;t have an account?
-            </Link>
-          </p>
-        </form>
-      );
-    }
-}
+          </Form.Group>
 
-export default LoginForm;
+          <FormGroup>
+            <Row>
+              <Col sm={6}>
+                <Form.Check className="mr-auto" label="Remember me" />
+              </Col>
+              <Col className="text-right" sm={6}>
+                <Button
+                  className="button-password ml-auto"
+                  onClick={() => setModalShow(true)}
+                  variant="link"
+                >
+                  Forgot password?
+                </Button>
+              </Col>
+            </Row>
+            <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
+          </FormGroup>
+
+          <FormGroup className="text-center text-uppercase">
+            <Button
+              variant="primary"
+              type="submit"
+              size="lg"
+              disabled={isSubmitting}
+            >
+              Login
+            </Button>
+          </FormGroup>
+        </Form>
+      )}
+    />
+  );
+};
+
+const mapStateToProps = ({ sessionData }) => sessionData;
+
+const mapDispatchToProps = dispatch => ({
+  login: fetchLogin(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

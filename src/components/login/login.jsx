@@ -1,9 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  Row, Col, Form, Button,
-} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 
 import './login.scss';
@@ -12,42 +10,13 @@ import config from '../../config';
 import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
-import ResetPasswordWindow from '../reset-password-window';
 import SocialButton from '../social-button';
+import LoginForm from '../login-form';
 
 import Logo from '../../assets/images/symbol.png';
 
 function Login({ login, isLoggedIn, error }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [modalShow, setModalShow] = useState(false);
-
   const wevedoService = useContext(WevedoServiceContext);
-
-  const handleUserInput = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleLogIn = event => {
-    event.preventDefault();
-
-    login(wevedoService.login, {
-      email,
-      password,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
-  };
 
   const handleSocialLogIn = ({ _profile: profile, _provider: provider }) => {
     login(wevedoService.socialLogin, {
@@ -107,54 +76,9 @@ function Login({ login, isLoggedIn, error }) {
             {error}
           </Col>
           <Col sm={12} className="mt-4">
-            <Form>
-              <Row>
-                <Col sm={12} className="mb-4">
-                  <Form.Group controlId="email">
-                    <Form.Control
-                      type="email"
-                      placeholder="Email Address"
-                      name="email"
-                      value={email}
-                      onChange={handleUserInput}
-                      autoComplete="email"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={12} className="mb-3">
-                  <Form.Group controlId="password">
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      value={password}
-                      onChange={handleUserInput}
-                      autoComplete="current-password"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={6}>
-                  <Form.Check label="Remember me" />
-                </Col>
-                <Col sm={6} className="text-right text-muted">
-                  <Button
-                    className="button-password"
-                    onClick={() => setModalShow(true)}
-                    variant="link"
-                  >
-                    Forgot password?
-                  </Button>
-                  <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
-                </Col>
-                <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                  <Button size="lg" onClick={handleLogIn}>
-                    Login
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
+            <LoginForm login={login} />
           </Col>
-          <Col className="text-center">
+          <Col className="text-center mt-4">
             <p>
               <b>
                 Don&apos;t have and account?
