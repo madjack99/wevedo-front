@@ -1,6 +1,19 @@
 {
   "contact": {
+    "jumbotron": "Contact Us",
     "title": "Contact to wevedo",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "sendBtn": "Send"
+  },
+  "popularSearches": {
+    "title": "Popular venue serches",
+    "text": "At some stage in all our lives we want clearer, fresher, younger looking skin. Well it can be achieved without spending a lot of money.",
+    "essex": "Essex",
+    "hertforshire": "Hertforshire",
+    "westMidlands": "West Midlands",
+    "hampshire": "Hampshire"
   }
 }

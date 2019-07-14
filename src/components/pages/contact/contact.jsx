@@ -61,7 +61,7 @@ class Contact extends React.Component {
           <Container className="h-100 w-100 align-items-center">
             <Row className="h-100 align-items-center">
               <Col sm={12} className="text-center text-uppercase">
-                <h1>Contact Us</h1>
+                <h1>{t('contact.jumbotron')}</h1>
               </Col>
             </Row>
           </Container>
@@ -77,12 +77,20 @@ class Contact extends React.Component {
                 <Row>
                   <Col sm={6}>
                     <Form.Group controlId="name">
-                      <Form.Control onChange={this.handleChange} type="text" placeholder="Name" />
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="text"
+                        placeholder={t('contact.namePlaceholder')}
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={6}>
                     <Form.Group controlId="email">
-                      <Form.Control onChange={this.handleChange} type="email" placeholder="Email" />
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="email"
+                        placeholder={t('contact.emailPlaceholder')}
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mt-5">
@@ -90,7 +98,7 @@ class Contact extends React.Component {
                       <Form.Control
                         onChange={this.handleChange}
                         as="textarea"
-                        placeholder="Message"
+                        placeholder={t('contact.messagePlaceholder')}
                         rows="3"
                       />
                     </Form.Group>
@@ -100,7 +108,7 @@ class Contact extends React.Component {
                       <Alert variant="danger">{this.state.errorMsg}</Alert>
                     ) : null}
                     <Button size="lg" type="submit">
-                      Send
+                      {t('contact.sendBtn')}
                     </Button>
                   </Col>
                 </Row>
