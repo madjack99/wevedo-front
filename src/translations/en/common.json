@@ -198,5 +198,12 @@
     "contact": "Contact",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
+  },
+  "header": {
+    "venues": "Venues",
+    "viewAllSuppliers": "View all suppliers",
+    "login": "Login",
+    "businessLogin": "Bussiness Login",
+    "signOut": "Sign Out"
   }
 }
