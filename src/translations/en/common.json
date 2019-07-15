@@ -156,5 +156,19 @@
       "pTwo": "3x more couples will view your listing than the Standard listing",
       "getStarted": "Get Started"
     }
+  },
+  "business-login": {
+    "jumbotron": {
+      "largeTitle": "Welcome Back,",
+      "smallTitle": "Please login to your account"
+    },
+    "form": {
+      "emailPlaceholder": "Email Address",
+      "passwordPlaceholder": "Password",
+      "rememberMeLabel": "Remember me",
+      "loginBtn": "Login",
+      "noAccount": "Don't have and account?",
+      "signUp": "Signup"
+    }
   }
 }
