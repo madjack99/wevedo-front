@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Image, Row, Container, Col, Form, Button,
 } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import PopularSearches from '../pages/popularSearches';
 import './home.scss';
@@ -19,17 +20,17 @@ import serches2 from '../../assets/images/serches2.png';
 import serches3 from '../../assets/images/serches3.png';
 import serches4 from '../../assets/images/serches4.png';
 
-const Home = () => (
+const Home = ({ t }) => (
   <React.Fragment>
     <div className="section section-header-full mainpagebg">
       <Container className="h-100 w-100 align-items-center">
         <Row className="h-100 align-items-center">
           <Col sm={12} className="text-center text-uppercase">
-            <h4>Special moment</h4>
+            <h4>{t('home.jumbotron.smallTitle')}</h4>
             <h1>
-              We can make
+              {t('home.jumbotron.largeTitleOne')}
               <br />
-              it happen
+              {t('home.jumbotron.largeTitleTwo')}
             </h1>
           </Col>
         </Row>
@@ -39,7 +40,7 @@ const Home = () => (
     <Container className="howitworks">
       <Row>
         <Col>
-          <h2 className="text-uppercase">How it works</h2>
+          <h2 className="text-uppercase">{t('home.mainSectionTitle')}</h2>
           <hr />
         </Col>
       </Row>
@@ -47,23 +48,19 @@ const Home = () => (
         <Col className="p-3">
           <div>
             <Image src={searchicon} alt="search-icon" />
-            <p className="mt-4">
-              Search for your perfect venue or supplier by category, location and budget.
-            </p>
+            <p className="mt-4">{t('home.howItWorks.boxOne')}</p>
           </div>
         </Col>
         <Col className="p-3">
           <div>
             <Image src={calendar} alt="calendar-icon" />
-            <p className="mt-4">See real time availability for your venue or supplier booking.</p>
+            <p className="mt-4">{t('home.howItWorks.boxTwo')}</p>
           </div>
         </Col>
         <Col className="p-3">
           <div>
             <Image src={chat} alt="chat-icon" />
-            <p className="mt-4">
-              Message suppliers directly through the app to make enquiries or bookings.
-            </p>
+            <p className="mt-4">{t('home.howItWorks.boxThree')}</p>
           </div>
         </Col>
       </Row>
@@ -96,26 +93,26 @@ const Home = () => (
 
     <Row className="findseparator d-flex align-items-center text-center">
       <Col sm={12}>
-        <h1>Find your best wedding supplier by Location</h1>
+        <h1>{t('home.findForm.title')}</h1>
         <Form>
           <Form.Row>
             <Col className="boxed-form">
               <Row>
                 <Col>
                   <Form.Control as="select">
-                    <option>Category</option>
-                    <option>...</option>
+                    <option>{t('home.findForm.category')}</option>
+                    <option>{t('home.findForm.options')}</option>
                   </Form.Control>
                 </Col>
                 <div className="divider" />
                 <Col>
-                  <Form.Control placeholder="Location" />
+                  <Form.Control placeholder={t('home.findForm.locationPlaceholder')} />
                 </Col>
               </Row>
             </Col>
             <Col sm={3}>
               <Button variant="light" size="lg">
-                Search
+                {t('home.findForm.searchBtn')}
               </Button>
             </Col>
           </Form.Row>
@@ -158,4 +155,4 @@ const Home = () => (
   </React.Fragment>
 );
 
-export default Home;
+export default withTranslation('common')(Home);
