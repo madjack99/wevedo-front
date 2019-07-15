@@ -192,5 +192,11 @@
       "countryPlaceholder": "Country",
       "nextStepBtn": "Next step"
     }
+  },
+  "footer": {
+    "wevedo": "© 2019 Wewedo",
+    "contact": "Contact",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
   }
 }
