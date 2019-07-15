@@ -170,5 +170,27 @@
       "noAccount": "Don't have and account?",
       "signUp": "Signup"
     }
+  },
+  "business-signup": {
+    "jumbotron": {
+      "largeTitle": "Hey,",
+      "smallTitle": "Glad to see you...",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    "form": {
+      "usernamePlaceholder": "Username",
+      "passwordPlaceholder": "Password",
+      "passwordConfirmationPlaceholder": "Confirm Password",
+      "businessNamePlaceholder": "Business Name",
+      "categoryPlaceholder": "Select Category",
+      "websitePlaceholder": "Business Website",
+      "emailPlaceholder": "Business Email",
+      "numberPlaceholder": "Business Phone Number",
+      "postcodePlaceholder": "Your Postcode",
+      "addressPlaceholder": "Business Address",
+      "cityPlaceholder": "Town/City",
+      "countryPlaceholder": "Country",
+      "nextStepBtn": "Next step"
+    }
   }
 }
