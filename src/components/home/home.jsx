@@ -3,6 +3,7 @@ import {
   Image, Row, Container, Col, Form, Button,
 } from 'react-bootstrap';
 
+import PopularSearches from '../pages/popularSearches';
 import './home.scss';
 
 import searchicon from '../../assets/images/search-icon.png';
@@ -46,7 +47,9 @@ const Home = () => (
         <Col className="p-3">
           <div>
             <Image src={searchicon} alt="search-icon" />
-            <p className="mt-4">Search for your perfect venue or supplier by category, location and budget.</p>
+            <p className="mt-4">
+              Search for your perfect venue or supplier by category, location and budget.
+            </p>
           </div>
         </Col>
         <Col className="p-3">
@@ -58,7 +61,9 @@ const Home = () => (
         <Col className="p-3">
           <div>
             <Image src={chat} alt="chat-icon" />
-            <p className="mt-4">Message suppliers directly through the app to make enquiries or bookings.</p>
+            <p className="mt-4">
+              Message suppliers directly through the app to make enquiries or bookings.
+            </p>
           </div>
         </Col>
       </Row>
@@ -68,14 +73,22 @@ const Home = () => (
         </Col>
         <Col md={4}>
           <Row>
-            <Col sm={12} className="mb-4"><Image src={musicphoto} alt="music-photo" /></Col>
-            <Col sm={12}><Image src={florist} alt="florist-photo" /></Col>
+            <Col sm={12} className="mb-4">
+              <Image src={musicphoto} alt="music-photo" />
+            </Col>
+            <Col sm={12}>
+              <Image src={florist} alt="florist-photo" />
+            </Col>
           </Row>
         </Col>
         <Col md={3}>
           <Row>
-            <Col sm={12} className="mb-4"><Image src={photography} alt="photo-icon" /></Col>
-            <Col sm={12}><Image src={decoration} alt="decoration-photo" /></Col>
+            <Col sm={12} className="mb-4">
+              <Image src={photography} alt="photo-icon" />
+            </Col>
+            <Col sm={12}>
+              <Image src={decoration} alt="decoration-photo" />
+            </Col>
           </Row>
         </Col>
       </Row>
@@ -101,7 +114,9 @@ const Home = () => (
               </Row>
             </Col>
             <Col sm={3}>
-              <Button variant="light" size="lg">Search</Button>
+              <Button variant="light" size="lg">
+                Search
+              </Button>
             </Col>
           </Form.Row>
         </Form>
@@ -139,74 +154,7 @@ const Home = () => (
       </Row>
     </Container> */}
 
-    <div className="popularserches">
-      <Container className="pb-5">
-        <Row>
-          <Col sm={6}>
-            <h3 className="text-uppercase">Popular venue serches</h3>
-            <p className="d-none d-sm-block">
-              At some stage in all our lives we want clearer, fresher, younger looking skin.
-              Well it can be achieved without spending a lot of money.
-            </p>
-          </Col>
-          <Col sm={6}>
-            <Row>
-              <Col>
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-              <Col>
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-              <Col className="d-none d-sm-block">
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-      <Row className="m-0">
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches1} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches2} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches3} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches4} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-      </Row>
-    </div>
-
+    <PopularSearches />
   </React.Fragment>
 );
 
