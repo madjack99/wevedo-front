@@ -119,5 +119,19 @@
       "pOne": "Reset password has been sent to user@email.com address.",
       "pTwo": "Please check your e-mail."
     }
+  },
+  "signup": {
+    "jumbotron": {
+      "largeTitle": "Hey,",
+      "smallTitle": "Glad to see you..."
+    },
+    "or": "OR",
+    "form": {
+      "emailPlaceholder": "Email Address",
+      "passwordPlaceholder": "Password",
+      "rememberMeLabel": "Remember me",
+      "signUpBtn": "SignUp",
+      "logIn": "Login"
+    }
   }
 }

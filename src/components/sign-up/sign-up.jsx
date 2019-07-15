@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import './sign-up.scss';
 
@@ -17,7 +19,7 @@ import SocialButton from '../social-button';
 import Logo from '../../assets/images/symbol.png';
 
 function SignUp({
-  login, existingEmail, isLoggedIn, error,
+  login, existingEmail, isLoggedIn, error, t,
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,8 +74,8 @@ function SignUp({
     <Row className="w-100 m-0 login">
       <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
-          <h1 className="mb-0">Hey,</h1>
-          <h2>Glad to see you...</h2>
+          <h1 className="mb-0">{t('signup.jumbotron.largeTitle')}</h1>
+          <h2>{t('signup.jumbotron.smallTitle')}</h2>
           <hr className="hr-sm m-0 mt-4 mb-4" />
         </div>
       </Col>
@@ -107,7 +109,7 @@ function SignUp({
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
             {' '}
-            <b className="text-muted text-butler-bold">OR</b>
+            <b className="text-muted text-butler-bold">{t('signup.or')}</b>
             {' '}
             <hr />
           </Col>
@@ -121,7 +123,7 @@ function SignUp({
                   <Form.Group controlId="email">
                     <Form.Control
                       type="email"
-                      placeholder="Email Address"
+                      placeholder={t('signup.form.emailPlaceholder')}
                       name="email"
                       value={email}
                       onChange={handleUserInput}
@@ -133,7 +135,7 @@ function SignUp({
                   <Form.Group controlId="password">
                     <Form.Control
                       type="password"
-                      placeholder="Password"
+                      placeholder={t('signup.form.passwordPlaceholder')}
                       name="password"
                       value={password}
                       onChange={handleUserInput}
@@ -142,11 +144,11 @@ function SignUp({
                   </Form.Group>
                 </Col>
                 <Col sm={6}>
-                  <Form.Check label="Remember me" />
+                  <Form.Check label={t('signup.form.rememberMeLabel')} />
                 </Col>
                 <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
                   <Button size="lg" onClick={handleSignUp}>
-                    SignUp
+                    {t('signup.form.signUpBtn')}
                   </Button>
                 </Col>
               </Row>
@@ -157,7 +159,7 @@ function SignUp({
               <b>
                 {'Already have and account? '}
                 <Link to="/login" className="text-wevedo">
-                  Login
+                  {t('signup.form.logIn')}
                 </Link>
               </b>
             </p>
@@ -175,4 +177,10 @@ const mapDispatchToProps = dispatch => ({
   existingEmail: error => dispatch(existingEmail(error)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(SignUp);
