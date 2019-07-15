@@ -49,5 +49,8 @@
       "locationPlaceholder": "Location",
       "searchBtn": "Search"
     }
+  },
+  "weddingTools": {
+    "title": "Weddingtools page"
   }
 }
