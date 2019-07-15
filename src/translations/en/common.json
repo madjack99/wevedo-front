@@ -133,5 +133,28 @@
       "signUpBtn": "SignUp",
       "logIn": "Login"
     }
+  },
+  "pricing": {
+    "mainTitle": "Pricing Plans",
+    "mainText": "Sign up to the the UK's most popular wedding planning web site and get access to more than 100,000 registered wedding couples. Start growing your wedding business today.",
+    "dollarSign": "$",
+    "standard": {
+      "title": "Standard",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    },
+    "enhanced": {
+      "title": "Enhanced",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    },
+    "premium": {
+      "title": "Premium",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    }
   }
 }
