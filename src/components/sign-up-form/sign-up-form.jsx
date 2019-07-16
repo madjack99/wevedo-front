@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 
-import {
-  Form, Button, FormGroup,
-} from 'react-bootstrap';
+import { Form, Button, FormGroup } from 'react-bootstrap';
 
 import './sign-up-form.scss';
 
@@ -13,7 +13,9 @@ import { fetchSignUp, fetchLogin, existingEmail } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 import { signUpFormSchema } from '../../form-schemas';
 
-const SignUpForm = ({ signUp, login, existingEmail }) => {
+const SignUpForm = ({
+  signUp, login, existingEmail, t,
+}) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   return (
@@ -42,16 +44,11 @@ const SignUpForm = ({ signUp, login, existingEmail }) => {
       }}
       validationSchema={signUpFormSchema}
       render={({
-        handleSubmit,
-        handleChange,
-        values,
-        touched,
-        errors,
-        isSubmitting,
+        handleSubmit, handleChange, values, touched, errors, isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="mb-5" controlId="formEmail">
-            <Form.Label className="mb-0">Email Address</Form.Label>
+            <Form.Label className="mb-0">{t('signAndLogForm.emailLabel')}</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -64,7 +61,7 @@ const SignUpForm = ({ signUp, login, existingEmail }) => {
           </Form.Group>
 
           <Form.Group controlId="formPassword">
-            <Form.Label className="mb-0">Password</Form.Label>
+            <Form.Label className="mb-0">{t('signAndLogForm.passwordLabel')}</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -77,17 +74,12 @@ const SignUpForm = ({ signUp, login, existingEmail }) => {
           </Form.Group>
 
           <FormGroup>
-            <Form.Check className="mr-auto" label="Remember me" />
+            <Form.Check className="mr-auto" label={t('signAndLogForm.rememberMe')} />
           </FormGroup>
 
           <FormGroup className="text-center text-uppercase">
-            <Button
-              variant="primary"
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
-            >
-              Sign up
+            <Button variant="primary" type="submit" size="lg" disabled={isSubmitting}>
+              {t('signAndLogForm.signUp')}
             </Button>
           </FormGroup>
         </Form>
@@ -104,4 +96,10 @@ const mapDispatchToProps = dispatch => ({
   existingEmail: error => dispatch(existingEmail(error)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(SignUpForm);

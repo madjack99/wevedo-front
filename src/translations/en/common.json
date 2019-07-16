@@ -205,5 +205,11 @@
     "login": "Login",
     "businessLogin": "Bussiness Login",
     "signOut": "Sign Out"
+  },
+  "signAndLogForm": {
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "rememberMe": "Remember me",
+    "signUp": "Sign up"
   }
 }
