@@ -22,9 +22,7 @@ const Supplier = ({ match, t }) => {
 
   useEffect(() => {
     const fetchSupplier = async () => {
-      const {
-        data: newSupplier,
-      } = await wevedoService.getSupplierById(supplierId);
+      const { data: newSupplier } = await wevedoService.getSupplierById(supplierId);
       setSupplier(newSupplier);
       console.log(newSupplier);
     };
@@ -63,43 +61,23 @@ const Supplier = ({ match, t }) => {
             <h4 className="text-uppercase">{t('supplier.section.primaryTitle')}</h4>
             <b>{t('supplier.section.subTitle')}</b>
             <hr className="hr-sm m-0 mt-4 mb-4" />
-            <p>
-            {t('supplier.section.pOne')}
-            </p>
-            <p>
-            {t('supplier.section.pTwo')}
-            </p>
+            <p>{t('supplier.section.pOne')}</p>
+            <p>{t('supplier.section.pTwo')}</p>
             <div className="divider" />
             <b className="text-uppercase">{t('supplier.contactSection.title')}</b>
             <hr className="hr-xs" />
             <div className="d-block mb-4">
-              {
-                supplier.website
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Website: ${supplier.website}`}
-                    </b>
-                  )
-                  : null
-              }
-              {
-                supplier.email
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Email: ${supplier.email}`}
-                    </b>
-                  )
-                  : null
-              }
-              {
-                supplier.phoneNumber
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Number: ${supplier.phoneNumber}`}
-                    </b>
-                  )
-                  : null
-              }
+              {supplier.website ? (
+                <b className="text-uppercase text-muted mb-4">{`Website: ${supplier.website}`}</b>
+              ) : null}
+              {supplier.email ? (
+                <b className="text-uppercase text-muted mb-4">{`Email: ${supplier.email}`}</b>
+              ) : null}
+              {supplier.phoneNumber ? (
+                <b className="text-uppercase text-muted mb-4">
+                  {`Number: ${supplier.phoneNumber}`}
+                </b>
+              ) : null}
             </div>
             <div className="divider" />
             <b className="text-uppercase">{t('supplier.contactSection.findUs')}</b>
@@ -119,7 +97,7 @@ const Supplier = ({ match, t }) => {
                 >
                   {t('supplier.sendAMessage.button')}
                 </Button>
-                <MsgToSupplier show={modalShow} onHide={() => setModalShow(false)} />
+                <MsgToSupplier show={modalShow} onHide={() => setModalShow(false)} t={t} />
               </Col>
               <Col sm={12}>
                 <div className="supplier-results-side-box">
@@ -131,9 +109,7 @@ const Supplier = ({ match, t }) => {
                   <div>
                     <b className="text-uppercase text-muted">{t('supplier.results.services')}</b>
                     <hr className="hr-xs" />
-                    <b>
-                    {t('supplier.results.servicesList')}
-                    </b>
+                    <b>{t('supplier.results.servicesList')}</b>
                   </div>
                 </div>
               </Col>
@@ -142,7 +118,7 @@ const Supplier = ({ match, t }) => {
           <Col sm={12} className="text-right">
             <div className="divider" />
             <b className="supplier-results-next-btn">
-            {t('supplier.nextResult')}
+              {t('supplier.nextResult')}
               <i className="fa fa-arrow-right" />
             </b>
           </Col>
@@ -153,7 +129,7 @@ const Supplier = ({ match, t }) => {
   );
 };
 
-const MsgToSupplier = ({ show, onHide }) => (
+const MsgToSupplier = ({ show, onHide, t }) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -164,11 +140,7 @@ const MsgToSupplier = ({ show, onHide }) => (
   >
     <Modal.Body className="p-0">
       <Row>
-        <Button
-          className="modal-close-btn"
-          onClick={onHide}
-          variant="link"
-        >
+        <Button className="modal-close-btn" onClick={onHide} variant="link">
           <i className="fas fa-times fa-2x" />
         </Button>
         <Col sm={4} className="p-0">
@@ -176,14 +148,14 @@ const MsgToSupplier = ({ show, onHide }) => (
         </Col>
         <Col sm={8}>
           <Form>
-            <h5>{props.t('supplier.sendAMessage.modalTitle')}</h5>
+            <h5>{t('supplier.sendAMessage.modalTitle')}</h5>
             <hr className="hr-sm m-0 mt-3 mb-4" />
             <Row>
               <Col sm={12} className="mb-4">
                 <Form.Group controlId="">
                   <Form.Control
                     type="text"
-                    placeholder={props.t('supplier.sendAMessage.namePlaceholder')}
+                    placeholder={t('supplier.sendAMessage.namePlaceholder')}
                   />
                 </Form.Group>
               </Col>
@@ -191,7 +163,7 @@ const MsgToSupplier = ({ show, onHide }) => (
                 <Form.Group controlId="">
                   <Form.Control
                     type="email"
-                    placeholder={props.t('supplier.sendAMessage.emailPlaceholder')}
+                    placeholder={t('supplier.sendAMessage.emailPlaceholder')}
                   />
                 </Form.Group>
               </Col>
@@ -199,7 +171,7 @@ const MsgToSupplier = ({ show, onHide }) => (
                 <Form.Group controlId="">
                   <Form.Control
                     type="number"
-                    placeholder={props.t('supplier.sendAMessage.mobilePlaceholder')}
+                    placeholder={t('supplier.sendAMessage.mobilePlaceholder')}
                   />
                 </Form.Group>
               </Col>
@@ -207,13 +179,13 @@ const MsgToSupplier = ({ show, onHide }) => (
                 <Form.Group controlId="">
                   <Form.Control
                     as="textarea"
-                    placeholder={props.t('supplier.sendAMessage.messagePlaceholder')}
+                    placeholder={t('supplier.sendAMessage.messagePlaceholder')}
                     rows="3"
                   />
                 </Form.Group>
               </Col>
               <Col className="text-center text-uppercase">
-                <Button size="lg">{props.t('supplier.sendAMessage.sendBtn')}</Button>
+                <Button size="lg">{t('supplier.sendAMessage.sendBtn')}</Button>
               </Col>
             </Row>
           </Form>
