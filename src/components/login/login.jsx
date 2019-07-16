@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import './login.scss';
 
@@ -15,7 +17,9 @@ import LoginForm from '../login-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function Login({ login, isLoggedIn, error }) {
+function Login({
+  login, isLoggedIn, error, t,
+}) {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialLogIn = ({ _profile: profile, _provider: provider }) => {
@@ -33,8 +37,8 @@ function Login({ login, isLoggedIn, error }) {
     <Row className="w-100 m-0 login logi">
       <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
-          <h1 className="mb-0">Welcome Back,</h1>
-          <h2>Please login to your account</h2>
+          <h1 className="mb-0">{t('login.jumbotron.largeTitle')}</h1>
+          <h2>{t('login.jumbotron.smallTitle')}</h2>
           <hr className="hr-sm m-0 mt-4 mb-4" />
         </div>
       </Col>
@@ -68,7 +72,7 @@ function Login({ login, isLoggedIn, error }) {
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
             {' '}
-            <b className="text-muted text-butler-bold">OR</b>
+            <b className="text-muted text-butler-bold">{t('login.or')}</b>
             {' '}
             <hr />
           </Col>
@@ -81,10 +85,10 @@ function Login({ login, isLoggedIn, error }) {
           <Col className="text-center mt-4">
             <p>
               <b>
-                Don&apos;t have and account?
+                {t('login.form.noAccount')}
                 {' '}
                 <Link to="/signup" className="text-wevedo">
-                  Sign Up
+                  {t('login.form.signUp')}
                 </Link>
               </b>
             </p>
@@ -101,4 +105,10 @@ const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(Login);

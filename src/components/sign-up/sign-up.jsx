@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import './sign-up.scss';
 
@@ -15,7 +17,9 @@ import SignUpForm from '../sign-up-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({ login, isLoggedIn, error }) {
+function SignUp({
+  login, isLoggedIn, error, t,
+}) {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
@@ -33,8 +37,8 @@ function SignUp({ login, isLoggedIn, error }) {
     <Row className="w-100 m-0 login">
       <Col sm={6} className="login-img login-img__user">
         <div className="login-img-text p-5">
-          <h1 className="mb-0">Hey,</h1>
-          <h2>Glad to see you...</h2>
+          <h1 className="mb-0">{t('signup.jumbotron.largeTitle')}</h1>
+          <h2>{t('signup.jumbotron.smallTitle')}</h2>
           <hr className="hr-sm m-0 mt-4 mb-4" />
         </div>
       </Col>
@@ -68,7 +72,7 @@ function SignUp({ login, isLoggedIn, error }) {
           <Col sm={12} className="d-flex align-items-center justify-content-center mt-4 mb-4">
             <hr />
             {' '}
-            <b className="text-muted text-butler-bold">OR</b>
+            <b className="text-muted text-butler-bold">{t('signup.or')}</b>
             {' '}
             <hr />
           </Col>
@@ -83,7 +87,7 @@ function SignUp({ login, isLoggedIn, error }) {
               <b>
                 {'Already have and account? '}
                 <Link to="/login" className="text-wevedo">
-                  Login
+                  {t('signup.form.logIn')}
                 </Link>
               </b>
             </p>
@@ -100,4 +104,10 @@ const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(SignUp);

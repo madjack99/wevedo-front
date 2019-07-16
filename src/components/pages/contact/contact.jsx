@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Row, Container, Col, Form, Button, Alert,
 } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import PopularSearches from '../popularSearches';
 import ApiBase from '../../../api/api-base';
@@ -53,13 +54,14 @@ class Contact extends React.Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <React.Fragment>
         <div className="section section-header-half contact">
           <Container className="h-100 w-100 align-items-center">
             <Row className="h-100 align-items-center">
               <Col sm={12} className="text-center text-uppercase">
-                <h1>Contact Us</h1>
+                <h1>{t('contact.jumbotron')}</h1>
               </Col>
             </Row>
           </Container>
@@ -68,22 +70,27 @@ class Contact extends React.Component {
         <Container className="mt-5 mb-5">
           <Row className="justify-content-center mt-5 mb-5">
             <Col sm={8} className="text-center">
-              <h4 className="text-uppercase">Contact to wevedo</h4>
+              <h4 className="text-uppercase">{t('contact.title')}</h4>
               <hr />
-              <p className="mr-5 pr-5 ml-5 pl-5 text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
+              <p className="mr-5 pr-5 ml-5 pl-5 text-muted">{t('contact.text')}</p>
               <Form className="mt-5" onSubmit={this.handleSubmit}>
                 <Row>
                   <Col sm={6}>
                     <Form.Group controlId="name">
-                      <Form.Control onChange={this.handleChange} type="text" placeholder="Name" />
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="text"
+                        placeholder={t('contact.namePlaceholder')}
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={6}>
                     <Form.Group controlId="email">
-                      <Form.Control onChange={this.handleChange} type="email" placeholder="Email" />
+                      <Form.Control
+                        onChange={this.handleChange}
+                        type="email"
+                        placeholder={t('contact.emailPlaceholder')}
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mt-5">
@@ -91,7 +98,7 @@ class Contact extends React.Component {
                       <Form.Control
                         onChange={this.handleChange}
                         as="textarea"
-                        placeholder="Message"
+                        placeholder={t('contact.messagePlaceholder')}
                         rows="3"
                       />
                     </Form.Group>
@@ -101,7 +108,7 @@ class Contact extends React.Component {
                       <Alert variant="danger">{this.state.errorMsg}</Alert>
                     ) : null}
                     <Button size="lg" type="submit">
-                      Send
+                      {t('contact.sendBtn')}
                     </Button>
                   </Col>
                 </Row>
@@ -115,4 +122,4 @@ class Contact extends React.Component {
   }
 }
 
-export default Contact;
+export default withTranslation('common')(Contact);
