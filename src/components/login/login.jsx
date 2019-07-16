@@ -17,7 +17,9 @@ import LoginForm from '../login-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function Login({ login, isLoggedIn, error }) {
+function Login({
+  login, isLoggedIn, error, t,
+}) {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialLogIn = ({ _profile: profile, _provider: provider }) => {
