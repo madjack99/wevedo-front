@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import {
-  Row, Col, Form, Button, Modal,
-} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 
@@ -15,42 +13,12 @@ import { fetchLogin } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 import SocialButton from '../social-button';
+import LoginForm from '../login-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function Login({
-  login, isLoggedIn, error, t,
-}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [modalShow, setModalShow] = useState(false);
-
+function Login({ login, isLoggedIn, error }) {
   const wevedoService = useContext(WevedoServiceContext);
-
-  const handleUserInput = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleLogIn = event => {
-    event.preventDefault();
-
-    login(wevedoService.login, {
-      email,
-      password,
-      deviceOS: 'android', // TO-DO: 'web' should be later
-    });
-  };
 
   const handleSocialLogIn = ({ _profile: profile, _provider: provider }) => {
     login(wevedoService.socialLogin, {
@@ -58,8 +26,6 @@ function Login({
       provider,
     });
   };
-
-  const modalClose = () => setModalShow(false);
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -112,54 +78,9 @@ function Login({
             {error}
           </Col>
           <Col sm={12} className="mt-4">
-            <Form>
-              <Row>
-                <Col sm={12} className="mb-4">
-                  <Form.Group controlId="email">
-                    <Form.Control
-                      type="email"
-                      placeholder={t('login.form.emailPlaceholder')}
-                      name="email"
-                      value={email}
-                      onChange={handleUserInput}
-                      autoComplete="email"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={12} className="mb-3">
-                  <Form.Group controlId="password">
-                    <Form.Control
-                      type="password"
-                      placeholder={t('login.form.passwordPlaceholder')}
-                      name="password"
-                      value={password}
-                      onChange={handleUserInput}
-                      autoComplete="current-password"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col sm={6}>
-                  <Form.Check label={t('login.form.rememberMeLabel')} />
-                </Col>
-                <Col sm={6} className="text-right text-muted">
-                  <Button
-                    className="button-password"
-                    onClick={() => setModalShow(true)}
-                    variant="link"
-                  >
-                    {t('login.form.forgotPassword')}
-                  </Button>
-                  <PassReset show={modalShow} onHide={modalClose} t={t} />
-                </Col>
-                <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                  <Button size="lg" onClick={handleLogIn}>
-                    {t('login.form.loginBtn')}
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
+            <LoginForm />
           </Col>
-          <Col className="text-center">
+          <Col className="text-center mt-4">
             <p>
               <b>
                 {t('login.form.noAccount')}
@@ -175,27 +96,6 @@ function Login({
     </Row>
   );
 }
-
-const PassReset = props => (
-  <Modal {...props} size="md" aria-labelledby="Password reset" centered className="global-modal">
-    <Modal.Body className="p-0">
-      <Row>
-        <span className="modal-close-btn" onClick={props.onHide}>
-          <i className="fas fa-times fa-2x" />
-        </span>
-        <Col sm={12} className="p-5 text-center">
-          <h5 className="text-uppercase">{props.t('login.passResetModal.title')}</h5>
-          <hr />
-          <p className="mb-0">
-            {props.t('login.passResetModal.pOne')}
-            <br />
-            {props.t('login.passResetModal.pTwo')}
-          </p>
-        </Col>
-      </Row>
-    </Modal.Body>
-  </Modal>
-);
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 

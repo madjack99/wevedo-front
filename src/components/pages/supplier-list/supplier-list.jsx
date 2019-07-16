@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Container, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
+import {
+  Row, Container, Col, Form, Button, ButtonToolbar,
+} from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
+import { Range } from 'rc-slider';
 
 import PopularSearches from '../popularSearches';
 import './supplier-list.scss';
 
 import 'rc-slider/assets/index.css';
-import { Range } from 'rc-slider';
 
 import { WevedoServiceContext } from '../../contexts';
 import config from '../../../config';
@@ -22,13 +24,12 @@ export default function SupplierList({ history, match }) {
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const { data: newProviders } = await wevedoService.getListByCategory(
-        supplierName,
-        currentPage,
-      );
-      const { data: newNumberOfProviders } = await wevedoService.getProvidersByFilters(
-        supplierName,
-      );
+      const {
+        data: {
+          providers: newProviders,
+          numberOfProviders: newNumberOfProviders,
+        },
+      } = await wevedoService.getProvidersByFilters(supplierName);
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
@@ -172,10 +173,13 @@ function Filters() {
   );
 }
 
-function Providers({ providers, numberOfProviders, currentPage, onPaginationChange }) {
+function Providers({
+  providers, numberOfProviders, currentPage, onPaginationChange,
+}) {
   function ProviderCard({ provider }) {
+    const { _id: providerId } = provider;
     return (
-      <Link to="/supplier">
+      <Link to={`/supplier/${providerId}`}>
         <Row>
           <Col sm={5}>
             <img src={provider.profileImageURL} alt="" />
@@ -183,7 +187,9 @@ function Providers({ providers, numberOfProviders, currentPage, onPaginationChan
           <Col sm={7}>
             <h5>{provider.firstName}</h5>
             <span className="results-data-location">
-              <i className="fas fa-map-marker-alt" /> {provider.regionName}
+              <i className="fas fa-map-marker-alt" />
+              {' '}
+              {provider.regionName}
             </span>
             <p className="mt-2 mb-2">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
@@ -200,8 +206,9 @@ function Providers({ providers, numberOfProviders, currentPage, onPaginationChan
     function ResultsArea() {
       const numberOfProvidersShown = config.providersPerPage * currentPage;
       const beginRangeCount = config.providersPerPage * (currentPage - 1) + 1;
-      const endRangeCount =
-        numberOfProvidersShown > numberOfProviders ? numberOfProviders : numberOfProvidersShown;
+      const endRangeCount = numberOfProvidersShown > numberOfProviders
+        ? numberOfProviders
+        : numberOfProvidersShown;
 
       return (
         <span className="text-muted">
@@ -270,4 +277,3 @@ function Providers({ providers, numberOfProviders, currentPage, onPaginationChan
     </React.Fragment>
   );
 }
-

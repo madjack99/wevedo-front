@@ -1,1 +1,18 @@
 @import '../../assets/styles/wevedo.scss';
+
+.login-form {
+  font: 14px 'Proxima Nova Bold';
+  color: $gray-500 !important;
+
+  .button-password {
+    font: 14px 'Proxima Nova Bold';
+    letter-spacing: 0;
+    color: $gray-500;
+    text-transform: none !important;
+  }
+  
+  .button-password:hover {
+    color: $gray-600;
+    text-decoration: none;
+  }
+}

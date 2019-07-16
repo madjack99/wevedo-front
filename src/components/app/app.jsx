@@ -40,7 +40,7 @@ const App = () => (
       <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
       <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
       <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
-      <RouteMainLayout path="/supplier" component={Supplier} />
+      <RouteMainLayout path="/supplier/:id" component={Supplier} />
       <RouteMainLayout path="/contact" component={Contact} />
       <RouteMainLayout path="/terms" component={Terms} />
       <RouteMainLayout path="/privacy" component={Privacy} />

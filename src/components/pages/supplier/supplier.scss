@@ -37,3 +37,17 @@
 		text-transform: uppercase;
 	}
 }
+
+.modal-close-btn {
+	position: absolute;
+	color: $gray-600;
+	right: 0;
+	top: 0; 
+	margin: 15px;
+	cursor: pointer;
+	z-index: 9;
+
+	&:hover {
+		color: $gray-700;
+	}
+}
