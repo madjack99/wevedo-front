@@ -17,7 +17,9 @@ import SignUpForm from '../sign-up-form';
 
 import Logo from '../../assets/images/symbol.png';
 
-function SignUp({ login, isLoggedIn, error }) {
+function SignUp({
+  login, isLoggedIn, error, t,
+}) {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
