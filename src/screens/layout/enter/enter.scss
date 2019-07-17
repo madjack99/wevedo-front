@@ -1,0 +1,41 @@
+.enter-business-screen {
+  .side-background {
+    overflow: hidden;
+    
+    &-image {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 100%;
+      min-height: 100vh;
+    }
+  }
+
+  .welcome-block {
+    position: absolute;
+    left: 75px;
+    bottom: 150px;
+  
+    &__title {
+      font: 3rem 'Butler Black', serif;
+      color: white;
+    }
+  
+    &__subtitle {
+      font: 2rem 'Butler Bold', serif;
+      color: white;
+  
+      &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 30px;
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+  
+  &_right {
+    padding: 70px;
+  }
+}
