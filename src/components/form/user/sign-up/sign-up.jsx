@@ -8,7 +8,7 @@ import {
   Row, Col, Form, Button, FormGroup,
 } from 'react-bootstrap';
 
-import './sign-up.scss';
+import '../../form.scss';
 
 import config from '../../../../config';
 
@@ -35,7 +35,7 @@ const SignUpUserForm = ({
 
   return (
     <Formik
-      className="sign-up-user-form"
+      className="form"
       initialValues={{
         email: '',
         password: '',
@@ -94,16 +94,16 @@ const SignUpUserForm = ({
             </Col>
           </Row>
 
-          <div className="sign-up-user-form__divider text-center m-5">
+          <div className="form__divider text-center m-5">
             <span>OR</span>
           </div>
 
           <Form noValidate onSubmit={handleSubmit}>
-            <div className="sign-up-user-form__error text-center my-3">
+            <div className="form__error text-center my-3">
               <span>{error}</span>
             </div>
             <Form.Group className="mb-5" controlId="formEmail">
-              <Form.Label className="sign-up-user-form__label mb-0">Email Address</Form.Label>
+              <Form.Label className="form__label mb-0">Email Address</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -116,7 +116,7 @@ const SignUpUserForm = ({
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-              <Form.Label className="sign-up-user-form__label mb-0">Password</Form.Label>
+              <Form.Label className="form__label mb-0">Password</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -129,7 +129,7 @@ const SignUpUserForm = ({
             </Form.Group>
 
             <FormGroup>
-              <Form.Check className="sign-up-user-form__check mr-auto" label="Remember me" />
+              <Form.Check className="form__check mr-auto" label="Remember me" />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -144,7 +144,7 @@ const SignUpUserForm = ({
               </Button>
             </FormGroup>
 
-            <div className="sign-up-user-form__question text-center mt-5">
+            <div className="form__question text-center mt-5">
               <span>
                 Already have an account?
                 {' '}

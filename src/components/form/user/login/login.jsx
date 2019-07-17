@@ -8,7 +8,7 @@ import {
   Row, Col, Form, Button, FormGroup,
 } from 'react-bootstrap';
 
-import './login.scss';
+import '../../form.scss';
 
 import config from '../../../../config';
 
@@ -36,7 +36,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
 
   return (
     <Formik
-      className="login-user-form"
+      className="form"
       initialValues={{
         email: '',
         password: '',
@@ -86,16 +86,16 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
             </Col>
           </Row>
 
-          <div className="sign-up-user-form__divider text-center m-5">
+          <div className="form__divider text-center m-5">
             <span>OR</span>
           </div>
 
           <Form noValidate onSubmit={handleSubmit}>
-            <div className="sign-up-user-form__error text-center my-3">
+            <div className="form__error text-center my-3">
               <span>{error}</span>
             </div>
             <Form.Group className="mb-5" controlId="formEmail">
-              <Form.Label className="sign-up-user-form__label mb-0">Email Address</Form.Label>
+              <Form.Label className="form__label mb-0">Email Address</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -108,7 +108,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-              <Form.Label className="sign-up-user-form__label mb-0">Password</Form.Label>
+              <Form.Label className="form__label mb-0">Password</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -123,7 +123,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
             <FormGroup controlId="passwordActions">
               <Row>
                 <Col>
-                  <Form.Check className="login-user-form__check mr-auto" label="Remember me" />
+                  <Form.Check className="form__check mr-auto" label="Remember me" />
                 </Col>
                 <Col className="text-right">
                   <Button
@@ -149,7 +149,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
               </Button>
             </FormGroup>
 
-            <div className="login-user-form__question text-center mt-5">
+            <div className="form__question text-center mt-5">
               <span>
                 Don&apos;t have an account?
                 {' '}
