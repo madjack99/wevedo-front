@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
@@ -12,15 +12,21 @@ import '../../form.scss';
 
 import config from '../../../../config';
 
-import { fetchSignUp, fetchLogin, existingEmail } from '../../../../actions';
+import {
+  fetchSignUp, fetchLogin, existingEmail, resetError,
+} from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
-  signUp, login, statusEmail, isLoggedIn, error,
+  signUp, login, statusEmail, cleanForm, isLoggedIn, error,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    cleanForm();
+  }, [cleanForm]);
 
   const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
     login(wevedoService.socialLogin, {
@@ -169,6 +175,7 @@ const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
   statusEmail: error => dispatch(existingEmail(error)),
+  cleanForm: () => dispatch(resetError()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpUserForm);

@@ -3,6 +3,7 @@ import {
   fetchLogin,
   existingEmail,
   fetchSignOut,
+  resetError,
 } from './auth-actions';
 
 import {
@@ -15,4 +16,5 @@ export {
   existingEmail,
   fetchSignOut,
   fetchCategories,
+  resetError,
 };
