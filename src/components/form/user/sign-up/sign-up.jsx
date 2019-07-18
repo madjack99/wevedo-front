@@ -34,69 +34,68 @@ const SignUpUserForm = ({
   }
 
   return (
-    <Formik
-      className="form"
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      onSubmit={async ({ email, password }, { setSubmitting }) => {
-        setSubmitting(false);
+    <React.Fragment>
+      <Row>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="facebook"
+            provider="facebook"
+            appId={config.facebookAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-facebook-f mr-3" />
+            {' Register with Facebook'}
+          </SocialButton>
+        </Col>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="google"
+            provider="google"
+            appId={config.googleAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-google mr-3" />
+            {' Register with Google'}
+          </SocialButton>
+        </Col>
+      </Row>
 
-        const isNewEmail = await wevedoService.checkEmail({ email });
-        const body = {
-          email,
-          password,
-          deviceOS: 'android', // TO-DO: 'web' should be later
-        };
+      <div className="form__divider text-center m-5">
+        <span>OR</span>
+      </div>
+      <Formik
+        className="form"
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={async ({ email, password }, { setSubmitting }) => {
+          setSubmitting(false);
 
-        if (isNewEmail) {
-          await signUp(wevedoService.register, body);
-          return login(wevedoService.login, body);
-        }
+          const isNewEmail = await wevedoService.checkEmail({ email });
+          const body = {
+            email,
+            password,
+            deviceOS: 'android', // TO-DO: 'web' should be later
+          };
 
-        return statusEmail('Email is already in use');
-      }}
-      validationSchema={signUpFormSchema}
-      render={({
-        handleSubmit,
-        handleChange,
-        values,
-        errors,
-        isSubmitting,
-      }) => (
-        <React.Fragment>
-          <Row>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="facebook"
-                provider="facebook"
-                appId={config.facebookAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-facebook-f mr-3" />
-                {' Register with Facebook'}
-              </SocialButton>
-            </Col>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="google"
-                provider="google"
-                appId={config.googleAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-google mr-3" />
-                {' Register with Google'}
-              </SocialButton>
-            </Col>
-          </Row>
+          if (isNewEmail) {
+            await signUp(wevedoService.register, body);
+            return login(wevedoService.login, body);
+          }
 
-          <div className="form__divider text-center m-5">
-            <span>OR</span>
-          </div>
-
+          return statusEmail('Email is already in use');
+        }}
+        validationSchema={signUpFormSchema}
+        render={({
+          handleSubmit,
+          handleChange,
+          values,
+          errors,
+          isSubmitting,
+        }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <div className="form__error text-center my-3">
               <span>{error}</span>
@@ -157,9 +156,9 @@ const SignUpUserForm = ({
               </span>
             </div>
           </Form>
-        </React.Fragment>
-      )}
-    />
+        )}
+      />
+    </React.Fragment>
   );
 };
 
