@@ -14,7 +14,7 @@ import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin, existingEmail } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
-import { signUpFormSchema } from '../../schemas';
+import { signUpUserFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
@@ -88,7 +88,7 @@ const SignUpUserForm = ({
 
           return statusEmail('Email is already in use');
         }}
-        validationSchema={signUpFormSchema}
+        validationSchema={signUpUserFormSchema}
         render={({
           handleSubmit,
           handleChange,
