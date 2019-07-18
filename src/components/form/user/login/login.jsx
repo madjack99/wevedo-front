@@ -101,7 +101,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
                 value={values.email}
                 onChange={handleChange}
                 isValid={values.email && !errors.email}
-                isInvalid={values.email && !!errors.email}
+                isInvalid={!values.email && !!errors.email}
                 autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
@@ -117,7 +117,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
                 value={values.password}
                 onChange={handleChange}
                 isValid={values.password && !errors.password}
-                isInvalid={values.password && !!errors.password}
+                isInvalid={!values.password && !!errors.password}
                 autoComplete="current-password"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">

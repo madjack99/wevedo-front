@@ -108,7 +108,7 @@ const SignUpUserForm = ({
                 value={values.email}
                 onChange={handleChange}
                 isValid={values.email && !errors.email}
-                isInvalid={values.email && !!errors.email}
+                isInvalid={!values.email && !!errors.email}
                 autoComplete="new-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
@@ -124,7 +124,7 @@ const SignUpUserForm = ({
                 value={values.password}
                 onChange={handleChange}
                 isValid={values.password && !errors.password}
-                isInvalid={values.password && !!errors.password}
+                isInvalid={!values.password && !!errors.password}
                 autoComplete="new-password"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
