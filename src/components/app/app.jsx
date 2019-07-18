@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
@@ -19,6 +21,9 @@ import BusinessSignup from '../business-sign-up';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 
+import { fetchCategories } from '../../actions';
+import { WevedoServiceContext } from '../contexts';
+
 const RouteMainLayout = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -32,25 +37,37 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
   />
 );
 
-const App = () => (
-  <React.Fragment>
-    <Switch>
-      <RouteMainLayout exact path="/" component={Home} />
-      <RouteMainLayout path="/weddingtools" component={Weddingtools} />
-      <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
-      <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
-      <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
-      <RouteMainLayout path="/supplier/:id" component={Supplier} />
-      <RouteMainLayout path="/contact" component={Contact} />
-      <RouteMainLayout path="/terms" component={Terms} />
-      <RouteMainLayout path="/privacy" component={Privacy} />
-      <Route path="/login" component={ScreensUserLogin} />
-      <Route path="/signup" component={ScreensUserSignUp} />
-      <Route path="/pricing" component={Pricing} />
-      <Route path="/business-login" component={BusinessLogin} />
-      <Route path="/business-signup" component={BusinessSignup} />
-    </Switch>
-  </React.Fragment>
-);
+const App = ({ getCategories }) => {
+  const wevedoService = useContext(WevedoServiceContext);
 
-export default App;
+  useEffect(() => {
+    getCategories(wevedoService.getCategories);
+  }, [getCategories, wevedoService]);
+
+  return (
+    <React.Fragment>
+      <Switch>
+        <RouteMainLayout exact path="/" component={Home} />
+        <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+        <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
+        <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
+        <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
+        <RouteMainLayout path="/supplier/:id" component={Supplier} />
+        <RouteMainLayout path="/contact" component={Contact} />
+        <RouteMainLayout path="/terms" component={Terms} />
+        <RouteMainLayout path="/privacy" component={Privacy} />
+        <Route path="/login" component={ScreensUserLogin} />
+        <Route path="/signup" component={ScreensUserSignUp} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/business-login" component={BusinessLogin} />
+        <Route path="/business-signup" component={BusinessSignup} />
+      </Switch>
+    </React.Fragment>
+  );
+};
+
+const mapDispatchToProps = dispatch => ({
+  getCategories: fetchCategories(dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(App);
