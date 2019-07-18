@@ -14,7 +14,7 @@ import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin, existingEmail } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
-import { signUpFormSchema } from '../../../../form-schemas';
+import { signUpFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
@@ -62,7 +62,6 @@ const SignUpUserForm = ({
         handleSubmit,
         handleChange,
         values,
-        touched,
         errors,
         isSubmitting,
       }) => (
@@ -109,10 +108,13 @@ const SignUpUserForm = ({
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                isValid={touched.email && !errors.email}
-                isInvalid={!!errors.email}
+                isValid={values.email && !errors.email}
+                isInvalid={values.email && !!errors.email}
                 autoComplete="new-email"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formPassword">
@@ -122,10 +124,13 @@ const SignUpUserForm = ({
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                isValid={touched.password && !errors.password}
-                isInvalid={!!errors.password}
+                isValid={values.password && !errors.password}
+                isInvalid={values.password && !!errors.password}
                 autoComplete="new-password"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <FormGroup>

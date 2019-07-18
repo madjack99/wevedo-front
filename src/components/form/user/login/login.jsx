@@ -14,7 +14,7 @@ import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
-import { loginFormSchema } from '../../../../form-schemas';
+import { loginFormSchema } from '../../schemas';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
@@ -35,61 +35,60 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
   }
 
   return (
-    <Formik
-      className="form"
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      onSubmit={async (values, { setSubmitting }) => {
-        setSubmitting(false);
-        login(wevedoService.login, {
-          email: values.email,
-          password: values.password,
-          deviseOS: 'android', // TO-DO: 'web' should be later
-        });
-      }}
-      validationSchema={loginFormSchema}
-      render={({
-        handleSubmit,
-        handleChange,
-        values,
-        touched,
-        errors,
-        isSubmitting,
-      }) => (
-        <React.Fragment>
-          <Row>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="facebook"
-                provider="facebook"
-                appId={config.facebookAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-facebook-f mr-3" />
-                {' Login with Facebook'}
-              </SocialButton>
-            </Col>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="google"
-                provider="google"
-                appId={config.googleAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-google mr-3" />
-                {' Login with Google'}
-              </SocialButton>
-            </Col>
-          </Row>
+    <React.Fragment>
+      <Row>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="facebook"
+            provider="facebook"
+            appId={config.facebookAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-facebook-f mr-3" />
+            {' Login with Facebook'}
+          </SocialButton>
+        </Col>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="google"
+            provider="google"
+            appId={config.googleAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-google mr-3" />
+            {' Login with Google'}
+          </SocialButton>
+        </Col>
+      </Row>
 
-          <div className="form__divider text-center m-5">
-            <span>OR</span>
-          </div>
+      <div className="form__divider text-center m-5">
+        <span>OR</span>
+      </div>
 
+      <Formik
+        className="form"
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={async (values, { setSubmitting }) => {
+          setSubmitting(false);
+          login(wevedoService.login, {
+            email: values.email,
+            password: values.password,
+            deviseOS: 'android', // TO-DO: 'web' should be later
+          });
+        }}
+        validationSchema={loginFormSchema}
+        render={({
+          handleSubmit,
+          handleChange,
+          values,
+          errors,
+          isSubmitting,
+        }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <div className="form__error text-center my-3">
               <span>{error}</span>
@@ -101,10 +100,13 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                isValid={touched.email && !errors.email}
-                isInvalid={!!errors.email}
+                isValid={values.email && !errors.email}
+                isInvalid={values.email && !!errors.email}
                 autoComplete="current-email"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formPassword">
@@ -114,10 +116,13 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                isValid={touched.password && !errors.password}
-                isInvalid={!!errors.password}
+                isValid={values.password && !errors.password}
+                isInvalid={values.password && !!errors.password}
                 autoComplete="current-password"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <FormGroup controlId="passwordActions">
@@ -157,9 +162,9 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
               </span>
             </div>
           </Form>
-        </React.Fragment>
-      )}
-    />
+        )}
+      />
+    </React.Fragment>
   );
 };
 
