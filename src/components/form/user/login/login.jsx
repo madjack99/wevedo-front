@@ -14,7 +14,7 @@ import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
-import { loginUserFormSchema } from '../../schemas';
+import { userFormSchema } from '../../schemas';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
@@ -81,7 +81,7 @@ const LoginUserForm = ({ login, isLoggedIn, error }) => {
             deviseOS: 'android', // TO-DO: 'web' should be later
           });
         }}
-        validationSchema={loginUserFormSchema}
+        validationSchema={userFormSchema}
         render={({
           handleSubmit,
           handleChange,
