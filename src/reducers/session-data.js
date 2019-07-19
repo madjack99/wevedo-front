@@ -52,17 +52,10 @@ const updateSessionData = (state, action) => {
         token: null,
         error: action.payload,
       };
-    case actionTypes.EXISTING_EMAIL:
-      return {
-        ...state.sessionData,
-        error: action.payload,
-      };
     case actionTypes.FETCH_SIGNOUT_REQUEST:
       return {
         ...state.sessionData,
         isLoggedIn: false,
-        // token: state.sessionData.token,
-        // error: null,
       };
     case actionTypes.FETCH_SIGNOUT_SUCCESS:
       return {
@@ -73,6 +66,19 @@ const updateSessionData = (state, action) => {
       return {
         ...state.sessionData,
         token: null,
+        error: action.payload,
+      };
+    case actionTypes.FETCH_EMAIL_STATUS_REQUEST:
+      return {
+        ...state.sessionData,
+      };
+    case actionTypes.FETCH_EMAIL_STATUS_SUCCESS:
+      return {
+        ...state.sessionData,
+      };
+    case actionTypes.FETCH_EMAIL_STATUS_FAILURE:
+      return {
+        ...state.sessionData,
         error: action.payload,
       };
     case actionTypes.RESET_ERROR:

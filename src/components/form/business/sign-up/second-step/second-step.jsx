@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
@@ -10,10 +10,13 @@ import {
 
 import '../../../form.scss';
 
-import { existingEmail } from '../../../../../actions';
+import { fetchEmailStatus } from '../../../../../actions';
+import { WevedoServiceContext } from '../../../../contexts';
 import { SecondStepSignUpBusinessScheme } from '../../../schemas';
 
-const SecondStepSignUpBusinessForm = ({ isLoggedIn, error }) => {
+const SecondStepSignUpBusinessForm = ({ emailStatus, isLoggedIn, error }) => {
+  const wevedoService = useContext(WevedoServiceContext);
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
@@ -34,7 +37,11 @@ const SecondStepSignUpBusinessForm = ({ isLoggedIn, error }) => {
       }, { setSubmitting }) => {
         setSubmitting(false);
 
-        // save data to redux
+        const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
+
+        if (isNewEmail) {
+          // save data to redux
+        }
       }}
       validationSchema={SecondStepSignUpBusinessScheme}
       render={({
@@ -165,7 +172,7 @@ const SecondStepSignUpBusinessForm = ({ isLoggedIn, error }) => {
 const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
-  statusEmail: error => dispatch(existingEmail(error)),
+  emailStatus: fetchEmailStatus(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondStepSignUpBusinessForm);

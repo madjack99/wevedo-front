@@ -13,14 +13,14 @@ import '../../form.scss';
 import config from '../../../../config';
 
 import {
-  fetchSignUp, fetchLogin, existingEmail, resetError,
+  fetchSignUp, fetchLogin, fetchEmailStatus, resetError,
 } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
-  signUp, login, statusEmail, cleanForm, isLoggedIn, error,
+  signUp, login, emailStatus, cleanForm, isLoggedIn, error,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -80,19 +80,18 @@ const SignUpUserForm = ({
         onSubmit={async ({ email, password }, { setSubmitting }) => {
           setSubmitting(false);
 
-          const isNewEmail = await wevedoService.checkEmail({ email });
-          const body = {
-            email,
-            password,
-            deviceOS: 'android', // TO-DO: 'web' should be later
-          };
+          const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
           if (isNewEmail) {
-            await signUp(wevedoService.register, body);
-            return login(wevedoService.login, body);
-          }
+            const body = {
+              email,
+              password,
+              deviceOS: 'android', // TO-DO: 'web' should be later
+            };
 
-          return statusEmail('Email is already in use');
+            await signUp(wevedoService.register, body);
+            login(wevedoService.login, body);
+          }
         }}
         validationSchema={userFormSchema}
         render={({
@@ -174,7 +173,7 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
-  statusEmail: error => dispatch(existingEmail(error)),
+  emailStatus: fetchEmailStatus(dispatch),
   cleanForm: () => dispatch(resetError()),
 });
 
