@@ -21,6 +21,7 @@ import ImgUpload from '../imgUpload';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
+import ScreensBusinessSignUpSecondStep from '../../screens/business/sign-up/second-step';
 
 import { fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
@@ -62,6 +63,7 @@ const App = ({ getCategories }) => {
         <Route path="/pricing" component={Pricing} />
         <Route path="/business-login" component={BusinessLogin} />
         <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
+        <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
         <Route path="/businesssignup-step1" component={ImgUpload} />
       </Switch>
     </React.Fragment>
