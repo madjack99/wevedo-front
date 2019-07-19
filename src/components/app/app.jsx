@@ -17,6 +17,8 @@ import Terms from '../pages/terms-and-conditions';
 import Privacy from '../pages/privacy';
 import Pricing from '../pricing';
 import BusinessLogin from '../business-login';
+import BusinessSignup from '../business-sign-up';
+import ImgUpload from '../imgUpload';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
@@ -61,6 +63,8 @@ const App = ({ getCategories }) => {
         <Route path="/pricing" component={Pricing} />
         <Route path="/business-login" component={BusinessLogin} />
         <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
+        <Route path="/businesssignup-step1" component={ImgUpload} />
+        // Надо уточнить какой путь будет вести к моему компоненту
       </Switch>
     </React.Fragment>
   );
@@ -70,4 +74,7 @@ const mapDispatchToProps = dispatch => ({
   getCategories: fetchCategories(dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(App);
