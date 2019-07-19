@@ -10,13 +10,10 @@ import {
 
 import '../../../form.scss';
 
-import {
-  fetchSignUp, fetchLogin, existingEmail,
-} from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, error, categories,
+  isLoggedIn, categories,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -188,10 +185,4 @@ const mapStateToProps = ({ sessionData, categoryList }) => ({
   ...categoryList,
 });
 
-const mapDispatchToProps = dispatch => ({
-  signUp: fetchSignUp(dispatch),
-  login: fetchLogin(dispatch),
-  statusEmail: error => dispatch(existingEmail(error)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FirstStepSignUpBusinessForm);
+export default connect(mapStateToProps)(FirstStepSignUpBusinessForm);
