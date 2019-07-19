@@ -83,7 +83,7 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Label className="form__label mb-0">Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              name="confirm-password"
+              name="confirmPassword"
               value={values.confirmPassword}
               onChange={handleChange}
               isValid={values.confirmPassword && !errors.confirmPassword}
