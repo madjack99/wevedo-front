@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
@@ -12,15 +12,21 @@ import '../../form.scss';
 
 import config from '../../../../config';
 
-import { fetchSignUp, fetchLogin, existingEmail } from '../../../../actions';
+import {
+  fetchSignUp, fetchLogin, existingEmail, resetError,
+} from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
-import { signUpFormSchema } from '../../../../form-schemas';
+import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
-  signUp, login, statusEmail, isLoggedIn, error,
+  signUp, login, statusEmail, cleanForm, isLoggedIn, error,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    cleanForm();
+  }, [cleanForm]);
 
   const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
     login(wevedoService.socialLogin, {
@@ -34,70 +40,69 @@ const SignUpUserForm = ({
   }
 
   return (
-    <Formik
-      className="form"
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      onSubmit={async ({ email, password }, { setSubmitting }) => {
-        setSubmitting(false);
+    <React.Fragment>
+      <Row>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="facebook"
+            provider="facebook"
+            appId={config.facebookAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-facebook-f mr-3" />
+            {' Register with Facebook'}
+          </SocialButton>
+        </Col>
+        <Col md={6}>
+          <SocialButton
+            bsPrefix="social-btn"
+            variant="google"
+            provider="google"
+            appId={config.googleAppId}
+            onLoginSuccess={handleSocialSignUp}
+          >
+            <i className="fab fa-google mr-3" />
+            {' Register with Google'}
+          </SocialButton>
+        </Col>
+      </Row>
 
-        const isNewEmail = await wevedoService.checkEmail({ email });
-        const body = {
-          email,
-          password,
-          deviceOS: 'android', // TO-DO: 'web' should be later
-        };
+      <div className="form__divider text-center m-5">
+        <span>OR</span>
+      </div>
+      <Formik
+        className="form"
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={async ({ email, password }, { setSubmitting }) => {
+          setSubmitting(false);
 
-        if (isNewEmail) {
-          await signUp(wevedoService.register, body);
-          return login(wevedoService.login, body);
-        }
+          const isNewEmail = await wevedoService.checkEmail({ email });
+          const body = {
+            email,
+            password,
+            deviceOS: 'android', // TO-DO: 'web' should be later
+          };
 
-        return statusEmail('Email is already in use');
-      }}
-      validationSchema={signUpFormSchema}
-      render={({
-        handleSubmit,
-        handleChange,
-        values,
-        touched,
-        errors,
-        isSubmitting,
-      }) => (
-        <React.Fragment>
-          <Row>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="facebook"
-                provider="facebook"
-                appId={config.facebookAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-facebook-f mr-3" />
-                {' Register with Facebook'}
-              </SocialButton>
-            </Col>
-            <Col md={6}>
-              <SocialButton
-                bsPrefix="social-btn"
-                variant="google"
-                provider="google"
-                appId={config.googleAppId}
-                onLoginSuccess={handleSocialSignUp}
-              >
-                <i className="fab fa-google mr-3" />
-                {' Register with Google'}
-              </SocialButton>
-            </Col>
-          </Row>
+          if (isNewEmail) {
+            await signUp(wevedoService.register, body);
+            return login(wevedoService.login, body);
+          }
 
-          <div className="form__divider text-center m-5">
-            <span>OR</span>
-          </div>
-
+          return statusEmail('Email is already in use');
+        }}
+        validationSchema={userFormSchema}
+        render={({
+          handleSubmit,
+          handleChange,
+          values,
+          touched,
+          errors,
+          isSubmitting,
+        }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <div className="form__error text-center my-3">
               <span>{error}</span>
@@ -109,10 +114,13 @@ const SignUpUserForm = ({
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                isValid={touched.email && !errors.email}
-                isInvalid={!!errors.email}
+                isValid={values.email && !errors.email}
+                isInvalid={touched.email && !!errors.email}
                 autoComplete="new-email"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formPassword">
@@ -122,10 +130,13 @@ const SignUpUserForm = ({
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                isValid={touched.password && !errors.password}
-                isInvalid={!!errors.password}
+                isValid={values.password && !errors.password}
+                isInvalid={touched.password && !!errors.password}
                 autoComplete="new-password"
               />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <FormGroup>
@@ -152,9 +163,9 @@ const SignUpUserForm = ({
               </span>
             </div>
           </Form>
-        </React.Fragment>
-      )}
-    />
+        )}
+      />
+    </React.Fragment>
   );
 };
 
@@ -164,6 +175,7 @@ const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
   statusEmail: error => dispatch(existingEmail(error)),
+  cleanForm: () => dispatch(resetError()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpUserForm);

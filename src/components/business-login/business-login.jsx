@@ -61,7 +61,7 @@ export default function BusinessLogin() {
               <b>
                 Don&apos;t have and account?
                 {' '}
-                <Link to="/pricing" className="text-wevedo">Signup</Link>
+                <Link to="/business-signup-1" className="text-wevedo">Signup</Link>
               </b>
             </p>
           </Col>

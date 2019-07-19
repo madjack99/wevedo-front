@@ -83,3 +83,7 @@ export const fetchSignOut = dispatch => async service => {
     dispatch(signOutFailed(error));
   }
 };
+
+export const resetError = () => ({
+  type: actionTypes.RESET_ERROR,
+});

@@ -18,6 +18,7 @@ const ScreensLayoutEnter = ({
           <div className="welcome-block">
             <h2 className="welcome-block__title">{welcomeTitle}</h2>
             <p className="welcome-block__subtitle">{welcomeSubtitle}</p>
+            <div className="welcome-block__divider" />
             {
               welcomeText
                 ? <p className="welcome-block__text">{welcomeText}</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { LinkContainer } from 'react-router-bootstrap';
@@ -9,22 +9,13 @@ import { Link, NavLink } from 'react-router-dom';
 
 import './header.scss';
 
-import { fetchSignOut } from '../../actions';
+import { fetchSignOut, fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 import logo from '../../assets/images/symbol.png';
 
-function Header({ isLoggedIn, token, signOut }) {
-  const [categories, setCategories] = useState([]);
-  const wevedoService = useContext(WevedoServiceContext);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const { data: newCategories } = await wevedoService.getCategories();
-      setCategories(newCategories);
-    };
-    fetchCategories();
-  }, [wevedoService]);
-
+function Header({
+  isLoggedIn, token, categories, signOut,
+}) {
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
       <Navbar.Toggle />
@@ -129,10 +120,14 @@ function ProfileArea({ signOut }) {
   );
 }
 
-const mapStateToProps = ({ sessionData }) => sessionData;
+const mapStateToProps = ({ sessionData, categoryList }) => ({
+  ...sessionData,
+  ...categoryList,
+});
 
 const mapDispatchToProps = dispatch => ({
   signOut: fetchSignOut(dispatch),
+  getCategories: fetchCategories(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
