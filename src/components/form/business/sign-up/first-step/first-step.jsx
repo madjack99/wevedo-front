@@ -27,7 +27,7 @@ const FirstStepSignUpBusinessForm = ({
         password: '',
         confirmPassword: '',
         name: '',
-        category: categories[0],
+        category: '',
         website: '',
       }}
       onSubmit={async ({
@@ -124,7 +124,7 @@ const FirstStepSignUpBusinessForm = ({
               isInvalid={touched.category && !!errors.category}
               autoComplete="new-category"
             >
-              <option defaultValue />
+              <option disabled />
               {
                 categories.map(({ _id: id, name }) => (
                   <option key={id}>{name}</option>
