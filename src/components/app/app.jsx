@@ -17,9 +17,9 @@ import Terms from '../pages/terms-and-conditions';
 import Privacy from '../pages/privacy';
 import Pricing from '../pricing';
 import BusinessLogin from '../business-login';
-import BusinessSignup from '../business-sign-up';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
+import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
 
 import { fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
@@ -60,7 +60,7 @@ const App = ({ getCategories }) => {
         <Route path="/signup" component={ScreensUserSignUp} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/business-login" component={BusinessLogin} />
-        <Route path="/business-signup" component={BusinessSignup} />
+        <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
       </Switch>
     </React.Fragment>
   );
