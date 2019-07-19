@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import {
   Form, FormGroup, Button,
@@ -47,9 +47,6 @@ const FirstStepSignUpBusinessForm = ({
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <div className="form__error text-center my-3">
-            <span>{error}</span>
-          </div>
           <Form.Group className="mb-5" controlId="formUsername">
             <Form.Label className="form__label mb-0">Username</Form.Label>
             <Form.Control
@@ -166,14 +163,6 @@ const FirstStepSignUpBusinessForm = ({
               Next step
             </Button>
           </FormGroup>
-
-          <div className="form__question text-center mt-5">
-            <span>
-              Already have an account?
-              {' '}
-              <Link className="text-wevedo" to="/business-login">Login</Link>
-            </span>
-          </div>
         </Form>
       )}
     />
