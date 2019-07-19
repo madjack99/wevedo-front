@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
 
 import {
-  Form, FormGroup, Button, Dropdown,
+  Form, FormGroup, Button,
 } from 'react-bootstrap';
 
 import '../../../form.scss';
@@ -120,14 +120,22 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formCategory">
             <Form.Label className="form__label mb-0">Select Category</Form.Label>
             <Form.Control
+              className="first-step__dropdown"
               type="text"
               name="category"
+              as="select"
               value={values.category}
               onChange={handleChange}
               isValid={values.category && !errors.category}
               isInvalid={touched.category && !!errors.category}
               autoComplete="new-category"
-            />
+            >
+              {
+                categories.map(({ _id: id, name }) => (
+                  <option key={id}>{name}</option>
+                ))
+              }
+            </Form.Control>
             <Form.Control.Feedback className="form__feedback" type="invalid">
               {errors.category}
             </Form.Control.Feedback>
