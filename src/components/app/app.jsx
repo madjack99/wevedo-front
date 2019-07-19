@@ -16,6 +16,7 @@ import Privacy from '../pages/privacy';
 import Pricing from '../pricing';
 import BusinessLogin from '../business-login';
 import BusinessSignup from '../business-sign-up';
+import ImgUpload from '../imgUpload';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 
@@ -49,6 +50,7 @@ const App = () => (
       <Route path="/pricing" component={Pricing} />
       <Route path="/business-login" component={BusinessLogin} />
       <Route path="/business-signup" component={BusinessSignup} />
+      <Route path="/businesssignup-step1" component={ImgUpload} />
     </Switch>
   </React.Fragment>
 );
