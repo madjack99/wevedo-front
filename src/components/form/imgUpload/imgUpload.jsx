@@ -4,7 +4,7 @@ import {
   Container, Row, Col, Button, Form, Image,
 } from 'react-bootstrap';
 
-import Logo from '../../assets/images/symbol.png';
+import Logo from '../../../assets/images/symbol.png';
 import './imgUpload.scss';
 
 class ImgUpload extends React.Component {
