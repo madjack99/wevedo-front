@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import {
   Form, FormGroup, Button,
@@ -10,11 +11,13 @@ import {
 
 import '../../../form.scss';
 
-import { fetchEmailStatus } from '../../../../../actions';
+import { updateUser, fetchEmailStatus } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import { SecondStepSignUpBusinessScheme } from '../../../schemas';
 
-const SecondStepSignUpBusinessForm = ({ emailStatus, isLoggedIn, error }) => {
+const SecondStepSignUpBusinessForm = ({
+  isLoggedIn, error, updateUser, emailStatus, history,
+}) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   if (isLoggedIn) {
@@ -25,22 +28,31 @@ const SecondStepSignUpBusinessForm = ({ emailStatus, isLoggedIn, error }) => {
     <Formik
       className="form"
       initialValues={{
-        email: '',
-        phoneNumber: '',
-        postcode: '',
-        address: '',
-        townOrCity: '',
-        country: '',
+        email: 'pavel@gmail.com',
+        phoneNumber: '+79123456789',
+        postcode: '422456',
+        address: 'Some street',
+        townOrCity: 'Cheboksary',
+        country: 'Russia',
       }}
       onSubmit={async ({
-        email, phoneNumber, postcode, address, townOrCity, country
+        email, phoneNumber, postcode, address, townOrCity, country,
       }, { setSubmitting }) => {
         setSubmitting(false);
 
         const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
         if (isNewEmail) {
-          // save data to redux
+          updateUser()({
+            email,
+            phoneNumber,
+            postcode,
+            address,
+            townOrCity,
+            country,
+          });
+
+          history.push('/'); // TO-DO: add route to load images
         }
       }}
       validationSchema={SecondStepSignUpBusinessScheme}
@@ -172,7 +184,12 @@ const SecondStepSignUpBusinessForm = ({ emailStatus, isLoggedIn, error }) => {
 const mapStateToProps = ({ sessionData }) => sessionData;
 
 const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
   emailStatus: fetchEmailStatus(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SecondStepSignUpBusinessForm);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(
+    SecondStepSignUpBusinessForm,
+  ),
+);

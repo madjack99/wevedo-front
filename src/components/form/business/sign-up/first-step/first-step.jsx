@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import {
   Form, FormGroup, Button,
@@ -10,10 +11,11 @@ import {
 
 import '../../../form.scss';
 
+import { updateUser } from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, categories,
+  isLoggedIn, categories, updateUser, history,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -23,19 +25,27 @@ const FirstStepSignUpBusinessForm = ({
     <Formik
       className="form"
       initialValues={{
-        username: '',
-        password: '',
-        confirmPassword: '',
-        name: '',
-        category: '',
-        website: '',
+        username: 'RukkiesMan',
+        password: '123456',
+        confirmPassword: '123456',
+        name: 'PavelCo',
+        category: 'Media',
+        website: 'https://pavel.co',
       }}
       onSubmit={async ({
-        username, password, confirmPassword, name, category, website,
+        username, password, name, category, website,
       }, { setSubmitting }) => {
         setSubmitting(false);
 
-        // save data to redux
+        updateUser()({
+          username,
+          password,
+          name,
+          category,
+          website,
+        });
+
+        history.push('/business-signup-2');
       }}
       validationSchema={FirstStepSignUpBusinessScheme}
       render={({
@@ -174,4 +184,12 @@ const mapStateToProps = ({ sessionData, categoryList }) => ({
   ...categoryList,
 });
 
-export default connect(mapStateToProps)(FirstStepSignUpBusinessForm);
+const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(
+    FirstStepSignUpBusinessForm,
+  ),
+);
