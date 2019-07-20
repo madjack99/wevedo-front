@@ -19,9 +19,7 @@ import { userFormSchema } from '../../schemas';
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 
-const LoginUserForm = ({
-  login, cleanForm, isLoggedIn, error,
-}) => {
+const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -79,13 +77,20 @@ const LoginUserForm = ({
           email: '',
           password: '',
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
           setSubmitting(false);
-          login(wevedoService.login, {
+          const isLoginSuccessful = await login(wevedoService.login, {
             email: values.email,
             password: values.password,
             deviseOS: 'android', // TO-DO: 'web' should be later
           });
+
+          if (!isLoginSuccessful) {
+            setErrors({
+              email: 'wrong credentials',
+              password: 'wrong credentials',
+            });
+          }
         }}
         validationSchema={userFormSchema}
         render={({
@@ -97,9 +102,6 @@ const LoginUserForm = ({
           isSubmitting,
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
-            <div className="form__error text-center my-3">
-              <span>{error}</span>
-            </div>
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">Email Address</Form.Label>
               <Form.Control

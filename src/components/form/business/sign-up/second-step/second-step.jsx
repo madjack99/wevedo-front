@@ -16,7 +16,7 @@ import { WevedoServiceContext } from '../../../../contexts';
 import { SecondStepSignUpBusinessScheme } from '../../../schemas';
 
 const SecondStepSignUpBusinessForm = ({
-  isLoggedIn, error, updateUser, emailStatus, history,
+  isLoggedIn, updateUser, emailStatus, history,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -37,7 +37,7 @@ const SecondStepSignUpBusinessForm = ({
       }}
       onSubmit={async ({
         email, phoneNumber, postcode, address, townOrCity, country,
-      }, { setSubmitting }) => {
+      }, { setSubmitting, setErrors }) => {
         setSubmitting(false);
 
         const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
@@ -52,8 +52,10 @@ const SecondStepSignUpBusinessForm = ({
             country,
           });
 
-          history.push('/'); // TO-DO: add route to load images
+          return history.push('/'); // TO-DO: add route to load images
         }
+
+        return setErrors({ email: 'email is already in use' });
       }}
       validationSchema={SecondStepSignUpBusinessScheme}
       render={({
@@ -65,9 +67,6 @@ const SecondStepSignUpBusinessForm = ({
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <div className="form__error text-center my-3">
-            <span>{error}</span>
-          </div>
           <Form.Group className="mb-5" controlId="formEmail">
             <Form.Label className="form__label mb-0">Business Email</Form.Label>
             <Form.Control

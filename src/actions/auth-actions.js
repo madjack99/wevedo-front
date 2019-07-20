@@ -78,8 +78,10 @@ export const fetchLogin = dispatch => async (login, body) => {
     console.log(`ENTERED. TOKEN: ${token}`);
     Cookies.set('token', token);
     dispatch(loginSucceed(token));
+    return true;
   } catch (error) {
     dispatch(loginFailed(error.response.data.message));
+    return false;
   }
 };
 

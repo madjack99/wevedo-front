@@ -20,7 +20,7 @@ import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
-  signUp, login, emailStatus, cleanForm, isLoggedIn, error,
+  signUp, login, emailStatus, cleanForm, isLoggedIn,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -77,7 +77,7 @@ const SignUpUserForm = ({
           email: '',
           password: '',
         }}
-        onSubmit={async ({ email, password }, { setSubmitting }) => {
+        onSubmit={async ({ email, password }, { setSubmitting, setErrors }) => {
           setSubmitting(false);
 
           const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
@@ -90,8 +90,10 @@ const SignUpUserForm = ({
             };
 
             await signUp(wevedoService.register, body);
-            login(wevedoService.login, body);
+            return login(wevedoService.login, body);
           }
+
+          return setErrors({ email: 'email is already in use' });
         }}
         validationSchema={userFormSchema}
         render={({
@@ -103,9 +105,6 @@ const SignUpUserForm = ({
           isSubmitting,
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
-            <div className="form__error text-center my-3">
-              <span>{error}</span>
-            </div>
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">Email Address</Form.Label>
               <Form.Control
