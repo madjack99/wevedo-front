@@ -7,6 +7,11 @@ import {
 } from './auth-actions';
 
 import {
+  fetchUser,
+  removeUser,
+} from './user-actions';
+
+import {
   fetchCategories,
 } from './category-actions';
 
@@ -15,6 +20,8 @@ export {
   fetchLogin,
   fetchSignOut,
   fetchEmailStatus,
-  fetchCategories,
   resetError,
+  fetchUser,
+  removeUser,
+  fetchCategories,
 };

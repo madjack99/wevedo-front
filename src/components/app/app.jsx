@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 
@@ -23,7 +24,7 @@ import ScreensUserLogin from '../../screens/user/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
 import ScreensBusinessSignUpSecondStep from '../../screens/business/sign-up/second-step';
 
-import { fetchCategories } from '../../actions';
+import { fetchUser, removeUser, fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
 
 const RouteMainLayout = ({ component: Component, ...rest }) => (
@@ -39,8 +40,18 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
   />
 );
 
-const App = ({ getCategories }) => {
+
+const App = ({
+  isLoggedIn, getUser, removeUser, getCategories,
+}) => {
   const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getUser(wevedoService.getProfile);
+    }
+    removeUser();
+  }, [getUser, removeUser, isLoggedIn, wevedoService]);
 
   useEffect(() => {
     getCategories(wevedoService.getCategories);
@@ -70,11 +81,18 @@ const App = ({ getCategories }) => {
   );
 };
 
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
+
 const mapDispatchToProps = dispatch => ({
+  getUser: fetchUser(dispatch),
+  removeUser: () => dispatch(removeUser()),
   getCategories: fetchCategories(dispatch),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(App);
