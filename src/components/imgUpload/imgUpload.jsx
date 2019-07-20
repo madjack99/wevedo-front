@@ -26,7 +26,9 @@ class ImgUpload extends React.Component {
 
   render() {
     const { files } = this.state;
-    const customClassName = files.length ? 'customHeightWithPhotos' : 'customHightWithoutPhotos';
+    const customClassName = files.length
+      ? 'custom-height-with-photos'
+      : 'custom-hight-without-photos';
     return (
       <React.Fragment>
         <Container className="business-signup-config">
@@ -44,7 +46,7 @@ class ImgUpload extends React.Component {
             </Col>
             <Col
               sm={12}
-              className={`d-flex mt-2 bg-info rounded text-center customBorder ${customClassName}`}
+              className={`d-flex mt-2 mb-2 custom-bg rounded text-center custom-border ${customClassName}`}
             >
               <Form className="m-auto">
                 <DragAndDrop handleDrop={this.handleDrop}>
@@ -69,7 +71,8 @@ class ImgUpload extends React.Component {
 
             {files
               ? files.map((src, i) => (
-                <Col sm={4} key={i}>
+                <Col sm={4} key={i} className="position-relative">
+                  <h3 className="delete-icon">&times;</h3>
                   <Image src={src} alt="new img" fluid />
                 </Col>
               ))
@@ -150,7 +153,7 @@ class DragAndDrop extends Component {
     return (
       <div className="position-relative" ref={this.dropRef}>
         {this.state.dragging && (
-          <div className="customBorder position-absolute bg-success w-100 h-100 d-flex">
+          <div className="custom-border position-absolute custom-bg-upload w-100 h-100 d-flex">
             <span className="m-auto">Drop here</span>
           </div>
         )}
