@@ -1,29 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container, Row, Col, Button, Form, Image,
 } from 'react-bootstrap';
+
+import DragAndDrop from './DragAndDrop';
 import Logo from '../../assets/images/symbol.png';
+import './imgUpload.scss';
 
 class ImgUpload extends React.Component {
   state = {
     files: [],
   };
 
-  handleChange = e => {
+  handleUpload = e => {
     const newImg = e.target.files[0];
-    this.setState({ files: [...this.state.files, URL.createObjectURL(newImg)] });
+    if (newImg) {
+      this.setState({ files: [...this.state.files, URL.createObjectURL(newImg)] });
+    }
+  };
+
+  handleDrop = files => {
+    const droppedImgs = files.map(img => URL.createObjectURL(img));
+    this.setState({ files: [...this.state.files, ...droppedImgs] });
   };
 
   render() {
     const { files } = this.state;
+    const customClassName = files.length ? 'customHeightWithPhotos' : 'customHightWithoutPhotos';
     return (
       <React.Fragment>
         <Container className="business-signup-config">
           <Row className="mt-5 mb-5">
             <Col>
-              <a href="/">
+              <Link to="/">
                 <img src={Logo} width="130px" alt="wevedo" />
-              </a>
+              </Link>
             </Col>
           </Row>
           <Row className="pt-4 pb-4">
@@ -33,13 +45,26 @@ class ImgUpload extends React.Component {
             </Col>
             <Col
               sm={12}
-              className="mt-2 bg-info rounded text-center "
-              style={{ border: 'dashed', height: 200 }}
+              className={`d-flex mt-2 bg-info rounded text-center customBorder ${customClassName}`}
             >
-              <Form className="mt-5">
-                <label htmlFor="fileUpload">drag and drop box</label>
+              <Form className="m-auto">
+                <DragAndDrop handleDrop={this.handleDrop}>
+                  <label htmlFor="fileUpload">
+                    <div className="p-5">
+                      <span className="font-weight-bold">Upload photos </span>
+                      or just drag and drop
+                      <br />
+                      <span className="text-muted">+ Add at least 3 Photos</span>
+                    </div>
+                  </label>
+                </DragAndDrop>
                 <br />
-                <input type="file" id="fileUpload" onChange={this.handleChange} />
+                <input
+                  type="file"
+                  id="fileUpload"
+                  className="d-none"
+                  onChange={this.handleUpload}
+                />
               </Form>
             </Col>
 
