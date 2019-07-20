@@ -29,11 +29,6 @@ const loginFailed = error => ({
   payload: error,
 });
 
-export const existingEmail = error => ({
-  type: actionTypes.EXISTING_EMAIL,
-  payload: error,
-});
-
 const signOutRequested = () => ({
   type: actionTypes.FETCH_SIGNOUT_REQUEST,
 });
@@ -45,6 +40,23 @@ const signOutSucceed = () => ({
 const signOutFailed = error => ({
   type: actionTypes.FETCH_SIGNOUT_FAILURE,
   payload: error,
+});
+
+const emailStatusRequested = () => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_REQUEST,
+});
+
+const emailStatusSucceed = () => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_SUCCESS,
+});
+
+const emailStatusFailed = error => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_FAILURE,
+  payload: error,
+});
+
+export const resetError = () => ({
+  type: actionTypes.RESET_ERROR,
 });
 
 export const fetchSignUp = dispatch => async (register, body) => {
@@ -84,6 +96,15 @@ export const fetchSignOut = dispatch => async service => {
   }
 };
 
-export const resetError = () => ({
-  type: actionTypes.RESET_ERROR,
-});
+export const fetchEmailStatus = dispatch => async (body, checkEmail) => {
+  dispatch(emailStatusRequested());
+
+  try {
+    await checkEmail(body);
+    dispatch(emailStatusSucceed());
+    return true;
+  } catch (error) {
+    dispatch(emailStatusFailed(error.response.data.message));
+    return false;
+  }
+};

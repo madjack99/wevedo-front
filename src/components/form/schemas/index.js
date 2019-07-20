@@ -40,7 +40,8 @@ export const SecondStepSignUpBusinessScheme = Yup.object().shape({
     .email()
     .required('email is required!'),
   phoneNumber: Yup.string()
-    .matches(phoneRegex, 'number is not valid'),
+    .matches(phoneRegex, 'number is not valid')
+    .required('phone number is required!'),
   postcode: Yup.string()
     .required('postcode is required'),
   address: Yup.string()

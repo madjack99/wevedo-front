@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
-import { Redirect, Link } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import {
   Form, FormGroup, Button,
@@ -10,13 +11,11 @@ import {
 
 import '../../../form.scss';
 
-import {
-  fetchSignUp, fetchLogin, existingEmail,
-} from '../../../../../actions';
+import { updateUser } from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, error, categories,
+  isLoggedIn, categories, updateUser, history,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -26,19 +25,27 @@ const FirstStepSignUpBusinessForm = ({
     <Formik
       className="form"
       initialValues={{
-        username: '',
-        password: '',
-        confirmPassword: '',
-        name: '',
-        category: categories[0],
-        website: '',
+        username: 'RukkiesMan',
+        password: '123456',
+        confirmPassword: '123456',
+        name: 'PavelCo',
+        category: 'Media',
+        website: 'https://pavel.co',
       }}
       onSubmit={async ({
-        username, password, confirmPassword, name, category, website,
+        username, password, name, category, website,
       }, { setSubmitting }) => {
         setSubmitting(false);
 
-        // save data to redux
+        updateUser()({
+          username,
+          password,
+          name,
+          category,
+          website,
+        });
+
+        history.push('/business-signup-2');
       }}
       validationSchema={FirstStepSignUpBusinessScheme}
       render={({
@@ -50,9 +57,6 @@ const FirstStepSignUpBusinessForm = ({
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <div className="form__error text-center my-3">
-            <span>{error}</span>
-          </div>
           <Form.Group className="mb-5" controlId="formUsername">
             <Form.Label className="form__label mb-0">Username</Form.Label>
             <Form.Control
@@ -89,7 +93,7 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Label className="form__label mb-0">Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              name="confirm-password"
+              name="confirmPassword"
               value={values.confirmPassword}
               onChange={handleChange}
               isValid={values.confirmPassword && !errors.confirmPassword}
@@ -130,7 +134,7 @@ const FirstStepSignUpBusinessForm = ({
               isInvalid={touched.category && !!errors.category}
               autoComplete="new-category"
             >
-              <option defaultValue />
+              <option disabled />
               {
                 categories.map(({ _id: id, name }) => (
                   <option key={id}>{name}</option>
@@ -169,14 +173,6 @@ const FirstStepSignUpBusinessForm = ({
               Next step
             </Button>
           </FormGroup>
-
-          <div className="form__question text-center mt-5">
-            <span>
-              Already have an account?
-              {' '}
-              <Link className="text-wevedo" to="/business-login">Login</Link>
-            </span>
-          </div>
         </Form>
       )}
     />
@@ -189,9 +185,11 @@ const mapStateToProps = ({ sessionData, categoryList }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signUp: fetchSignUp(dispatch),
-  login: fetchLogin(dispatch),
-  statusEmail: error => dispatch(existingEmail(error)),
+  updateUser: updateUser(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FirstStepSignUpBusinessForm);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(
+    FirstStepSignUpBusinessForm,
+  ),
+);

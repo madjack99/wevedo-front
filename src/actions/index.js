@@ -1,10 +1,16 @@
 import {
   fetchSignUp,
   fetchLogin,
-  existingEmail,
   fetchSignOut,
+  fetchEmailStatus,
   resetError,
 } from './auth-actions';
+
+import {
+  fetchUser,
+  updateUser,
+  removeUser,
+} from './user-actions';
 
 import {
   fetchCategories,
@@ -13,8 +19,11 @@ import {
 export {
   fetchSignUp,
   fetchLogin,
-  existingEmail,
   fetchSignOut,
-  fetchCategories,
+  fetchEmailStatus,
   resetError,
+  fetchUser,
+  updateUser,
+  removeUser,
+  fetchCategories,
 };
