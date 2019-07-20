@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import {
   Container, Row, Col, Button, Form, Image,
 } from 'react-bootstrap';
+
+import DragAndDrop from './DragAndDrop';
 import Logo from '../../assets/images/symbol.png';
 import './imgUpload.scss';
 
@@ -11,9 +13,16 @@ class ImgUpload extends React.Component {
     files: [],
   };
 
-  handleChange = e => {
+  handleUpload = e => {
     const newImg = e.target.files[0];
-    this.setState({ files: [...this.state.files, URL.createObjectURL(newImg)] });
+    if (newImg) {
+      this.setState({ files: [...this.state.files, URL.createObjectURL(newImg)] });
+    }
+  };
+
+  handleDrop = files => {
+    const droppedImgs = files.map(img => URL.createObjectURL(img));
+    this.setState({ files: [...this.state.files, ...droppedImgs] });
   };
 
   render() {
@@ -39,20 +48,22 @@ class ImgUpload extends React.Component {
               className={`d-flex mt-2 bg-info rounded text-center customBorder ${customClassName}`}
             >
               <Form className="m-auto">
-                <label htmlFor="fileUpload">
-                  <div>
-                    <span className="font-weight-bold">Upload photos </span>
-                    or just drag and drop box
-                    <br />
-                    <span className="text-muted">+ Add at least 3 Photos</span>
-                  </div>
-                </label>
+                <DragAndDrop handleDrop={this.handleDrop}>
+                  <label htmlFor="fileUpload">
+                    <div className="p-5">
+                      <span className="font-weight-bold">Upload photos </span>
+                      or just drag and drop
+                      <br />
+                      <span className="text-muted">+ Add at least 3 Photos</span>
+                    </div>
+                  </label>
+                </DragAndDrop>
                 <br />
                 <input
                   type="file"
                   id="fileUpload"
                   className="d-none"
-                  onChange={this.handleChange}
+                  onChange={this.handleUpload}
                 />
               </Form>
             </Col>
