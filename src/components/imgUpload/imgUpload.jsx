@@ -24,6 +24,12 @@ class ImgUpload extends React.Component {
     this.setState({ files: [...this.state.files, ...droppedImgs] });
   };
 
+  handleDelete = index => {
+    const { files } = this.state;
+    const filteredImgs = files.filter(img => files.indexOf(img) !== index);
+    this.setState({ files: filteredImgs });
+  };
+
   render() {
     const { files } = this.state;
     const customClassName = files.length
@@ -71,7 +77,12 @@ class ImgUpload extends React.Component {
 
             {files
               ? files.map((src, i) => (
-                <Col sm={4} key={i} className="position-relative">
+                <Col
+                  sm={4}
+                  key={i}
+                  className="position-relative"
+                  onClick={() => this.handleDelete(i)}
+                >
                   <h3 className="delete-icon">&times;</h3>
                   <Image src={src} alt="new img" fluid />
                 </Col>
