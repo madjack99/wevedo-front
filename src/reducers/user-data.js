@@ -24,6 +24,24 @@ const updateUserData = (state, action) => {
         user: {},
         userError: action.payload,
       };
+    case actionTypes.UPDATE_USER_REQUEST:
+      return {
+        ...state.userData,
+        userError: null,
+      };
+    case actionTypes.UPDATE_USER_SUCCESS:
+      return {
+        user: {
+          ...state.userData.user,
+          ...action.payload,
+        },
+        userError: null,
+      };
+    case actionTypes.UPDATE_USER_FAILURE:
+      return {
+        ...state.userData,
+        userError: action.payload,
+      };
     case actionTypes.REMOVE_USER:
       return {
         user: {},

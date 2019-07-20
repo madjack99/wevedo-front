@@ -8,6 +8,7 @@ import {
 
 import {
   fetchUser,
+  updateUser,
   removeUser,
 } from './user-actions';
 
@@ -22,6 +23,7 @@ export {
   fetchEmailStatus,
   resetError,
   fetchUser,
+  updateUser,
   removeUser,
   fetchCategories,
 };
