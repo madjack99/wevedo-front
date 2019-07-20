@@ -34,9 +34,7 @@ const FirstStepSignUpBusinessForm = ({
       }}
       onSubmit={async ({
         username, password, name, category, website,
-      }, { setSubmitting }) => {
-        setSubmitting(false);
-
+      }) => {
         updateUser()({
           username,
           password,

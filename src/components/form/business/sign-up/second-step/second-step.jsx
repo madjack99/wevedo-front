@@ -38,8 +38,6 @@ const SecondStepSignUpBusinessForm = ({
       onSubmit={async ({
         email, phoneNumber, postcode, address, townOrCity, country,
       }, { setSubmitting, setErrors }) => {
-        setSubmitting(false);
-
         const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
         if (isNewEmail) {
@@ -55,6 +53,7 @@ const SecondStepSignUpBusinessForm = ({
           return history.push('/'); // TO-DO: add route to load images
         }
 
+        setSubmitting(false);
         return setErrors({ email: 'email is already in use' });
       }}
       validationSchema={SecondStepSignUpBusinessScheme}

@@ -78,8 +78,6 @@ const SignUpUserForm = ({
           password: '',
         }}
         onSubmit={async ({ email, password }, { setSubmitting, setErrors }) => {
-          setSubmitting(false);
-
           const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
           if (isNewEmail) {
@@ -93,6 +91,7 @@ const SignUpUserForm = ({
             return login(wevedoService.login, body);
           }
 
+          setSubmitting(false);
           return setErrors({ email: 'email is already in use' });
         }}
         validationSchema={userFormSchema}

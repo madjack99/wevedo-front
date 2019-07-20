@@ -78,7 +78,6 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          setSubmitting(false);
           const isLoginSuccessful = await login(wevedoService.login, {
             email: values.email,
             password: values.password,
@@ -90,6 +89,8 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
               email: 'wrong credentials',
               password: 'wrong credentials',
             });
+
+            setSubmitting(false);
           }
         }}
         validationSchema={userFormSchema}
