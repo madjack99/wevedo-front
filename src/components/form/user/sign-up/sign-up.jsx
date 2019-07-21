@@ -107,6 +107,7 @@ const SignUpUserForm = ({
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">Email Address</Form.Label>
               <Form.Control
+                className="form__control"
                 type="email"
                 name="email"
                 value={values.email}
@@ -123,6 +124,7 @@ const SignUpUserForm = ({
             <Form.Group controlId="formPassword">
               <Form.Label className="form__label mb-0">Password</Form.Label>
               <Form.Control
+                className="form__control"
                 type="password"
                 name="password"
                 value={values.password}

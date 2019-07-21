@@ -69,6 +69,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formEmail">
             <Form.Label className="form__label mb-0">Business Email</Form.Label>
             <Form.Control
+              className="form__control"
               type="email"
               name="email"
               value={values.email}
@@ -85,6 +86,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formPhoneNumber">
             <Form.Label className="form__label mb-0">Business Phone Number</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="phoneNumber"
               value={values.phoneNumber}
@@ -101,6 +103,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formPostcode">
             <Form.Label className="form__label mb-0">Your postcode</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="postcode"
               value={values.postcode}
@@ -117,6 +120,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formAddress">
             <Form.Label className="form__label mb-0">Business Address</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="address"
               value={values.address}
@@ -133,6 +137,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formTownOrCity">
             <Form.Label className="form__label mb-0">Town/City</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="townOrCity"
               value={values.townOrCity}
@@ -149,6 +154,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formCountry">
             <Form.Label className="form__label mb-0">Country</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="country"
               value={values.country}
