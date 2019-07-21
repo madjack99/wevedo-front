@@ -34,6 +34,10 @@
     border-radius: 0;
   }
 
+  &__textarea {
+    resize: none;
+  }
+
   &__check {
     font: 0.8rem 'Proxima Nova', sans-serif;
     color: $tertiary;
