@@ -29,7 +29,7 @@ export default function SupplierList({ history, match }) {
           providers: newProviders,
           numberOfProviders: newNumberOfProviders,
         },
-      } = await wevedoService.getProvidersByFilters(supplierName);
+      } = await wevedoService.getProvidersByFilters(supplierName, currentPage);
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);

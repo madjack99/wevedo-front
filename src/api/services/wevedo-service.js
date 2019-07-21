@@ -14,7 +14,7 @@ export default class WevedoService extends ApiBase {
     this.updateProfile = async body => this.update('users/me', body);
 
     this.getCategories = () => this.get('categories');
-    this.getProvidersByFilters = category => this.get(`providers/by-category/${category}`);
+    this.getProvidersByFilters = (category, page) => this.get(`providers/by-category/${category}?page=${page}`);
     this.getSupplierById = id => this.get(`providers/${id}`);
   }
 }
