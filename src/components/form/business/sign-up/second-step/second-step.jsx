@@ -50,7 +50,7 @@ const SecondStepSignUpBusinessForm = ({
             country,
           });
 
-          return history.push('/'); // TO-DO: add route to load images
+          return history.push('/service-info'); // TO-DO: add route to load images
         }
 
         setSubmitting(false);

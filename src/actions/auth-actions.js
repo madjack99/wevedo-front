@@ -65,8 +65,10 @@ export const fetchSignUp = dispatch => async (register, body) => {
   try {
     await register(body);
     dispatch(signUpSucceed());
+    return true;
   } catch (error) {
     dispatch(signUpFailed(error.response.data.message));
+    return false;
   }
 };
 

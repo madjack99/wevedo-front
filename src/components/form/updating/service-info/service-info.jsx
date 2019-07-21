@@ -12,19 +12,18 @@ import {
 import '../../form.scss';
 import '../updating-form.scss';
 
-import { updateUser } from '../../../../actions';
+import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { ServiceInfoScheme } from '../../schemas';
 
 const ServiceInfoUpdatingForm = ({
-  user, isLoggedIn, updateUser, history,
+  user, isLoggedIn, login, signUp, history,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
-  // TO-DO: Uncomment this later
-  // if (!user.isProvider) {
-  //   return <Redirect to="/" />;
-  // }
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Formik
@@ -38,28 +37,24 @@ const ServiceInfoUpdatingForm = ({
       onSubmit={async ({
         description, minPrice, maxPrice, facilities,
       }, { setSubmitting }) => {
-        if (isLoggedIn) {
-          const isUpdatedUser = updateUser(wevedoService.updateProfile)({
-            description,
-            minPrice,
-            maxPrice,
-            facilities,
-          });
-
-          if (isUpdatedUser) {
-            return history.push('/');
-          }
-          return setSubmitting(false);
-        }
-
-        updateUser()({
+        const body = {
+          ...user,
           description,
           minPrice,
           maxPrice,
           facilities,
-        });
+          isProvider: true,
+          deviceOS: 'android', // TO-DO: 'web' should be later
+        };
 
-        return history.push('/service-info');
+        const isRegisterSuccessful = await signUp(wevedoService.register, body);
+
+        if (isRegisterSuccessful) {
+          await login(wevedoService.login, body);
+          return history.push('/');
+        }
+
+        return setSubmitting(false);
       }}
       validationSchema={ServiceInfoScheme}
       render={({
@@ -164,7 +159,8 @@ const mapStateToProps = ({ sessionData, userData }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: updateUser(dispatch),
+  login: fetchLogin(dispatch),
+  signUp: fetchSignUp(dispatch),
 });
 
 export default withRouter(
