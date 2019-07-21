@@ -63,12 +63,12 @@ export const fetchSignUp = dispatch => async (register, body) => {
   dispatch(signUpRequested());
 
   try {
-    await register(body);
+    const { data } = await register(body);
     dispatch(signUpSucceed());
-    return true;
+    return data;
   } catch (error) {
     dispatch(signUpFailed(error.response.data.message));
-    return false;
+    return null;
   }
 };
 
@@ -80,10 +80,10 @@ export const fetchLogin = dispatch => async (login, body) => {
     console.log(`ENTERED. TOKEN: ${token}`);
     Cookies.set('token', token);
     dispatch(loginSucceed(token));
-    return true;
+    return token;
   } catch (error) {
     dispatch(loginFailed(error.response.data.message));
-    return false;
+    return null;
   }
 };
 
@@ -91,12 +91,14 @@ export const fetchSignOut = dispatch => async service => {
   dispatch(signOutRequested());
 
   try {
-    const { data: { status } } = await service.signOut();
+    const { data, data: { status } } = await service.signOut();
     console.log(`IS EXIT: ${status}`);
     Cookies.remove('token');
     dispatch(signOutSucceed());
+    return data;
   } catch (error) {
     dispatch(signOutFailed(error));
+    return null;
   }
 };
 
@@ -104,11 +106,11 @@ export const fetchEmailStatus = dispatch => async (body, checkEmail) => {
   dispatch(emailStatusRequested());
 
   try {
-    await checkEmail(body);
+    const { data } = await checkEmail(body);
     dispatch(emailStatusSucceed());
-    return true;
+    return data;
   } catch (error) {
     dispatch(emailStatusFailed(error.response.data.message));
-    return false;
+    return null;
   }
 };

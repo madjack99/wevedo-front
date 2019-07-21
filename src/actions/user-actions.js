@@ -33,6 +33,7 @@ export const fetchUser = dispatch => async getProfile => {
 
   try {
     const { data: user } = await getProfile();
+    console.log('USER: ', user);
     dispatch(userSucceed(user));
   } catch (error) {
     dispatch(userFailed(error));
@@ -48,12 +49,12 @@ export const updateUser = dispatch => update => async body => {
   }
 
   try {
-    await update(body);
+    const { data } = await update(body);
     dispatch(updateUserSucceed(body));
-    return true;
+    return data;
   } catch (error) {
     dispatch(updateUserFailed(error));
-    return false;
+    return null;
   }
 };
 
