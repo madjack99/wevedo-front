@@ -18,7 +18,7 @@ import Terms from '../pages/terms-and-conditions';
 import Privacy from '../pages/privacy';
 import Pricing from '../pricing';
 import BusinessLogin from '../business-login';
-import ImgUpload from '../imgUpload';
+import ImgUpload from '../form/imgUpload';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
@@ -40,7 +40,6 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
     )}
   />
 );
-
 
 const App = ({
   isLoggedIn, getUser, removeUser, getCategories,
