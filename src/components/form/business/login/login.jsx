@@ -1,0 +1,145 @@
+import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+
+import { Formik } from 'formik';
+import { Redirect, Link } from 'react-router-dom';
+
+import {
+  Row, Col, Form, Button, FormGroup,
+} from 'react-bootstrap';
+
+import '../../form.scss';
+
+import { fetchSignUp, fetchLogin } from '../../../../actions';
+import { WevedoServiceContext } from '../../../contexts';
+import { userFormSchema } from '../../schemas';
+
+import ResetPasswordWindow from '../../../reset-password-window';
+
+const LoginUserForm = ({ login, isLoggedIn }) => {
+  const [modalShow, setModalShow] = useState(false);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
+
+  return (
+    <React.Fragment>
+      <Formik
+        className="form"
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          const loggedInUser = await login(wevedoService.login, {
+            email: values.email,
+            password: values.password,
+            deviseOS: 'android', // TO-DO: 'web' should be later
+          });
+
+          if (!loggedInUser) {
+            setErrors({
+              email: 'wrong credentials',
+              password: 'wrong credentials',
+            });
+
+            setSubmitting(false);
+          }
+        }}
+        validationSchema={userFormSchema}
+        render={({
+          handleSubmit,
+          handleChange,
+          values,
+          touched,
+          errors,
+          isSubmitting,
+        }) => (
+          <Form noValidate onSubmit={handleSubmit}>
+            <Form.Group className="mb-5" controlId="formEmail">
+              <Form.Label className="form__label mb-0">Email Address</Form.Label>
+              <Form.Control
+                className="form__control"
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                isValid={values.email && !errors.email}
+                isInvalid={touched.email && !!errors.email}
+                autoComplete="current-email"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+              <Form.Label className="form__label mb-0">Password</Form.Label>
+              <Form.Control
+                className="form__control"
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                isValid={values.password && !errors.password}
+                isInvalid={touched.password && !!errors.password}
+                autoComplete="current-password"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <FormGroup controlId="passwordActions">
+              <Row>
+                <Col>
+                  <Form.Check className="form__check mr-auto" label="Remember me" />
+                </Col>
+                <Col className="text-right">
+                  <Button
+                    bsPrefix="password-btn"
+                    onClick={() => setModalShow(true)}
+                  >
+                    Forgot password?
+                  </Button>
+                </Col>
+              </Row>
+              <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
+            </FormGroup>
+
+            <FormGroup className="text-center text-uppercase">
+              <Button
+                className="mt-4"
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                Login
+              </Button>
+            </FormGroup>
+
+            <div className="form__question text-center mt-5">
+              <span>
+                Don&apos;t have an account?
+                {' '}
+                <Link className="text-wevedo" to="/business-signup-1">Sign Up</Link>
+              </span>
+            </div>
+          </Form>
+        )}
+      />
+    </React.Fragment>
+  );
+};
+
+const mapStateToProps = ({ sessionData }) => sessionData;
+
+const mapDispatchToProps = dispatch => ({
+  signUp: fetchSignUp(dispatch),
+  login: fetchLogin(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);
