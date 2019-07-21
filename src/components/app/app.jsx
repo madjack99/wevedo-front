@@ -23,6 +23,7 @@ import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
 import ScreensBusinessSignUpSecondStep from '../../screens/business/sign-up/second-step';
+import ScreensUpdatingServiceInfo from '../../screens/updating/service-info';
 
 import { fetchUser, removeUser, fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../contexts';
@@ -76,6 +77,7 @@ const App = ({
         <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
         <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
         <Route path="/businesssignup-step1" component={ImgUpload} />
+        <Route path="/service-info" component={ScreensUpdatingServiceInfo} />
       </Switch>
     </React.Fragment>
   );
