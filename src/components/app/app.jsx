@@ -17,10 +17,10 @@ import Contact from '../pages/contact';
 import Terms from '../pages/terms-and-conditions';
 import Privacy from '../pages/privacy';
 import Pricing from '../pricing';
-import BusinessLogin from '../business-login';
 import ImgUpload from '../form/imgUpload';
 import ScreensUserSignUp from '../../screens/user/sign-up';
 import ScreensUserLogin from '../../screens/user/login';
+import ScreensBusinessLogin from '../../screens/business/login';
 import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
 import ScreensBusinessSignUpSecondStep from '../../screens/business/sign-up/second-step';
 import ScreensUpdatingServiceInfo from '../../screens/updating/service-info';
@@ -72,7 +72,7 @@ const App = ({
         <Route path="/login" component={ScreensUserLogin} />
         <Route path="/signup" component={ScreensUserSignUp} />
         <Route path="/pricing" component={Pricing} />
-        <Route path="/business-login" component={BusinessLogin} />
+        <Route path="/business-login" component={ScreensBusinessLogin} />
         <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
         <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
         <Route path="/businesssignup-step1" component={ImgUpload} />
