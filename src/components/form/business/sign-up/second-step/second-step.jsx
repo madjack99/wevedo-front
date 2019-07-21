@@ -16,7 +16,7 @@ import { WevedoServiceContext } from '../../../../contexts';
 import { SecondStepSignUpBusinessScheme } from '../../../schemas';
 
 const SecondStepSignUpBusinessForm = ({
-  isLoggedIn, error, updateUser, emailStatus, history,
+  isLoggedIn, updateUser, emailStatus, history,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -37,9 +37,7 @@ const SecondStepSignUpBusinessForm = ({
       }}
       onSubmit={async ({
         email, phoneNumber, postcode, address, townOrCity, country,
-      }, { setSubmitting }) => {
-        setSubmitting(false);
-
+      }, { setSubmitting, setErrors }) => {
         const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
         if (isNewEmail) {
@@ -52,8 +50,11 @@ const SecondStepSignUpBusinessForm = ({
             country,
           });
 
-          history.push('/'); // TO-DO: add route to load images
+          return history.push('/service-info'); // TO-DO: add route to load images
         }
+
+        setSubmitting(false);
+        return setErrors({ email: 'email is already in use' });
       }}
       validationSchema={SecondStepSignUpBusinessScheme}
       render={({
@@ -65,12 +66,10 @@ const SecondStepSignUpBusinessForm = ({
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <div className="form__error text-center my-3">
-            <span>{error}</span>
-          </div>
           <Form.Group className="mb-5" controlId="formEmail">
             <Form.Label className="form__label mb-0">Business Email</Form.Label>
             <Form.Control
+              className="form__control"
               type="email"
               name="email"
               value={values.email}
@@ -87,6 +86,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formPhoneNumber">
             <Form.Label className="form__label mb-0">Business Phone Number</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="phoneNumber"
               value={values.phoneNumber}
@@ -103,6 +103,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formPostcode">
             <Form.Label className="form__label mb-0">Your postcode</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="postcode"
               value={values.postcode}
@@ -119,6 +120,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formAddress">
             <Form.Label className="form__label mb-0">Business Address</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="address"
               value={values.address}
@@ -135,6 +137,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formTownOrCity">
             <Form.Label className="form__label mb-0">Town/City</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="townOrCity"
               value={values.townOrCity}
@@ -151,6 +154,7 @@ const SecondStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formCountry">
             <Form.Label className="form__label mb-0">Country</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="country"
               value={values.country}

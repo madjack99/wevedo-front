@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
@@ -10,30 +10,15 @@ import {
 
 import '../../form.scss';
 
-import config from '../../../../config';
-
-import {
-  fetchSignUp, fetchLogin, fetchEmailStatus, resetError,
-} from '../../../../actions';
+import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
-import SocialButton from '../../../social-button';
 
-const SignUpUserForm = ({
-  signUp, login, emailStatus, cleanForm, isLoggedIn,
-}) => {
+import ResetPasswordWindow from '../../../reset-password-window';
+
+const LoginUserForm = ({ login, isLoggedIn }) => {
+  const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
-
-  useEffect(() => {
-    cleanForm();
-  }, [cleanForm]);
-
-  const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
-    login(wevedoService.socialLogin, {
-      ...profile,
-      provider,
-    });
-  };
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -41,58 +26,27 @@ const SignUpUserForm = ({
 
   return (
     <React.Fragment>
-      <Row>
-        <Col md={6}>
-          <SocialButton
-            bsPrefix="social-btn"
-            variant="facebook"
-            provider="facebook"
-            appId={config.facebookAppId}
-            onLoginSuccess={handleSocialSignUp}
-          >
-            <i className="fab fa-facebook-f mr-3" />
-            {' Register with Facebook'}
-          </SocialButton>
-        </Col>
-        <Col md={6}>
-          <SocialButton
-            bsPrefix="social-btn"
-            variant="google"
-            provider="google"
-            appId={config.googleAppId}
-            onLoginSuccess={handleSocialSignUp}
-          >
-            <i className="fab fa-google mr-3" />
-            {' Register with Google'}
-          </SocialButton>
-        </Col>
-      </Row>
-
-      <div className="form__divider text-center m-5">
-        <span>OR</span>
-      </div>
       <Formik
         className="form"
         initialValues={{
           email: '',
           password: '',
         }}
-        onSubmit={async ({ email, password }, { setSubmitting, setErrors }) => {
-          const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          const loggedInUser = await login(wevedoService.login, {
+            email: values.email,
+            password: values.password,
+            deviseOS: 'android', // TO-DO: 'web' should be later
+          });
 
-          if (isNewEmail) {
-            const body = {
-              email,
-              password,
-              deviceOS: 'android', // TO-DO: 'web' should be later
-            };
+          if (!loggedInUser) {
+            setErrors({
+              email: 'wrong credentials',
+              password: 'wrong credentials',
+            });
 
-            await signUp(wevedoService.register, body);
-            return login(wevedoService.login, body);
+            setSubmitting(false);
           }
-
-          setSubmitting(false);
-          return setErrors({ email: 'email is already in use' });
         }}
         validationSchema={userFormSchema}
         render={({
@@ -114,7 +68,7 @@ const SignUpUserForm = ({
                 onChange={handleChange}
                 isValid={values.email && !errors.email}
                 isInvalid={touched.email && !!errors.email}
-                autoComplete="new-email"
+                autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.email}
@@ -131,15 +85,28 @@ const SignUpUserForm = ({
                 onChange={handleChange}
                 isValid={values.password && !errors.password}
                 isInvalid={touched.password && !!errors.password}
-                autoComplete="new-password"
+                autoComplete="current-password"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
 
-            <FormGroup>
-              <Form.Check className="form__check mr-auto" label="Remember me" />
+            <FormGroup controlId="passwordActions">
+              <Row>
+                <Col>
+                  <Form.Check className="form__check mr-auto" label="Remember me" />
+                </Col>
+                <Col className="text-right">
+                  <Button
+                    bsPrefix="password-btn"
+                    onClick={() => setModalShow(true)}
+                  >
+                    Forgot password?
+                  </Button>
+                </Col>
+              </Row>
+              <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -150,15 +117,15 @@ const SignUpUserForm = ({
                 size="lg"
                 disabled={isSubmitting}
               >
-                Sign up
+                Login
               </Button>
             </FormGroup>
 
             <div className="form__question text-center mt-5">
               <span>
-                Already have an account?
+                Don&apos;t have an account?
                 {' '}
-                <Link className="text-wevedo" to="/login">Login</Link>
+                <Link className="text-wevedo" to="/business-signup-1">Sign Up</Link>
               </span>
             </div>
           </Form>
@@ -173,8 +140,6 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
-  emailStatus: fetchEmailStatus(dispatch),
-  cleanForm: () => dispatch(resetError()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpUserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);

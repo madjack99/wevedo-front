@@ -34,9 +34,7 @@ const FirstStepSignUpBusinessForm = ({
       }}
       onSubmit={async ({
         username, password, name, category, website,
-      }, { setSubmitting }) => {
-        setSubmitting(false);
-
+      }) => {
         updateUser()({
           username,
           password,
@@ -60,6 +58,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formUsername">
             <Form.Label className="form__label mb-0">Username</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="username"
               value={values.username}
@@ -76,6 +75,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formPassword">
             <Form.Label className="form__label mb-0">Password</Form.Label>
             <Form.Control
+              className="form__control"
               type="password"
               name="password"
               value={values.password}
@@ -92,6 +92,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formConfirmPassword">
             <Form.Label className="form__label mb-0">Confirm Password</Form.Label>
             <Form.Control
+              className="form__control"
               type="password"
               name="confirmPassword"
               value={values.confirmPassword}
@@ -108,6 +109,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formName">
             <Form.Label className="form__label mb-0">Business Name</Form.Label>
             <Form.Control
+              className="form__control"
               type="text"
               name="name"
               value={values.name}
@@ -124,7 +126,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formCategory">
             <Form.Label className="form__label mb-0">Select Category</Form.Label>
             <Form.Control
-              className="first-step__dropdown"
+              className="form__control first-step__dropdown"
               type="text"
               name="category"
               as="select"
@@ -149,6 +151,7 @@ const FirstStepSignUpBusinessForm = ({
           <Form.Group className="mb-5" controlId="formWebsite">
             <Form.Label className="form__label mb-0">Business Website</Form.Label>
             <Form.Control
+              className="form__control"
               type="url"
               name="website"
               value={values.website}

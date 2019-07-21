@@ -28,6 +28,16 @@
     color: $tertiary;
   }
 
+  &__control {
+    border: 0;
+		border-bottom: 1px solid $form-border-color;
+    border-radius: 0;
+  }
+
+  &__textarea {
+    resize: none;
+  }
+
   &__check {
     font: 0.8rem 'Proxima Nova', sans-serif;
     color: $tertiary;

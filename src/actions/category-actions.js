@@ -21,7 +21,9 @@ export const fetchCategories = dispatch => async getCategories => {
   try {
     const { data: categories } = await getCategories();
     dispatch(categoriesSucceed(categories));
+    return categories;
   } catch (error) {
     dispatch(categoriesFailed());
+    return null;
   }
 };

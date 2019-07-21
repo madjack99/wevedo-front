@@ -33,6 +33,7 @@ export const fetchUser = dispatch => async getProfile => {
 
   try {
     const { data: user } = await getProfile();
+    console.log('USER: ', user);
     dispatch(userSucceed(user));
   } catch (error) {
     dispatch(userFailed(error));
@@ -43,14 +44,17 @@ export const updateUser = dispatch => update => async body => {
   dispatch(updateUserRequested());
 
   if (!update) {
-    return dispatch(updateUserSucceed(body));
+    dispatch(updateUserSucceed(body));
+    return true;
   }
 
   try {
-    await update(body);
-    return dispatch(updateUserSucceed(body));
+    const { data } = await update(body);
+    dispatch(updateUserSucceed(body));
+    return data;
   } catch (error) {
-    return dispatch(updateUserFailed(error));
+    dispatch(updateUserFailed(error));
+    return null;
   }
 };
 
