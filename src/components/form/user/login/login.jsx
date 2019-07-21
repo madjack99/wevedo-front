@@ -18,6 +18,7 @@ import { userFormSchema } from '../../schemas';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
+import RememberMe from '../../../ui/rememberMe';
 
 const LoginUserForm = ({
   login, cleanForm, isLoggedIn, error,
@@ -89,12 +90,7 @@ const LoginUserForm = ({
         }}
         validationSchema={userFormSchema}
         render={({
-          handleSubmit,
-          handleChange,
-          values,
-          touched,
-          errors,
-          isSubmitting,
+          handleSubmit, handleChange, values, touched, errors, isSubmitting,
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <div className="form__error text-center my-3">
@@ -135,13 +131,11 @@ const LoginUserForm = ({
             <FormGroup controlId="passwordActions">
               <Row>
                 <Col>
-                  <Form.Check className="form__check mr-auto" label="Remember me" />
+                  {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
+                  <RememberMe />
                 </Col>
                 <Col className="text-right">
-                  <Button
-                    bsPrefix="password-btn"
-                    onClick={() => setModalShow(true)}
-                  >
+                  <Button bsPrefix="password-btn" onClick={() => setModalShow(true)}>
                     Forgot password?
                   </Button>
                 </Col>
@@ -165,7 +159,9 @@ const LoginUserForm = ({
               <span>
                 Don&apos;t have an account?
                 {' '}
-                <Link className="text-wevedo" to="/signup">Sign Up</Link>
+                <Link className="text-wevedo" to="/signup">
+                  Sign Up
+                </Link>
               </span>
             </div>
           </Form>
@@ -183,4 +179,7 @@ const mapDispatchToProps = dispatch => ({
   cleanForm: () => dispatch(resetError()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginUserForm);
