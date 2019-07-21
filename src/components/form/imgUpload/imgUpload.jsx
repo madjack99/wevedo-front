@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
-  Container, Row, Col, Button, Form, Image,
+  Container, Row, Col, Button, Form, Image, Alert,
 } from 'react-bootstrap';
 
+import { updateUser } from '../../../actions/user-actions';
 import Logo from '../../../assets/images/symbol.png';
 import './imgUpload.scss';
 
 class ImgUpload extends React.Component {
   state = {
     files: [],
+    errorMsg: null,
   };
 
   handleUpload = e => {
@@ -30,7 +33,23 @@ class ImgUpload extends React.Component {
     this.setState({ files: filteredImgs });
   };
 
+  handleNextStep = () => {
+    const { updateUser } = this.props;
+    const { files } = this.state;
+    if (files.length < 3) {
+      this.setState({ errorMsg: 'Please, provide at least 3 photos.' });
+    } else {
+      const photoObject = files.reduce((acc, photo, index) => {
+        acc[index] = photo;
+        return acc;
+      }, {});
+      updateUser(photoObject);
+      this.props.history.push('/businesssignup-step2');
+    }
+  };
+
   render() {
+    const { errorMsg } = this.state;
     const { files } = this.state;
     const customClassName = files.length
       ? 'custom-height-with-photos'
@@ -90,7 +109,12 @@ class ImgUpload extends React.Component {
               : null}
 
             <Col sm={12} className="text-right text-uppercase mt-2 mb-4">
-              <Button href="/businesssignup-step2" size="lg">
+              {errorMsg && (
+                <Alert className="text-center" variant="danger">
+                  {errorMsg}
+                </Alert>
+              )}
+              <Button size="lg" onClick={this.handleNextStep}>
                 Next step
                 <i className="fa fa-arrow-right" />
               </Button>
@@ -174,4 +198,11 @@ class DragAndDrop extends Component {
   }
 }
 
-export default ImgUpload;
+const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ImgUpload);
