@@ -43,14 +43,17 @@ export const updateUser = dispatch => update => async body => {
   dispatch(updateUserRequested());
 
   if (!update) {
-    return dispatch(updateUserSucceed(body));
+    dispatch(updateUserSucceed(body));
+    return true;
   }
 
   try {
     await update(body);
-    return dispatch(updateUserSucceed(body));
+    dispatch(updateUserSucceed(body));
+    return true;
   } catch (error) {
-    return dispatch(updateUserFailed(error));
+    dispatch(updateUserFailed(error));
+    return false;
   }
 };
 
