@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
@@ -15,7 +16,9 @@ import { updateUser } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { ServiceInfoScheme } from '../../schemas';
 
-const ServiceInfoUpdatingForm = ({ user, isLoggedIn, history }) => {
+const ServiceInfoUpdatingForm = ({
+  user, isLoggedIn, updateUser, history,
+}) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   // TO-DO: Uncomment this later
@@ -56,7 +59,7 @@ const ServiceInfoUpdatingForm = ({ user, isLoggedIn, history }) => {
           facilities,
         });
 
-        return history.push('/');
+        return history.push('/service-info');
       }}
       validationSchema={ServiceInfoScheme}
       render={({
