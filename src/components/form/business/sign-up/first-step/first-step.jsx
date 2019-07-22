@@ -28,17 +28,17 @@ const FirstStepSignUpBusinessForm = ({
         username: 'RukkiesMan',
         password: '123456',
         confirmPassword: '123456',
-        name: 'PavelCo',
+        fullname: 'PavelCo',
         categories: 'Media',
         website: 'https://pavel.co',
       }}
       onSubmit={async ({
-        username, password, name, categories, website,
+        username, password, fullname, categories, website,
       }) => {
         updateUser()({
           username,
           password,
-          name,
+          fullname,
           categories,
           website,
         });
@@ -111,15 +111,15 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Control
               className="form__control"
               type="text"
-              name="name"
-              value={values.name}
+              name="fullname"
+              value={values.fullname}
               onChange={handleChange}
-              isValid={values.name && !errors.name}
-              isInvalid={touched.name && !!errors.name}
-              autoComplete="new-name"
+              isValid={values.fullname && !errors.fullname}
+              isInvalid={touched.fullname && !!errors.fullname}
+              autoComplete="new-fullname"
             />
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.name}
+              {errors.fullname}
             </Form.Control.Feedback>
           </Form.Group>
 

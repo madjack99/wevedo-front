@@ -24,7 +24,7 @@ export const FirstStepSignUpBusinessScheme = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'passwords must match')
     .required('confirm password is required'),
-  name: Yup.string()
+  fullname: Yup.string()
     .min(6, 'at least 6 symbols')
     .max(50, 'maximum 50 characters')
     .required('name is required'),
