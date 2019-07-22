@@ -44,6 +44,7 @@ const ServiceInfoUpdatingForm = ({
           maxPrice,
           facilities,
           isProvider: true,
+          profileImageURL: 'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
           isApproved: true, // TO-DO: must be false before payment
           deviceOS: 'android', // TO-DO: 'web' should be later
         };
