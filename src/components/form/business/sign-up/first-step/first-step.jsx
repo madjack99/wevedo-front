@@ -15,7 +15,7 @@ import { updateUser } from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, categories, updateUser, history,
+  isLoggedIn, categories: categoryList, updateUser, history,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -28,18 +28,22 @@ const FirstStepSignUpBusinessForm = ({
         username: 'RukkiesMan',
         password: '123456',
         confirmPassword: '123456',
-        name: 'PavelCo',
-        category: 'Media',
+        fullname: 'PavelCo',
+        categories: 'Media',
         website: 'https://pavel.co',
       }}
       onSubmit={async ({
-        username, password, name, category, website,
+        username, password, fullname, categories, website,
       }) => {
+        const [firstName, lastName] = fullname.split(' ');
+
         updateUser()({
           username,
           password,
-          name,
-          category,
+          fullname,
+          firstName,
+          lastName,
+          categories: [categoryList.find(({ name }) => name === categories)],
           website,
         });
 
@@ -111,15 +115,15 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Control
               className="form__control"
               type="text"
-              name="name"
-              value={values.name}
+              name="fullname"
+              value={values.fullname}
               onChange={handleChange}
-              isValid={values.name && !errors.name}
-              isInvalid={touched.name && !!errors.name}
-              autoComplete="new-name"
+              isValid={values.fullname && !errors.fullname}
+              isInvalid={touched.fullname && !!errors.fullname}
+              autoComplete="new-fullname"
             />
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.name}
+              {errors.fullname}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -128,23 +132,23 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Control
               className="form__control first-step__dropdown"
               type="text"
-              name="category"
+              name="categories"
               as="select"
-              value={values.category}
+              value={values.categories}
               onChange={handleChange}
-              isValid={values.category && !errors.category}
-              isInvalid={touched.category && !!errors.category}
-              autoComplete="new-category"
+              isValid={values.categories && !errors.categories}
+              isInvalid={touched.categories && !!errors.categories}
+              autoComplete="new-categories"
             >
               <option disabled />
               {
-                categories.map(({ _id: id, name }) => (
+                categoryList.map(({ _id: id, name }) => (
                   <option key={id}>{name}</option>
                 ))
               }
             </Form.Control>
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.category}
+              {errors.categories}
             </Form.Control.Feedback>
           </Form.Group>
 

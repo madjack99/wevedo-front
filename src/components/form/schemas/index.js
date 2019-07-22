@@ -24,11 +24,11 @@ export const FirstStepSignUpBusinessScheme = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'passwords must match')
     .required('confirm password is required'),
-  name: Yup.string()
+  fullname: Yup.string()
     .min(6, 'at least 6 symbols')
     .max(50, 'maximum 50 characters')
     .required('name is required'),
-  category: Yup.string()
+  categories: Yup.string()
     .required('category is required'),
   website: Yup.string()
     .url('enter a valid URL')
@@ -46,14 +46,14 @@ export const SecondStepSignUpBusinessScheme = Yup.object().shape({
     .required('postcode is required'),
   address: Yup.string()
     .required('address is required'),
-  townOrCity: Yup.string()
+  regionName: Yup.string()
     .required('town/city is required'),
   country: Yup.string()
     .required('country is required'),
 });
 
 export const ServiceInfoScheme = Yup.object().shape({
-  description: Yup.string()
+  bio: Yup.string()
     .max(500, 'maximum 500 characters')
     .required('description is required'),
   minPrice: Yup.number()
