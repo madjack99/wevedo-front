@@ -75,7 +75,7 @@ const App = ({
         <Route path="/business-login" component={ScreensBusinessLogin} />
         <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
         <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
-        <Route path="/businesssignup-step1" component={ImgUpload} />
+        <Route path="/image-upload" component={ImgUpload} />
         <Route path="/service-info" component={ScreensUpdatingServiceInfo} />
       </Switch>
     </React.Fragment>
