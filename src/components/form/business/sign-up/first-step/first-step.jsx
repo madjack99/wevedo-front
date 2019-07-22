@@ -15,7 +15,7 @@ import { updateUser } from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, categories, updateUser, history,
+  isLoggedIn, categories: categoryList, updateUser, history,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -39,7 +39,7 @@ const FirstStepSignUpBusinessForm = ({
           username,
           password,
           fullname,
-          categories,
+          categories: [categoryList.find(({ name }) => name === categories)],
           website,
         });
 
@@ -138,7 +138,7 @@ const FirstStepSignUpBusinessForm = ({
             >
               <option disabled />
               {
-                categories.map(({ _id: id, name }) => (
+                categoryList.map(({ _id: id, name }) => (
                   <option key={id}>{name}</option>
                 ))
               }
