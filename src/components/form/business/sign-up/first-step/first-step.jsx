@@ -35,10 +35,14 @@ const FirstStepSignUpBusinessForm = ({
       onSubmit={async ({
         username, password, fullname, categories, website,
       }) => {
+        const [firstName, lastName] = fullname.split(' ');
+
         updateUser()({
           username,
           password,
           fullname,
+          firstName,
+          lastName,
           categories: [categoryList.find(({ name }) => name === categories)],
           website,
         });
