@@ -53,7 +53,7 @@ export const SecondStepSignUpBusinessScheme = Yup.object().shape({
 });
 
 export const ServiceInfoScheme = Yup.object().shape({
-  description: Yup.string()
+  bio: Yup.string()
     .max(500, 'maximum 500 characters')
     .required('description is required'),
   minPrice: Yup.number()

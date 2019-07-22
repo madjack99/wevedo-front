@@ -29,17 +29,17 @@ const ServiceInfoUpdatingForm = ({
     <Formik
       className="form updating-form"
       initialValues={{
-        description: 'Description',
+        bio: 'Description',
         minPrice: '100',
         maxPrice: '200',
         facilities: 'Pre wedding, Post wedding',
       }}
       onSubmit={async ({
-        description, minPrice, maxPrice, facilities,
+        bio, minPrice, maxPrice, facilities,
       }, { setSubmitting }) => {
         const body = {
           ...user,
-          description,
+          bio,
           minPrice,
           maxPrice,
           facilities,
@@ -71,16 +71,16 @@ const ServiceInfoUpdatingForm = ({
             <Form.Label className="updating-form__label">Describe your business and services</Form.Label>
             <Form.Control
               className="form__textarea updating-form__control"
-              name="description"
+              name="bio"
               as="textarea"
               rows="5"
-              value={values.description}
+              value={values.bio}
               onChange={handleChange}
-              isValid={values.description && !errors.description}
-              isInvalid={touched.description && !!errors.description}
+              isValid={values.bio && !errors.bio}
+              isInvalid={touched.bio && !!errors.bio}
             />
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.description}
+              {errors.bio}
             </Form.Control.Feedback>
           </Form.Group>
 
