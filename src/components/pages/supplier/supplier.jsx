@@ -62,7 +62,13 @@ const Supplier = ({ match }) => {
         <Row className="mt-5 mb-5">
           <Col sm={7}>
             <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
-            <b>Church Road, Clearwell, Forest of Dean Gloucestershire, GL16 8LG</b>
+            {
+              <b>
+                {
+                  `${supplier.address || ''} ${supplier.regionName || ''} ${supplier.country || ''} ${supplier.postcode || ''}
+                `}
+              </b>
+            }
             <hr className="hr-sm m-0 mt-4 mb-4" />
             <p>
               {supplier.bio}
@@ -74,7 +80,7 @@ const Supplier = ({ match }) => {
               {
                 supplier.website
                   ? (
-                    <b className="text-uppercase text-muted mb-4">
+                    <b className="text-uppercase d-block text-muted mb-4">
                       {`Website: ${supplier.website}`}
                     </b>
                   )
@@ -83,7 +89,7 @@ const Supplier = ({ match }) => {
               {
                 supplier.email
                   ? (
-                    <b className="text-uppercase text-muted mb-4">
+                    <b className="text-uppercase d-block text-muted mb-4">
                       {`Email: ${supplier.email}`}
                     </b>
                   )
@@ -92,7 +98,7 @@ const Supplier = ({ match }) => {
               {
                 supplier.phoneNumber
                   ? (
-                    <b className="text-uppercase text-muted mb-4">
+                    <b className="text-uppercase d-block text-muted mb-4">
                       {`Number: ${supplier.phoneNumber}`}
                     </b>
                   )
@@ -121,19 +127,30 @@ const Supplier = ({ match }) => {
               </Col>
               <Col sm={12}>
                 <div className="supplier-results-side-box">
-                  <div className="mb-4">
-                    <b className="text-uppercase text-muted">Budget</b>
-                    <hr className="hr-xs" />
-                    <b>$8.500 - $50.000</b>
-                  </div>
-                  <div>
-                    <b className="text-uppercase text-muted">Services</b>
-                    <hr className="hr-xs" />
-                    <b>
-                      Photography, pre wedding, post wedding, albums, mini albums, digital album,
-                      high resolution photos.
-                    </b>
-                  </div>
+                  {
+                    supplier.minPrice && supplier.maxPrice
+                      ? (
+                        <div className="mb-4">
+                          <b className="text-uppercase text-muted">Budget</b>
+                          <hr className="hr-xs" />
+                          <b>{`$${supplier.minPrice} - $${supplier.maxPrice}`}</b>
+                        </div>
+                      )
+                      : null
+                  }
+                  {
+                    supplier.facilities
+                      ? (
+                        <div>
+                          <b className="text-uppercase text-muted">Services</b>
+                          <hr className="hr-xs" />
+                          <b>
+                            {supplier.facilities}
+                          </b>
+                        </div>
+                      )
+                      : null
+                  }
                 </div>
               </Col>
             </Row>
