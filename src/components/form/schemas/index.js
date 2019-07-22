@@ -28,7 +28,7 @@ export const FirstStepSignUpBusinessScheme = Yup.object().shape({
     .min(6, 'at least 6 symbols')
     .max(50, 'maximum 50 characters')
     .required('name is required'),
-  category: Yup.string()
+  categories: Yup.string()
     .required('category is required'),
   website: Yup.string()
     .url('enter a valid URL')

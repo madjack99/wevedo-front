@@ -29,17 +29,17 @@ const FirstStepSignUpBusinessForm = ({
         password: '123456',
         confirmPassword: '123456',
         name: 'PavelCo',
-        category: 'Media',
+        categories: 'Media',
         website: 'https://pavel.co',
       }}
       onSubmit={async ({
-        username, password, name, category, website,
+        username, password, name, categories, website,
       }) => {
         updateUser()({
           username,
           password,
           name,
-          category,
+          categories,
           website,
         });
 
@@ -128,13 +128,13 @@ const FirstStepSignUpBusinessForm = ({
             <Form.Control
               className="form__control first-step__dropdown"
               type="text"
-              name="category"
+              name="categories"
               as="select"
-              value={values.category}
+              value={values.categories}
               onChange={handleChange}
-              isValid={values.category && !errors.category}
-              isInvalid={touched.category && !!errors.category}
-              autoComplete="new-category"
+              isValid={values.categories && !errors.categories}
+              isInvalid={touched.categories && !!errors.categories}
+              autoComplete="new-categories"
             >
               <option disabled />
               {
@@ -144,7 +144,7 @@ const FirstStepSignUpBusinessForm = ({
               }
             </Form.Control>
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.category}
+              {errors.categories}
             </Form.Control.Feedback>
           </Form.Group>
 
