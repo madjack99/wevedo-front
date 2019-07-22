@@ -43,7 +43,7 @@ class ImgUpload extends React.Component {
         acc[index] = photo;
         return acc;
       }, {});
-      updateUser(photoObject);
+      updateUser()(photoObject);
       this.props.history.push('/businesssignup-step2');
     }
   };
