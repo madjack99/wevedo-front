@@ -18,7 +18,7 @@ import { userFormSchema } from '../../schemas';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
-import RememberMe from '../../../ui/rememberMe';
+import Checkbox from '../../../ui/checkbox';
 
 const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -137,7 +137,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
               <Row>
                 <Col>
                   {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
-                  <RememberMe />
+                  <Checkbox labelText="Remember me" />
                 </Col>
                 <Col className="text-right">
                   <Button bsPrefix="password-btn" onClick={() => setModalShow(true)}>
