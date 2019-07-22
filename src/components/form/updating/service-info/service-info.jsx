@@ -44,6 +44,7 @@ const ServiceInfoUpdatingForm = ({
           maxPrice,
           facilities,
           isProvider: true,
+          isApproved: true, // TO-DO: must be false before payment
           deviceOS: 'android', // TO-DO: 'web' should be later
         };
 
