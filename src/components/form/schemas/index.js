@@ -46,7 +46,7 @@ export const SecondStepSignUpBusinessScheme = Yup.object().shape({
     .required('postcode is required'),
   address: Yup.string()
     .required('address is required'),
-  townOrCity: Yup.string()
+  regionName: Yup.string()
     .required('town/city is required'),
   country: Yup.string()
     .required('country is required'),

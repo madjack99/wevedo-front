@@ -32,11 +32,11 @@ const SecondStepSignUpBusinessForm = ({
         phoneNumber: '+79123456789',
         postcode: '422456',
         address: 'Some street',
-        townOrCity: 'Cheboksary',
+        regionName: 'Cheboksary',
         country: 'Russia',
       }}
       onSubmit={async ({
-        email, phoneNumber, postcode, address, townOrCity, country,
+        email, phoneNumber, postcode, address, regionName, country,
       }, { setSubmitting, setErrors }) => {
         const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
 
@@ -46,7 +46,7 @@ const SecondStepSignUpBusinessForm = ({
             phoneNumber,
             postcode,
             address,
-            townOrCity,
+            regionName,
             country,
           });
 
@@ -139,15 +139,15 @@ const SecondStepSignUpBusinessForm = ({
             <Form.Control
               className="form__control"
               type="text"
-              name="townOrCity"
-              value={values.townOrCity}
+              name="regionName"
+              value={values.regionName}
               onChange={handleChange}
-              isValid={values.townOrCity && !errors.townOrCity}
-              isInvalid={touched.townOrCity && !!errors.townOrCity}
+              isValid={values.regionName && !errors.regionName}
+              isInvalid={touched.regionName && !!errors.regionName}
               autoComplete="new-town-or-city"
             />
             <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.townOrCity}
+              {errors.regionName}
             </Form.Control.Feedback>
           </Form.Group>
 
