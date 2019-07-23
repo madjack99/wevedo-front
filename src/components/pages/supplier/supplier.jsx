@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   Row, Container, Col, Button, Carousel, Modal, Form,
 } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import PopularSearches from '../popularSearches';
 import './supplier.scss';
@@ -12,7 +13,7 @@ import slide from '../../../assets/images/supplier-slide.png';
 import map from '../../../assets/images/map.png';
 import modalimg from '../../../assets/images/wedding dress.png';
 
-const Supplier = ({ match }) => {
+const Supplier = ({ match, t }) => {
   const [supplier, setSupplier] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
@@ -21,9 +22,7 @@ const Supplier = ({ match }) => {
 
   useEffect(() => {
     const fetchSupplier = async () => {
-      const {
-        data: newSupplier,
-      } = await wevedoService.getSupplierById(supplierId);
+      const { data: newSupplier } = await wevedoService.getSupplierById(supplierId);
       setSupplier(newSupplier);
       console.log(newSupplier);
     };
@@ -36,7 +35,7 @@ const Supplier = ({ match }) => {
         <Container className="h-100 w-100 align-items-center">
           <Row className="h-100 align-items-center">
             <Col sm={12} className="text-center text-uppercase">
-              <h1>Fulham Palace</h1>
+              <h1>{t('supplier.jumbotron')}</h1>
             </Col>
           </Row>
         </Container>
@@ -59,56 +58,29 @@ const Supplier = ({ match }) => {
         </Row>
         <Row className="mt-5 mb-5">
           <Col sm={7}>
-            <h4 className="text-uppercase">Fulham Palace</h4>
-            <b>Church Road, Clearwell, Forest of Dean Gloucestershire, GL16 8LG</b>
+            <h4 className="text-uppercase">{t('supplier.section.primaryTitle')}</h4>
+            <b>{t('supplier.section.subTitle')}</b>
             <hr className="hr-sm m-0 mt-4 mb-4" />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-              qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
-              natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-              eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-              sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
-            </p>
+            <p>{t('supplier.section.pOne')}</p>
+            <p>{t('supplier.section.pTwo')}</p>
             <div className="divider" />
-            <b className="text-uppercase">Contact</b>
+            <b className="text-uppercase">{t('supplier.contactSection.title')}</b>
             <hr className="hr-xs" />
             <div className="d-block mb-4">
-              {
-                supplier.website
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Website: ${supplier.website}`}
-                    </b>
-                  )
-                  : null
-              }
-              {
-                supplier.email
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Email: ${supplier.email}`}
-                    </b>
-                  )
-                  : null
-              }
-              {
-                supplier.phoneNumber
-                  ? (
-                    <b className="text-uppercase text-muted mb-4">
-                      {`Number: ${supplier.phoneNumber}`}
-                    </b>
-                  )
-                  : null
-              }
+              {supplier.website ? (
+                <b className="text-uppercase text-muted mb-4">{`Website: ${supplier.website}`}</b>
+              ) : null}
+              {supplier.email ? (
+                <b className="text-uppercase text-muted mb-4">{`Email: ${supplier.email}`}</b>
+              ) : null}
+              {supplier.phoneNumber ? (
+                <b className="text-uppercase text-muted mb-4">
+                  {`Number: ${supplier.phoneNumber}`}
+                </b>
+              ) : null}
             </div>
             <div className="divider" />
-            <b className="text-uppercase">Find us</b>
+            <b className="text-uppercase">{t('supplier.contactSection.findUs')}</b>
             <hr className="hr-xs" />
             <Col className="p-0">
               <img src={map} alt="map" width="100%" />
@@ -123,24 +95,21 @@ const Supplier = ({ match }) => {
                   className="text-uppercase"
                   onClick={() => setModalShow(true)}
                 >
-                  Send a message to supplier
+                  {t('supplier.sendAMessage.button')}
                 </Button>
-                <MsgToSupplier show={modalShow} onHide={() => setModalShow(false)} />
+                <MsgToSupplier show={modalShow} onHide={() => setModalShow(false)} t={t} />
               </Col>
               <Col sm={12}>
                 <div className="supplier-results-side-box">
                   <div className="mb-4">
-                    <b className="text-uppercase text-muted">Budget</b>
+                    <b className="text-uppercase text-muted">{t('supplier.results.budget')}</b>
                     <hr className="hr-xs" />
-                    <b>$8.500 - $50.000</b>
+                    <b>{t('supplier.results.amount')}</b>
                   </div>
                   <div>
-                    <b className="text-uppercase text-muted">Services</b>
+                    <b className="text-uppercase text-muted">{t('supplier.results.services')}</b>
                     <hr className="hr-xs" />
-                    <b>
-                      Photography, pre wedding, post wedding, albums, mini albums, digital album,
-                      high resolution photos.
-                    </b>
+                    <b>{t('supplier.results.servicesList')}</b>
                   </div>
                 </div>
               </Col>
@@ -149,7 +118,7 @@ const Supplier = ({ match }) => {
           <Col sm={12} className="text-right">
             <div className="divider" />
             <b className="supplier-results-next-btn">
-              Next result
+              {t('supplier.nextResult')}
               <i className="fa fa-arrow-right" />
             </b>
           </Col>
@@ -160,7 +129,7 @@ const Supplier = ({ match }) => {
   );
 };
 
-const MsgToSupplier = ({ show, onHide }) => (
+const MsgToSupplier = ({ show, onHide, t }) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -171,11 +140,7 @@ const MsgToSupplier = ({ show, onHide }) => (
   >
     <Modal.Body className="p-0">
       <Row>
-        <Button
-          className="modal-close-btn"
-          onClick={onHide}
-          variant="link"
-        >
+        <Button className="modal-close-btn" onClick={onHide} variant="link">
           <i className="fas fa-times fa-2x" />
         </Button>
         <Col sm={4} className="p-0">
@@ -183,31 +148,44 @@ const MsgToSupplier = ({ show, onHide }) => (
         </Col>
         <Col sm={8}>
           <Form>
-            <h5>Send a message to Supplier Name</h5>
+            <h5>{t('supplier.sendAMessage.modalTitle')}</h5>
             <hr className="hr-sm m-0 mt-3 mb-4" />
             <Row>
               <Col sm={12} className="mb-4">
                 <Form.Group controlId="">
-                  <Form.Control type="text" placeholder="Name" />
+                  <Form.Control
+                    type="text"
+                    placeholder={t('supplier.sendAMessage.namePlaceholder')}
+                  />
                 </Form.Group>
               </Col>
               <Col sm={6}>
                 <Form.Group controlId="">
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control
+                    type="email"
+                    placeholder={t('supplier.sendAMessage.emailPlaceholder')}
+                  />
                 </Form.Group>
               </Col>
               <Col sm={6}>
                 <Form.Group controlId="">
-                  <Form.Control type="number" placeholder="Mobile Number" />
+                  <Form.Control
+                    type="number"
+                    placeholder={t('supplier.sendAMessage.mobilePlaceholder')}
+                  />
                 </Form.Group>
               </Col>
               <Col sm={12} className="mt-4 mb-4">
                 <Form.Group controlId="">
-                  <Form.Control as="textarea" placeholder="Message" rows="3" />
+                  <Form.Control
+                    as="textarea"
+                    placeholder={t('supplier.sendAMessage.messagePlaceholder')}
+                    rows="3"
+                  />
                 </Form.Group>
               </Col>
               <Col className="text-center text-uppercase">
-                <Button size="lg">Send</Button>
+                <Button size="lg">{t('supplier.sendAMessage.sendBtn')}</Button>
               </Col>
             </Row>
           </Form>
@@ -217,4 +195,4 @@ const MsgToSupplier = ({ show, onHide }) => (
   </Modal>
 );
 
-export default Supplier;
+export default withTranslation('common')(Supplier);

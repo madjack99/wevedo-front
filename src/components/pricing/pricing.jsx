@@ -1,83 +1,94 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import './pricing.scss';
 
 import Logo from '../../assets/images/symbol.png';
 
-const Pricing = () => (
+const Pricing = ({ t }) => (
   <React.Fragment>
     <Container className="pricing">
       <Row className="mt-5">
-        <Col><a href="/"><img src={Logo} width="130px" alt="wevedo" /></a></Col>
+        <Col>
+          <a href="/">
+            <img src={Logo} width="130px" alt="wevedo" />
+          </a>
+        </Col>
       </Row>
       <Row className="mt-5 text-center align-items-center">
         <Col sm={8} className="mr-auto ml-auto">
-          <h2 className="text-uppercase">Pricing Plans</h2>
+          <h2 className="text-uppercase">{t('pricing.mainTitle')}</h2>
           <hr />
-          <p>
-            Sign up to the the UK&apos;s most popular wedding planning web site and
-            get access to more than 100,000 registered wedding couples.
-            Start growing your wedding business today.
-          </p>
+          <p>{t('pricing.mainText')}</p>
         </Col>
       </Row>
       <Row className="pricing-boxes text-center align-items-center">
         <Col md={4} className="p-3">
           <div>
-            <h5 className="text-wevedo"><b>Standard</b></h5>
+            <h5 className="text-wevedo">
+              <b>{t('pricing.standard.title')}</b>
+            </h5>
             <h2 className="m-4">
-              <small>$</small>
+              <small>{t('pricing.dollarSign')}</small>
               <span>15</span>
             </h2>
             <p>
               <i className="fa fa-check" />
-              You will feature above Standard listings
+              {t('pricing.standard.pOne')}
             </p>
             <p className="mb-4">
               <i className="fa fa-check" />
-              3x more couples will view your listing than the Standard listing
+              {t('pricing.standard.pTwo')}
             </p>
-            <a href="/pricing" className="text-uppercase text-wevedo">Get Started</a>
+            <a href="/pricing" className="text-uppercase text-wevedo">
+              {t('pricing.standard.getStarted')}
+            </a>
           </div>
         </Col>
         <Col md={4} className="p-3">
           <div className="pricing-boxes__enhaced">
-            <h5 className="text-wevedo"><b>Enhaced</b></h5>
+            <h5 className="text-wevedo">
+              <b>{t('pricing.enhanced.title')}</b>
+            </h5>
             <h2 className="m-4">
-              <small>$</small>
+              <small>{t('pricing.dollarSign')}</small>
               <span>85</span>
             </h2>
             <p>
               <i className="fa fa-check" />
-              You will feature above Standard listings
+              {t('pricing.enhanced.pOne')}
             </p>
             <p className="mb-4">
               <i className="fa fa-check" />
-              3x more couples will view your listing than the Standard listing
+              {t('pricing.enhanced.pTwo')}
             </p>
             <a href="/pricing" className="text-uppercase">
-              Get Started
+              {t('pricing.enhanced.getStarted')}
               <i className="fa fa-arrow-right" />
             </a>
           </div>
         </Col>
         <Col md={4} className="p-3">
           <div>
-            <h5 className="text-wevedo"><b>Premium</b></h5>
+            <h5 className="text-wevedo">
+              <b>{t('pricing.premium.title')}</b>
+            </h5>
             <h2 className="m-4">
-              <small>$</small>
+              <small>{t('pricing.dollarSign')}</small>
               <span>100</span>
             </h2>
             <p>
               <i className="fa fa-check" />
-              You will feature above Standard listings
+              {t('pricing.enhanced.pOne')}
             </p>
             <p className="mb-4">
               <i className="fa fa-check" />
-              3x more couples will view your listing than the Standard listing
+              {t('pricing.enhanced.pTwo')}
             </p>
-            <a href="/pricing" className="text-uppercase text-wevedo">Get Started</a>
+            <a href="/pricing" className="text-uppercase text-wevedo">
+              {t('pricing.enhanced.getStarted')}
+            </a>
           </div>
         </Col>
       </Row>
@@ -85,4 +96,4 @@ const Pricing = () => (
   </React.Fragment>
 );
 
-export default Pricing;
+export default withTranslation('common')(Pricing);

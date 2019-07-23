@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { LinkContainer } from 'react-router-bootstrap';
 import {
   Row, Col, Nav, Navbar, NavDropdown, ButtonToolbar, Button,
 } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import './header.scss';
 
@@ -14,7 +16,7 @@ import { WevedoServiceContext } from '../contexts';
 import logo from '../../assets/images/symbol.png';
 
 function Header({
-  isLoggedIn, token, categories, signOut,
+  isLoggedIn, token, categories, signOut, t,
 }) {
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
@@ -24,15 +26,11 @@ function Header({
         <Nav className="text-uppercase mr-auto">
           {/* <Nav.Link><Link to="/weddingtools"><b>Wedding Tools</b></Link></Nav.Link> */}
           <NavLink className="nav-link" to="/suppliers/Venue">
-            <b>Venues</b>
+            <b>{t('header.venues')}</b>
           </NavLink>
-          <CategoriesDropdown categories={categories} />
+          <CategoriesDropdown categories={categories} t={t} />
         </Nav>
-        {
-          isLoggedIn
-            ? <ProfileArea token={token} signOut={signOut} />
-            : <Buttons />
-        }
+        {isLoggedIn ? <ProfileArea token={token} signOut={signOut} t={t} /> : <Buttons t={t} />}
       </Navbar.Collapse>
 
       <NavLink className="navbar-brand" to="/">
@@ -42,7 +40,7 @@ function Header({
   );
 }
 
-function CategoriesDropdown({ categories }) {
+function CategoriesDropdown({ categories, t }) {
   const leftCategoryColumns = categories.slice(0, categories.length / 2);
   const rightCategoryColumns = categories.slice(categories.length / 2);
 
@@ -52,22 +50,18 @@ function CategoriesDropdown({ categories }) {
         <Col sm={8}>
           <Row className="pt-3">
             <Col sm={6}>
-              {
-                leftCategoryColumns.map(({ _id, name }) => (
-                  <CategoryDropDownItem key={_id} name={name} />
-                ))
-              }
+              {leftCategoryColumns.map(({ _id, name }) => (
+                <CategoryDropDownItem key={_id} name={name} />
+              ))}
             </Col>
             <Col sm={6}>
-              {
-                rightCategoryColumns.map(({ _id, name }) => (
-                  <CategoryDropDownItem key={_id} name={name} />
-                ))
-              }
+              {rightCategoryColumns.map(({ _id, name }) => (
+                <CategoryDropDownItem key={_id} name={name} />
+              ))}
             </Col>
             <Col sm={12}>
               <Link to="/weddingsuppliers" className="dropdown-view-all-btn">
-                View all suppliers
+                {t('header.viewAllSuppliers')}
                 {' '}
                 <i className="fa fa-arrow-right" />
               </Link>
@@ -90,31 +84,28 @@ function CategoryDropDownItem({ name }) {
   );
 }
 
-function Buttons() {
+function Buttons({ t }) {
   return (
     <ButtonToolbar>
       <Link to="/login">
         <Button variant="primary" className="mr-2">
-          Login
+          {t('header.login')}
         </Button>
       </Link>
       <Link to="/business-login">
-        <Button variant="dark">Bussiness Login</Button>
+        <Button variant="dark">{t('header.businessLogin')}</Button>
       </Link>
     </ButtonToolbar>
   );
 }
 
-function ProfileArea({ signOut }) {
+function ProfileArea({ signOut, t }) {
   const wevedoService = useContext(WevedoServiceContext);
 
   return (
     <ButtonToolbar>
-      <Button
-        variant="dark"
-        onClick={() => signOut(wevedoService)}
-      >
-        Sign Out
+      <Button variant="dark" onClick={() => signOut(wevedoService)}>
+        {t('header.signOut')}
       </Button>
     </ButtonToolbar>
   );
@@ -130,4 +121,10 @@ const mapDispatchToProps = dispatch => ({
   getCategories: fetchCategories(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(Header);

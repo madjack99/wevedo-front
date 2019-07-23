@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Image, Row, Container, Col, Form, Button,
 } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
+import PopularSearches from '../pages/popularSearches';
 import './home.scss';
 
 import searchicon from '../../assets/images/search-icon.png';
@@ -18,17 +20,17 @@ import serches2 from '../../assets/images/serches2.png';
 import serches3 from '../../assets/images/serches3.png';
 import serches4 from '../../assets/images/serches4.png';
 
-const Home = () => (
+const Home = ({ t }) => (
   <React.Fragment>
     <div className="section section-header-full mainpagebg">
       <Container className="h-100 w-100 align-items-center">
         <Row className="h-100 align-items-center">
           <Col sm={12} className="text-center text-uppercase">
-            <h4>Special moment</h4>
+            <h4>{t('home.jumbotron.smallTitle')}</h4>
             <h1>
-              We can make
+              {t('home.jumbotron.largeTitleOne')}
               <br />
-              it happen
+              {t('home.jumbotron.largeTitleTwo')}
             </h1>
           </Col>
         </Row>
@@ -38,7 +40,7 @@ const Home = () => (
     <Container className="howitworks">
       <Row>
         <Col>
-          <h2 className="text-uppercase">How it works</h2>
+          <h2 className="text-uppercase">{t('home.mainSectionTitle')}</h2>
           <hr />
         </Col>
       </Row>
@@ -46,19 +48,19 @@ const Home = () => (
         <Col className="p-3">
           <div>
             <Image src={searchicon} alt="search-icon" />
-            <p className="mt-4">Search for your perfect venue or supplier by category, location and budget.</p>
+            <p className="mt-4">{t('home.howItWorks.boxOne')}</p>
           </div>
         </Col>
         <Col className="p-3">
           <div>
             <Image src={calendar} alt="calendar-icon" />
-            <p className="mt-4">See real time availability for your venue or supplier booking.</p>
+            <p className="mt-4">{t('home.howItWorks.boxTwo')}</p>
           </div>
         </Col>
         <Col className="p-3">
           <div>
             <Image src={chat} alt="chat-icon" />
-            <p className="mt-4">Message suppliers directly through the app to make enquiries or bookings.</p>
+            <p className="mt-4">{t('home.howItWorks.boxThree')}</p>
           </div>
         </Col>
       </Row>
@@ -68,14 +70,22 @@ const Home = () => (
         </Col>
         <Col md={4}>
           <Row>
-            <Col sm={12} className="mb-4"><Image src={musicphoto} alt="music-photo" /></Col>
-            <Col sm={12}><Image src={florist} alt="florist-photo" /></Col>
+            <Col sm={12} className="mb-4">
+              <Image src={musicphoto} alt="music-photo" />
+            </Col>
+            <Col sm={12}>
+              <Image src={florist} alt="florist-photo" />
+            </Col>
           </Row>
         </Col>
         <Col md={3}>
           <Row>
-            <Col sm={12} className="mb-4"><Image src={photography} alt="photo-icon" /></Col>
-            <Col sm={12}><Image src={decoration} alt="decoration-photo" /></Col>
+            <Col sm={12} className="mb-4">
+              <Image src={photography} alt="photo-icon" />
+            </Col>
+            <Col sm={12}>
+              <Image src={decoration} alt="decoration-photo" />
+            </Col>
           </Row>
         </Col>
       </Row>
@@ -83,25 +93,27 @@ const Home = () => (
 
     <Row className="findseparator d-flex align-items-center text-center">
       <Col sm={12}>
-        <h1>Find your best wedding supplier by Location</h1>
+        <h1>{t('home.findForm.title')}</h1>
         <Form>
           <Form.Row>
             <Col className="boxed-form">
               <Row>
                 <Col>
                   <Form.Control as="select">
-                    <option>Category</option>
-                    <option>...</option>
+                    <option>{t('home.findForm.category')}</option>
+                    <option>{t('home.findForm.options')}</option>
                   </Form.Control>
                 </Col>
                 <div className="divider" />
                 <Col>
-                  <Form.Control placeholder="Location" />
+                  <Form.Control placeholder={t('home.findForm.locationPlaceholder')} />
                 </Col>
               </Row>
             </Col>
             <Col sm={3}>
-              <Button variant="light" size="lg">Search</Button>
+              <Button variant="light" size="lg">
+                {t('home.findForm.searchBtn')}
+              </Button>
             </Col>
           </Form.Row>
         </Form>
@@ -139,75 +151,8 @@ const Home = () => (
       </Row>
     </Container> */}
 
-    <div className="popularserches">
-      <Container className="pb-5">
-        <Row>
-          <Col sm={6}>
-            <h3 className="text-uppercase">Popular venue serches</h3>
-            <p className="d-none d-sm-block">
-              At some stage in all our lives we want clearer, fresher, younger looking skin.
-              Well it can be achieved without spending a lot of money.
-            </p>
-          </Col>
-          <Col sm={6}>
-            <Row>
-              <Col>
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-              <Col>
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-              <Col className="d-none d-sm-block">
-                <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
-                </ul>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-      <Row className="m-0">
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches1} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches2} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches3} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={serches4} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-      </Row>
-    </div>
-
+    <PopularSearches />
   </React.Fragment>
 );
 
-export default Home;
+export default withTranslation('common')(Home);
