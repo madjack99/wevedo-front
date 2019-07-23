@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -17,6 +19,7 @@ const FirstStepSignUpBusinessForm = ({
   categories: categoryList,
   updateUser,
   history,
+  t,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -65,7 +68,9 @@ const FirstStepSignUpBusinessForm = ({
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="mb-5" controlId="formUsername">
-            <Form.Label className="form__label mb-0">Username</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.usernamePlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="text"
@@ -82,7 +87,9 @@ const FirstStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formPassword">
-            <Form.Label className="form__label mb-0">Password</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.passwordPlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="password"
@@ -100,7 +107,7 @@ const FirstStepSignUpBusinessForm = ({
 
           <Form.Group className="mb-5" controlId="formConfirmPassword">
             <Form.Label className="form__label mb-0">
-              Confirm Password
+              {t('business-signup.form.passwordConfirmationPlaceholder')}
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -118,7 +125,9 @@ const FirstStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formName">
-            <Form.Label className="form__label mb-0">Business Name</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.businessNamePlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="text"
@@ -136,7 +145,7 @@ const FirstStepSignUpBusinessForm = ({
 
           <Form.Group className="mb-5" controlId="formCategory">
             <Form.Label className="form__label mb-0">
-              Select Category
+              {t('business-signup.form.categoryPlaceholder')}
             </Form.Label>
             <Form.Control
               className="form__control first-step__dropdown"
@@ -161,7 +170,7 @@ const FirstStepSignUpBusinessForm = ({
 
           <Form.Group className="mb-5" controlId="formWebsite">
             <Form.Label className="form__label mb-0">
-              Business Website
+              {t('business-signup.form.websitePlaceholder')}
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -186,7 +195,7 @@ const FirstStepSignUpBusinessForm = ({
               size="lg"
               disabled={isSubmitting}
             >
-              Next step
+              {t('business-signup.form.nextStepBtn')}
             </Button>
           </FormGroup>
         </Form>
@@ -205,8 +214,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  compose(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    ),
+    withTranslation('common'),
   )(FirstStepSignUpBusinessForm),
 );
