@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import {
   Row, Col, Form, Button,
@@ -9,13 +10,13 @@ import './business-login.scss';
 
 import Logo from '../../assets/images/symbol.png';
 
-export default function BusinessLogin() {
+function BusinessLogin({ t }) {
   return (
     <Row className="w-100 m-0 login">
       <Col sm={6} className="login-img login-img__business">
         <div className="login-img-text p-5">
-          <h1 className="mb-0">Welcome Back,</h1>
-          <h2>Please login to your account</h2>
+          <h1 className="mb-0">{t('business-login.jumbotron.largeTitle')}</h1>
+          <h2>{t('business-login.jumbotron.smallTitle')}</h2>
           <hr className="hr-sm m-0 mt-4 mb-4" />
         </div>
       </Col>
@@ -33,7 +34,7 @@ export default function BusinessLogin() {
                   <Form.Group controlId="username">
                     <Form.Control
                       type="email"
-                      placeholder="Email Address"
+                      placeholder={t('business-login.form.emailPlaceholder')}
                       autoComplete="username"
                     />
                   </Form.Group>
@@ -42,16 +43,18 @@ export default function BusinessLogin() {
                   <Form.Group controlId="password">
                     <Form.Control
                       type="password"
-                      placeholder="Password"
+                      placeholder={t('business-login.form.passwordPlaceholder')}
                       autoComplete="password"
                     />
                   </Form.Group>
                 </Col>
                 <Col sm={6}>
-                  <Form.Check label="Remember me" />
+                  <Form.Check label={t('business-login.form.rememberMeLabel')} />
                 </Col>
                 <Col sm={12} className="text-center text-uppercase mt-5 mb-4">
-                  <Button href="/dashboard" size="lg">Login</Button>
+                  <Button href="/dashboard" size="lg">
+                    {t('business-login.form.loginBtn')}
+                  </Button>
                 </Col>
               </Row>
             </Form>
@@ -59,7 +62,7 @@ export default function BusinessLogin() {
           <Col className="text-center">
             <p>
               <b>
-                Don&apos;t have and account?
+                {t('business-login.form.noAccount')}
                 {' '}
                 <Link to="/business-signup-1" className="text-wevedo">Signup</Link>
               </b>
@@ -70,3 +73,4 @@ export default function BusinessLogin() {
     </Row>
   );
 }
+export default withTranslation('common')(BusinessLogin);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import serches1 from '../../../assets/images/serches1.png';
 import serches2 from '../../../assets/images/serches2.png';
@@ -7,42 +8,39 @@ import serches3 from '../../../assets/images/serches3.png';
 import serches4 from '../../../assets/images/serches4.png';
 import './popularSearches.scss';
 
-function PopularSearches() {
+function PopularSearches({ t }) {
   return (
     <div className="popularserches">
       <Container className="pb-5">
         <Row>
           <Col sm={6}>
-            <h3 className="text-uppercase">Popular venue serches</h3>
-            <p className="d-none d-sm-block">
-              At some stage in all our lives we want clearer, fresher, younger looking skin. Well it
-              can be achieved without spending a lot of money.
-            </p>
+            <h3 className="text-uppercase">{t('popularSearches.title')}</h3>
+            <p className="d-none d-sm-block">{t('popularSearches.text')}</p>
           </Col>
           <Col sm={6}>
             <Row>
               <Col>
                 <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
+                  <li>{t('popularSearches.essex')}</li>
+                  <li>{t('popularSearches.hertforshire')}</li>
+                  <li>{t('popularSearches.westMidlands')}</li>
+                  <li>{t('popularSearches.hampshire')}</li>
                 </ul>
               </Col>
               <Col>
                 <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
+                  <li>{t('popularSearches.essex')}</li>
+                  <li>{t('popularSearches.hertforshire')}</li>
+                  <li>{t('popularSearches.westMidlands')}</li>
+                  <li>{t('popularSearches.hampshire')}</li>
                 </ul>
               </Col>
               <Col className="d-none d-sm-block">
                 <ul>
-                  <li>Essex</li>
-                  <li>Hertforshire</li>
-                  <li>West Midlands</li>
-                  <li>Hampshire</li>
+                  <li>{t('popularSearches.essex')}</li>
+                  <li>{t('popularSearches.hertforshire')}</li>
+                  <li>{t('popularSearches.westMidlands')}</li>
+                  <li>{t('popularSearches.hampshire')}</li>
                 </ul>
               </Col>
             </Row>
@@ -79,4 +77,4 @@ function PopularSearches() {
   );
 }
 
-export default PopularSearches;
+export default withTranslation('common')(PopularSearches);
