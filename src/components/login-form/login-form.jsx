@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 
@@ -15,7 +17,7 @@ import { loginFormSchema } from '../../form-schemas';
 
 import ResetPasswordWindow from '../reset-password-window';
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
 
   const wevedoService = useContext(WevedoServiceContext);
@@ -37,16 +39,11 @@ const LoginForm = ({ login }) => {
       }}
       validationSchema={loginFormSchema}
       render={({
-        handleSubmit,
-        handleChange,
-        values,
-        touched,
-        errors,
-        isSubmitting,
+        handleSubmit, handleChange, values, touched, errors, isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="mb-5" controlId="formEmail">
-            <Form.Label className="mb-0">Email Address</Form.Label>
+            <Form.Label className="mb-0">{t('signAndLogForm.emailLabel')}</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -59,7 +56,7 @@ const LoginForm = ({ login }) => {
           </Form.Group>
 
           <Form.Group controlId="formPassword">
-            <Form.Label className="mb-0">Password</Form.Label>
+            <Form.Label className="mb-0">{t('signAndLogForm.passwordLabel')}</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -74,7 +71,7 @@ const LoginForm = ({ login }) => {
           <FormGroup>
             <Row>
               <Col sm={6}>
-                <Form.Check className="mr-auto" label="Remember me" />
+                <Form.Check className="mr-auto" label={t('signAndLogForm.rememberMe')} />
               </Col>
               <Col className="text-right" sm={6}>
                 <Button
@@ -82,7 +79,7 @@ const LoginForm = ({ login }) => {
                   onClick={() => setModalShow(true)}
                   variant="link"
                 >
-                  Forgot password?
+                  {t('signAndLogForm.forgotPassword')}
                 </Button>
               </Col>
             </Row>
@@ -90,13 +87,8 @@ const LoginForm = ({ login }) => {
           </FormGroup>
 
           <FormGroup className="text-center text-uppercase">
-            <Button
-              variant="primary"
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
-            >
-              Login
+            <Button variant="primary" type="submit" size="lg" disabled={isSubmitting}>
+              {t('signAndLogForm.logIn')}
             </Button>
           </FormGroup>
         </Form>
@@ -111,4 +103,10 @@ const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(LoginForm);

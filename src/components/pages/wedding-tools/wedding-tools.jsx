@@ -1,5 +1,6 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
-const WeddingTools = () => <h1 style={{ margin: '150px' }}>Weddingtools page</h1>;
+const WeddingTools = ({ t }) => <h1 style={{ margin: '150px' }}>{t('weddingTools.title')}</h1>;
 
-export default WeddingTools;
+export default withTranslation('common')(WeddingTools);
