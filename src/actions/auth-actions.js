@@ -29,11 +29,6 @@ const loginFailed = error => ({
   payload: error,
 });
 
-export const existingEmail = error => ({
-  type: actionTypes.EXISTING_EMAIL,
-  payload: error,
-});
-
 const signOutRequested = () => ({
   type: actionTypes.FETCH_SIGNOUT_REQUEST,
 });
@@ -47,14 +42,33 @@ const signOutFailed = error => ({
   payload: error,
 });
 
+const emailStatusRequested = () => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_REQUEST,
+});
+
+const emailStatusSucceed = () => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_SUCCESS,
+});
+
+const emailStatusFailed = error => ({
+  type: actionTypes.FETCH_EMAIL_STATUS_FAILURE,
+  payload: error,
+});
+
+export const resetError = () => ({
+  type: actionTypes.RESET_ERROR,
+});
+
 export const fetchSignUp = dispatch => async (register, body) => {
   dispatch(signUpRequested());
 
   try {
-    await register(body);
+    const { data } = await register(body);
     dispatch(signUpSucceed());
+    return data;
   } catch (error) {
     dispatch(signUpFailed(error.response.data.message));
+    return null;
   }
 };
 
@@ -66,8 +80,10 @@ export const fetchLogin = dispatch => async (login, body) => {
     console.log(`ENTERED. TOKEN: ${token}`);
     Cookies.set('token', token);
     dispatch(loginSucceed(token));
+    return token;
   } catch (error) {
     dispatch(loginFailed(error.response.data.message));
+    return null;
   }
 };
 
@@ -75,11 +91,26 @@ export const fetchSignOut = dispatch => async service => {
   dispatch(signOutRequested());
 
   try {
-    const { data: { status } } = await service.signOut();
+    const { data, data: { status } } = await service.signOut();
     console.log(`IS EXIT: ${status}`);
     Cookies.remove('token');
     dispatch(signOutSucceed());
+    return data;
   } catch (error) {
     dispatch(signOutFailed(error));
+    return null;
+  }
+};
+
+export const fetchEmailStatus = dispatch => async (body, checkEmail) => {
+  dispatch(emailStatusRequested());
+
+  try {
+    const { data } = await checkEmail(body);
+    dispatch(emailStatusSucceed());
+    return data;
+  } catch (error) {
+    dispatch(emailStatusFailed(error.response.data.message));
+    return null;
   }
 };

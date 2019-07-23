@@ -1,25 +1,33 @@
 module.exports = {
-    parser: "babel-eslint",
-    env: {
-      es6: true,
-      node: true,
-      browser: true
-    },
-    extends: [
-      "airbnb",
-    ],
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-      ecmaVersion: 2018,
-      sourceType: 'module',
-    },
-    plugins: [
-      'react',
-    ],
-    rules: {
-      'arrow-parens': ['error', 'as-needed'],
-      'react/prop-types': 0
-    },
-  };
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": ["off"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    'react/prop-types': 0,
+    "max-len": [
+      "warn",
+      {
+        "code": 80,
+        "tabWidth": 2,
+        "comments": 80,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ]
+  }
+}

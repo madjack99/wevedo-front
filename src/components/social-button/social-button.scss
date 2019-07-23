@@ -1,0 +1,27 @@
+@import '../../assets/styles/wevedo.scss';
+
+.social-btn {
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+
+  &-facebook {
+    background-color: $facebook-color;
+
+    &:hover {
+      background-color: darken($facebook-color, 15%);
+    }
+  }
+
+  &-google {
+    background-color: #DC4437;
+  
+    &:hover {
+      background-color: darken($google-color, 15%);
+    }
+  }  
+}

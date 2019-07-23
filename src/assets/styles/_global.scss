@@ -66,11 +66,11 @@ a {
 }
 
 form {
-	input, textarea {
+	input, textarea, select {
 		font-size: 13px !important; 
-		border: 0 !important;
-		border-radius: 0 !important;
-		border-bottom: 1px solid $gray-400 !important;
+		border: 0;
+		border-radius: 0;
+		border-bottom: 1px solid $gray-400;
 		transition: all .3s ease;
 	}
 	//to do: custom checkbox

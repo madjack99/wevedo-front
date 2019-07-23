@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable no-shadow */
+import React, { useContext, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
@@ -13,11 +16,17 @@ import Supplier from '../pages/supplier';
 import Contact from '../pages/contact';
 import Terms from '../pages/terms-and-conditions';
 import Privacy from '../pages/privacy';
-import Login from '../login';
-import Signup from '../sign-up';
 import Pricing from '../pricing';
-import BusinessLogin from '../business-login';
-import BusinessSignup from '../business-sign-up';
+import ImgUpload from '../form/imgUpload';
+import ScreensUserSignUp from '../../screens/user/sign-up';
+import ScreensUserLogin from '../../screens/user/login';
+import ScreensBusinessLogin from '../../screens/business/login';
+import ScreensBusinessSignUpFirstStep from '../../screens/business/sign-up/first-step';
+import ScreensBusinessSignUpSecondStep from '../../screens/business/sign-up/second-step';
+import ScreensUpdatingServiceInfo from '../../screens/updating/service-info';
+
+import { fetchUser, removeUser, fetchCategories } from '../../actions';
+import { WevedoServiceContext } from '../contexts';
 
 const RouteMainLayout = ({ component: Component, ...rest }) => (
   <Route
@@ -32,25 +41,59 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
   />
 );
 
-const App = () => (
-  <React.Fragment>
-    <Switch>
-      <RouteMainLayout exact path="/" component={Home} />
-      <RouteMainLayout path="/weddingtools" component={Weddingtools} />
-      <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
-      <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
-      <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
-      <RouteMainLayout path="/supplier/:id" component={Supplier} />
-      <RouteMainLayout path="/contact" component={Contact} />
-      <RouteMainLayout path="/terms" component={Terms} />
-      <RouteMainLayout path="/privacy" component={Privacy} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/pricing" component={Pricing} />
-      <Route path="/business-login" component={BusinessLogin} />
-      <Route path="/business-signup" component={BusinessSignup} />
-    </Switch>
-  </React.Fragment>
-);
+const App = ({
+  isLoggedIn, getUser, removeUser, getCategories,
+}) => {
+  const wevedoService = useContext(WevedoServiceContext);
 
-export default App;
+  useEffect(() => {
+    if (isLoggedIn) {
+      getUser(wevedoService.getProfile);
+    }
+    removeUser();
+  }, [getUser, removeUser, isLoggedIn, wevedoService]);
+
+  useEffect(() => {
+    getCategories(wevedoService.getCategories);
+  }, [getCategories, wevedoService]);
+
+  return (
+    <React.Fragment>
+      <Switch>
+        <RouteMainLayout exact path="/" component={Home} />
+        <RouteMainLayout path="/weddingtools" component={Weddingtools} />
+        <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
+        <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
+        <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
+        <RouteMainLayout path="/supplier/:id" component={Supplier} />
+        <RouteMainLayout path="/contact" component={Contact} />
+        <RouteMainLayout path="/terms" component={Terms} />
+        <RouteMainLayout path="/privacy" component={Privacy} />
+        <Route path="/login" component={ScreensUserLogin} />
+        <Route path="/signup" component={ScreensUserSignUp} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/business-login" component={ScreensBusinessLogin} />
+        <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
+        <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
+        <Route path="/image-upload" component={ImgUpload} />
+        <Route path="/service-info" component={ScreensUpdatingServiceInfo} />
+      </Switch>
+    </React.Fragment>
+  );
+};
+
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getUser: fetchUser(dispatch),
+  removeUser: () => dispatch(removeUser()),
+  getCategories: fetchCategories(dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

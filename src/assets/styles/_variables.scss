@@ -25,11 +25,19 @@ $cyan:    #17a2b8 !default;
 
 $wevedo:  #ffafbd !default;
 
-$primary:       $pink !default;
-$secondary:     $gray-600 !default;
+$main:        #292929 !default;
+$secondary:   #6A6A6A !default;
+$tertiary:    #919191;
+
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $black !default;
+
+$facebook-color: #3B5998;
+$google-color:   #DC4437;
+
+$form-border-color:     #D0D0D0;
+$updating-form-border-color: #E8E8E9;

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Image, Row, Container, Col, Form, Button,
-} from 'react-bootstrap';
+import { Image, Row, Container, Col, Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
 import PopularSearches from '../pages/popularSearches';
@@ -15,10 +13,6 @@ import musicphoto from '../../assets/images/music.png';
 import florist from '../../assets/images/florist.png';
 import photography from '../../assets/images/photography.png';
 import decoration from '../../assets/images/decoration.png';
-import serches1 from '../../assets/images/serches1.png';
-import serches2 from '../../assets/images/serches2.png';
-import serches3 from '../../assets/images/serches3.png';
-import serches4 from '../../assets/images/serches4.png';
 
 const Home = ({ t }) => (
   <React.Fragment>
@@ -106,7 +100,9 @@ const Home = ({ t }) => (
                 </Col>
                 <div className="divider" />
                 <Col>
-                  <Form.Control placeholder={t('home.findForm.locationPlaceholder')} />
+                  <Form.Control
+                    placeholder={t('home.findForm.locationPlaceholder')}
+                  />
                 </Col>
               </Row>
             </Col>

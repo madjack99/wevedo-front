@@ -1,0 +1,26 @@
+.custom-hight-without-photos {
+  height: 50vh;
+}
+
+.custom-height-with-photos {
+  height: 25vh;
+}
+
+.custom-border {
+  border: 2px dashed black;
+}
+
+.custom-bg {
+  background-color: #f4f7fc;
+}
+
+.custom-bg-upload {
+  background-color: rgba(141, 142, 145, 0.8);
+}
+
+.delete-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
