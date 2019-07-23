@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
@@ -18,7 +20,7 @@ import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 import Checkbox from '../../../ui/checkbox';
 
-const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
+const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -70,7 +72,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
       </Row>
 
       <div className="form__divider text-center m-5">
-        <span>OR</span>
+        <span>{t('signAndLogForm.or')}</span>
       </div>
 
       <Formik
@@ -107,7 +109,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">
-                Email Address
+                {t('signAndLogForm.emailLabel')}
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -125,7 +127,9 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-              <Form.Label className="form__label mb-0">Password</Form.Label>
+              <Form.Label className="form__label mb-0">
+                {t('signAndLogForm.passwordLabel')}
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="password"
@@ -147,7 +151,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
                   {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
                   <Checkbox
                     className="form__check mr-auto"
-                    labelText="Remember me"
+                    labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
                 <Col className="text-right">
@@ -155,7 +159,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
                     bsPrefix="password-btn"
                     onClick={() => setModalShow(true)}
                   >
-                    Forgot password?
+                    {t('signAndLogForm.forgotPassword')}
                   </Button>
                 </Col>
               </Row>
@@ -173,15 +177,15 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
                 size="lg"
                 disabled={isSubmitting}
               >
-                Login
+                {t('signAndLogForm.logIn')}
               </Button>
             </FormGroup>
 
             <div className="form__question text-center mt-5">
               <span>
-                Don&apos;t have an account?{' '}
+                {t('signAndLogForm.noAccount')}{' '}
                 <Link className="text-wevedo" to="/signup">
-                  Sign Up
+                  {t('signAndLogForm.signUp')}
                 </Link>
               </span>
             </div>
@@ -200,7 +204,10 @@ const mapDispatchToProps = dispatch => ({
   cleanForm: () => dispatch(resetError()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
 )(LoginUserForm);

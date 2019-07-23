@@ -99,41 +99,7 @@
       "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
     }
   },
-  "login": {
-    "jumbotron": {
-      "largeTitle": "Welcome Back,",
-      "smallTitle": "Please login to your account"
-    },
-    "or": "OR",
-    "form": {
-      "emailPlaceholder": "Email Address",
-      "passwordPlaceholder": "Password",
-      "rememberMeLabel": "Remember me",
-      "forgotPassword": "Forgot password?",
-      "loginBtn": "Login",
-      "noAccount": "Don't have and account?",
-      "signUp": "Sign Up"
-    },
-    "passResetModal": {
-      "title": "Reset Password",
-      "pOne": "Reset password has been sent to user@email.com address.",
-      "pTwo": "Please check your e-mail."
-    }
-  },
-  "signup": {
-    "jumbotron": {
-      "largeTitle": "Hey,",
-      "smallTitle": "Glad to see you..."
-    },
-    "or": "OR",
-    "form": {
-      "emailPlaceholder": "Email Address",
-      "passwordPlaceholder": "Password",
-      "rememberMeLabel": "Remember me",
-      "signUpBtn": "SignUp",
-      "logIn": "Login"
-    }
-  },
+
   "pricing": {
     "mainTitle": "Pricing Plans",
     "mainText": "Sign up to the the UK's most popular wedding planning web site and get access to more than 100,000 registered wedding couples. Start growing your wedding business today.",
@@ -157,26 +123,8 @@
       "getStarted": "Get Started"
     }
   },
-  "business-login": {
-    "jumbotron": {
-      "largeTitle": "Welcome Back,",
-      "smallTitle": "Please login to your account"
-    },
-    "form": {
-      "emailPlaceholder": "Email Address",
-      "passwordPlaceholder": "Password",
-      "rememberMeLabel": "Remember me",
-      "loginBtn": "Login",
-      "noAccount": "Don't have and account?",
-      "signUp": "Signup"
-    }
-  },
+
   "business-signup": {
-    "jumbotron": {
-      "largeTitle": "Hey,",
-      "smallTitle": "Glad to see you...",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
     "form": {
       "usernamePlaceholder": "Username",
       "passwordPlaceholder": "Password",
@@ -206,12 +154,50 @@
     "businessLogin": "Bussiness Login",
     "signOut": "Sign Out"
   },
+
   "signAndLogForm": {
     "emailLabel": "Email Address",
     "passwordLabel": "Password",
     "rememberMe": "Remember me",
     "signUp": "Sign up",
     "forgotPassword": "Forgot password?",
-    "logIn": "Login"
+    "logIn": "Login",
+    "noAccount": "Don't have and account?",
+    "or": "OR",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "businessAndUserLogin": {
+    "jumbotron": {
+      "largeTitle": "Welcome Back,",
+      "smallTitle": "Please login to your account..."
+    },
+    "passResetModal": {
+      "title": "Reset Password",
+      "pOne": "Reset password has been sent to user@email.com address.",
+      "pTwo": "Please check your e-mail."
+    }
+  },
+  "businessAndUserSignup": {
+    "jumbotron": {
+      "largeTitle": "Hey,",
+      "smallTitle": "Glad to see you...",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+  },
+
+  "imgUpload": {
+    "uploadPhotos": "Upload Photos",
+    "dragAndDrop": "or just drag and drop",
+    "addAtLeast": "+ Add at least 1 Photos"
+  },
+  "serviceInfo": {
+    "describeService": "Describe your business and services",
+    "startingPrice": "From which price can I hire Service name?",
+    "startingPriceDescription": "Enter your average pricing in order for your Shopfont to appear in results when couples search by price",
+    "minPricePlaceholder": "Minimum Price",
+    "maxPricePlaceholder": "Maximum Price",
+    "whatFacilities": "Which facilities do you provide?",
+    "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
+    "save": "Save"
   }
 }

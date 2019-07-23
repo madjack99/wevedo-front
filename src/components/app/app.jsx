@@ -41,9 +41,7 @@ const RouteMainLayout = ({ component: Component, ...rest }) => (
   />
 );
 
-const App = ({
-  isLoggedIn, getUser, removeUser, getCategories,
-}) => {
+const App = ({ isLoggedIn, getUser, removeUser, getCategories }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   useEffect(() => {
@@ -62,8 +60,14 @@ const App = ({
       <Switch>
         <RouteMainLayout exact path="/" component={Home} />
         <RouteMainLayout path="/weddingtools" component={Weddingtools} />
-        <RouteMainLayout path="/weddingsuppliers" component={Weddingsuppliers} />
-        <RouteMainLayout path="/suppliers/:name/:pageNumber" component={SupplierList} />
+        <RouteMainLayout
+          path="/weddingsuppliers"
+          component={Weddingsuppliers}
+        />
+        <RouteMainLayout
+          path="/suppliers/:name/:pageNumber"
+          component={SupplierList}
+        />
         <RouteMainLayout path="/suppliers/:name" component={SupplierList} />
         <RouteMainLayout path="/supplier/:id" component={Supplier} />
         <RouteMainLayout path="/contact" component={Contact} />
@@ -73,8 +77,14 @@ const App = ({
         <Route path="/signup" component={ScreensUserSignUp} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/business-login" component={ScreensBusinessLogin} />
-        <Route path="/business-signup-1" component={ScreensBusinessSignUpFirstStep} />
-        <Route path="/business-signup-2" component={ScreensBusinessSignUpSecondStep} />
+        <Route
+          path="/business-signup-1"
+          component={ScreensBusinessSignUpFirstStep}
+        />
+        <Route
+          path="/business-signup-2"
+          component={ScreensBusinessSignUpSecondStep}
+        />
         <Route path="/image-upload" component={ImgUpload} />
         <Route path="/service-info" component={ScreensUpdatingServiceInfo} />
       </Switch>
