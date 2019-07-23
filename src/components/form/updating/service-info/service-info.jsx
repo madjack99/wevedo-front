@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 
-import {
-  Form, Row, Col, Button,
-} from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 
 import '../../form.scss';
 import '../updating-form.scss';
@@ -17,7 +15,11 @@ import { WevedoServiceContext } from '../../../contexts';
 import { ServiceInfoScheme } from '../../schemas';
 
 const ServiceInfoUpdatingForm = ({
-  user, isLoggedIn, login, signUp, history,
+  user,
+  isLoggedIn,
+  login,
+  signUp,
+  history,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -29,14 +31,15 @@ const ServiceInfoUpdatingForm = ({
     <Formik
       className="form updating-form"
       initialValues={{
-        bio: 'Description',
-        minPrice: '100',
-        maxPrice: '200',
-        facilities: 'Pre wedding, Post wedding',
+        bio: '',
+        minPrice: '',
+        maxPrice: '',
+        facilities: '',
       }}
-      onSubmit={async ({
-        bio, minPrice, maxPrice, facilities,
-      }, { setSubmitting }) => {
+      onSubmit={async (
+        { bio, minPrice, maxPrice, facilities },
+        { setSubmitting },
+      ) => {
         const body = {
           ...user,
           bio,
@@ -44,7 +47,8 @@ const ServiceInfoUpdatingForm = ({
           maxPrice,
           facilities,
           isProvider: true,
-          profileImageURL: 'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
+          profileImageURL:
+            'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
           isApproved: true, // TO-DO: must be false before payment
           deviceOS: 'android', // TO-DO: 'web' should be later
         };
@@ -69,7 +73,9 @@ const ServiceInfoUpdatingForm = ({
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="updating-form__group">
-            <Form.Label className="updating-form__label">Describe your business and services</Form.Label>
+            <Form.Label className="updating-form__label">
+              Describe your business and services
+            </Form.Label>
             <Form.Control
               className="form__textarea updating-form__control"
               name="bio"
@@ -86,10 +92,12 @@ const ServiceInfoUpdatingForm = ({
           </Form.Group>
 
           <Form.Group className="updating-form__group">
-            <Form.Label className="updating-form__label">From which price can I hire Service name?</Form.Label>
+            <Form.Label className="updating-form__label">
+              From which price can I hire Service name?
+            </Form.Label>
             <Form.Text className="updating-form__text">
-              Enter your average pricing in order for your Shopfont
-              to appear in results when couples search by price
+              Enter your average pricing in order for your Shopfont to appear in
+              results when couples search by price
             </Form.Text>
             <Row>
               <Col md={3}>
@@ -102,7 +110,10 @@ const ServiceInfoUpdatingForm = ({
                   isValid={values.minPrice && !errors.minPrice}
                   isInvalid={touched.minPrice && !!errors.minPrice}
                 />
-                <Form.Control.Feedback className="form__feedback" type="invalid">
+                <Form.Control.Feedback
+                  className="form__feedback"
+                  type="invalid"
+                >
                   {errors.minPrice}
                 </Form.Control.Feedback>
               </Col>
@@ -116,7 +127,10 @@ const ServiceInfoUpdatingForm = ({
                   isValid={values.maxPrice && !errors.maxPrice}
                   isInvalid={touched.maxPrice && !!errors.maxPrice}
                 />
-                <Form.Control.Feedback className="form__feedback" type="invalid">
+                <Form.Control.Feedback
+                  className="form__feedback"
+                  type="invalid"
+                >
                   {errors.maxPrice}
                 </Form.Control.Feedback>
               </Col>
@@ -124,7 +138,9 @@ const ServiceInfoUpdatingForm = ({
           </Form.Group>
 
           <Form.Group className="updating-form__group">
-            <Form.Label className="updating-form__label">Which facilities do you provide?</Form.Label>
+            <Form.Label className="updating-form__label">
+              Which facilities do you provide?
+            </Form.Label>
             <Form.Control
               className="updating-form__control"
               name="facilities"
@@ -166,7 +182,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(
-    ServiceInfoUpdatingForm,
-  ),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(ServiceInfoUpdatingForm),
 );

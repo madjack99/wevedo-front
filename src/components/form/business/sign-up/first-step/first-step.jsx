@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
 
-import {
-  Form, FormGroup, Button,
-} from 'react-bootstrap';
+import { Form, FormGroup, Button } from 'react-bootstrap';
 
 import '../../../form.scss';
 
@@ -15,7 +13,10 @@ import { updateUser } from '../../../../../actions';
 import { FirstStepSignUpBusinessScheme } from '../../../schemas';
 
 const FirstStepSignUpBusinessForm = ({
-  isLoggedIn, categories: categoryList, updateUser, history,
+  isLoggedIn,
+  categories: categoryList,
+  updateUser,
+  history,
 }) => {
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -25,15 +26,19 @@ const FirstStepSignUpBusinessForm = ({
     <Formik
       className="form"
       initialValues={{
-        username: 'RukkiesMan',
-        password: '123456',
-        confirmPassword: '123456',
-        fullname: 'PavelCo',
-        categories: 'Media',
-        website: 'https://pavel.co',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        fullname: '',
+        categories: '',
+        website: '',
       }}
       onSubmit={async ({
-        username, password, fullname, categories, website,
+        username,
+        password,
+        fullname,
+        categories,
+        website,
       }) => {
         const [firstName, lastName] = fullname.split(' ');
 
@@ -94,7 +99,9 @@ const FirstStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formConfirmPassword">
-            <Form.Label className="form__label mb-0">Confirm Password</Form.Label>
+            <Form.Label className="form__label mb-0">
+              Confirm Password
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="password"
@@ -128,7 +135,9 @@ const FirstStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formCategory">
-            <Form.Label className="form__label mb-0">Select Category</Form.Label>
+            <Form.Label className="form__label mb-0">
+              Select Category
+            </Form.Label>
             <Form.Control
               className="form__control first-step__dropdown"
               type="text"
@@ -141,11 +150,9 @@ const FirstStepSignUpBusinessForm = ({
               autoComplete="new-categories"
             >
               <option disabled />
-              {
-                categoryList.map(({ _id: id, name }) => (
-                  <option key={id}>{name}</option>
-                ))
-              }
+              {categoryList.map(({ _id: id, name }) => (
+                <option key={id}>{name}</option>
+              ))}
             </Form.Control>
             <Form.Control.Feedback className="form__feedback" type="invalid">
               {errors.categories}
@@ -153,7 +160,9 @@ const FirstStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formWebsite">
-            <Form.Label className="form__label mb-0">Business Website</Form.Label>
+            <Form.Label className="form__label mb-0">
+              Business Website
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="url"
@@ -196,7 +205,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(
-    FirstStepSignUpBusinessForm,
-  ),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(FirstStepSignUpBusinessForm),
 );
