@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
 
-import {
-  Row, Col, Form, Button, FormGroup,
-} from 'react-bootstrap';
+import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
 import '../../form.scss';
 
@@ -28,7 +26,10 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
     cleanForm();
   }, [cleanForm]);
 
-  const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
+  const handleSocialSignUp = async ({
+    _profile: profile,
+    _provider: provider,
+  }) => {
     login(wevedoService.socialLogin, {
       ...profile,
       provider,
@@ -96,11 +97,18 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
         }}
         validationSchema={userFormSchema}
         render={({
-          handleSubmit, handleChange, values, touched, errors, isSubmitting,
+          handleSubmit,
+          handleChange,
+          values,
+          touched,
+          errors,
+          isSubmitting,
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
-              <Form.Label className="form__label mb-0">Email Address</Form.Label>
+              <Form.Label className="form__label mb-0">
+                Email Address
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="email"
@@ -137,15 +145,24 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
               <Row>
                 <Col>
                   {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
-                  <Checkbox labelText="Remember me" />
+                  <Checkbox
+                    className="form__check mr-auto"
+                    labelText="Remember me"
+                  />
                 </Col>
                 <Col className="text-right">
-                  <Button bsPrefix="password-btn" onClick={() => setModalShow(true)}>
+                  <Button
+                    bsPrefix="password-btn"
+                    onClick={() => setModalShow(true)}
+                  >
                     Forgot password?
                   </Button>
                 </Col>
               </Row>
-              <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
+              <ResetPasswordWindow
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -162,8 +179,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn }) => {
 
             <div className="form__question text-center mt-5">
               <span>
-                Don&apos;t have an account?
-                {' '}
+                Don&apos;t have an account?{' '}
                 <Link className="text-wevedo" to="/signup">
                   Sign Up
                 </Link>
