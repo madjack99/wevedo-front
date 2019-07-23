@@ -9,7 +9,6 @@ import './supplier.scss';
 
 import { WevedoServiceContext } from '../../contexts';
 
-import slide from '../../../assets/images/supplier-slide.png';
 import map from '../../../assets/images/map.png';
 import modalimg from '../../../assets/images/wedding dress.png';
 
@@ -24,7 +23,6 @@ const Supplier = ({ match, t }) => {
     const fetchSupplier = async () => {
       const { data: newSupplier } = await wevedoService.getSupplierById(supplierId);
       setSupplier(newSupplier);
-      console.log(newSupplier);
     };
     fetchSupplier();
   }, [wevedoService, supplierId]);
@@ -35,7 +33,7 @@ const Supplier = ({ match, t }) => {
         <Container className="h-100 w-100 align-items-center">
           <Row className="h-100 align-items-center">
             <Col sm={12} className="text-center text-uppercase">
-              <h1>{t('supplier.jumbotron')}</h1>
+              <h1>{`${supplier.fullName}`}</h1>
             </Col>
           </Row>
         </Container>
@@ -43,41 +41,68 @@ const Supplier = ({ match, t }) => {
       <Container className="supplier-results">
         <Row className="mt-5 mb-5">
           <Col>
-            <Carousel>
-              <Carousel.Item>
-                <img className="d-block w-100" src={slide} alt="supplier-slide" />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img className="d-block w-100" src={slide} alt="supplier-slide" />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img className="d-block w-100" src={slide} alt="supplier-slide" />
-              </Carousel.Item>
-            </Carousel>
+            {
+              supplier.providerImages
+                ? (
+                  <Carousel>
+                    {
+                      Object.values(supplier.providerImages).map(image => (
+                        <Carousel.Item className="carousel-image">
+                          <img className="d-block h-100 mx-auto" src={image} alt="supplier-slide" />
+                        </Carousel.Item>
+                      ))
+                    }
+                  </Carousel>
+                )
+                : null
+            }
           </Col>
         </Row>
         <Row className="mt-5 mb-5">
           <Col sm={7}>
-            <h4 className="text-uppercase">{t('supplier.section.primaryTitle')}</h4>
-            <b>{t('supplier.section.subTitle')}</b>
+            <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
+            {
+              <b>
+                {
+                  `${supplier.address || ''} ${supplier.regionName || ''} ${supplier.country || ''} ${supplier.postcode || ''}
+                `}
+              </b>
+            }
             <hr className="hr-sm m-0 mt-4 mb-4" />
-            <p>{t('supplier.section.pOne')}</p>
-            <p>{t('supplier.section.pTwo')}</p>
+            <p>
+              {supplier.bio}
+            </p>
             <div className="divider" />
             <b className="text-uppercase">{t('supplier.contactSection.title')}</b>
             <hr className="hr-xs" />
             <div className="d-block mb-4">
-              {supplier.website ? (
-                <b className="text-uppercase text-muted mb-4">{`Website: ${supplier.website}`}</b>
-              ) : null}
-              {supplier.email ? (
-                <b className="text-uppercase text-muted mb-4">{`Email: ${supplier.email}`}</b>
-              ) : null}
-              {supplier.phoneNumber ? (
-                <b className="text-uppercase text-muted mb-4">
-                  {`Number: ${supplier.phoneNumber}`}
-                </b>
-              ) : null}
+              {
+                supplier.website
+                  ? (
+                    <b className="text-uppercase d-block text-muted mb-4">
+                      {`Website: ${supplier.website}`}
+                    </b>
+                  )
+                  : null
+              }
+              {
+                supplier.email
+                  ? (
+                    <b className="text-uppercase d-block text-muted mb-4">
+                      {`Email: ${supplier.email}`}
+                    </b>
+                  )
+                  : null
+              }
+              {
+                supplier.phoneNumber
+                  ? (
+                    <b className="text-uppercase d-block text-muted mb-4">
+                      {`Number: ${supplier.phoneNumber}`}
+                    </b>
+                  )
+                  : null
+              }
             </div>
             <div className="divider" />
             <b className="text-uppercase">{t('supplier.contactSection.findUs')}</b>
@@ -101,16 +126,30 @@ const Supplier = ({ match, t }) => {
               </Col>
               <Col sm={12}>
                 <div className="supplier-results-side-box">
-                  <div className="mb-4">
-                    <b className="text-uppercase text-muted">{t('supplier.results.budget')}</b>
-                    <hr className="hr-xs" />
-                    <b>{t('supplier.results.amount')}</b>
-                  </div>
-                  <div>
-                    <b className="text-uppercase text-muted">{t('supplier.results.services')}</b>
-                    <hr className="hr-xs" />
-                    <b>{t('supplier.results.servicesList')}</b>
-                  </div>
+                  {
+                    supplier.minPrice && supplier.maxPrice
+                      ? (
+                        <div className="mb-4">
+                          <b className="text-uppercase text-muted">Budget</b>
+                          <hr className="hr-xs" />
+                          <b>{`$${supplier.minPrice} - $${supplier.maxPrice}`}</b>
+                        </div>
+                      )
+                      : null
+                  }
+                  {
+                    supplier.facilities
+                      ? (
+                        <div>
+                          <b className="text-uppercase text-muted">Services</b>
+                          <hr className="hr-xs" />
+                          <b>
+                            {supplier.facilities}
+                          </b>
+                        </div>
+                      )
+                      : null
+                  }
                 </div>
               </Col>
             </Row>
