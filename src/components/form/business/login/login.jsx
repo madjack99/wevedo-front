@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
 
-import {
-  Row, Col, Form, Button, FormGroup,
-} from 'react-bootstrap';
+import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
 import '../../form.scss';
 
@@ -14,6 +12,7 @@ import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 
+import Checkbox from '../../../ui/checkbox';
 import ResetPasswordWindow from '../../../reset-password-window';
 
 const LoginUserForm = ({ login, isLoggedIn }) => {
@@ -59,7 +58,9 @@ const LoginUserForm = ({ login, isLoggedIn }) => {
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
-              <Form.Label className="form__label mb-0">Email Address</Form.Label>
+              <Form.Label className="form__label mb-0">
+                Email Address
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="email"
@@ -95,7 +96,10 @@ const LoginUserForm = ({ login, isLoggedIn }) => {
             <FormGroup controlId="passwordActions">
               <Row>
                 <Col>
-                  <Form.Check className="form__check mr-auto" label="Remember me" />
+                  <Checkbox
+                    className="form__check mr-auto"
+                    labelText="Remember me"
+                  />
                 </Col>
                 <Col className="text-right">
                   <Button
@@ -106,7 +110,10 @@ const LoginUserForm = ({ login, isLoggedIn }) => {
                   </Button>
                 </Col>
               </Row>
-              <ResetPasswordWindow show={modalShow} onHide={() => setModalShow(false)} />
+              <ResetPasswordWindow
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -123,9 +130,10 @@ const LoginUserForm = ({ login, isLoggedIn }) => {
 
             <div className="form__question text-center mt-5">
               <span>
-                Don&apos;t have an account?
-                {' '}
-                <Link className="text-wevedo" to="/business-signup-1">Sign Up</Link>
+                Don&apos;t have an account?{' '}
+                <Link className="text-wevedo" to="/business-signup-1">
+                  Sign Up
+                </Link>
               </span>
             </div>
           </Form>
@@ -142,4 +150,7 @@ const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginUserForm);
