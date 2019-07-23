@@ -1,26 +1,34 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
 
-import {
-  Row, Col, Form, Button, FormGroup,
-} from 'react-bootstrap';
+import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
 import '../../form.scss';
 
 import config from '../../../../config';
 
 import {
-  fetchSignUp, fetchLogin, fetchEmailStatus, resetError,
+  fetchSignUp,
+  fetchLogin,
+  fetchEmailStatus,
+  resetError,
 } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({
-  signUp, login, emailStatus, cleanForm, isLoggedIn,
+  signUp,
+  login,
+  emailStatus,
+  cleanForm,
+  isLoggedIn,
+  t,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -28,7 +36,10 @@ const SignUpUserForm = ({
     cleanForm();
   }, [cleanForm]);
 
-  const handleSocialSignUp = async ({ _profile: profile, _provider: provider }) => {
+  const handleSocialSignUp = async ({
+    _profile: profile,
+    _provider: provider,
+  }) => {
     login(wevedoService.socialLogin, {
       ...profile,
       provider,
@@ -69,7 +80,7 @@ const SignUpUserForm = ({
       </Row>
 
       <div className="form__divider text-center m-5">
-        <span>OR</span>
+        <span>{t('signAndLogForm.or')}</span>
       </div>
       <Formik
         className="form"
@@ -78,7 +89,10 @@ const SignUpUserForm = ({
           password: '',
         }}
         onSubmit={async ({ email, password }, { setSubmitting, setErrors }) => {
-          const isNewEmail = await emailStatus({ email }, wevedoService.checkEmail);
+          const isNewEmail = await emailStatus(
+            { email },
+            wevedoService.checkEmail,
+          );
 
           if (isNewEmail) {
             const body = {
@@ -105,7 +119,9 @@ const SignUpUserForm = ({
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
-              <Form.Label className="form__label mb-0">Email Address</Form.Label>
+              <Form.Label className="form__label mb-0">
+                {t('signAndLogForm.emailLabel')}
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="email"
@@ -122,7 +138,9 @@ const SignUpUserForm = ({
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-              <Form.Label className="form__label mb-0">Password</Form.Label>
+              <Form.Label className="form__label mb-0">
+                {t('signAndLogForm.passwordLabel')}
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="password"
@@ -139,7 +157,10 @@ const SignUpUserForm = ({
             </Form.Group>
 
             <FormGroup>
-              <Form.Check className="form__check mr-auto" label="Remember me" />
+              <Form.Check
+                className="form__check mr-auto"
+                label={t('signAndLogForm.rememberMe')}
+              />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -150,15 +171,16 @@ const SignUpUserForm = ({
                 size="lg"
                 disabled={isSubmitting}
               >
-                Sign up
+                {t('signAndLogForm.signUp')}
               </Button>
             </FormGroup>
 
             <div className="form__question text-center mt-5">
               <span>
-                Already have an account?
-                {' '}
-                <Link className="text-wevedo" to="/login">Login</Link>
+                {t('signAndLogForm.alreadyHaveAccount')}{' '}
+                <Link className="text-wevedo" to="/login">
+                  {t('signAndLogForm.logIn')}
+                </Link>
               </span>
             </div>
           </Form>
@@ -177,4 +199,10 @@ const mapDispatchToProps = dispatch => ({
   cleanForm: () => dispatch(resetError()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpUserForm);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(SignUpUserForm);

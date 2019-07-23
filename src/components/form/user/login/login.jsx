@@ -72,7 +72,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
       </Row>
 
       <div className="form__divider text-center m-5">
-        <span>{t('login.or')}</span>
+        <span>{t('signAndLogForm.or')}</span>
       </div>
 
       <Formik
@@ -109,7 +109,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">
-                {t('login.form.emailPlaceholder')}
+                {t('signAndLogForm.emailLabel')}
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -128,7 +128,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
 
             <Form.Group controlId="formPassword">
               <Form.Label className="form__label mb-0">
-                {t('login.form.passwordPlaceholder')}
+                {t('signAndLogForm.passwordLabel')}
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -151,7 +151,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
                   {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
                   <Checkbox
                     className="form__check mr-auto"
-                    labelText={t('login.form.rememberMeLabel')}
+                    labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
                 <Col className="text-right">
@@ -159,7 +159,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
                     bsPrefix="password-btn"
                     onClick={() => setModalShow(true)}
                   >
-                    {t('login.form.forgotPassword')}
+                    {t('signAndLogForm.forgotPassword')}
                   </Button>
                 </Col>
               </Row>
@@ -177,15 +177,15 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
                 size="lg"
                 disabled={isSubmitting}
               >
-                {t('login.form.loginBtn')}
+                {t('signAndLogForm.logIn')}
               </Button>
             </FormGroup>
 
             <div className="form__question text-center mt-5">
               <span>
-                {t('login.form.noAccount')}{' '}
+                {t('signAndLogForm.noAccount')}{' '}
                 <Link className="text-wevedo" to="/signup">
-                  {t('login.form.signUp')}
+                  {t('signAndLogForm.signUp')}
                 </Link>
               </span>
             </div>
