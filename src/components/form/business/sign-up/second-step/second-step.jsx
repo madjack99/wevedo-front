@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -18,6 +20,7 @@ const SecondStepSignUpBusinessForm = ({
   updateUser,
   emailStatus,
   history,
+  t,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -72,7 +75,10 @@ const SecondStepSignUpBusinessForm = ({
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="mb-5" controlId="formEmail">
-            <Form.Label className="form__label mb-0">Business Email</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {' '}
+              {t('business-signup.form.emailPlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="email"
@@ -90,7 +96,7 @@ const SecondStepSignUpBusinessForm = ({
 
           <Form.Group className="mb-5" controlId="formPhoneNumber">
             <Form.Label className="form__label mb-0">
-              Business Phone Number
+              {t('business-signup.form.numberPlaceholder')}
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -108,7 +114,9 @@ const SecondStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formPostcode">
-            <Form.Label className="form__label mb-0">Your postcode</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.postcodePlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="text"
@@ -126,7 +134,7 @@ const SecondStepSignUpBusinessForm = ({
 
           <Form.Group className="mb-5" controlId="formAddress">
             <Form.Label className="form__label mb-0">
-              Business Address
+              {t('business-signup.form.addressPlaceholder')}
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -144,7 +152,9 @@ const SecondStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formTownOrCity">
-            <Form.Label className="form__label mb-0">Town/City</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.cityPlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="text"
@@ -161,7 +171,9 @@ const SecondStepSignUpBusinessForm = ({
           </Form.Group>
 
           <Form.Group className="mb-5" controlId="formCountry">
-            <Form.Label className="form__label mb-0">Country</Form.Label>
+            <Form.Label className="form__label mb-0">
+              {t('business-signup.form.countryPlaceholder')}
+            </Form.Label>
             <Form.Control
               className="form__control"
               type="text"
@@ -185,7 +197,7 @@ const SecondStepSignUpBusinessForm = ({
               size="lg"
               disabled={isSubmitting}
             >
-              Next step
+              {t('business-signup.form.nextStepBtn')}
             </Button>
           </FormGroup>
         </Form>
@@ -202,8 +214,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  compose(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    ),
+    withTranslation('common'),
   )(SecondStepSignUpBusinessForm),
 );
