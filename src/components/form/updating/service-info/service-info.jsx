@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import { withRouter, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -20,6 +22,7 @@ const ServiceInfoUpdatingForm = ({
   login,
   signUp,
   history,
+  t,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -74,7 +77,7 @@ const ServiceInfoUpdatingForm = ({
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="updating-form__group">
             <Form.Label className="updating-form__label">
-              Describe your business and services
+              {t('serviceInfo.describeService')}
             </Form.Label>
             <Form.Control
               className="form__textarea updating-form__control"
@@ -93,18 +96,17 @@ const ServiceInfoUpdatingForm = ({
 
           <Form.Group className="updating-form__group">
             <Form.Label className="updating-form__label">
-              From which price can I hire Service name?
+              {t('serviceInfo.startingPrice')}
             </Form.Label>
             <Form.Text className="updating-form__text">
-              Enter your average pricing in order for your Shopfont to appear in
-              results when couples search by price
+              {t('serviceInfo.startingPriceDescription')}
             </Form.Text>
             <Row>
               <Col md={3}>
                 <Form.Control
                   className="updating-form__control"
                   name="minPrice"
-                  placeholder="Minimum Price"
+                  placeholder={t('serviceInfo.minPricePlaceholder')}
                   value={values.minPrice}
                   onChange={handleChange}
                   isValid={values.minPrice && !errors.minPrice}
@@ -121,7 +123,7 @@ const ServiceInfoUpdatingForm = ({
                 <Form.Control
                   className="updating-form__control"
                   name="maxPrice"
-                  placeholder="Maximum Price"
+                  placeholder={t('serviceInfo.maxPricePlaceholder')}
                   value={values.maxPrice}
                   onChange={handleChange}
                   isValid={values.maxPrice && !errors.maxPrice}
@@ -139,12 +141,12 @@ const ServiceInfoUpdatingForm = ({
 
           <Form.Group className="updating-form__group">
             <Form.Label className="updating-form__label">
-              Which facilities do you provide?
+              {t('serviceInfo.whatFacilities')}
             </Form.Label>
             <Form.Control
               className="updating-form__control"
               name="facilities"
-              placeholder="Eg. Pre wedding, Post wedding, ..."
+              placeholder={t('serviceInfo.facilitiesDescriptionPlaceholder')}
               value={values.facilities}
               onChange={handleChange}
               isValid={values.facilities && !errors.facilities}
@@ -162,7 +164,7 @@ const ServiceInfoUpdatingForm = ({
               size="lg"
               disabled={isSubmitting}
             >
-              Save
+              {t('serviceInfo.save')}
             </Button>
           </Form.Group>
         </Form>
@@ -182,8 +184,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  compose(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    ),
+    withTranslation('common'),
   )(ServiceInfoUpdatingForm),
 );
