@@ -125,11 +125,6 @@
   },
 
   "business-signup": {
-    "jumbotron": {
-      "largeTitle": "Hey,",
-      "smallTitle": "Glad to see you...",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
     "form": {
       "usernamePlaceholder": "Username",
       "passwordPlaceholder": "Password",
@@ -182,10 +177,11 @@
       "pTwo": "Please check your e-mail."
     }
   },
-  "signup": {
+  "businessAndUserSignup": {
     "jumbotron": {
       "largeTitle": "Hey,",
-      "smallTitle": "Glad to see you..."
+      "smallTitle": "Glad to see you...",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
   },
 

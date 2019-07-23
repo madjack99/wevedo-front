@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 import './first-step.scss';
 
@@ -7,15 +8,15 @@ import FirstStepSignUpBusinessForm from '../../../../components/form/business/si
 
 import userSideBackground from '../../../../assets/images/businesslogin.png';
 
-const ScreensUserSignUp = () => (
+const ScreensUserSignUp = ({ t }) => (
   <EnterLayoutScreen
     sideBackground={userSideBackground}
-    welcomeTitle="Hey,"
-    welcomeSubtitle="Glad to see you..."
-    welcomeText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    welcomeTitle={t('businessAndUserSignup.jumbotron.largeTitle')}
+    welcomeSubtitle={t('businessAndUserSignup.jumbotron.smallTitle')}
+    welcomeText={t('businessAndUserSignup.jumbotron.text')}
   >
     <FirstStepSignUpBusinessForm />
   </EnterLayoutScreen>
 );
 
-export default ScreensUserSignUp;
+export default withTranslation('common')(ScreensUserSignUp);
