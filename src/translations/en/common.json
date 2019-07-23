@@ -161,14 +161,6 @@
     "jumbotron": {
       "largeTitle": "Welcome Back,",
       "smallTitle": "Please login to your account"
-    },
-    "form": {
-      "emailPlaceholder": "Email Address",
-      "passwordPlaceholder": "Password",
-      "rememberMeLabel": "Remember me",
-      "loginBtn": "Login",
-      "noAccount": "Don't have and account?",
-      "signUp": "Signup"
     }
   },
   "business-signup": {
@@ -212,6 +204,7 @@
     "rememberMe": "Remember me",
     "signUp": "Sign up",
     "forgotPassword": "Forgot password?",
-    "logIn": "Login"
+    "logIn": "Login",
+    "noAccount": "Don't have and account?"
   }
 }
