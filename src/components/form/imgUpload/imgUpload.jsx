@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 import {
   Container,
   Row,
@@ -57,6 +59,7 @@ class ImgUpload extends React.Component {
   };
 
   render() {
+    const { t } = this.props;
     const { errorMsg } = this.state;
     const { files } = this.state;
     const customClassName = files.length
@@ -75,7 +78,7 @@ class ImgUpload extends React.Component {
           <Row className="pt-4 pb-4">
             <Col sm={12}>
               <h6 className="text-uppercase text-proxima-bold">
-                Upload Photos
+                {t('imgUpload.uploadPhotos')}
               </h6>
               <hr className="hr-md" />
             </Col>
@@ -87,11 +90,13 @@ class ImgUpload extends React.Component {
                 <DragAndDrop handleDrop={this.handleDrop}>
                   <label htmlFor="fileUpload">
                     <div className="p-5">
-                      <span className="font-weight-bold">Upload photos </span>
-                      or just drag and drop
+                      <span className="font-weight-bold">
+                        {t('imgUpload.uploadPhotos')}{' '}
+                      </span>
+                      {t('imgUpload.dragAndDrop')}
                       <br />
                       <span className="text-muted">
-                        + Add at least 1 Photos
+                        {t('imgUpload.addAtLeast')}
                       </span>
                     </div>
                   </label>
@@ -127,7 +132,7 @@ class ImgUpload extends React.Component {
                 </Alert>
               )}
               <Button size="lg" onClick={this.handleNextStep}>
-                Next step
+                {t('business-signup.form.nextStepBtn')}
                 <i className="fa fa-arrow-right" />
               </Button>
             </Col>
@@ -214,7 +219,10 @@ const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
 )(ImgUpload);

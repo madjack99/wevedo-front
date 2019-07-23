@@ -206,5 +206,10 @@
     "forgotPassword": "Forgot password?",
     "logIn": "Login",
     "noAccount": "Don't have and account?"
+  },
+  "imgUpload": {
+    "uploadPhotos": "Upload Photos",
+    "dragAndDrop": "or just drag and drop",
+    "addAtLeast": "+ Add at least 1 Photos"
   }
 }
