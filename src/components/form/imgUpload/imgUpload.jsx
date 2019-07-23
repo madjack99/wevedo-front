@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  Container, Row, Col, Button, Form, Image, Alert,
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  Image,
+  Alert,
 } from 'react-bootstrap';
 
 import { updateUser } from '../../../actions/user-actions';
@@ -18,7 +24,9 @@ class ImgUpload extends React.Component {
   handleUpload = e => {
     const newImg = e.target.files[0];
     if (newImg) {
-      this.setState({ files: [...this.state.files, URL.createObjectURL(newImg)] });
+      this.setState({
+        files: [...this.state.files, URL.createObjectURL(newImg)],
+      });
     }
   };
 
@@ -36,8 +44,8 @@ class ImgUpload extends React.Component {
   handleNextStep = () => {
     const { updateUser } = this.props;
     const { files } = this.state;
-    if (files.length < 3) {
-      this.setState({ errorMsg: 'Please, provide at least 3 photos.' });
+    if (files.length < 1) {
+      this.setState({ errorMsg: 'Please, provide at least 1 photos.' });
     } else {
       const photoObject = files.reduce((acc, photo, index) => {
         acc[index] = photo;
@@ -66,7 +74,9 @@ class ImgUpload extends React.Component {
           </Row>
           <Row className="pt-4 pb-4">
             <Col sm={12}>
-              <h6 className="text-uppercase text-proxima-bold">Upload Photos</h6>
+              <h6 className="text-uppercase text-proxima-bold">
+                Upload Photos
+              </h6>
               <hr className="hr-md" />
             </Col>
             <Col
@@ -80,7 +90,9 @@ class ImgUpload extends React.Component {
                       <span className="font-weight-bold">Upload photos </span>
                       or just drag and drop
                       <br />
-                      <span className="text-muted">+ Add at least 3 Photos</span>
+                      <span className="text-muted">
+                        + Add at least 1 Photos
+                      </span>
                     </div>
                   </label>
                 </DragAndDrop>
@@ -96,16 +108,16 @@ class ImgUpload extends React.Component {
 
             {files
               ? files.map((src, i) => (
-                <Col
-                  sm={4}
-                  key={i}
-                  className="position-relative"
-                  onClick={() => this.handleDelete(i)}
-                >
-                  <h3 className="delete-icon">&times;</h3>
-                  <Image src={src} alt="new img" fluid />
-                </Col>
-              ))
+                  <Col
+                    sm={4}
+                    key={i}
+                    className="position-relative"
+                    onClick={() => this.handleDelete(i)}
+                  >
+                    <h3 className="delete-icon">&times;</h3>
+                    <Image src={src} alt="new img" fluid />
+                  </Col>
+                ))
               : null}
 
             <Col sm={12} className="text-right text-uppercase mt-2 mb-4">
