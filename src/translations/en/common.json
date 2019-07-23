@@ -123,12 +123,7 @@
       "getStarted": "Get Started"
     }
   },
-  "business-login": {
-    "jumbotron": {
-      "largeTitle": "Welcome Back,",
-      "smallTitle": "Please login to your account"
-    }
-  },
+
   "business-signup": {
     "jumbotron": {
       "largeTitle": "Hey,",
@@ -176,10 +171,10 @@
     "or": "OR",
     "alreadyHaveAccount": "Already have an account?"
   },
-  "login": {
+  "businessAndUserLogin": {
     "jumbotron": {
       "largeTitle": "Welcome Back,",
-      "smallTitle": "Please login to your account"
+      "smallTitle": "Please login to your account..."
     },
     "passResetModal": {
       "title": "Reset Password",

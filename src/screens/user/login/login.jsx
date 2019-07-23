@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 import './login.scss';
 
@@ -7,14 +8,14 @@ import LoginUserForm from '../../../components/form/user/login';
 
 import userSideBackground from '../../../assets/images/login-img.png';
 
-const ScreensUserSignUp = () => (
+const ScreensUserSignUp = ({ t }) => (
   <EnterLayoutScreen
     sideBackground={userSideBackground}
-    welcomeTitle="Welcome Back,"
-    welcomeSubtitle="Please login to your account..."
+    welcomeTitle={t('businessAndUserLogin.jumbotron.largeTitle')}
+    welcomeSubtitle={t('businessAndUserLogin.jumbotron.smallTitle')}
   >
     <LoginUserForm />
   </EnterLayoutScreen>
 );
 
-export default ScreensUserSignUp;
+export default withTranslation('common')(ScreensUserSignUp);
