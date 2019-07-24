@@ -3,25 +3,19 @@ import {
   fetchLogin,
   fetchSignOut,
   fetchEmailStatus,
-  resetError,
+  fetchPhoneStatus,
 } from './auth-actions';
 
-import {
-  fetchUser,
-  updateUser,
-  removeUser,
-} from './user-actions';
+import { fetchUser, updateUser, removeUser } from './user-actions';
 
-import {
-  fetchCategories,
-} from './category-actions';
+import { fetchCategories } from './category-actions';
 
 export {
   fetchSignUp,
   fetchLogin,
   fetchSignOut,
   fetchEmailStatus,
-  resetError,
+  fetchPhoneStatus,
   fetchUser,
   updateUser,
   removeUser,

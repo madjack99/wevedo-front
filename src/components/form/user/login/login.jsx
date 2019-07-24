@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -12,7 +12,7 @@ import '../../form.scss';
 
 import config from '../../../../config';
 
-import { fetchSignUp, fetchLogin, resetError } from '../../../../actions';
+import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 
@@ -20,13 +20,9 @@ import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 import Checkbox from '../../../ui/checkbox';
 
-const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
+const LoginUserForm = ({ login, isLoggedIn, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
-
-  useEffect(() => {
-    cleanForm();
-  }, [cleanForm]);
 
   const handleSocialSignUp = async ({
     _profile: profile,
@@ -71,7 +67,7 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
         </Col>
       </Row>
 
-      <div className="form__divider text-center m-5">
+      <div className="form__divider text-center my-5">
         <span>{t('signAndLogForm.or')}</span>
       </div>
 
@@ -147,14 +143,13 @@ const LoginUserForm = ({ login, cleanForm, isLoggedIn, t }) => {
 
             <FormGroup controlId="passwordActions">
               <Row>
-                <Col>
-                  {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
+                <Col md={6} className="text-center text-md-left mb-2">
                   <Checkbox
                     className="form__check mr-auto"
                     labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
-                <Col className="text-right">
+                <Col md={6} className="text-center text-md-right">
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => setModalShow(true)}
@@ -201,7 +196,6 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
-  cleanForm: () => dispatch(resetError()),
 });
 
 export default compose(
