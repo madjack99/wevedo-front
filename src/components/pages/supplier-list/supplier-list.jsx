@@ -185,6 +185,8 @@ function Providers({
   currentPage,
   onPaginationChange,
 }) {
+  const [gridView, changeView] = useState(true);
+
   function ProviderGrid({ provider }) {
     const { _id: providerId } = provider;
     return (
@@ -306,33 +308,43 @@ function Providers({
           <Button variant="secondary" className="mr-2">
             Show map
           </Button>
-          <Button variant="secondary" className="mr-2">
+          <Button
+            variant={gridView ? 'primary' : 'secondary'}
+            className="mr-2"
+            onClick={() => changeView(!gridView)}
+          >
             <i className="fas fa-th-large" />
           </Button>
-          <Button variant="primary">
+          <Button
+            variant={gridView ? 'secondary' : 'primary'}
+            onClick={() => changeView(!gridView)}
+          >
             <i className="fas fa-bars" />
           </Button>
         </Col>
       </Row>
-      {/* {providers.map(provider => {
-        const { _id: id } = provider;
-        return (
-          <React.Fragment key={id}>
-            <ProviderCard provider={provider} />
-            <div className="divider" />
-          </React.Fragment>
-        );
-      })} */}
-      <Row>
-        {providers.map(provider => {
+      {gridView ? (
+        <Row>
+          {providers.map(provider => {
+            const { _id: id } = provider;
+            return (
+              <React.Fragment key={id}>
+                <ProviderGrid provider={provider} />
+              </React.Fragment>
+            );
+          })}
+        </Row>
+      ) : (
+        providers.map(provider => {
           const { _id: id } = provider;
           return (
             <React.Fragment key={id}>
-              <ProviderGrid provider={provider} />
+              <ProviderCard provider={provider} />
+              <div className="divider" />
             </React.Fragment>
           );
-        })}
-      </Row>
+        })
+      )}
       <PaginationButtons className="mt-5" />
     </React.Fragment>
   );
