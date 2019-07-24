@@ -67,7 +67,7 @@ const LoginUserForm = ({ login, isLoggedIn, t }) => {
         </Col>
       </Row>
 
-      <div className="form__divider text-center m-5">
+      <div className="form__divider text-center my-5">
         <span>{t('signAndLogForm.or')}</span>
       </div>
 
@@ -143,14 +143,13 @@ const LoginUserForm = ({ login, isLoggedIn, t }) => {
 
             <FormGroup controlId="passwordActions">
               <Row>
-                <Col>
-                  {/* <Form.Check className="form__check mr-auto" label="Remember me" /> */}
+                <Col sm={6} className="text-center text-md-left mb-2">
                   <Checkbox
                     className="form__check mr-auto"
                     labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
-                <Col className="text-right">
+                <Col sm={6} className="text-center text-md-right">
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => setModalShow(true)}
