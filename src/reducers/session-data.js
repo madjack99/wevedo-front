@@ -94,12 +94,6 @@ const updateSessionData = (state, action) => {
         ...state.sessionData,
         error: action.payload,
       };
-    case actionTypes.RESET_ERROR:
-      return {
-        isLoggedIn: false,
-        token: null,
-        error: null,
-      };
     default:
       return state.sessionData;
   }

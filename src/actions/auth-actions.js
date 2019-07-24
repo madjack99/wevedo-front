@@ -68,10 +68,6 @@ const phoneStatusFailed = error => ({
   payload: error,
 });
 
-export const resetError = () => ({
-  type: actionTypes.RESET_ERROR,
-});
-
 export const fetchSignUp = dispatch => async (register, body) => {
   dispatch(signUpRequested());
 

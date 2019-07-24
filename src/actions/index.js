@@ -4,7 +4,6 @@ import {
   fetchSignOut,
   fetchEmailStatus,
   fetchPhoneStatus,
-  resetError,
 } from './auth-actions';
 
 import { fetchUser, updateUser, removeUser } from './user-actions';
@@ -17,7 +16,6 @@ export {
   fetchSignOut,
   fetchEmailStatus,
   fetchPhoneStatus,
-  resetError,
   fetchUser,
   updateUser,
   removeUser,

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -14,29 +14,13 @@ import config from '../../../../config';
 
 import Checkbox from '../../../ui/checkbox';
 
-import {
-  fetchSignUp,
-  fetchLogin,
-  fetchEmailStatus,
-  resetError,
-} from '../../../../actions';
+import { fetchSignUp, fetchLogin, fetchEmailStatus } from '../../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
 import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
-const SignUpUserForm = ({
-  signUp,
-  login,
-  emailStatus,
-  cleanForm,
-  isLoggedIn,
-  t,
-}) => {
+const SignUpUserForm = ({ signUp, login, emailStatus, isLoggedIn, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
-
-  useEffect(() => {
-    cleanForm();
-  }, [cleanForm]);
 
   const handleSocialSignUp = async ({
     _profile: profile,
@@ -198,7 +182,6 @@ const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
   emailStatus: fetchEmailStatus(dispatch),
-  cleanForm: () => dispatch(resetError()),
 });
 
 export default compose(
