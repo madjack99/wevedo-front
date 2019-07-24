@@ -12,6 +12,8 @@ import '../../form.scss';
 
 import config from '../../../../config';
 
+import Checkbox from '../../../ui/checkbox';
+
 import {
   fetchSignUp,
   fetchLogin,
@@ -157,9 +159,9 @@ const SignUpUserForm = ({
             </Form.Group>
 
             <FormGroup>
-              <Form.Check
+              <Checkbox
                 className="form__check mr-auto"
-                label={t('signAndLogForm.rememberMe')}
+                labelText={t('signAndLogForm.rememberMe')}
               />
             </FormGroup>
 
