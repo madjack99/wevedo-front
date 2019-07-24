@@ -55,6 +55,19 @@ const emailStatusFailed = error => ({
   payload: error,
 });
 
+const phoneStatusRequested = () => ({
+  type: actionTypes.FETCH_PHONE_STATUS_REQUEST,
+});
+
+const phoneStatusSucceed = () => ({
+  type: actionTypes.FETCH_PHONE_STATUS_SUCCESS,
+});
+
+const phoneStatusFailed = error => ({
+  type: actionTypes.FETCH_PHONE_STATUS_FAILURE,
+  payload: error,
+});
+
 export const resetError = () => ({
   type: actionTypes.RESET_ERROR,
 });
@@ -91,7 +104,10 @@ export const fetchSignOut = dispatch => async service => {
   dispatch(signOutRequested());
 
   try {
-    const { data, data: { status } } = await service.signOut();
+    const {
+      data,
+      data: { status },
+    } = await service.signOut();
     console.log(`IS EXIT: ${status}`);
     Cookies.remove('token');
     dispatch(signOutSucceed());
@@ -111,6 +127,19 @@ export const fetchEmailStatus = dispatch => async (body, checkEmail) => {
     return data;
   } catch (error) {
     dispatch(emailStatusFailed(error.response.data.message));
+    return null;
+  }
+};
+
+export const fetchPhoneStatus = dispatch => async (body, checkPhone) => {
+  dispatch(phoneStatusRequested());
+
+  try {
+    const { data } = await checkPhone(body);
+    dispatch(phoneStatusSucceed());
+    return data;
+  } catch (error) {
+    dispatch(phoneStatusFailed(error.response.data.message));
     return null;
   }
 };

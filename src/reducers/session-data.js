@@ -81,6 +81,19 @@ const updateSessionData = (state, action) => {
         ...state.sessionData,
         error: action.payload,
       };
+    case actionTypes.FETCH_PHONE_STATUS_REQUEST:
+      return {
+        ...state.sessionData,
+      };
+    case actionTypes.FETCH_PHONE_STATUS_SUCCESS:
+      return {
+        ...state.sessionData,
+      };
+    case actionTypes.FETCH_PHONE_STATUS_FAILURE:
+      return {
+        ...state.sessionData,
+        error: action.payload,
+      };
     case actionTypes.RESET_ERROR:
       return {
         isLoggedIn: false,
