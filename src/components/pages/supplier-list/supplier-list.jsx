@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Row, Container, Col, Form, Button, ButtonToolbar,
+  Row,
+  Container,
+  Col,
+  Form,
+  Button,
+  ButtonToolbar,
+  Card,
 } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 import { Range } from 'rc-slider';
@@ -174,8 +180,53 @@ function Filters() {
 }
 
 function Providers({
-  providers, numberOfProviders, currentPage, onPaginationChange,
+  providers,
+  numberOfProviders,
+  currentPage,
+  onPaginationChange,
 }) {
+  function ProviderGrid({ provider }) {
+    const { _id: providerId } = provider;
+    return (
+      <Col sm={6}>
+        <Link to={`/supplier/${providerId}`}>
+          <Card className="mb-4">
+            <Card.Img
+              variant="top"
+              src={provider.profileImageURL}
+              alt="Wevedo Venues"
+            />
+            <Card.Body>
+              <Card.Title className="mb-1">{provider.firstName}</Card.Title>
+              <span className="results-data-location">
+                <i className="fas fa-map-marker-alt" />
+                {provider.regionName}
+              </span>
+              <Card.Text className="mt-3">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod ...
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <Row>
+                <Col className="pl-md-3 text-center">
+                  <b>$985 - $85,000</b>
+                </Col>
+                <span
+                  className="d-sm-none d-md-block"
+                  style={{ borderRight: '1px solid #e9ecef' }}
+                />
+                <Col className="pr-md-3 text-center">
+                  <b>Up to 220 Capacity</b>{' '}
+                </Col>
+              </Row>
+            </Card.Footer>
+          </Card>
+        </Link>
+      </Col>
+    );
+  }
+
   function ProviderCard({ provider }) {
     const { _id: providerId } = provider;
     return (
@@ -187,13 +238,11 @@ function Providers({
           <Col sm={7}>
             <h5>{provider.firstName}</h5>
             <span className="results-data-location">
-              <i className="fas fa-map-marker-alt" />
-              {' '}
-              {provider.regionName}
+              <i className="fas fa-map-marker-alt" /> {provider.regionName}
             </span>
             <p className="mt-2 mb-2">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua...
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua...
             </p>
             <b>$985 - $85,000 | Up to 220 Capacity</b>
           </Col>
@@ -206,9 +255,10 @@ function Providers({
     function ResultsArea() {
       const numberOfProvidersShown = config.providersPerPage * currentPage;
       const beginRangeCount = config.providersPerPage * (currentPage - 1) + 1;
-      const endRangeCount = numberOfProvidersShown > numberOfProviders
-        ? numberOfProviders
-        : numberOfProvidersShown;
+      const endRangeCount =
+        numberOfProvidersShown > numberOfProviders
+          ? numberOfProviders
+          : numberOfProvidersShown;
 
       return (
         <span className="text-muted">
@@ -264,7 +314,7 @@ function Providers({
           </Button>
         </Col>
       </Row>
-      {providers.map(provider => {
+      {/* {providers.map(provider => {
         const { _id: id } = provider;
         return (
           <React.Fragment key={id}>
@@ -272,7 +322,17 @@ function Providers({
             <div className="divider" />
           </React.Fragment>
         );
-      })}
+      })} */}
+      <Row>
+        {providers.map(provider => {
+          const { _id: id } = provider;
+          return (
+            <React.Fragment key={id}>
+              <ProviderGrid provider={provider} />
+            </React.Fragment>
+          );
+        })}
+      </Row>
       <PaginationButtons className="mt-5" />
     </React.Fragment>
   );
