@@ -96,14 +96,14 @@ export const fetchLogin = dispatch => async (login, body) => {
   }
 };
 
-export const fetchSignOut = dispatch => async service => {
+export const fetchSignOut = dispatch => async signOut => {
   dispatch(signOutRequested());
 
   try {
     const {
       data,
       data: { status },
-    } = await service.signOut();
+    } = await signOut();
     console.log(`IS EXIT: ${status}`);
     Cookies.remove('token');
     dispatch(signOutSucceed());
