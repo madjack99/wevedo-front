@@ -22,23 +22,14 @@ import photography from '../../assets/images/photography.png';
 import decoration from '../../assets/images/decoration.png';
 
 import ScreensLayoutsMain from '../Layouts/Main';
-import Hero from '../../components/Hero';
 
 const ScreensHome = ({ t }) => {
   return (
-    <ScreensLayoutsMain>
-      <Hero
-        title="We can make&#013; it happen"
-        subtitle="Special moment"
-        backgroundImage={backgroundImage}
-      >
-        <h4 className="home__subtitle">SpecialMoment</h4>
-        <h1>
-          We can make
-          <br /> it happen
-        </h1>
-      </Hero>
-
+    <ScreensLayoutsMain
+      title="We can make it happen"
+      subtitle="Special moment"
+      backgroundImage={backgroundImage}
+    >
       <Container className="howitworks">
         <Row>
           <Col>

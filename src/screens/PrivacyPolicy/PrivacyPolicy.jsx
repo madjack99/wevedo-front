@@ -1,17 +1,13 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 
-import BackgroundImage from '../../assets/images/common-header.png';
+import backgroundImage from '../../assets/images/common-header.png';
 
 import ScreensLayoutMain from '../Layouts/Main';
 import Hero from '../../components/Hero';
 
 const PrivacyPolicy = () => (
-  <ScreensLayoutMain>
-    <Hero backgroundImage={BackgroundImage}>
-      <h1>Privacy Policy</h1>
-    </Hero>
-
+  <ScreensLayoutMain title="Privacy Policy" backgroundImage={backgroundImage}>
     <Container className="mt-2 mb-2 mt-md-5 mb-md-5">
       <Row className="justify-content-center mt-5 mb-5">
         <Col sm={8} className="text-center mb-0 mb-md-3">
