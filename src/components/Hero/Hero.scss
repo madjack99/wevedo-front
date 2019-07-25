@@ -1,0 +1,21 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+
+  &__background-image {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  h4 {
+    font-size: 1rem;
+    line-height: 2;
+    letter-spacing: 5px;
+  }
+}
