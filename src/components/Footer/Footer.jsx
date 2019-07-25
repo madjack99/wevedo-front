@@ -17,7 +17,7 @@ const Footer = ({ t }) => (
             <span className="footer-dot" />
             <Nav.Link href="/terms">{t('footer.terms')}</Nav.Link>
             <span className="footer-dot" />
-            <Nav.Link href="/privacy">{t('footer.privacy')}</Nav.Link>
+            <Nav.Link href="/privacy-policy">{t('footer.privacy')}</Nav.Link>
           </Nav>
         </Col>
         <Col sm={2} xs className="text-center social-links">
