@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 
 import { Container, Row, Col, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Footer = ({ t }) => (
   <React.Fragment>
@@ -11,13 +12,21 @@ const Footer = ({ t }) => (
       <Row className="h-100 align-items-center">
         <Col sm={10} className="links">
           <Nav className="text-uppercase">
-            <Nav.Link href="/">{t('footer.wevedo')}</Nav.Link>
+            <LinkContainer to="/">
+              <Nav.Link>{t('footer.wevedo')}</Nav.Link>
+            </LinkContainer>
             <span className="footer-dot" />
-            <Nav.Link href="/contact">{t('footer.contact')}</Nav.Link>
+            <LinkContainer to="/contact">
+              <Nav.Link>{t('footer.contact')}</Nav.Link>
+            </LinkContainer>
             <span className="footer-dot" />
-            <Nav.Link href="/terms">{t('footer.terms')}</Nav.Link>
+            <LinkContainer to="/terms">
+              <Nav.Link>{t('footer.terms')}</Nav.Link>
+            </LinkContainer>
             <span className="footer-dot" />
-            <Nav.Link href="/privacy-policy">{t('footer.privacy')}</Nav.Link>
+            <LinkContainer to="/privacy-policy">
+              <Nav.Link>{t('footer.privacy')}</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Col>
         <Col sm={2} xs className="text-center social-links">
