@@ -1,12 +1,14 @@
 import React from 'react';
 
 import Header from '../../../components/Header';
+import Hero from '../../../components/Hero';
 import PopularSearches from '../../../components/PopularSearches';
 import Footer from '../../../components/Footer';
 
-const ScreensLayoutsMain = ({ children }) => (
+const ScreensLayoutsMain = ({ title, subtitle, backgroundImage, children }) => (
   <React.Fragment>
     <Header />
+    <Hero title={title} subtitle={subtitle} backgroundImage={backgroundImage} />
     {children}
     <PopularSearches />
     <Footer />
