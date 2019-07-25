@@ -1,6 +1,6 @@
 // Variables (not used for now...maybe later)
 
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -10,34 +10,35 @@ $gray-600: #868e96 !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
-$blue:    #052f99 !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #ffafbd !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #fce35c !default;
-$green:   #28a745 !default;
-$teal:    #0871b9 !default;
-$cyan:    #17a2b8 !default;
+$blue: #052f99 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #ffafbd !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #fce35c !default;
+$green: #28a745 !default;
+$teal: #0871b9 !default;
+$cyan: #17a2b8 !default;
 
-$wevedo:  #ffafbd !default;
+$wevedo: #ffafbd !default;
+$gray-w: #f4f7fc !default;
 
-$main:        #292929 !default;
-$secondary:   #6A6A6A !default;
-$tertiary:    #919191;
+$main: black !default;
+$secondary: #6a6a6a !default;
+$tertiary: #919191;
 
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $black !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $black !default;
 
-$facebook-color: #3B5998;
-$google-color:   #DC4437;
+$facebook-color: #3b5998;
+$google-color: #dc4437;
 
-$form-border-color:     #D0D0D0;
-$updating-form-border-color: #E8E8E9;
+$form-border-color: #d0d0d0;
+$updating-form-border-color: #e8e8e9;

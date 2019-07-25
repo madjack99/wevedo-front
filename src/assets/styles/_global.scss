@@ -5,7 +5,7 @@
 }
 
 html, body {
-	height: 100%;
+	height: calc(100% - 79px);
 	width: 100%;
 }
 
@@ -43,7 +43,7 @@ h1 {
 	font-size: 3rem;
 	letter-spacing: 5px;
 	line-height: 70px;
-	text-shadow: 0px 2px 5px #222;
+	text-shadow: 0px 1px 10px $gray-900;
 }
 
 h2,h3,h4,h5,h6 {
@@ -66,11 +66,11 @@ a {
 }
 
 form {
-	input, textarea, select {
+	input, textarea {
 		font-size: 13px !important; 
-		border: 0;
-		border-radius: 0;
-		border-bottom: 1px solid $gray-400;
+		border: 0 !important;
+		border-radius: 0 !important;
+		border-bottom: 1px solid $gray-400 !important;
 		transition: all .3s ease;
 	}
 	//to do: custom checkbox
@@ -85,5 +85,32 @@ form {
 		margin-top: -3.5px; 
 		width: 10px; 
 		height: 10px; 
+	}
+}
+
+.h-scroll {
+	overflow-x: auto;
+  	white-space: nowrap;
+  	flex-wrap: nowrap;
+  	.h-scroll__item {
+  		display: inline-block;
+  		float: none;
+  	}
+}
+
+.wrap {
+	white-space: normal;
+	flex-wrap: wrap;
+}
+
+@include media-breakpoint-up(lg) {
+	html, body { max-width: 1366px }
+	html {
+    	display: table;
+    	margin: auto;
+	}
+	body {
+	    display: block;
+	    vertical-align: middle;
 	}
 }
