@@ -1,20 +1,23 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'redux';
+
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 
-const Footer = () => (
+const Footer = ({ t }) => (
   <React.Fragment>
     <div className="footer-border" />
     <Container className="footer">
       <Row className="h-100 align-items-center">
         <Col sm={10} className="links">
           <Nav className="text-uppercase">
-            <Nav.Link href="/">© 2019 Wewedo</Nav.Link>
+            <Nav.Link href="/">{t('footer.wevedo')}</Nav.Link>
             <span className="footer-dot" />
-            <Nav.Link href="/contact">Contact</Nav.Link>
+            <Nav.Link href="/contact">{t('footer.contact')}</Nav.Link>
             <span className="footer-dot" />
-            <Nav.Link href="/terms">Terms & Conditions</Nav.Link>
+            <Nav.Link href="/terms">{t('footer.terms')}</Nav.Link>
             <span className="footer-dot" />
-            <Nav.Link href="/privacy">Privacy Policy</Nav.Link>
+            <Nav.Link href="/privacy">{t('footer.privacy')}</Nav.Link>
           </Nav>
         </Col>
         <Col sm={2} xs className="text-center social-links">
@@ -41,4 +44,4 @@ const Footer = () => (
   </React.Fragment>
 );
 
-export default Footer;
+export default compose(withTranslation('common'))(Footer);
