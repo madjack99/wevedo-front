@@ -1,0 +1,191 @@
+.login {
+  .login-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    .login-img-text {
+      position: absolute;
+      bottom: 0;
+      color: white;
+      h1 {
+        text-shadow: none;
+      }
+      h1,
+      h2 {
+        letter-spacing: 0.8px;
+      }
+      hr {
+        background: white;
+      }
+      p {
+        font-size: 15px;
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+  .login-form {
+    b {
+      font-size: 14px;
+    }
+    hr {
+      width: 20px;
+      height: 1px;
+      margin: 10px;
+      background: $dark;
+    }
+    form {
+      label {
+        font-size: 15px;
+        line-height: 1;
+        margin: 0;
+      }
+      input {
+        font-size: 14px !important;
+        padding-left: 0;
+      }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -webkit-border-radius: 0px;
+        background-image: url('../../assets/images/arrow-down.svg');
+        background-position: 99% 50%;
+        background-repeat: no-repeat;
+        background-size: 12px;
+        padding-left: 0;
+        border: 0;
+        border-bottom: 1px solid $gray-400 !important;
+        font-size: 14px !important;
+        color: #495057;
+      }
+      select::placeholder {
+        color: red;
+      }
+    }
+    .login-form-scrollable {
+      overflow-y: scroll;
+      max-height: 668px;
+      padding-right: 15px;
+    }
+    .login-form-social-btn {
+      button {
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: 14px;
+        margin: 10px;
+        padding: 15px 30px;
+      }
+      .login-form-social-btn-fb {
+        background: #3b5998;
+      }
+      .login-form-social-btn-g {
+        background: #dd4b39;
+        &:hover {
+          background: red !important;
+        }
+      }
+    }
+  }
+}
+
+.business-signup-config {
+  input,
+  textarea {
+    background-color: #f4f7fc;
+    border: 0;
+  }
+  input::placeholder {
+    font-size: 11px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+  .busines-signup-config__uploadImg-dropbox {
+    background: #f4f7fc;
+    border: 2px dashed $gray-400;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  .busines-signup-config__uploadImg-dropboxB {
+    padding: 0 1rem;
+    text-align: left;
+  }
+  .busines-signup-config__uploadImg-loaded {
+    img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: all 0.3s ease;
+      background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+      border-radius: 5px;
+    }
+    .overlayed {
+      position: relative;
+      &:hover {
+        .overlay {
+          opacity: 0.85;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .login-form-scrollable {
+    height: calc(100vh - 250px);
+  }
+}
+@include media-breakpoint-down(sm) {
+  .login-img {
+    height: 50vh !important;
+    .login-img-text {
+      h1,
+      h2 {
+        letter-spacing: 0 !important;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.5;
+      }
+      h2 {
+        font-size: 25px;
+      }
+    }
+  }
+  .login-form {
+    hr {
+      width: 40px !important;
+      height: 2px !important;
+      background-image: linear-gradient(30deg, #ffafbd, #ffc3a0) !important;
+      background: #ffafbd !important;
+    }
+    h5 {
+      font-family: 'Proxima Nova Bold';
+    }
+    .login-form-social-btn {
+      margin-top: 20px;
+      button {
+        padding: 9.5px 13px !important;
+        font-size: 12px !important;
+        line-height: 0;
+        margin: 5px !important;
+      }
+    }
+    form {
+    }
+  }
+}
