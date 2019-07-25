@@ -119,6 +119,8 @@ function SearchForm() {
 }
 
 function Filters() {
+  const budgetDefaultValues = [500, 1000];
+  const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
   return (
     <React.Fragment>
       <Form>
@@ -128,11 +130,17 @@ function Filters() {
           </div>
           <Row>
             <Col sm={12}>
-              <Range min={0} max={20} defaultValue={[3, 10]} />
+              <Range
+                min={0}
+                max={10000}
+                defaultValue={[...budgetDefaultValues]}
+                step={budgetValues[1] > 5000 ? 1000 : 10}
+                onChange={updatedValues => setBudgetValues(updatedValues)}
+              />
             </Col>
             <Col sm={12} className="mt-3">
               <span className="text-muted">Price: </span>
-              $30 - $100
+              {`$${budgetValues[0]} - $${budgetValues[1]}`}
             </Col>
           </Row>
         </div>
