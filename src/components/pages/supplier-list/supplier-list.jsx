@@ -139,7 +139,21 @@ function Filters() {
     });
   };
 
-  console.log(venueTypes);
+  const [venueStyles, setVenueStyles] = useState({
+    Classic: false,
+    Intimate: false,
+    Unusual: false,
+    Modern: false,
+  });
+  const handleVenueStyleSelection = e => {
+    const venueStyle = e.target.id;
+    setVenueStyles({
+      ...venueStyles,
+      [venueStyle]: !venueStyles[venueStyle],
+    });
+  };
+
+  console.log(venueStyles);
 
   return (
     <React.Fragment>
@@ -215,10 +229,26 @@ function Filters() {
           <div className="mb-3">
             <b>Venue Styles</b>
           </div>
-          <Form.Check label="Classic" />
-          <Form.Check label="Intimate" />
-          <Form.Check label="Unusual" />
-          <Form.Check label="Modern" />
+          <Form.Check
+            label="Classic"
+            id="Classic"
+            onChange={handleVenueStyleSelection}
+          />
+          <Form.Check
+            label="Intimate"
+            id="Intimate"
+            onChange={handleVenueStyleSelection}
+          />
+          <Form.Check
+            label="Unusual"
+            id="Unusual"
+            onChange={handleVenueStyleSelection}
+          />
+          <Form.Check
+            label="Modern"
+            id="Modern"
+            onChange={handleVenueStyleSelection}
+          />
         </div>
       </Form>
       <ButtonToolbar>
