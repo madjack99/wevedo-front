@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './App.scss';
 
 import { fetchUser, removeUser, fetchCategories } from '../../actions';
-import { WevedoServiceContext } from '../contexts';
+import { WevedoServiceContext } from '../../contexts';
 
 import ScreensRoot from '../../screens/Root';
 

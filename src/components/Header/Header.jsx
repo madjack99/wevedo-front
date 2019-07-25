@@ -17,7 +17,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { fetchSignOut, fetchCategories } from '../../actions';
-import { WevedoServiceContext } from '../contexts';
+import { WevedoServiceContext } from '../../contexts';
 
 import logo from '../../assets/images/symbol.png';
 
