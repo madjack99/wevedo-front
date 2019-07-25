@@ -125,6 +125,22 @@ function Filters() {
   const guestsDefaultNumber = [30, 100];
   const [guestsNumber, setGuestsNumber] = useState([...guestsDefaultNumber]);
 
+  const [venueTypes, setVenueTypes] = useState({
+    'Country House': false,
+    Barn: false,
+    Outdoor: false,
+    Attraction: false,
+  });
+  const handleVenueTypeSelection = e => {
+    const venueName = e.target.id;
+    setVenueTypes({
+      ...venueTypes,
+      [venueName]: !venueTypes[venueName],
+    });
+  };
+
+  console.log(venueTypes);
+
   return (
     <React.Fragment>
       <Form>
@@ -174,10 +190,26 @@ function Filters() {
           <div className="mb-3">
             <b>Venue Type</b>
           </div>
-          <Form.Check label="Country House" />
-          <Form.Check label="Barm" />
-          <Form.Check label="Outdoor" />
-          <Form.Check label="Attraction" />
+          <Form.Check
+            label="Country House"
+            id="Country House"
+            onChange={handleVenueTypeSelection}
+          />
+          <Form.Check
+            label="Barn"
+            id="Barn"
+            onChange={handleVenueTypeSelection}
+          />
+          <Form.Check
+            label="Outdoor"
+            id="Outdoor"
+            onChange={handleVenueTypeSelection}
+          />
+          <Form.Check
+            label="Attraction"
+            id="Attraction"
+            onChange={handleVenueTypeSelection}
+          />
         </div>
         <div className="mb-5">
           <div className="mb-3">
