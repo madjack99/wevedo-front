@@ -125,12 +125,13 @@ function Filters() {
   const guestsDefaultNumber = [30, 100];
   const [guestsNumber, setGuestsNumber] = useState([...guestsDefaultNumber]);
 
-  const [venueTypes, setVenueTypes] = useState({
+  const defaultVenueTypes = {
     'Country House': false,
     Barn: false,
     Outdoor: false,
     Attraction: false,
-  });
+  };
+  const [venueTypes, setVenueTypes] = useState(defaultVenueTypes);
   const handleVenueTypeSelection = e => {
     const venueName = e.target.id;
     setVenueTypes({
@@ -139,12 +140,13 @@ function Filters() {
     });
   };
 
-  const [venueStyles, setVenueStyles] = useState({
+  const defaultVenueStyles = {
     Classic: false,
     Intimate: false,
     Unusual: false,
     Modern: false,
-  });
+  };
+  const [venueStyles, setVenueStyles] = useState(defaultVenueStyles);
   const handleVenueStyleSelection = e => {
     const venueStyle = e.target.id;
     setVenueStyles({
@@ -168,6 +170,7 @@ function Filters() {
                 min={0}
                 max={10000}
                 defaultValue={[...budgetDefaultValues]}
+                value={budgetValues}
                 step={budgetValues[1] > 5000 ? 1000 : 10}
                 onChange={updatedValues => setBudgetValues(updatedValues)}
               />
@@ -188,6 +191,7 @@ function Filters() {
                 min={0}
                 max={200}
                 defaultValue={[...guestsDefaultNumber]}
+                value={guestsNumber}
                 step={1}
                 onChange={updatedGuestsNumber =>
                   setGuestsNumber(updatedGuestsNumber)
@@ -208,21 +212,25 @@ function Filters() {
             label="Country House"
             id="Country House"
             onChange={handleVenueTypeSelection}
+            checked={venueTypes['Country House']}
           />
           <Form.Check
             label="Barn"
             id="Barn"
             onChange={handleVenueTypeSelection}
+            checked={venueTypes['Barn']}
           />
           <Form.Check
             label="Outdoor"
             id="Outdoor"
             onChange={handleVenueTypeSelection}
+            checked={venueTypes['Outdoor']}
           />
           <Form.Check
             label="Attraction"
             id="Attraction"
             onChange={handleVenueTypeSelection}
+            checked={venueTypes['Attraction']}
           />
         </div>
         <div className="mb-5">
@@ -233,21 +241,25 @@ function Filters() {
             label="Classic"
             id="Classic"
             onChange={handleVenueStyleSelection}
+            checked={venueStyles['Classic']}
           />
           <Form.Check
             label="Intimate"
             id="Intimate"
             onChange={handleVenueStyleSelection}
+            checked={venueStyles['Intimate']}
           />
           <Form.Check
             label="Unusual"
             id="Unusual"
             onChange={handleVenueStyleSelection}
+            checked={venueStyles['Unusual']}
           />
           <Form.Check
             label="Modern"
             id="Modern"
             onChange={handleVenueStyleSelection}
+            checked={venueStyles['Modern']}
           />
         </div>
       </Form>
@@ -255,7 +267,17 @@ function Filters() {
         <Button variant="primary" className="mr-2">
           Apply Filter
         </Button>
-        <Button variant="dark">Clear</Button>
+        <Button
+          variant="dark"
+          onClick={() => {
+            setBudgetValues(budgetDefaultValues);
+            setGuestsNumber(guestsDefaultNumber);
+            setVenueTypes(defaultVenueTypes);
+            setVenueStyles(defaultVenueStyles);
+          }}
+        >
+          Clear
+        </Button>
       </ButtonToolbar>
     </React.Fragment>
   );
