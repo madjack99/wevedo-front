@@ -6,7 +6,7 @@ import i18next from 'i18next';
 
 import App from './components/App';
 import WevedoService from './api/services/wevedo-service';
-import { WevedoServiceContext } from './components/contexts';
+import { WevedoServiceContext } from './contexts';
 import store from './store';
 import commonEN from './translations/en/common.json';
 
