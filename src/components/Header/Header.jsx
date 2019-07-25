@@ -35,9 +35,9 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
             onClick={() => setModalShow(true)}
             className="d-block d-lg-none"
           >
-            <p className="font-weght-bold">
+            <span className="font-weight-bold">
               Suppliers <i className="fa fa-chevron-right ml-2" />
-            </p>
+            </span>
           </Nav.Link>
         </Nav>
         {isLoggedIn ? (
