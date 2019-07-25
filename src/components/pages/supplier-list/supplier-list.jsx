@@ -121,6 +121,10 @@ function SearchForm() {
 function Filters() {
   const budgetDefaultValues = [500, 1000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
+
+  const guestsDefaultNumber = [30, 100];
+  const [guestsNumber, setGuestsNumber] = useState([...guestsDefaultNumber]);
+
   return (
     <React.Fragment>
       <Form>
@@ -150,11 +154,19 @@ function Filters() {
           </div>
           <Row>
             <Col sm={12}>
-              <Range min={0} max={20} defaultValue={[3, 10]} />
+              <Range
+                min={0}
+                max={200}
+                defaultValue={[...guestsDefaultNumber]}
+                step={1}
+                onChange={updatedGuestsNumber =>
+                  setGuestsNumber(updatedGuestsNumber)
+                }
+              />
             </Col>
             <Col sm={12} className="mt-3">
               <span className="text-muted">Seated: </span>
-              30 - 100
+              {`${guestsNumber[0]} - ${guestsNumber[1]}`}
             </Col>
           </Row>
         </div>
