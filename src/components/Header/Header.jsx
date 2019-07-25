@@ -29,7 +29,11 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="text-uppercase mr-auto">
-          <Nav.Link className="font-weight-bold">{t('header.venues')}</Nav.Link>
+          <LinkContainer to="/suppliers/Venue">
+            <Nav.Link className="font-weight-bold">
+              {t('header.venues')}
+            </Nav.Link>
+          </LinkContainer>
           <CategoryDropdown categories={categories} t={t} />
           <Nav.Link
             onClick={() => setModalShow(true)}
