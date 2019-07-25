@@ -10,6 +10,8 @@ import {
   Button,
   Carousel,
 } from 'react-bootstrap';
+
+import backgroundImage from '../../assets/images/main-page1.png';
 import searchicon from '../../assets/images/search-icon.png';
 import calendar from '../../assets/images/calendar.png';
 import chat from '../../assets/images/chat-icon.png';
@@ -20,22 +22,22 @@ import photography from '../../assets/images/photography.png';
 import decoration from '../../assets/images/decoration.png';
 
 import ScreensLayoutsMain from '../Layouts/Main';
+import Hero from '../../components/Hero';
 
 const ScreensHome = ({ t }) => {
   return (
     <ScreensLayoutsMain>
-      <div className="section section-header-half mainpagebg">
-        <Container className="h-100 w-100 align-items-center">
-          <Row className="h-100 align-items-center">
-            <Col sm={12} className="text-center text-uppercase">
-              <h4>Special moment</h4>
-              <h1>
-                We can make <br /> it happen
-              </h1>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Hero
+        title="We can make&#013; it happen"
+        subtitle="Special moment"
+        backgroundImage={backgroundImage}
+      >
+        <h4 className="home__subtitle">SpecialMoment</h4>
+        <h1>
+          We can make
+          <br /> it happen
+        </h1>
+      </Hero>
 
       <Container className="howitworks">
         <Row>
