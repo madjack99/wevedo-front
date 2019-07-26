@@ -24,6 +24,8 @@ export default function SupplierList({ history, match }) {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
 
+  const [filterOptions, setFilterOptions] = useState({});
+
   const wevedoService = useContext(WevedoServiceContext);
   const supplierName = match.params.name;
   const currentPage = +match.params.pageNumber || 1;
@@ -55,7 +57,7 @@ export default function SupplierList({ history, match }) {
       <Container className="supplier-list-results">
         <Row>
           <Col sm={4} className="results-filters">
-            <Filters />
+            <Filters setFilterOptions={setFilterOptions} />
           </Col>
           <Col sm={8} className="results-data">
             <Providers
@@ -118,7 +120,7 @@ function SearchForm() {
   );
 }
 
-function Filters() {
+function Filters({ setFilterOptions }) {
   const budgetDefaultValues = [500, 1000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
@@ -154,8 +156,6 @@ function Filters() {
       [venueStyle]: !venueStyles[venueStyle],
     });
   };
-
-  console.log(venueStyles);
 
   return (
     <React.Fragment>
@@ -264,7 +264,20 @@ function Filters() {
         </div>
       </Form>
       <ButtonToolbar>
-        <Button variant="primary" className="mr-2">
+        <Button
+          variant="primary"
+          className="mr-2"
+          onClick={() => {
+            const filterOptionsObj = {
+              budgetValues,
+              guestsNumber,
+              venueTypes,
+              venueStyles,
+            };
+            console.log(filterOptionsObj);
+            setFilterOptions(filterOptionsObj);
+          }}
+        >
           Apply Filter
         </Button>
         <Button
