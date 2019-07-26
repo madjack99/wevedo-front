@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 import EnterLayoutScreen from '../../../../Layouts/Enter';
-import FirstStepSignUpBusinessForm from '../../../../../components/Business/Form/Signup/MainInfo';
+import FirstStepSignUpBusinessForm from '../../../../../components/Business/Forms/Signup/MainInfo';
 
 import userSideBackground from '../../../../../assets/images/businesslogin.png';
 
