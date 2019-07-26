@@ -2,16 +2,6 @@ import * as Yup from 'yup';
 
 const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-export const userFormSchema = Yup.object().shape({
-  email: Yup.string()
-    .email()
-    .required('email is required!'),
-  password: Yup.string()
-    .min(6, 'at least 6 symbols')
-    .max(50, 'maximum 50 characters')
-    .required('password is required!'),
-});
-
 export const FirstStepSignUpBusinessScheme = Yup.object().shape({
   username: Yup.string()
     .min(6, 'at least 6 symbols')
