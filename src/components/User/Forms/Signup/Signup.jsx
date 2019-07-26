@@ -17,7 +17,7 @@ import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 import SocialButton from '../../../social-button';
 
-const SignUpUserForm = ({ signUp, login, emailStatus, t }) => {
+const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({
@@ -184,4 +184,4 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
-)(SignUpUserForm);
+)(UserFormsSignup);

@@ -1,3 +1,3 @@
-import ScreensUserFormSignup from './Signup';
+import ScreensUserFormsSignup from './Signup';
 
-export default ScreensUserFormSignup;
+export default ScreensUserFormsSignup;

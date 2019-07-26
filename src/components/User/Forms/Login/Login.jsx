@@ -18,7 +18,7 @@ import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 import Checkbox from '../../../ui/checkbox';
 
-const UserFormLogin = ({ login, t }) => {
+const UserFormsLogin = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -198,4 +198,4 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
-)(UserFormLogin);
+)(UserFormsLogin);

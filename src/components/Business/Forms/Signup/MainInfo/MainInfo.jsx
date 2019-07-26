@@ -11,7 +11,7 @@ import { Form, FormGroup, Button } from 'react-bootstrap';
 import { updateUser } from '../../../../../actions';
 import formSchema from './schema';
 
-const BusinessFormSignupMainInfo = ({
+const BusinessFormsSignupMainInfo = ({
   isLoggedIn,
   categories: categoryList,
   updateUser,
@@ -217,5 +217,5 @@ export default withRouter(
       mapDispatchToProps,
     ),
     withTranslation('common'),
-  )(BusinessFormSignupMainInfo),
+  )(BusinessFormsSignupMainInfo),
 );

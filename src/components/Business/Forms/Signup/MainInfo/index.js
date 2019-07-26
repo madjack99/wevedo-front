@@ -1,3 +1,3 @@
-import BusinessFormSignupMainInfo from './MainInfo';
+import BusinessFormsSignupMainInfo from './MainInfo';
 
-export default BusinessFormSignupMainInfo;
+export default BusinessFormsSignupMainInfo;

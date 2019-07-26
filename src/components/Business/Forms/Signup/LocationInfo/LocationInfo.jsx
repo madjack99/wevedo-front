@@ -17,7 +17,7 @@ import {
 import { WevedoServiceContext } from '../../../../../contexts';
 import formScheme from './schema';
 
-const BusinessFormSignupLocationInfo = ({
+const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
   updateUser,
   emailStatus,
@@ -232,5 +232,5 @@ export default withRouter(
       mapDispatchToProps,
     ),
     withTranslation('common'),
-  )(BusinessFormSignupLocationInfo),
+  )(BusinessFormsSignupLocationInfo),
 );

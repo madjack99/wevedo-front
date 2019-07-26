@@ -13,7 +13,7 @@ import { fetchSignUp, fetchLogin } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../../contexts';
 import formSchema from './schema';
 
-const BusinessFormSignupServiceInfo = ({
+const BusinessFormsSignupServiceInfo = ({
   user,
   isLoggedIn,
   login,
@@ -187,5 +187,5 @@ export default withRouter(
       mapDispatchToProps,
     ),
     withTranslation('common'),
-  )(BusinessFormSignupServiceInfo),
+  )(BusinessFormsSignupServiceInfo),
 );
