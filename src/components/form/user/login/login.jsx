@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
@@ -13,14 +13,14 @@ import '../../form.scss';
 import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin } from '../../../../actions';
-import { WevedoServiceContext } from '../../../contexts';
+import { WevedoServiceContext } from '../../../../contexts';
 import { userFormSchema } from '../../schemas';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 import Checkbox from '../../../ui/checkbox';
 
-const LoginUserForm = ({ login, isLoggedIn, t }) => {
+const LoginUserForm = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -33,10 +33,6 @@ const LoginUserForm = ({ login, isLoggedIn, t }) => {
       provider,
     });
   };
-
-  if (isLoggedIn) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <React.Fragment>
