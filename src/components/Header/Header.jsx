@@ -118,7 +118,7 @@ function EnterButtons({ t }) {
           {t('header.login')}
         </Button>
       </LinkContainer>
-      <LinkContainer to="/business-login">
+      <LinkContainer to="/business/login">
         <Button variant="dark">{t('header.businessLogin')}</Button>
       </LinkContainer>
     </ButtonToolbar>
