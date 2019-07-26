@@ -37,13 +37,17 @@ export default function SupplierList({ history, match }) {
           providers: newProviders,
           numberOfProviders: newNumberOfProviders,
         },
-      } = await wevedoService.getProvidersByFilters(supplierName, currentPage);
+      } = await wevedoService.getProvidersByFilters(
+        supplierName,
+        currentPage,
+        filterOptions,
+      );
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
     };
     fetchProviders();
-  }, [wevedoService, currentPage, supplierName]);
+  }, [wevedoService, currentPage, supplierName, filterOptions]);
 
   const onPaginationChange = pageNumber => {
     history.push(`/suppliers/${supplierName}/${pageNumber}`);
