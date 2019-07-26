@@ -11,7 +11,7 @@ import ScreensBusinessFormSignupServiceInfo from './Business/Forms/Signup/Servic
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
-import ImgUpload from '../components/form/imgUpload';
+import ImgUpload from '../components/ImageUpload';
 
 const ScreensRoot = () => {
   return (
