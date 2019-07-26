@@ -20,7 +20,7 @@ const Footer = ({ t }) => (
               <Nav.Link>{t('footer.contact')}</Nav.Link>
             </LinkContainer>
             <span className="footer-dot" />
-            <LinkContainer to="/terms">
+            <LinkContainer to="/terms-and-conditions">
               <Nav.Link>{t('footer.terms')}</Nav.Link>
             </LinkContainer>
             <span className="footer-dot" />
