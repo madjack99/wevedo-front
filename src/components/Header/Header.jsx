@@ -16,10 +16,11 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
+import logo from '../../assets/images/symbol.png';
+import avatar from '../../assets/images/avatar.png';
+
 import { fetchSignOut, fetchCategories } from '../../actions';
 import { WevedoServiceContext } from '../../contexts';
-
-import logo from '../../assets/images/symbol.png';
 
 const Header = ({ isLoggedIn, categories, signOut, t }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -43,6 +44,12 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
               Suppliers <i className="fa fa-chevron-right ml-2" />
             </span>
           </Nav.Link>
+          <SubMenu
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            categories={categories}
+            t={t}
+          />
         </Nav>
         {isLoggedIn ? (
           <ProfileArea signOut={signOut} t={t} />
@@ -55,12 +62,6 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
           <img src={logo} alt="logo" />
         </Link>
       </Navbar.Brand>
-      <SubMenu
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        categories={categories}
-        t={t}
-      />
     </Navbar>
   );
 };
@@ -128,11 +129,27 @@ function ProfileArea({ signOut, t }) {
   const wevedoService = useContext(WevedoServiceContext);
 
   return (
-    <ButtonToolbar>
-      <Button variant="dark" onClick={() => signOut(wevedoService.signOut)}>
-        {t('header.signOut')}
-      </Button>
-    </ButtonToolbar>
+    // <ButtonToolbar>
+    //   <Button variant="dark" onClick={() => signOut(wevedoService.signOut)}>
+    //     {t('header.signOut')}
+    //   </Button>
+    // </ButtonToolbar>
+    <div className="dashboard-header__user ml-auto">
+      <Link
+        to="/dashboard/businessaccount"
+        className="d-flex justify-content-between align-items-center"
+      >
+        <img
+          src={avatar}
+          width="40"
+          height="40"
+          alt="Wevedo Login"
+          className="mr-2"
+        />
+        <b>John Smith</b>
+        <i className="fa fa-chevron-down ml-2" />
+      </Link>
+    </div>
   );
 }
 
