@@ -7,11 +7,11 @@ import ScreensUserFormSignup from './User/Forms/Signup';
 import ScreensBusinessFormLogin from './Business/Forms/Login';
 import ScreensBusinessFormSignupMainInfo from './Business/Forms/Signup/MainInfo';
 import ScreensBusinessFormSignupLocationInfo from './Business/Forms/Signup/LocationInfo';
+import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
-import ImgUpload from '../components/ImageUpload';
 
 const ScreensRoot = () => {
   return (
@@ -29,7 +29,10 @@ const ScreensRoot = () => {
           path="/business/signup/location-info"
           component={ScreensBusinessFormSignupLocationInfo}
         />
-        <Route path="/business/signup/images-upload" component={ImgUpload} />
+        <Route
+          path="/business/signup/images-upload"
+          component={ScreensBusinessFormsSignupImageUpload}
+        />
         <Route
           path="/business/signup/service-info"
           component={ScreensBusinessFormSignupServiceInfo}

@@ -69,23 +69,10 @@ class ImageUpload extends React.Component {
     return (
       <React.Fragment>
         <Container className="business-signup-config">
-          <Row className="mt-5 mb-5">
-            <Col>
-              <Link to="/">
-                <img src={Logo} width="130px" alt="wevedo" />
-              </Link>
-            </Col>
-          </Row>
-          <Row className="pt-4 pb-4">
-            <Col sm={12}>
-              <h6 className="text-uppercase text-proxima-bold">
-                {t('imgUpload.uploadPhotos')}
-              </h6>
-              <hr className="hr-md" />
-            </Col>
+          <Row>
             <Col
               sm={12}
-              className={`d-flex mt-2 mb-2 custom-bg rounded text-center custom-border ${customClassName}`}
+              className={`d-flex mb-2 custom-bg rounded text-center custom-border ${customClassName}`}
             >
               <Form className="m-auto">
                 <DragAndDrop handleDrop={this.handleDrop}>
