@@ -4,7 +4,6 @@ import { Row, Container, Col } from 'react-bootstrap';
 import backgroundImage from '../../assets/images/common-header.png';
 
 import ScreensLayoutMain from '../Layouts/Main';
-import Hero from '../../components/Hero';
 
 const PrivacyPolicy = () => (
   <ScreensLayoutMain title="Privacy Policy" backgroundImage={backgroundImage}>
