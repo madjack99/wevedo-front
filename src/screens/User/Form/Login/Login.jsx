@@ -6,7 +6,7 @@ import { withTranslation } from 'react-i18next';
 import { withoutAuth } from '../../../../components/HOC';
 
 import EnterLayoutScreen from '../../../Layouts/Enter';
-import LoginUserForm from '../../../../components/form/user/login';
+import FormUserLogin from '../../../../components/User/Form/Login';
 
 import userSideBackground from '../../../../assets/images/login-img.png';
 
@@ -17,7 +17,7 @@ const ScreensUserFormLogin = ({ t }) => {
       welcomeTitle={t('businessAndUserLogin.jumbotron.largeTitle')}
       welcomeSubtitle={t('businessAndUserLogin.jumbotron.smallTitle')}
     >
-      <LoginUserForm />
+      <FormUserLogin />
     </EnterLayoutScreen>
   );
 };

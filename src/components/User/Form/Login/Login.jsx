@@ -8,19 +8,17 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
-import '../../form.scss';
-
 import config from '../../../../config';
 
 import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
-import { userFormSchema } from '../../schemas';
+import formSchema from './schema';
 
 import ResetPasswordWindow from '../../../reset-password-window';
 import SocialButton from '../../../social-button';
 import Checkbox from '../../../ui/checkbox';
 
-const LoginUserForm = ({ login, t }) => {
+const UserFormLogin = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -89,7 +87,7 @@ const LoginUserForm = ({ login, t }) => {
             setSubmitting(false);
           }
         }}
-        validationSchema={userFormSchema}
+        validationSchema={formSchema}
         render={({
           handleSubmit,
           handleChange,
@@ -200,4 +198,4 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
-)(LoginUserForm);
+)(UserFormLogin);
