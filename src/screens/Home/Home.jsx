@@ -26,8 +26,10 @@ import ScreensLayoutsMain from '../Layouts/Main';
 const ScreensHome = ({ t }) => {
   return (
     <ScreensLayoutsMain
-      title="We can make it happen"
-      subtitle="Special moment"
+      title={`${t('home.jumbotron.largeTitleOne')} ${t(
+        'home.jumbotron.largeTitleTwo',
+      )}`}
+      subtitle={t('home.jumbotron.smallTitle')}
       backgroundImage={backgroundImage}
     >
       <Container className="howitworks">
