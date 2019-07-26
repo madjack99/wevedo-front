@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 
 import { withoutAuth } from '../../../../components/HOC';
 
-import EnterLayoutScreen from '../../../Layouts/Enter';
+import EnterLayoutScreen from '../../../Layouts/EnterForm';
 import FormUserLogin from '../../../../components/User/Forms/Login';
 
 import userSideBackground from '../../../../assets/images/login-img.png';
