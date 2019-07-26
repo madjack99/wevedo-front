@@ -30,7 +30,7 @@ const ScreensRoot = () => {
           component={ScreensBusinessFormsSignupLocationInfo}
         />
         <Route
-          path="/business/signup/images-upload"
+          path="/business/signup/image-upload"
           component={ScreensBusinessFormsSignupImageUpload}
         />
         <Route
