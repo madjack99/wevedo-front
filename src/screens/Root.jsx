@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ScreensHome from './Home';
-import ScreensUserFormLogin from './User/Form/Login';
-import ScreensUserFormSignup from './User/Form/Signup';
-import ScreensBusinessFormLogin from './Business/Form/Login';
-import ScreensBusinessFormSignupMainInfo from './Business/Form/Signup/MainInfo';
-import ScreensBusinessFormSignupLocationInfo from './Business/Form/Signup/LocationInfo';
-import ScreensBusinessFormSignupServiceInfo from './Business/Form/Signup/ServiceInfo';
+import ScreensUserFormLogin from './User/Forms/Login';
+import ScreensUserFormSignup from './User/Forms/Signup';
+import ScreensBusinessFormLogin from './Business/Forms/Login';
+import ScreensBusinessFormSignupMainInfo from './Business/Forms/Signup/MainInfo';
+import ScreensBusinessFormSignupLocationInfo from './Business/Forms/Signup/LocationInfo';
+import ScreensBusinessFormSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';

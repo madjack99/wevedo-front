@@ -1,7 +1,7 @@
 import React from 'react';
 
 import EnterLayoutScreen from '../../../../Layouts/Enter';
-import SecondStepSignUpBusinessForm from '../../../../../components/Business/Form/Signup/LocationInfo';
+import SecondStepSignUpBusinessForm from '../../../../../components/Business/Forms/Signup/LocationInfo';
 
 import userSideBackground from '../../../../../assets/images/businesslogin.png';
 
