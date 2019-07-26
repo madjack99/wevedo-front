@@ -54,7 +54,7 @@ class ImgUpload extends React.Component {
         return acc;
       }, {});
       updateUser()({ providerImages: photoObject });
-      this.props.history.push('/service-info');
+      this.props.history.push('/business/signup/service-info');
     }
   };
 
