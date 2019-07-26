@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
@@ -15,11 +15,11 @@ import config from '../../../../config';
 import Checkbox from '../../../ui/checkbox';
 
 import { fetchSignUp, fetchLogin, fetchEmailStatus } from '../../../../actions';
-import { WevedoServiceContext } from '../../../contexts';
+import { WevedoServiceContext } from '../../../../contexts';
 import { userFormSchema } from '../../schemas';
 import SocialButton from '../../../social-button';
 
-const SignUpUserForm = ({ signUp, login, emailStatus, isLoggedIn, t }) => {
+const SignUpUserForm = ({ signUp, login, emailStatus, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({
@@ -31,10 +31,6 @@ const SignUpUserForm = ({ signUp, login, emailStatus, isLoggedIn, t }) => {
       provider,
     });
   };
-
-  if (isLoggedIn) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <React.Fragment>
