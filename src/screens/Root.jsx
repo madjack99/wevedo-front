@@ -6,7 +6,7 @@ import ScreensUserFormLogin from './User/Form/Login';
 import ScreensUserFormSignup from './User/Form/Signup';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
-import ScreensPrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import ScreensPrivacyPolicy from './PrivacyPolicy';
 
 const ScreensRoot = () => {
   return (
