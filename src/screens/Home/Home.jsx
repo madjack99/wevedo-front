@@ -39,19 +39,19 @@ const ScreensHome = ({ t }) => {
         </Row>
         <Row className="howitworks-boxes">
           <Col sm={4} xs={12} className="p-3">
-            <div>
+            <div className="h-100">
               <Image src={searchicon} alt="search-icon" />
               <p className="mt-4">{t('home.howItWorks.boxOne')}</p>
             </div>
           </Col>
           <Col sm={4} xs={12} className="p-3">
-            <div>
+            <div className="h-100">
               <Image src={calendar} alt="calendar-icon" />
               <p className="mt-4">{t('home.howItWorks.boxTwo')}</p>
             </div>
           </Col>
           <Col sm={4} xs={12} className="p-3">
-            <div>
+            <div className="h-100">
               <Image src={chat} alt="chat-icon" />
               <p className="mt-4">{t('home.howItWorks.boxThree')}</p>
             </div>
