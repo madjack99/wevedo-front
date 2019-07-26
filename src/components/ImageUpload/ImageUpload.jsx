@@ -13,11 +13,12 @@ import {
   Alert,
 } from 'react-bootstrap';
 
-import { updateUser } from '../../../actions/user-actions';
-import Logo from '../../../assets/images/symbol.png';
-import './imgUpload.scss';
+import './ImageUpload.scss';
 
-class ImgUpload extends React.Component {
+import { updateUser } from '../../actions/user-actions';
+import Logo from '../../assets/images/symbol.png';
+
+class ImageUpload extends React.Component {
   state = {
     files: [],
     errorMsg: null,
@@ -225,4 +226,4 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
-)(ImgUpload);
+)(ImageUpload);
