@@ -1,3 +1,3 @@
-import BusinessFormSignupLocationInfo from './LocationInfo';
+import BusinessFormsSignupLocationInfo from './LocationInfo';
 
-export default BusinessFormSignupLocationInfo;
+export default BusinessFormsSignupLocationInfo;

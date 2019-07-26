@@ -1,3 +1,3 @@
-import ScreensBusinessFormSignUpMainInfo from './MainInfo';
+import ScreensBusinessFormsSignUpMainInfo from './MainInfo';
 
-export default ScreensBusinessFormSignUpMainInfo;
+export default ScreensBusinessFormsSignUpMainInfo;

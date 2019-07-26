@@ -1,3 +1,3 @@
-import UserFormSignup from './Signup';
+import UserFormsSignup from './Signup';
 
-export default UserFormSignup;
+export default UserFormsSignup;

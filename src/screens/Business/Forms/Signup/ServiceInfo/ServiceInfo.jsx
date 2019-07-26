@@ -1,12 +1,12 @@
 import React from 'react';
 
 import ScreensLayoutsMinimalistForm from '../../../../Layouts/MinimalistForm';
-import BusinessFormSignupServiceInfo from '../../../../../components/Business/Forms/Signup/ServiceInfo';
+import BusinessFormsSignupServiceInfo from '../../../../../components/Business/Forms/Signup/ServiceInfo';
 
-const ScreensUserSignUp = () => (
+const ScreensBusinessFormsSignupServiceInfo = () => (
   <ScreensLayoutsMinimalistForm title="Basic info">
-    <BusinessFormSignupServiceInfo />
+    <BusinessFormsSignupServiceInfo />
   </ScreensLayoutsMinimalistForm>
 );
 
-export default ScreensUserSignUp;
+export default ScreensBusinessFormsSignupServiceInfo;

@@ -2,18 +2,18 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 import EnterLayoutScreen from '../../../Layouts/EnterForm';
-import LoginBusinessForm from '../../../../components/Business/Forms/Login';
+import BusinessFormsLogin from '../../../../components/Business/Forms/Login';
 
-import userSideBackground from '../../../../assets/images/businesslogin.png';
+import sideBackground from '../../../../assets/images/businesslogin.png';
 
-const ScreensBusinessFormLogin = ({ t }) => (
+const ScreensBusinessFormsLogin = ({ t }) => (
   <EnterLayoutScreen
-    sideBackground={userSideBackground}
+    sideBackground={sideBackground}
     welcomeTitle={t('businessAndUserLogin.jumbotron.largeTitle')}
     welcomeSubtitle={t('businessAndUserLogin.jumbotron.smallTitle')}
   >
-    <LoginBusinessForm />
+    <BusinessFormsLogin />
   </EnterLayoutScreen>
 );
 
-export default withTranslation('common')(ScreensBusinessFormLogin);
+export default withTranslation('common')(ScreensBusinessFormsLogin);

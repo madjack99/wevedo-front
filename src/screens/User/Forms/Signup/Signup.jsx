@@ -6,17 +6,17 @@ import { withTranslation } from 'react-i18next';
 import { withoutAuth } from '../../../../components/HOC';
 
 import EnterLayoutScreen from '../../../Layouts/EnterForm';
-import SignUpUserForm from '../../../../components/User/Forms/Signup';
+import UserFormsSignup from '../../../../components/User/Forms/Signup';
 
-import userSideBackground from '../../../../assets/images/login-img.png';
+import sideBackground from '../../../../assets/images/login-img.png';
 
-const ScreensUserFormSignUp = ({ t }) => (
+const ScreensUserFormsSignUp = ({ t }) => (
   <EnterLayoutScreen
-    sideBackground={userSideBackground}
+    sideBackground={sideBackground}
     welcomeTitle={t('businessAndUserSignup.jumbotron.largeTitle')}
     welcomeSubtitle={t('businessAndUserSignup.jumbotron.smallTitle')}
   >
-    <SignUpUserForm />
+    <UserFormsSignup />
   </EnterLayoutScreen>
 );
 
@@ -26,4 +26,4 @@ export default compose(
   connect(mapStateToProps),
   withoutAuth(),
   withTranslation('common'),
-)(ScreensUserFormSignUp);
+)(ScreensUserFormsSignUp);
