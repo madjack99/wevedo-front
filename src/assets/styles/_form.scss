@@ -1,11 +1,9 @@
-@import '../../assets/styles/wevedo.scss';
-
 .form {
   &__divider {
     span {
       font: 0.9rem 'Butler Bold', serif;
       color: $tertiary;
-      
+
       &::before,
       &::after {
         content: '';
@@ -30,7 +28,7 @@
 
   &__control {
     border: 0;
-		border-bottom: 1px solid $form-border-color;
+    border-bottom: 1px solid $form-border-color;
     border-radius: 0;
   }
 
