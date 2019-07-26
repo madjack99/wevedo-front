@@ -8,15 +8,13 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
-import '../../form.scss';
-
 import config from '../../../../config';
 
 import Checkbox from '../../../ui/checkbox';
 
 import { fetchSignUp, fetchLogin, fetchEmailStatus } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
-import { userFormSchema } from '../../schemas';
+import formSchema from './schema';
 import SocialButton from '../../../social-button';
 
 const SignUpUserForm = ({ signUp, login, emailStatus, t }) => {
@@ -90,7 +88,7 @@ const SignUpUserForm = ({ signUp, login, emailStatus, t }) => {
           setSubmitting(false);
           return setErrors({ email: 'email is already in use' });
         }}
-        validationSchema={userFormSchema}
+        validationSchema={formSchema}
         render={({
           handleSubmit,
           handleChange,
