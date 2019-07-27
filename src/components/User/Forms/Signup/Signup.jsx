@@ -10,12 +10,12 @@ import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
 import config from '../../../../config';
 
-import Checkbox from '../../../ui/checkbox';
+import Checkbox from '../../../UI/Checkbox';
 
 import { fetchSignUp, fetchLogin, fetchEmailStatus } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
-import SocialButton from '../../../social-button';
+import SocialButton from '../../../SocialButton';
 
 const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
@@ -35,7 +35,6 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
       <Row>
         <Col md={6}>
           <SocialButton
-            bsPrefix="social-btn"
             variant="facebook"
             provider="facebook"
             appId={config.facebookAppId}
@@ -47,7 +46,6 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
         </Col>
         <Col md={6}>
           <SocialButton
-            bsPrefix="social-btn"
             variant="google"
             provider="google"
             appId={config.googleAppId}
