@@ -135,13 +135,13 @@ const UserFormsLogin = ({ login, t }) => {
 
             <FormGroup controlId="passwordActions">
               <Row>
-                <Col md={6} className="text-center text-md-left mb-2">
+                <Col md={6} className="text-left mb-2">
                   <Checkbox
                     className="form__check mr-auto"
                     labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
-                <Col md={6} className="text-center text-md-right">
+                <Col md={6} className="text-right">
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => setModalShow(true)}

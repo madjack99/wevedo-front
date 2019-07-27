@@ -134,7 +134,7 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <FormGroup className="text-center text-md-left">
+            <FormGroup className="text-left">
               <Checkbox
                 className="form__check mr-auto"
                 labelText={t('signAndLogForm.rememberMe')}
