@@ -13,7 +13,7 @@ import backgroundImage from '../../../assets/images/wedding-suppliers-bg.png';
 import ScreensLayoutMain from '../../Layouts/Main';
 import SearchPanel from '../../../components/SearchPanel';
 
-export default function WeddingSuppliers() {
+export default function ScreensSupplierCategories() {
   return (
     <ScreensLayoutMain
       title="Wedding Suppliers"
