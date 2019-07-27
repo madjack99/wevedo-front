@@ -17,13 +17,13 @@ const ScreensLayoutEnter = ({
   return (
     <Container className="enter-business-screen p-0" fluid>
       <Row className="w-100 m-0">
-        <Col className="position-relative side-background p-0" md={6}>
+        <Col className="position-relative side-background p-0" md={6} sm={12}>
           <img
             className="side-background-image"
             src={sideBackground}
             alt="background"
           />
-          <div className="welcome-block">
+          <div className="welcome-block p-3 p-sm-5">
             <h2 className="welcome-block__title">{welcomeTitle}</h2>
             <p className="welcome-block__subtitle">{welcomeSubtitle}</p>
             <div className="welcome-block__divider" />
@@ -32,7 +32,7 @@ const ScreensLayoutEnter = ({
             ) : null}
           </div>
         </Col>
-        <Col className="enter-business-screen_right" md={6}>
+        <Col className="enter-business-screen_right" md={6} sm={12}>
           <LinkContainer className="mb-5" to="/">
             <img src={logo} alt="logo" />
           </LinkContainer>

@@ -1,13 +1,18 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../assets/styles/variables';
+
 .enter-business-screen {
   .side-background {
     overflow: hidden;
-    
+
     &-image {
       position: relative;
       left: 50%;
       transform: translateX(-50%);
-      min-width: 100%;
-      min-height: 100vh;
+      width: 100%;
+      // min-height: 100vh;
       height: 100%;
       object-fit: cover;
     }
@@ -15,14 +20,13 @@
 
   .welcome-block {
     position: absolute;
-    left: 75px;
-    bottom: 100px;
-  
+    bottom: 0;
+
     &__title {
       font: 3rem 'Butler Black', serif;
       color: white;
     }
-  
+
     &__subtitle {
       font: 2rem 'Butler Bold', serif;
       color: white;
@@ -42,8 +46,35 @@
       line-height: 2rem;
     }
   }
-  
+
   &_right {
     padding: 70px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .enter-business-screen {
+    .welcome-block {
+      &__title {
+        font-size: 2rem;
+      }
+
+      &__subtitle {
+        font-size: 1.5rem;
+      }
+
+      &__divider {
+        margin: 15px 0;
+      }
+
+      &__text {
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    &_right {
+      padding: 20px;
+    }
   }
 }
