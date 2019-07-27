@@ -175,7 +175,7 @@ function Filters({ setFilterOptions }) {
                 max={10000}
                 defaultValue={[...budgetDefaultValues]}
                 value={budgetValues}
-                step={budgetValues[1] > 5000 ? 1000 : 10}
+                step={10}
                 onChange={updatedValues => setBudgetValues(updatedValues)}
               />
             </Col>
