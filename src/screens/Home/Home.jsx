@@ -1,15 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-import {
-  Image,
-  Row,
-  Container,
-  Col,
-  Form,
-  Button,
-  Carousel,
-} from 'react-bootstrap';
+import { Image, Row, Container, Col, Carousel } from 'react-bootstrap';
 
 import backgroundImage from '../../assets/images/main-page1.png';
 import searchicon from '../../assets/images/search-icon.png';
@@ -22,6 +14,7 @@ import photography from '../../assets/images/photography.png';
 import decoration from '../../assets/images/decoration.png';
 
 import ScreensLayoutsMain from '../Layouts/Main';
+import SearchPanel from '../../components/SearchPanel';
 
 const ScreensHome = ({ t }) => {
   return (
@@ -104,42 +97,9 @@ const ScreensHome = ({ t }) => {
           </Row>
         </div>
       </Container>
-      <SearchForm t={t} />
+      <SearchPanel />
     </ScreensLayoutsMain>
   );
 };
-
-const SearchForm = ({ t }) => (
-  <Row className="findseparator d-flex align-items-center text-center">
-    <Col sm={12}>
-      <h1>{t('home.findForm.title')}</h1>
-      <Form>
-        <Form.Row>
-          <Col className="boxed-form">
-            <Row>
-              <Col sm={6} md>
-                <Form.Control as="select">
-                  <option>{t('home.findForm.category')}</option>
-                  <option>{t('home.findForm.options')}</option>
-                </Form.Control>
-              </Col>
-              <div className="divider d-none d-sm-none d-md-inline" />
-              <Col sm={6} md>
-                <Form.Control
-                  placeholder={t('home.findForm.locationPlaceholder')}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col sm={3}>
-            <Button variant="light" size="lg">
-              {t('home.findForm.searchBtn')}
-            </Button>
-          </Col>
-        </Form.Row>
-      </Form>
-    </Col>
-  </Row>
-);
 
 export default withTranslation('common')(ScreensHome);
