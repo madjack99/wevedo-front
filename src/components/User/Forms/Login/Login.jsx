@@ -14,9 +14,9 @@ import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
-import ResetPasswordWindow from '../../../reset-password-window';
-import SocialButton from '../../../social-button';
-import Checkbox from '../../../ui/checkbox';
+import ResetPasswordWindow from '../../../Dialogs/ResetPassword';
+import SocialButton from '../../../SocialButton';
+import Checkbox from '../../../UI/Checkbox';
 
 const UserFormsLogin = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -37,7 +37,6 @@ const UserFormsLogin = ({ login, t }) => {
       <Row>
         <Col md={6}>
           <SocialButton
-            bsPrefix="social-btn"
             variant="facebook"
             provider="facebook"
             appId={config.facebookAppId}
@@ -49,7 +48,6 @@ const UserFormsLogin = ({ login, t }) => {
         </Col>
         <Col md={6}>
           <SocialButton
-            bsPrefix="social-btn"
             variant="google"
             provider="google"
             appId={config.googleAppId}

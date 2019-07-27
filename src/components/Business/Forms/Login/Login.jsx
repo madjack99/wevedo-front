@@ -12,8 +12,8 @@ import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
-import Checkbox from '../../../ui/checkbox';
-import ResetPasswordWindow from '../../../reset-password-window';
+import Checkbox from '../../../UI/Checkbox';
+import ResetPasswordWindow from '../../../Dialogs/ResetPassword';
 
 const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
   const [modalShow, setModalShow] = useState(false);
