@@ -9,7 +9,7 @@ import ScreensBusinessFormsSignupMainInfo from './Business/Forms/Signup/MainInfo
 import ScreensBusinessFormsSignupLocationInfo from './Business/Forms/Signup/LocationInfo';
 import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
-import ScreensSupplierList from './Supplier/List';
+import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
@@ -38,7 +38,10 @@ const ScreensRoot = () => {
           path="/business/signup/service-info"
           component={ScreensBusinessFormsSignupServiceInfo}
         />
-        <Route path="/suppliers/list" component={ScreensSupplierList} />
+        <Route
+          path="/suppliers/categories"
+          component={ScreensSupplierCategories}
+        />
         <Route path="/contact" component={ScreensContact} />
         <Route
           path="/terms-and-conditions"
