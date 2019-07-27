@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -20,7 +20,6 @@ import logo from '../../assets/images/symbol.png';
 import avatar from '../../assets/images/avatar.png';
 
 import { fetchSignOut, fetchCategories } from '../../actions';
-import { WevedoServiceContext } from '../../contexts';
 
 const Header = ({ isLoggedIn, categories, signOut, t }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -125,15 +124,8 @@ function EnterButtons({ t }) {
   );
 }
 
-function ProfileArea({ signOut, t }) {
-  const wevedoService = useContext(WevedoServiceContext);
-
+function ProfileArea() {
   return (
-    // <ButtonToolbar>
-    //   <Button variant="dark" onClick={() => signOut(wevedoService.signOut)}>
-    //     {t('header.signOut')}
-    //   </Button>
-    // </ButtonToolbar>
     <div className="dashboard-header__user ml-auto">
       <Link
         to="/dashboard/businessaccount"
