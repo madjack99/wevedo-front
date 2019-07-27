@@ -2,11 +2,11 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
-import './pricing.scss';
+import './PricingPlans.scss';
 
 import Logo from '../../assets/images/symbol.png';
 
-const Pricing = ({ t }) => (
+const ScreensPricingPlans = ({ t }) => (
   <React.Fragment>
     <Container className="pricing">
       <Row className="mt-5">
@@ -96,4 +96,4 @@ const Pricing = ({ t }) => (
   </React.Fragment>
 );
 
-export default withTranslation('common')(Pricing);
+export default withTranslation('common')(ScreensPricingPlans);
