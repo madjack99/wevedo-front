@@ -1,4 +1,4 @@
-@import "../../../assets/styles/wevedo.scss";
+@import '../../../assets/styles/variables';
 
 .section {
   color: white;
@@ -13,10 +13,6 @@
 
 .section-header-half {
   height: calc(60vh - 75px);
-}
-
-.supplier-list {
-  background: url(../../../assets/images/venues-bg.png);
 }
 
 .supplier-list-results {
@@ -35,12 +31,12 @@
     }
 
     h4 {
-      font-family: "Proxima Nova";
+      font-family: 'Proxima Nova';
       font-size: 1rem;
     }
 
     h5 {
-      font-family: "Proxima Nova Bold";
+      font-family: 'Proxima Nova Bold';
       font-size: 1rem;
       letter-spacing: 0;
     }
@@ -81,7 +77,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 9.5px 13px;
-  font-family: "Proxima Nova Bold";
+  font-family: 'Proxima Nova Bold';
   border: 0;
   border-radius: 0.25rem;
   background: #e9ecef;

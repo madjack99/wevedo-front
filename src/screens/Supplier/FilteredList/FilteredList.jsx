@@ -12,15 +12,18 @@ import {
 import Pagination from 'react-js-pagination';
 import { Range } from 'rc-slider';
 
-import PopularSearches from '../popularSearches';
-import './supplier-list.scss';
-
+import './FilteredList.scss';
 import 'rc-slider/assets/index.css';
 
-import { WevedoServiceContext } from '../../contexts';
+import backgroundImage from '../../../assets/images/venues-bg.png';
+
+import { WevedoServiceContext } from '../../../contexts';
 import config from '../../../config';
 
-export default function SupplierList({ history, match }) {
+import ScreensLayoutMain from '../../Layouts/Main';
+import SearchPanel from '../../../components/SearchPanel';
+
+const ScreensSupplierFilteredList = ({ history, match }) => {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
 
@@ -49,9 +52,8 @@ export default function SupplierList({ history, match }) {
   };
 
   return (
-    <React.Fragment>
-      <Hero supplierName={supplierName} />
-      <SearchForm />
+    <ScreensLayoutMain title={supplierName} backgroundImage={backgroundImage}>
+      <SearchPanel />
       <Container className="supplier-list-results">
         <Row>
           <Col sm={4} className="results-filters">
@@ -60,6 +62,7 @@ export default function SupplierList({ history, match }) {
           <Col sm={8} className="results-data">
             <Providers
               providers={providers}
+              supplierName={supplierName}
               currentPage={currentPage}
               numberOfProviders={numberOfProviders}
               onPaginationChange={onPaginationChange}
@@ -67,56 +70,9 @@ export default function SupplierList({ history, match }) {
           </Col>
         </Row>
       </Container>
-      <PopularSearches />
-    </React.Fragment>
+    </ScreensLayoutMain>
   );
-}
-
-function Hero({ supplierName }) {
-  return (
-    <div className="section section-header-full supplier-list">
-      <Container className="h-100 w-100 align-items-center">
-        <Row className="h-100 align-items-center">
-          <Col sm={12} className="text-center text-uppercase">
-            <h1>{supplierName}</h1>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
-}
-
-function SearchForm() {
-  return (
-    <Row className="findseparator findseparator-sm d-flex align-items-center text-center">
-      <Col sm={12}>
-        <Form>
-          <Form.Row>
-            <Col className="boxed-form">
-              <Row>
-                <Col>
-                  <Form.Control as="select">
-                    <option>Category</option>
-                    <option>...</option>
-                  </Form.Control>
-                </Col>
-                <div className="divider" />
-                <Col>
-                  <Form.Control placeholder="Location" />
-                </Col>
-              </Row>
-            </Col>
-            <Col sm={3}>
-              <Button variant="light" size="lg">
-                Search
-              </Button>
-            </Col>
-          </Form.Row>
-        </Form>
-      </Col>
-    </Row>
-  );
-}
+};
 
 function Filters() {
   return (
@@ -181,6 +137,7 @@ function Filters() {
 
 function Providers({
   providers,
+  supplierName,
   numberOfProviders,
   currentPage,
   onPaginationChange,
@@ -199,20 +156,19 @@ function Providers({
               alt="Wevedo Venues"
             />
             <Card.Body>
-              <Card.Title className="mb-1">{provider.firstName}</Card.Title>
+              <Card.Title className="mb-1">{provider.fullName}</Card.Title>
               <span className="results-data-location">
                 <i className="fas fa-map-marker-alt" />
                 {provider.regionName}
               </span>
-              <Card.Text className="mt-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod ...
-              </Card.Text>
+              <Card.Text className="mt-3">{provider.bio}</Card.Text>
             </Card.Body>
             <Card.Footer>
               <Row>
                 <Col className="pl-md-3 text-center">
-                  <b>$985 - $85,000</b>
+                  <b>
+                    ${provider.minPrice} - ${provider.maxPrice}
+                  </b>
                 </Col>
                 <span
                   className="d-sm-none d-md-block"
@@ -242,11 +198,10 @@ function Providers({
             <span className="results-data-location">
               <i className="fas fa-map-marker-alt" /> {provider.regionName}
             </span>
-            <p className="mt-2 mb-2">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua...
-            </p>
-            <b>$985 - $85,000 | Up to 220 Capacity</b>
+            <p className="mt-2 mb-2">{provider.bio}</p>
+            <b>
+              ${provider.minPrice} - ${provider.maxPrice} | Up to 220 Capacity
+            </b>
           </Col>
         </Row>
       </Link>
@@ -302,7 +257,7 @@ function Providers({
     <React.Fragment>
       <Row className="mb-4">
         <Col className="mr-auto text-uppercase">
-          <h4 className="pt-2">740 Wedding Venues</h4>
+          <h4 className="pt-2">{`${numberOfProviders} ${supplierName}`}</h4>
         </Col>
         <Col className="text-right">
           <Button variant="secondary" className="mr-2">
@@ -349,3 +304,5 @@ function Providers({
     </React.Fragment>
   );
 }
+
+export default ScreensSupplierFilteredList;
