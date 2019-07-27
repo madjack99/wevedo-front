@@ -1,6 +1,6 @@
 @import '../../assets/styles/wevedo.scss';
 
-.social-btn {
+.ui-social-button {
   width: 100%;
   margin: 10px 0;
   padding: 15px;
@@ -18,10 +18,10 @@
   }
 
   &-google {
-    background-color: #DC4437;
-  
+    background-color: #dc4437;
+
     &:hover {
       background-color: darken($google-color, 15%);
     }
-  }  
+  }
 }
