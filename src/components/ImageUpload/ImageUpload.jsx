@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -16,7 +15,6 @@ import {
 import './ImageUpload.scss';
 
 import { updateUser } from '../../actions/user-actions';
-import Logo from '../../assets/images/symbol.png';
 
 class ImageUpload extends React.Component {
   state = {
