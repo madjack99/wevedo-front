@@ -11,6 +11,7 @@ import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/Image
 import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
 import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensSupplierFilteredList from './Supplier/FilteredList';
+import ScreensSupplierDetails from './Supplier/Details';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
@@ -42,6 +43,10 @@ const ScreensRoot = () => {
         <Route
           path="/suppliers/categories"
           component={ScreensSupplierCategories}
+        />
+        <Route
+          path="/suppliers/details/:id/"
+          component={ScreensSupplierDetails}
         />
         <Route
           path="/suppliers/:name/:pageNumber"

@@ -1,0 +1,62 @@
+@import '../../../assets/styles/variables';
+
+.section {
+  color: white;
+  margin-top: 75px;
+  background-size: cover;
+  background-position: center;
+}
+
+.section-header-full {
+  height: calc(100vh - 75px);
+}
+
+.section-header-half {
+  height: calc(60vh - 75px);
+}
+
+.supplier-results {
+  h4 {
+    font-family: 'Proxima Nova Bold';
+  }
+  b {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+  .supplier-results-side-box {
+    background: $gray-200;
+    margin-top: 30px;
+    border-radius: 0.3rem;
+    padding: 50px;
+  }
+  .supplier-results-next-btn {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  color: $gray-600;
+  right: 0;
+  top: 0;
+  margin: 15px;
+  cursor: pointer;
+  z-index: 9;
+
+  &:hover {
+    color: $gray-700;
+  }
+}
+
+.carousel {
+  &-image {
+    height: 400px;
+  }
+
+  &-control-prev-icon,
+  &-control-next-icon {
+    filter: invert(100%);
+  }
+}
