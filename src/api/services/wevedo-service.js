@@ -8,6 +8,7 @@ export default class WevedoService extends ApiBase {
     this.register = async body => this.create('register', body);
     this.socialLogin = async body => this.create('social-login', body);
     this.checkEmail = async body => this.create('check-email', body);
+    this.checkPhone = async body => this.create('check-phone', body);
     this.signOut = async () => this.get('signout');
 
     this.getProfile = async () => this.get('users/me');
@@ -15,9 +16,7 @@ export default class WevedoService extends ApiBase {
 
     this.getCategories = () => this.get('categories');
     this.getProvidersByFilters = (category, page, filterOptions) => {
-      console.log('filters', filterOptions);
       const filterString = JSON.stringify(filterOptions);
-      console.log(filterString);
       return this.get(
         `providers/by-category/${category}?page=${page}&filterOptions=${filterString}`,
       );

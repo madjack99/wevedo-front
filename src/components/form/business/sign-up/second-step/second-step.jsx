@@ -11,7 +11,11 @@ import { Form, FormGroup, Button } from 'react-bootstrap';
 
 import '../../../form.scss';
 
-import { updateUser, fetchEmailStatus } from '../../../../../actions';
+import {
+  updateUser,
+  fetchEmailStatus,
+  fetchPhoneStatus,
+} from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import { SecondStepSignUpBusinessScheme } from '../../../schemas';
 
@@ -19,6 +23,7 @@ const SecondStepSignUpBusinessForm = ({
   isLoggedIn,
   updateUser,
   emailStatus,
+  phoneStatus,
   history,
   t,
 }) => {
@@ -48,7 +53,12 @@ const SecondStepSignUpBusinessForm = ({
           wevedoService.checkEmail,
         );
 
-        if (isNewEmail) {
+        const isNewPhone = await phoneStatus(
+          { phoneNumber },
+          wevedoService.checkPhone,
+        );
+
+        if (isNewEmail && isNewPhone) {
           updateUser()({
             email,
             phoneNumber,
@@ -61,8 +71,11 @@ const SecondStepSignUpBusinessForm = ({
           return history.push('/image-upload'); // TO-DO: add route to load images
         }
 
-        setSubmitting(false);
-        return setErrors({ email: 'email is already in use' });
+        setErrors({
+          email: !isNewEmail ? 'email is already in use' : null,
+          phoneNumber: !isNewPhone ? 'number is already in use' : null,
+        });
+        return setSubmitting(false);
       }}
       validationSchema={SecondStepSignUpBusinessScheme}
       render={({
@@ -211,6 +224,7 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),
   emailStatus: fetchEmailStatus(dispatch),
+  phoneStatus: fetchPhoneStatus(dispatch),
 });
 
 export default withRouter(
