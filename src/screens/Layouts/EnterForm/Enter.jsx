@@ -33,7 +33,7 @@ const ScreensLayoutEnter = ({
           </div>
         </Col>
         <Col className="enter-business-screen_right" md={6} sm={12}>
-          <LinkContainer className="mb-5" to="/">
+          <LinkContainer className="mb-5 d-none d-md-block" to="/">
             <img src={logo} alt="logo" />
           </LinkContainer>
           {children}
