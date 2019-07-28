@@ -19,7 +19,8 @@ import { WevedoServiceContext } from '../../../contexts';
 import config from '../../../config';
 
 import ScreensLayoutMain from '../../Layouts/Main';
-import SearchPanel from '../../../components/SearchPanel';
+import SearchPanel from '../../../components/Search/Panel';
+import SearchPanelMobile from '../../../components/Search/Panel/Mobile';
 import FilterPanel from '../../../components/Filter/Panel';
 
 const ScreensSupplierFilteredList = ({ history, match }) => {
@@ -58,10 +59,18 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
 
   return (
     <ScreensLayoutMain title={supplierName} backgroundImage={backgroundImage}>
+      <Container>
+        <Row className="venues-filters d-flex d-sm-none pt-4 pb-4 mb-4">
+          <Col className="d-inline">
+            <SearchPanelMobile />
+          </Col>
+        </Row>
+      </Container>
+
       <SearchPanel />
       <Container className="supplier-list-results">
         <Row>
-          <Col sm={4} className="results-filters">
+          <Col sm={4} className="results-filters d-none d-sm-inline">
             <FilterPanel setFilterOptions={setFilterOptions} />
           </Col>
           <Col sm={8} className="results-data">
