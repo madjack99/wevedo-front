@@ -5,7 +5,9 @@ import FilterPanel from '../Panel';
 
 const FilterDialog = ({ show, onHide }) => (
   <UIModal show={show} onHide={onHide}>
-    <FilterPanel />
+    <div className="m-3">
+      <FilterPanel />
+    </div>
   </UIModal>
 );
 
