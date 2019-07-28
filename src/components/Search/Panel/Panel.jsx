@@ -4,21 +4,20 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const SearchPanel = ({ t }) => (
-  <Row className="findseparator d-flex align-items-center text-center">
+  <Row className="findseparator findseparator-sm align-items-center text-center d-none d-sm-flex mb-5">
     <Col sm={12}>
-      <h1>{t('home.findForm.title')}</h1>
       <Form>
         <Form.Row>
           <Col className="boxed-form">
             <Row>
-              <Col sm={6} md>
+              <Col>
                 <Form.Control as="select">
                   <option>{t('home.findForm.category')}</option>
                   <option>{t('home.findForm.options')}</option>
                 </Form.Control>
               </Col>
-              <div className="divider d-none d-sm-none d-md-inline" />
-              <Col sm={6} md>
+              <div className="divider" />
+              <Col>
                 <Form.Control
                   placeholder={t('home.findForm.locationPlaceholder')}
                 />
