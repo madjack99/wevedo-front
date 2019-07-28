@@ -14,7 +14,7 @@ import photography from '../../assets/images/photography.png';
 import decoration from '../../assets/images/decoration.png';
 
 import ScreensLayoutsMain from '../Layouts/Main';
-import SearchPanel from '../../components/SearchPanel';
+import SearchPanel from '../../components/Search/Panel';
 
 const ScreensHome = ({ t }) => {
   return (
@@ -97,7 +97,7 @@ const ScreensHome = ({ t }) => {
           </Row>
         </div>
       </Container>
-      <SearchPanel />
+      <SearchPanel title={t('home.findForm.title')} />
     </ScreensLayoutsMain>
   );
 };
