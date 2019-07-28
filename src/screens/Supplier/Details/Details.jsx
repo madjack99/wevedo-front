@@ -77,23 +77,24 @@ const Supplier = ({ match, t }) => {
               {t('supplier.contactSection.title')}
             </b>
             <hr className="hr-xs" />
-            <div className="d-block mb-4">
-              {supplier.website ? (
-                <b className="text-uppercase d-block text-muted mb-4">
-                  {`Website: ${supplier.website}`}
-                </b>
-              ) : null}
-              {supplier.email ? (
-                <b className="text-uppercase d-block text-muted mb-4">
-                  {`Email: ${supplier.email}`}
-                </b>
-              ) : null}
-              {supplier.phoneNumber ? (
-                <b className="text-uppercase d-block text-muted mb-4">
-                  {`Number: ${supplier.phoneNumber}`}
-                </b>
-              ) : null}
-            </div>
+            {supplier.website ? (
+              <div className="d-block mb-4">
+                <b className="text-uppercase text-muted">Website:</b>
+                <b>{` ${supplier.website}`}</b>
+              </div>
+            ) : null}
+            {supplier.email ? (
+              <div className="d-block mb-4">
+                <b className="text-uppercase text-muted mb-4">Email:</b>
+                <b>{` ${supplier.email}`}</b>
+              </div>
+            ) : null}
+            {supplier.phoneNumber ? (
+              <div className="d-block mb-4">
+                <b className="text-uppercase text-muted mb-4">Number:</b>
+                <b>{` ${supplier.phoneNumber}`}</b>
+              </div>
+            ) : null}
             <div className="divider" />
             <b className="text-uppercase">
               {t('supplier.contactSection.findUs')}
@@ -121,22 +122,25 @@ const Supplier = ({ match, t }) => {
                 />
               </Col>
               <Col sm={12}>
-                <div className="supplier-results-side-box">
-                  {supplier.minPrice && supplier.maxPrice ? (
-                    <div className="mb-4">
-                      <b className="text-uppercase text-muted">Budget</b>
-                      <hr className="hr-xs" />
-                      <b>{`$${supplier.minPrice} - $${supplier.maxPrice}`}</b>
-                    </div>
-                  ) : null}
-                  {supplier.facilities ? (
-                    <div>
-                      <b className="text-uppercase text-muted">Services</b>
-                      <hr className="hr-xs" />
-                      <b>{supplier.facilities}</b>
-                    </div>
-                  ) : null}
-                </div>
+                {(supplier.minPrice && supplier.maxPrice) ||
+                supplier.facilities ? (
+                  <div className="supplier-results-side-box">
+                    {supplier.minPrice && supplier.maxPrice ? (
+                      <div className="mb-4">
+                        <b className="text-uppercase text-muted">Budget</b>
+                        <hr className="hr-xs" />
+                        <b>{`$${supplier.minPrice} - $${supplier.maxPrice}`}</b>
+                      </div>
+                    ) : null}
+                    {supplier.facilities ? (
+                      <div>
+                        <b className="text-uppercase text-muted">Services</b>
+                        <hr className="hr-xs" />
+                        <b>{supplier.facilities}</b>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </Col>
             </Row>
           </Col>
