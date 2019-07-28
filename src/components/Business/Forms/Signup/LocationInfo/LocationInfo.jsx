@@ -66,7 +66,7 @@ const BusinessFormsSignupLocationInfo = ({
             country,
           });
 
-          return history.push('/business/signup/images-upload'); // TO-DO: add route to load images
+          return history.push('/business/signup/image-upload'); // TO-DO: add route to load images
         }
 
         setErrors({
