@@ -11,7 +11,7 @@ import Rings from '../../../assets/images/w-rings.png';
 import backgroundImage from '../../../assets/images/wedding-suppliers-bg.png';
 
 import ScreensLayoutMain from '../../Layouts/Main';
-import SearchPanel from '../../../components/SearchPanel';
+import SearchPanel from '../../../components/Search/Panel';
 
 export default function ScreensSupplierCategories() {
   return (
