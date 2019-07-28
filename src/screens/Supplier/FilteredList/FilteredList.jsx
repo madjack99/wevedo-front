@@ -68,7 +68,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
       </Container>
 
       <SearchPanel />
-      <Container className="supplier-list-results">
+      <Container className="venues-results">
         <Row>
           <Col sm={4} className="results-filters d-none d-sm-inline">
             <FilterPanel setFilterOptions={setFilterOptions} />
