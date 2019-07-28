@@ -20,7 +20,7 @@ import config from '../../../config';
 
 import ScreensLayoutMain from '../../Layouts/Main';
 import SearchPanel from '../../../components/SearchPanel';
-import FilterPanel from '../../../components/FilterPanel';
+import FilterPanel from '../../../components/Filter/Panel';
 
 const ScreensSupplierFilteredList = ({ history, match }) => {
   const [providers, setProviders] = useState([]);
