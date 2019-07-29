@@ -1,0 +1,103 @@
+.form {
+  &__divider {
+    span {
+      font: 0.9rem 'Butler Bold', serif;
+      color: $tertiary;
+
+      &::before,
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        margin: 0 10px;
+        padding-bottom: 5px;
+        border-top: 1px solid $tertiary;
+      }
+    }
+  }
+
+  &__error {
+    font-size: 0.9rem;
+    color: $red;
+  }
+
+  &__label {
+    font: 0.9rem 'Proxima Nova', sans-serif;
+    color: $tertiary;
+  }
+
+  &__control {
+    border: 0;
+    border-bottom: 1px solid $form-border-color;
+    border-radius: 0;
+  }
+
+  &__textarea {
+    resize: none;
+  }
+
+  &__check {
+    font: 0.8rem 'Proxima Nova', sans-serif;
+    color: $tertiary;
+  }
+
+  &__question {
+    font-size: 0.9rem;
+  }
+
+  &__feedback {
+    font-size: 0.8rem;
+  }
+}
+
+.password-btn {
+  font: 0.8rem 'Proxima Nova';
+  color: $tertiary;
+  background: none;
+  border: none;
+  text-transform: none;
+
+  &:hover {
+    color: darken($tertiary, $amount: 20%);
+    text-decoration: none;
+  }
+}
+
+.dashboard-form {
+  &__group {
+    margin-bottom: 35px;
+  }
+
+  &__label {
+    font: 0.9rem 'Proxima Nova Bold', sans-serif;
+    margin: 0;
+    color: $main;
+  }
+
+  &__control {
+    height: 40px;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #f4f7fc;
+    border: 1px solid $dashboard-form-border-color !important;
+    border-radius: 5px !important;
+
+    &::placeholder {
+      color: $tertiary;
+    }
+  }
+
+  &__text {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: $tertiary;
+  }
+}
+
+.minimalist-form {
+  &__title {
+    font: 1rem 'Proxima Nova Bold', sans-serif;
+    color: $main;
+    text-transform: uppercase;
+  }
+}

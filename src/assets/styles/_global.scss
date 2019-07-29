@@ -4,14 +4,15 @@
   // transition: all .3s ease;
 }
 
-html, body {
-	height: 100%;
-	width: 100%;
+html,
+body {
+  height: calc(100% - 79px);
+  width: 100%;
 }
 
 body {
-    font-size: 12px;
-    font-family: 'Proxima Nova';
+  font-size: 12px;
+  font-family: 'Proxima Nova';
 }
 
 hr {
@@ -21,69 +22,112 @@ hr {
   border: 0;
 }
 
-.hr-md { 
-	width: 30px; 
-	height: 2px;
-	margin-left: 0;
+.hr-md {
+  width: 30px;
+  height: 2px;
+  margin-left: 0;
 }
-.hr-sm { height: 1px }
+.hr-sm {
+  height: 1px;
+}
 .hr-xs {
-	margin: 10px 0 20px 0;
-	width: 25px;
-	height: 1px;
+  margin: 10px 0 20px 0;
+  width: 25px;
+  height: 1px;
 }
 
 .divider {
-	border-bottom: 1px solid $gray-200;
-	margin: 30px 0;
+  border-bottom: 1px solid $gray-200;
+  margin: 30px 0;
 }
 
 h1 {
-	font-family: 'Butler Black';
-	font-size: 3rem;
-	letter-spacing: 5px;
-	line-height: 70px;
-	text-shadow: 0px 2px 5px #222;
+  font-family: 'Butler Black';
+  font-size: 3rem;
+  letter-spacing: 5px;
+  line-height: 70px;
+  text-shadow: 0px 1px 10px $gray-900;
 }
 
-h2,h3,h4,h5,h6 {
-	font-family: 'Butler Bold';
-	letter-spacing: .1rem;
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Butler Bold';
+  letter-spacing: 0.1rem;
 }
 
 p {
-	font-size: 13px;
-	line-height: 1.5rem;
-	color: $gray-700;
+  font-size: 13px;
+  line-height: 1.5rem;
+  color: $gray-700;
 }
 
 a {
-	color: $gray-700;
-	&:hover {
-		color: $gray-600;
-		text-decoration: none;
-	}
+  color: $gray-700;
+  &:hover {
+    color: $gray-600;
+    text-decoration: none;
+  }
 }
 
 form {
-	input, textarea, select {
-		font-size: 13px !important; 
-		border: 0;
-		border-radius: 0;
-		border-bottom: 1px solid $gray-400;
-		transition: all .3s ease;
-	}
-	//to do: custom checkbox
+  input,
+  textarea,
+  select {
+    font-size: 13px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid $gray-400 !important;
+    transition: all 0.3s ease;
+  }
+  //to do: custom checkbox
 }
 
 .rc-slider {
-	.rc-slider-rail { height: 3px }
-	.rc-slider-track { height: 3px; background: $wevedo }
-	.rc-slider-handle { 
-		border: 0; 
-		background-color: $wevedo; 
-		margin-top: -3.5px; 
-		width: 10px; 
-		height: 10px; 
-	}
+  .rc-slider-rail {
+    height: 3px;
+  }
+  .rc-slider-track {
+    height: 3px;
+    background: $wevedo;
+  }
+  .rc-slider-handle {
+    border: 0;
+    background-color: $wevedo;
+    margin-top: -3.5px;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.h-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  .h-scroll__item {
+    display: inline-block;
+    float: none;
+  }
+}
+
+.wrap {
+  white-space: normal;
+  flex-wrap: wrap;
+}
+
+@include media-breakpoint-up(lg) {
+  html,
+  body {
+    max-width: 1366px;
+  }
+  html {
+    display: table;
+    margin: auto;
+  }
+  body {
+    display: block;
+    vertical-align: middle;
+  }
 }

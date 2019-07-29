@@ -1,0 +1,296 @@
+.section {
+  color: white;
+  margin-top: 79px;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+.section-header-full {
+  height: calc(100vh - 75px);
+}
+.section-header-half {
+  height: 668px;
+}
+
+.venues {
+  background: url(../../assets/images/venues-bg.png);
+}
+.supplier {
+  background: url(../../assets/images/supplier-bg.png);
+}
+.wedding-suppliers {
+  background: url(../../assets/images/wedding-suppliers-bg.png);
+}
+.contact,
+.terms,
+.privacy {
+  background: url(../../assets/images/common-header.png);
+}
+
+.findseparator-sm {
+  height: 120px;
+  margin: 0;
+  form {
+    margin: 30px 100px;
+  }
+}
+
+.venues-filters {
+  border-bottom: 1px solid $gray-200;
+  input::placeholder {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: $gray-500;
+  }
+}
+
+.venues-results {
+  margin-bottom: 80px;
+  .results-filters {
+    b {
+      font-size: 13px;
+    }
+  }
+  .results-data {
+    img {
+      width: 100%;
+      border-radius: 0.25rem;
+    }
+    h4 {
+      font-family: 'Proxima Nova';
+      font-size: 1rem;
+    }
+    h5 {
+      font-family: 'Proxima Nova Bold';
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+    .results-data-location {
+      i {
+        color: $wevedo;
+      }
+      color: $gray-600;
+    }
+    b {
+      font-size: 13px;
+    }
+    .card {
+      border-color: $gray-200;
+      transition: all 0.3s ease;
+      .card-footer {
+        background: white;
+        b {
+          font-size: 12px !important;
+        }
+      }
+      &:hover {
+        box-shadow: 0px 8px 20px $gray-400;
+      }
+    }
+  }
+}
+
+.supplier-results {
+  h4 {
+    font-family: 'Proxima Nova Bold';
+  }
+  b {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+  .carousel {
+    img {
+      display: block;
+      width: 100%;
+    }
+    ol {
+      display: none;
+    }
+    .carousel-inner {
+      border-radius: 5px;
+    }
+  }
+  .supplier-results-side-box {
+    background: $gray-w;
+    margin-top: 30px;
+    border-radius: 0.3rem;
+    padding: 50px;
+  }
+  .supplier-results-next-btn {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.wedding-suppliers-grid {
+  .wedding-suppliers-grid__child {
+    margin-bottom: 30px;
+    img {
+      width: 100%;
+    }
+    p {
+      position: absolute;
+      bottom: 5px;
+      left: 40px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
+
+.pricing {
+  .pricing-boxes {
+    .pricing-boxes__item {
+      div {
+        border: 2px solid $gray-300;
+        border-radius: 5px;
+        padding: 20px 30px;
+        h5,
+        h2 {
+          font-family: 'Proxima Nova';
+        }
+        h2 {
+          font-size: 2.5rem;
+          small {
+            position: absolute;
+            top: 92px;
+            font-size: 50%;
+          }
+          span {
+            padding-left: 20px;
+          }
+        }
+        p {
+          .fa {
+            color: #43d40a;
+            margin-right: 5px;
+          }
+        }
+        a {
+          font-weight: bolder;
+          letter-spacing: 1.5px;
+          font-size: 13px;
+        }
+      }
+      .pricing-boxes__enhaced {
+        border: none;
+        box-shadow: 0px 8px 20px $gray-400;
+        padding-bottom: 80px;
+        padding-top: 30px;
+        h2 {
+          small {
+            top: 101px;
+          }
+        }
+        a {
+          background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+          color: white;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 15px;
+          margin: 0 16px 16px;
+          border-bottom-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          .fa {
+            position: absolute;
+            bottom: 18px;
+            right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.contact-form {
+  label {
+    font-weight: bold;
+    float: left;
+    margin: 0;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .section-header-full,
+  .section-header-half {
+    height: calc(50vh - 75px) !important;
+    h1 {
+      font-size: 2rem;
+      line-height: 40px;
+      letter-spacing: 2px;
+    }
+  }
+  .venues-results {
+    .results-data {
+      h4 {
+        font-size: 13px;
+      }
+      .results-data-location {
+        padding-top: 1rem;
+      }
+      .btn-toolbar {
+        justify-content: center !important;
+      }
+    }
+  }
+  .supplier-results {
+    .carousel {
+      height: 300px;
+      img {
+        width: auto;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateX(
+          -33%
+        ); // to be checked - this will depend on image point of interest...
+      }
+    }
+    .btn-lg {
+      padding: 20px 0;
+    }
+    .supplier-results-side-box {
+      padding: 30px 20px;
+    }
+  }
+  .send-a-message-to-supplier {
+    form {
+      padding: 30px !important;
+      h5 {
+        margin-bottom: 40px;
+      }
+      input,
+      textarea {
+        padding-left: 0 !important;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        font-size: 15px;
+      }
+    }
+  }
+  .wedding-suppliers-grid {
+    h2 {
+      font-size: 1.4rem;
+      letter-spacing: 0;
+    }
+  }
+  .pricing {
+    .pricing-boxes {
+      overflow-x: auto;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+      .pricing-boxes__item {
+        display: inline-block;
+        float: none;
+        width: 320px;
+        div {
+          padding: 20px 20px;
+        }
+      }
+    }
+  }
+}

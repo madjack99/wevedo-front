@@ -1,0 +1,38 @@
+.ui-checkbox {
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='checkbox'] + label {
+    position: relative;
+  }
+
+  input[type='checkbox'] + label::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 3px;
+    left: -20px;
+    background: linear-gradient(90deg, #f9b1bf, #f7c4a4);
+    border-radius: 2px;
+  }
+
+  input[type='checkbox'] + label::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 9px;
+    border: 1px solid rgb(255, 255, 255);
+    top: 4px;
+    left: -15px;
+    border-top-style: none;
+    border-left-style: none;
+    transform: rotate(45deg);
+    display: none;
+  }
+
+  input[type='checkbox']:checked ~ label::after {
+    display: inline-block;
+  }
+}

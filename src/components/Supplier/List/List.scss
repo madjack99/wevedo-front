@@ -1,0 +1,14 @@
+.supplier-list {
+  &__image {
+    width: 100%;
+    object-fit: cover;
+
+    &_card {
+      height: 175px;
+    }
+
+    &_grid {
+      height: 250px;
+    }
+  }
+}
