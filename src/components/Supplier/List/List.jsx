@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button, ButtonToolbar, Card } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
+import ClampLines from 'react-clamp-lines';
 
 import 'rc-slider/assets/index.css';
+
+import './List.scss';
 
 import supplierMap from '../../../assets/images/aMap.png';
 
@@ -27,8 +30,9 @@ const SupplierList = ({
     const { _id: providerId } = provider;
     return (
       <Link to={`/suppliers/details/${providerId}`}>
-        <Card className="mb-4">
+        <Card className="h-100">
           <Card.Img
+            className="supplier-list__image supplier-list__image_grid"
             variant="top"
             src={provider.profileImageURL}
             alt="Wevedo Venues"
@@ -39,7 +43,15 @@ const SupplierList = ({
               <i className="fas fa-map-marker-alt mr-2" />
               {provider.regionName}
             </span>
-            <Card.Text className="mt-3">{provider.bio}</Card.Text>
+            <ClampLines
+              className="mt-3"
+              text={provider.bio || ''}
+              id="supplier-grid-text"
+              ellipsis="..."
+              lines={2}
+              buttons={false}
+              innerElement={Card.Text}
+            />
           </Card.Body>
           {provider.minPrice && provider.maxPrice ? (
             <Card.Footer>
@@ -62,8 +74,12 @@ const SupplierList = ({
     return (
       <Link to={`/suppliers/details/${providerId}`}>
         <Row>
-          <Col sm={5}>
-            <img src={provider.profileImageURL} alt="" />
+          <Col className="h-100" sm={5}>
+            <img
+              className="supplier-list__image supplier-list__image_card"
+              src={provider.profileImageURL}
+              alt=""
+            />
           </Col>
           <Col sm={7}>
             <h5>{provider.firstName}</h5>
@@ -71,7 +87,15 @@ const SupplierList = ({
               <i className="fas fa-map-marker-alt mr-2" />
               {provider.regionName}
             </span>
-            <p className="mt-2 mb-2">{provider.bio}</p>
+            <ClampLines
+              className="mt-2 mb-2"
+              text={provider.bio || ''}
+              id="supplier-grid-text"
+              ellipsis="..."
+              lines={3}
+              buttons={false}
+              innerElement="p"
+            />
             {provider.minPrice && provider.maxPrice ? (
               <b>
                 ${provider.minPrice} - ${provider.maxPrice}
@@ -86,33 +110,19 @@ const SupplierList = ({
   const Providers = () => {
     switch (displayType) {
       case displayTypes.GRID:
-        return providers
-          .map((provider, index) => {
-            const { _id: id } = provider;
-            if (index % 2 !== 0) {
+        return (
+          <Row>
+            {providers.map(provider => {
+              const { _id: id } = provider;
               return (
-                <Row key={id}>
-                  <Col sm="6">
-                    <ProviderGrid provider={provider} />
-                  </Col>
-                  <Col sm="6">
-                    <ProviderGrid provider={providers[index - 1]} />
-                  </Col>
-                </Row>
+                <Col className="mb-4" sm={6} key={id}>
+                  <ProviderGrid provider={provider} />
+                </Col>
               );
-            }
-            if (index === providers.length - 1) {
-              return (
-                <Row key={id}>
-                  <Col sm="6">
-                    <ProviderGrid provider={provider} />
-                  </Col>
-                </Row>
-              );
-            }
-            return null;
-          })
-          .filter(provider => provider);
+            })}
+          </Row>
+        );
+
       case displayTypes.LIST:
         return providers.map(provider => {
           const { _id: id } = provider;
