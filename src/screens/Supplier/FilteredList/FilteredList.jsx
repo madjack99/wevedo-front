@@ -21,7 +21,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
   const [filterOptions, setFilterOptions] = useState({});
 
   const wevedoService = useContext(WevedoServiceContext);
-  const supplierName = match.params.name;
+  const supplierCategory = match.params.name;
   const currentPage = +match.params.pageNumber || 1;
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
           numberOfProviders: newNumberOfProviders,
         },
       } = await wevedoService.getProvidersByFilters(
-        supplierName,
+        supplierCategory,
         currentPage,
         filterOptions,
       );
@@ -41,15 +41,18 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
       setNumberOfProviders(newNumberOfProviders);
     };
     fetchProviders();
-  }, [wevedoService, currentPage, supplierName, filterOptions]);
+  }, [wevedoService, currentPage, supplierCategory, filterOptions]);
 
   const onPaginationChange = pageNumber => {
-    history.push(`/suppliers/${supplierName}/${pageNumber}`);
+    history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
     window.scrollTo(0, 0);
   };
 
   return (
-    <ScreensLayoutMain title={supplierName} backgroundImage={backgroundImage}>
+    <ScreensLayoutMain
+      title={supplierCategory}
+      backgroundImage={backgroundImage}
+    >
       <Container>
         <Row className="venues-filters d-flex d-sm-none pt-4 pb-4 mb-4">
           <Col className="d-inline">
@@ -67,7 +70,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
           <Col sm={8} className="results-data">
             <SupplierList
               providers={providers}
-              supplierName={supplierName}
+              supplierCategory={supplierCategory}
               currentPage={currentPage}
               numberOfProviders={numberOfProviders}
               onPaginationChange={onPaginationChange}

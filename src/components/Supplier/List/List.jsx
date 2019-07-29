@@ -14,7 +14,7 @@ import config from '../../../config';
 
 const SupplierList = ({
   providers,
-  supplierName,
+  supplierCategory,
   numberOfProviders,
   currentPage,
   onPaginationChange,
@@ -193,7 +193,7 @@ const SupplierList = ({
     <React.Fragment>
       <Row className="mb-4">
         <Col className="mr-auto text-uppercase">
-          <h4 className="pt-2">{`${numberOfProviders} ${supplierName}`}</h4>
+          <h4 className="pt-2">{`${numberOfProviders} ${supplierCategory}`}</h4>
         </Col>
         <Col className="text-right">
           <Button
