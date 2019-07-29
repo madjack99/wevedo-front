@@ -13,9 +13,9 @@ const App = ({ isLoggedIn, getUser, removeUser, getCategories }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      getUser(wevedoService.getProfile);
+      return getUser(wevedoService.getProfile);
     }
-    removeUser();
+    return removeUser();
   }, [getUser, removeUser, isLoggedIn, wevedoService]);
 
   useEffect(() => {
