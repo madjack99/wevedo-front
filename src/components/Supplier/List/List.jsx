@@ -91,21 +91,21 @@ const SupplierList = ({
             const { _id: id } = provider;
             if (index % 2 !== 0) {
               return (
-                <Row>
+                <Row key={id}>
                   <Col sm="6">
-                    <ProviderGrid key={id} provider={provider} />
+                    <ProviderGrid provider={provider} />
                   </Col>
                   <Col sm="6">
-                    <ProviderGrid key={id} provider={providers[index - 1]} />
+                    <ProviderGrid provider={providers[index - 1]} />
                   </Col>
                 </Row>
               );
             }
             if (index === providers.length - 1) {
               return (
-                <Row>
+                <Row key={id}>
                   <Col sm="6">
-                    <ProviderGrid key={id} provider={provider} />
+                    <ProviderGrid provider={provider} />
                   </Col>
                 </Row>
               );
