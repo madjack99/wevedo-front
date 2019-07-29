@@ -21,7 +21,7 @@ import avatar from '../../assets/images/avatar.png';
 
 import { fetchSignOut, fetchCategories } from '../../actions';
 
-const Header = ({ isLoggedIn, categories, signOut, t }) => {
+const Header = ({ isLoggedIn, categories, user, signOut, t }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -51,7 +51,7 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
           />
         </Nav>
         {isLoggedIn ? (
-          <ProfileArea signOut={signOut} t={t} />
+          <ProfileArea fullName={user.fullName} />
         ) : (
           <EnterButtons t={t} />
         )}
@@ -129,7 +129,7 @@ function EnterButtons({ t }) {
   );
 }
 
-function ProfileArea() {
+function ProfileArea({ fullName }) {
   return (
     <div className="dashboard-header__user ml-auto">
       <Link
@@ -143,7 +143,7 @@ function ProfileArea() {
           alt="Wevedo Login"
           className="mr-2"
         />
-        <b>John Smith</b>
+        <b className="ml-3 mr-4">{fullName || 'User'}</b>
         <i className="fa fa-chevron-down ml-2" />
       </Link>
     </div>
@@ -180,9 +180,10 @@ const SubMenu = ({ categories, onHide, t, ...rest }) => (
   </Modal>
 );
 
-const mapStateToProps = ({ sessionData, categoryList }) => ({
+const mapStateToProps = ({ sessionData, categoryList, userData }) => ({
   ...sessionData,
   ...categoryList,
+  ...userData,
 });
 
 const mapDispatchToProps = dispatch => ({
