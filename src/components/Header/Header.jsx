@@ -66,8 +66,13 @@ const Header = ({ isLoggedIn, categories, signOut, t }) => {
 };
 
 const CategoryDropdown = ({ categories, t }) => {
-  const leftCategoryColumns = categories.slice(0, categories.length / 2);
-  const rightCategoryColumns = categories.slice(categories.length / 2);
+  const leftCategoryColumns = categories.slice(
+    0,
+    Math.ceil(categories.length / 2),
+  );
+  const rightCategoryColumns = categories.slice(
+    Math.ceil(categories.length / 2),
+  );
 
   return (
     <NavDropdown title="Suppliers" className="d-none d-lg-block">
