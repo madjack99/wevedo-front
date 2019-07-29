@@ -86,7 +86,7 @@ const CategoryDropdown = ({ categories, t }) => {
               ))}
             </Col>
             <Col sm={12}>
-              <Link to="/wedding-suppliers" className="view-all-btn">
+              <Link to="/suppliers/categories" className="view-all-btn">
                 {t('header.viewAllSuppliers')}{' '}
                 <i className="fa fa-arrow-right" />
               </Link>
@@ -155,17 +155,17 @@ const SubMenu = ({ categories, onHide, t, ...rest }) => (
   >
     <Modal.Body>
       <Row className="pt-2">
-        <Col xs={2} classSmName="ml-4" onClick={onHide}>
+        <Col xs={2} className="ml-4" onClick={onHide}>
           <i className="fas fa-arrow-left fa-2x" />
         </Col>
         <Col>
           <h4 className="text-uppercase text-proxima-bold mb-5">Suppliers</h4>
           {categories.map(({ _id, name }) => (
-            <LinkContainer to={`/suppliers/${name}`}>
-              <p key={_id}>{name}</p>
+            <LinkContainer to={`/suppliers/${name}`} key={_id}>
+              <p>{name}</p>
             </LinkContainer>
           ))}
-          <Link to="/weddingsuppliers" className="view-all-btn">
+          <Link to="/suppliers/categories" className="view-all-btn">
             {t('header.viewAllSuppliers')}{' '}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
