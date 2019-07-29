@@ -13,7 +13,7 @@ import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
 import Checkbox from '../../../UI/Checkbox';
-import ResetPasswordWindow from '../../../Dialogs/ResetPassword';
+import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 
 const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -112,7 +112,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
                   </Button>
                 </Col>
               </Row>
-              <ResetPasswordWindow
+              <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
