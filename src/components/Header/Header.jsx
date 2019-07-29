@@ -17,11 +17,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/symbol.png';
-import avatar from '../../assets/images/avatar.png';
+import defaultAvatar from '../../assets/images/default-avatar.png';
 
 import { fetchSignOut, fetchCategories } from '../../actions';
 
-const Header = ({ isLoggedIn, categories, user, signOut, t }) => {
+const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -50,11 +50,7 @@ const Header = ({ isLoggedIn, categories, user, signOut, t }) => {
             t={t}
           />
         </Nav>
-        {isLoggedIn ? (
-          <ProfileArea fullName={user.fullName} />
-        ) : (
-          <EnterButtons t={t} />
-        )}
+        {isLoggedIn ? <ProfileArea user={user} /> : <EnterButtons t={t} />}
       </Navbar.Collapse>
       <Navbar.Brand>
         <Link to="/">
@@ -129,7 +125,7 @@ function EnterButtons({ t }) {
   );
 }
 
-function ProfileArea({ fullName }) {
+function ProfileArea({ user }) {
   return (
     <div className="dashboard-header__user ml-auto">
       <Link
@@ -137,13 +133,13 @@ function ProfileArea({ fullName }) {
         className="d-flex justify-content-between align-items-center"
       >
         <img
-          src={avatar}
+          src={user.profileImageURL || defaultAvatar}
           width="40"
           height="40"
           alt="Wevedo Login"
           className="mr-2"
         />
-        <b className="ml-3 mr-4">{fullName || 'User'}</b>
+        <b className="ml-3 mr-4">{user.fullName || 'User'}</b>
         <i className="fa fa-chevron-down ml-2" />
       </Link>
     </div>
