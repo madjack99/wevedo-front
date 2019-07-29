@@ -151,7 +151,7 @@ const UserFormsLogin = ({ login, t }) => {
                 </Col>
               </Row>
               <ResetPasswordDialog
-                show/Dialog=}
+                show={modalShow}
                 onHide={() => setModalShow(false)}
               />
             </FormGroup>
