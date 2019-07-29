@@ -1,10 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
+import { compose } from 'redux';
 
 import './PricingPlans.scss';
 
 import Logo from '../../assets/images/symbol.png';
+
+import { withScrollToTop } from '../../../components/HOC';
 
 const ScreensPricingPlans = ({ t }) => (
   <React.Fragment>
@@ -96,4 +99,7 @@ const ScreensPricingPlans = ({ t }) => (
   </React.Fragment>
 );
 
-export default withTranslation('common')(ScreensPricingPlans);
+export default compose(
+  withTranslation('common'),
+  withScrollToTop(),
+)(ScreensPricingPlans);

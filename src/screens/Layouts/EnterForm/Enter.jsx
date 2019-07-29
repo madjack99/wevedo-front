@@ -7,6 +7,8 @@ import './Enter.scss';
 
 import logo from '../../../assets/images/symbol.png';
 
+import { withScrollToTop } from '../../../components/HOC';
+
 const ScreensLayoutEnter = ({
   sideBackground,
   welcomeTitle,
@@ -43,4 +45,4 @@ const ScreensLayoutEnter = ({
   );
 };
 
-export default ScreensLayoutEnter;
+export default withScrollToTop()(ScreensLayoutEnter);
