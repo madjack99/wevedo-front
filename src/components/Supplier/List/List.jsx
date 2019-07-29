@@ -26,7 +26,7 @@ const SupplierList = ({
   };
   const [displayType, setDisplayType] = useState(displayTypes.GRID);
 
-  function ProviderGrid({ provider }) {
+  function SupplierGrid({ provider }) {
     const { _id: providerId } = provider;
     return (
       <Link to={`/suppliers/details/${providerId}`}>
@@ -69,7 +69,7 @@ const SupplierList = ({
     );
   }
 
-  function ProviderCard({ provider }) {
+  function SupplierCard({ provider }) {
     const { _id: providerId } = provider;
     return (
       <Link to={`/suppliers/details/${providerId}`}>
@@ -107,7 +107,7 @@ const SupplierList = ({
     );
   }
 
-  const Providers = () => {
+  const Suppliers = () => {
     switch (displayType) {
       case displayTypes.GRID:
         return (
@@ -116,7 +116,7 @@ const SupplierList = ({
               const { _id: id } = provider;
               return (
                 <Col className="mb-4" sm={6} key={id}>
-                  <ProviderGrid provider={provider} />
+                  <SupplierGrid provider={provider} />
                 </Col>
               );
             })}
@@ -128,7 +128,7 @@ const SupplierList = ({
           const { _id: id } = provider;
           return (
             <React.Fragment key={id}>
-              <ProviderCard provider={provider} />
+              <SupplierCard provider={provider} />
               <div className="divider" />
             </React.Fragment>
           );
@@ -223,7 +223,7 @@ const SupplierList = ({
           </Button>
         </Col>
       </Row>
-      <Providers />
+      <Suppliers />
       {displayType !== displayTypes.MAP ? (
         <PaginationButtons className="mt-5" />
       ) : null}
