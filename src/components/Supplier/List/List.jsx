@@ -5,6 +5,8 @@ import Pagination from 'react-js-pagination';
 
 import 'rc-slider/assets/index.css';
 
+import supplierMap from '../../../assets/images/aMap.png';
+
 import config from '../../../config';
 
 const SupplierList = ({
@@ -14,7 +16,12 @@ const SupplierList = ({
   currentPage,
   onPaginationChange,
 }) => {
-  const [gridView, changeView] = useState(true);
+  const displayTypes = {
+    LIST: 'list',
+    GRID: 'grid',
+    MAP: 'map',
+  };
+  const [displayType, setDisplayType] = useState(displayTypes.GRID);
 
   function ProviderGrid({ provider }) {
     const { _id: providerId } = provider;
@@ -80,6 +87,38 @@ const SupplierList = ({
     );
   }
 
+  const Providers = () => {
+    switch (displayType) {
+      case displayTypes.GRID:
+        return providers.map(provider => {
+          const { _id: id } = provider;
+          return (
+            <React.Fragment key={id}>
+              <ProviderGrid provider={provider} />
+            </React.Fragment>
+          );
+        });
+      case displayTypes.LIST:
+        return providers.map(provider => {
+          const { _id: id } = provider;
+          return (
+            <React.Fragment key={id}>
+              <ProviderCard provider={provider} />
+              <div className="divider" />
+            </React.Fragment>
+          );
+        });
+      case displayTypes.MAP:
+        return (
+          <Col>
+            <img src={supplierMap} alt="Suppliers locations" />
+          </Col>
+        );
+      default:
+        return null;
+    }
+  };
+
   function PaginationButtons() {
     function ResultsArea() {
       const numberOfProvidersShown = config.providersPerPage * currentPage;
@@ -132,47 +171,37 @@ const SupplierList = ({
           <h4 className="pt-2">{`${numberOfProviders} ${supplierName}`}</h4>
         </Col>
         <Col className="text-right">
-          <Button variant="secondary" className="mr-2">
+          <Button
+            variant={displayType === displayTypes.MAP ? 'primary' : 'secondary'}
+            className="mr-2"
+            onClick={() => setDisplayType(displayTypes.MAP)}
+          >
             Show map
           </Button>
           <Button
-            variant={gridView ? 'primary' : 'secondary'}
+            variant={
+              displayType === displayTypes.GRID ? 'primary' : 'secondary'
+            }
             className="mr-2"
-            onClick={() => changeView(!gridView)}
+            onClick={() => setDisplayType(displayTypes.GRID)}
           >
             <i className="fas fa-th-large" />
           </Button>
           <Button
-            variant={gridView ? 'secondary' : 'primary'}
-            onClick={() => changeView(!gridView)}
+            variant={
+              displayType === displayTypes.LIST ? 'primary' : 'secondary'
+            }
+            className="d-none d-sm-inline"
+            onClick={() => setDisplayType(displayTypes.LIST)}
           >
             <i className="fas fa-bars" />
           </Button>
         </Col>
       </Row>
-      {gridView ? (
-        <Row>
-          {providers.map(provider => {
-            const { _id: id } = provider;
-            return (
-              <React.Fragment key={id}>
-                <ProviderGrid provider={provider} />
-              </React.Fragment>
-            );
-          })}
-        </Row>
-      ) : (
-        providers.map(provider => {
-          const { _id: id } = provider;
-          return (
-            <React.Fragment key={id}>
-              <ProviderCard provider={provider} />
-              <div className="divider" />
-            </React.Fragment>
-          );
-        })
-      )}
-      <PaginationButtons className="mt-5" />
+      <Providers />
+      {displayType !== displayTypes.MAP ? (
+        <PaginationButtons className="mt-5" />
+      ) : null}
     </React.Fragment>
   );
 };
