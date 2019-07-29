@@ -26,22 +26,22 @@ const SupplierList = ({
   function ProviderGrid({ provider }) {
     const { _id: providerId } = provider;
     return (
-      <Col sm={6}>
-        <Link to={`/suppliers/details/${providerId}`}>
-          <Card className="mb-4">
-            <Card.Img
-              variant="top"
-              src={provider.profileImageURL}
-              alt="Wevedo Venues"
-            />
-            <Card.Body>
-              <Card.Title className="mb-1">{provider.fullName}</Card.Title>
-              <span className="results-data-location">
-                <i className="fas fa-map-marker-alt" />
-                {provider.regionName}
-              </span>
-              <Card.Text className="mt-3">{provider.bio}</Card.Text>
-            </Card.Body>
+      <Link to={`/suppliers/details/${providerId}`}>
+        <Card className="mb-4">
+          <Card.Img
+            variant="top"
+            src={provider.profileImageURL}
+            alt="Wevedo Venues"
+          />
+          <Card.Body>
+            <Card.Title className="mb-1">{provider.fullName}</Card.Title>
+            <span className="results-data-location">
+              <i className="fas fa-map-marker-alt mr-2" />
+              {provider.regionName}
+            </span>
+            <Card.Text className="mt-3">{provider.bio}</Card.Text>
+          </Card.Body>
+          {provider.minPrice && provider.maxPrice ? (
             <Card.Footer>
               <Row>
                 <Col className="pl-md-3 text-center">
@@ -49,18 +49,11 @@ const SupplierList = ({
                     ${provider.minPrice} - ${provider.maxPrice}
                   </b>
                 </Col>
-                <span
-                  className="d-sm-none d-md-block"
-                  style={{ borderRight: '1px solid #e9ecef' }}
-                />
-                <Col className="pr-md-3 text-center">
-                  <b>Up to 220 Capacity</b>{' '}
-                </Col>
               </Row>
             </Card.Footer>
-          </Card>
-        </Link>
-      </Col>
+          ) : null}
+        </Card>
+      </Link>
     );
   }
 
@@ -75,12 +68,15 @@ const SupplierList = ({
           <Col sm={7}>
             <h5>{provider.firstName}</h5>
             <span className="results-data-location">
-              <i className="fas fa-map-marker-alt" /> {provider.regionName}
+              <i className="fas fa-map-marker-alt mr-2" />
+              {provider.regionName}
             </span>
             <p className="mt-2 mb-2">{provider.bio}</p>
-            <b>
-              ${provider.minPrice} - ${provider.maxPrice} | Up to 220 Capacity
-            </b>
+            {provider.minPrice && provider.maxPrice ? (
+              <b>
+                ${provider.minPrice} - ${provider.maxPrice}
+              </b>
+            ) : null}
           </Col>
         </Row>
       </Link>
@@ -90,14 +86,33 @@ const SupplierList = ({
   const Providers = () => {
     switch (displayType) {
       case displayTypes.GRID:
-        return providers.map(provider => {
-          const { _id: id } = provider;
-          return (
-            <React.Fragment key={id}>
-              <ProviderGrid provider={provider} />
-            </React.Fragment>
-          );
-        });
+        return providers
+          .map((provider, index) => {
+            const { _id: id } = provider;
+            if (index % 2 !== 0) {
+              return (
+                <Row>
+                  <Col sm="6">
+                    <ProviderGrid key={id} provider={provider} />
+                  </Col>
+                  <Col sm="6">
+                    <ProviderGrid key={id} provider={providers[index - 1]} />
+                  </Col>
+                </Row>
+              );
+            }
+            if (index === providers.length - 1) {
+              return (
+                <Row>
+                  <Col sm="6">
+                    <ProviderGrid key={id} provider={provider} />
+                  </Col>
+                </Row>
+              );
+            }
+            return null;
+          })
+          .filter(provider => provider);
       case displayTypes.LIST:
         return providers.map(provider => {
           const { _id: id } = provider;
