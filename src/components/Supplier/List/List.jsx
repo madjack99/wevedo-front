@@ -28,6 +28,7 @@ const SupplierList = ({
 
   function SupplierGrid({ provider }) {
     const { _id: providerId } = provider;
+    console.log(provider);
     return (
       <Link to={`/suppliers/details/${providerId}`}>
         <Card className="h-100">
