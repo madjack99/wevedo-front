@@ -65,7 +65,7 @@ const FilterPanel = ({ setFilterOptions }) => {
             </Col>
           </Row>
         </div>
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <div className="mb-3">
             <b>Seated Dining Capacity</b>
           </div>
@@ -145,7 +145,7 @@ const FilterPanel = ({ setFilterOptions }) => {
             onChange={handleVenueStyleSelection}
             checked={venueStyles['Modern']}
           />
-        </div>
+        </div> */}
       </Form>
       <ButtonToolbar>
         <Button
