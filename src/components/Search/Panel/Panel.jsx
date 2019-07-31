@@ -26,7 +26,7 @@ const SearchPanel = ({ title, t }) => (
               <div className="divider d-none d-sm-none d-md-inline" />
               <Col sm={6} md>
                 <Form.Control
-                  placeholder={t('home.findForm.locationPlaceholder')}
+                  placeholder={t('home.findForm.titlePlaceholder')}
                 />
               </Col>
             </Row>
