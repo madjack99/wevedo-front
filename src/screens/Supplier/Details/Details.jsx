@@ -107,7 +107,7 @@ const Supplier = ({ match, t }) => {
                 {Object.values(supplier.providerImages).map(image => (
                   <Carousel.Item className="carousel-image">
                     <img
-                      className="d-block h-100 mx-auto"
+                      className="d-block mx-auto"
                       src={image}
                       alt="supplier-slide"
                     />
