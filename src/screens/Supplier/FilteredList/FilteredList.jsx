@@ -61,7 +61,10 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
         </Row>
       </Container>
 
-      <SearchPanel />
+      <SearchPanel
+        getProvidersByFilters={wevedoService.getProvidersByFilters}
+        params={[supplierCategory, currentPage, filterOptions]}
+      />
       <Container className="venues-results">
         <Row>
           <Col sm={4} className="results-filters d-none d-sm-inline">
