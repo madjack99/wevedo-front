@@ -4,7 +4,7 @@ import { Range } from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-const FilterPanel = ({ setFilterOptions }) => {
+const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
   const budgetDefaultValues = [500, 1000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
@@ -160,6 +160,10 @@ const FilterPanel = ({ setFilterOptions }) => {
             };
             console.log(filterOptionsObj);
             setFilterOptions(filterOptionsObj);
+
+            if (onHideDialog) {
+              onHideDialog();
+            }
           }}
         >
           Apply Filter
