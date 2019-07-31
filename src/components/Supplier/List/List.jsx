@@ -194,10 +194,10 @@ const SupplierList = ({
   return (
     <React.Fragment>
       <Row className="mb-4">
-        <Col className="mr-auto text-uppercase">
+        <Col md={6} xs={4} className="mr-auto text-uppercase">
           <h4 className="pt-2">{`${numberOfProviders} ${supplierCategory}`}</h4>
         </Col>
-        <Col className="text-right">
+        <Col md={6} xs={8} className="text-right">
           <Button
             variant={displayType === displayTypes.MAP ? 'primary' : 'secondary'}
             className="mr-2"
