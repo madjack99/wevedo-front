@@ -9,6 +9,7 @@ import {
   Form,
 } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import './Details.scss';
 
@@ -105,7 +106,7 @@ const Supplier = ({ match, t }) => {
             {supplier.providerImages ? (
               <Carousel>
                 {Object.values(supplier.providerImages).map(image => (
-                  <Carousel.Item className="carousel-image">
+                  <Carousel.Item className="carousel-image" key={uniqid()}>
                     <img
                       className="d-block mx-auto"
                       src={image}
