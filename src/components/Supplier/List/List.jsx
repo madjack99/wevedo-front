@@ -147,7 +147,9 @@ const SupplierList = ({
   function PaginationButtons() {
     function ResultsArea() {
       const numberOfProvidersShown = config.providersPerPage * currentPage;
-      const beginRangeCount = config.providersPerPage * (currentPage - 1) + 1;
+      const beginRangeCount = providers.length
+        ? config.providersPerPage * (currentPage - 1) + 1
+        : 0;
       const endRangeCount =
         numberOfProvidersShown > numberOfProviders
           ? numberOfProviders
@@ -224,8 +226,11 @@ const SupplierList = ({
         </Col>
       </Row>
       <Suppliers />
-      {displayType !== displayTypes.MAP ? (
+      {displayType !== displayTypes.MAP && providers.length !== 0 ? (
         <PaginationButtons className="mt-5" />
+      ) : null}
+      {providers.length === 0 ? (
+        <p className="supplier-list__legend">Suppliers not found</p>
       ) : null}
     </React.Fragment>
   );
