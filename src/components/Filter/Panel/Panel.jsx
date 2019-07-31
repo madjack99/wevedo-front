@@ -4,42 +4,42 @@ import { Range } from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-const FilterPanel = ({ setFilterOptions }) => {
+const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
   const budgetDefaultValues = [500, 1000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
-  const guestsDefaultNumber = [30, 100];
-  const [guestsNumber, setGuestsNumber] = useState([...guestsDefaultNumber]);
+  // const guestsDefaultNumber = [30, 100];
+  // const [guestsNumber, setGuestsNumber] = useState([...guestsDefaultNumber]);
 
-  const defaultVenueTypes = {
-    'Country House': false,
-    Barn: false,
-    Outdoor: false,
-    Attraction: false,
-  };
-  const [venueTypes, setVenueTypes] = useState(defaultVenueTypes);
-  const handleVenueTypeSelection = e => {
-    const venueName = e.target.id;
-    setVenueTypes({
-      ...venueTypes,
-      [venueName]: !venueTypes[venueName],
-    });
-  };
+  // const defaultVenueTypes = {
+  //   'Country House': false,
+  //   Barn: false,
+  //   Outdoor: false,
+  //   Attraction: false,
+  // };
+  // const [venueTypes, setVenueTypes] = useState(defaultVenueTypes);
+  // const handleVenueTypeSelection = e => {
+  //   const venueName = e.target.id;
+  //   setVenueTypes({
+  //     ...venueTypes,
+  //     [venueName]: !venueTypes[venueName],
+  //   });
+  // };
 
-  const defaultVenueStyles = {
-    Classic: false,
-    Intimate: false,
-    Unusual: false,
-    Modern: false,
-  };
-  const [venueStyles, setVenueStyles] = useState(defaultVenueStyles);
-  const handleVenueStyleSelection = e => {
-    const venueStyle = e.target.id;
-    setVenueStyles({
-      ...venueStyles,
-      [venueStyle]: !venueStyles[venueStyle],
-    });
-  };
+  // const defaultVenueStyles = {
+  //   Classic: false,
+  //   Intimate: false,
+  //   Unusual: false,
+  //   Modern: false,
+  // };
+  // const [venueStyles, setVenueStyles] = useState(defaultVenueStyles);
+  // const handleVenueStyleSelection = e => {
+  //   const venueStyle = e.target.id;
+  //   setVenueStyles({
+  //     ...venueStyles,
+  //     [venueStyle]: !venueStyles[venueStyle],
+  //   });
+  // };
 
   return (
     <React.Fragment>
@@ -154,12 +154,16 @@ const FilterPanel = ({ setFilterOptions }) => {
           onClick={() => {
             const filterOptionsObj = {
               budgetValues,
-              guestsNumber,
-              venueTypes,
-              venueStyles,
+              // guestsNumber,
+              // venueTypes,
+              // venueStyles,
             };
             console.log(filterOptionsObj);
             setFilterOptions(filterOptionsObj);
+
+            if (onHideDialog) {
+              onHideDialog();
+            }
           }}
         >
           Apply Filter
@@ -168,9 +172,9 @@ const FilterPanel = ({ setFilterOptions }) => {
           variant="dark"
           onClick={() => {
             setBudgetValues(budgetDefaultValues);
-            setGuestsNumber(guestsDefaultNumber);
-            setVenueTypes(defaultVenueTypes);
-            setVenueStyles(defaultVenueStyles);
+            // setGuestsNumber(guestsDefaultNumber);
+            // setVenueTypes(defaultVenueTypes);
+            // setVenueStyles(defaultVenueStyles);
           }}
         >
           Clear

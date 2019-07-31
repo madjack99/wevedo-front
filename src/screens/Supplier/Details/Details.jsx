@@ -161,6 +161,7 @@ const Supplier = ({ match, t }) => {
             <Col className="p-0">
               <img src={map} alt="map" width="100%" />
             </Col>
+            <div className="divider d-sm-none" />
           </Col>
           <Col>
             <Row>

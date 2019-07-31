@@ -162,7 +162,7 @@ const SubMenu = ({ categories, onHide, t, ...rest }) => (
         <Col>
           <h4 className="text-uppercase text-proxima-bold mb-5">Suppliers</h4>
           {categories.map(({ _id, name }) => (
-            <LinkContainer to={`/suppliers/${name}`} key={_id}>
+            <LinkContainer to={`/suppliers/${name}`} onClick={onHide} key={_id}>
               <p>{name}</p>
             </LinkContainer>
           ))}
