@@ -147,7 +147,9 @@ const SupplierList = ({
   function PaginationButtons() {
     function ResultsArea() {
       const numberOfProvidersShown = config.providersPerPage * currentPage;
-      const beginRangeCount = config.providersPerPage * (currentPage - 1) + 1;
+      const beginRangeCount = providers.length
+        ? config.providersPerPage * (currentPage - 1) + 1
+        : 0;
       const endRangeCount =
         numberOfProvidersShown > numberOfProviders
           ? numberOfProviders
@@ -192,10 +194,10 @@ const SupplierList = ({
   return (
     <React.Fragment>
       <Row className="mb-4">
-        <Col className="mr-auto text-uppercase">
+        <Col md={6} xs={4} className="mr-auto text-uppercase">
           <h4 className="pt-2">{`${numberOfProviders} ${supplierCategory}`}</h4>
         </Col>
-        <Col className="text-right">
+        <Col md={6} xs={8} className="text-right">
           <Button
             variant={displayType === displayTypes.MAP ? 'primary' : 'secondary'}
             className="mr-2"
@@ -224,8 +226,11 @@ const SupplierList = ({
         </Col>
       </Row>
       <Suppliers />
-      {displayType !== displayTypes.MAP ? (
+      {displayType !== displayTypes.MAP && providers.length !== 0 ? (
         <PaginationButtons className="mt-5" />
+      ) : null}
+      {providers.length === 0 ? (
+        <p className="supplier-list__legend">Suppliers not found</p>
       ) : null}
     </React.Fragment>
   );

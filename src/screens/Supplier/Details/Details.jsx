@@ -9,6 +9,7 @@ import {
   Form,
 } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import './Details.scss';
 
@@ -37,6 +38,63 @@ const Supplier = ({ match, t }) => {
     fetchSupplier();
   }, [wevedoService, supplierId]);
 
+  const MessageToSupplier = ({ show, onHide }) => (
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="lg"
+      aria-labelledby="send-a-message-to-supplier"
+      centered
+      className="global-modal"
+    >
+      <Modal.Body className="p-0 send-a-message-to-supplier">
+        <Row>
+          <Button className="modal-close-btn" onClick={onHide} variant="link">
+            <i className="fas fa-times fa-2x" />
+          </Button>
+          <Col sm={4} className="p-0 d-none d-md-flex">
+            <img src={modalimg} alt="" />
+          </Col>
+          <Col sm={8}>
+            <Form>
+              <h5>Send a message to Supplier Name</h5>
+              <hr className="hr-sm m-0 mt-3 mb-4 d-none d-md-block" />
+              <Row>
+                <Col sm={12} className="mb-4">
+                  <Form.Group controlId="">
+                    <Form.Control type="text" placeholder="Name" />
+                  </Form.Group>
+                </Col>
+                <Col sm={6}>
+                  <Form.Group controlId="">
+                    <Form.Control type="email" placeholder="Email" />
+                  </Form.Group>
+                </Col>
+                <Col sm={6}>
+                  <Form.Group controlId="">
+                    <Form.Control type="number" placeholder="Mobile Number" />
+                  </Form.Group>
+                </Col>
+                <Col sm={12} className="mt-4 mb-4">
+                  <Form.Group controlId="">
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Message"
+                      rows="3"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col className="text-center text-uppercase">
+                  <Button size="lg">Send</Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
+      </Modal.Body>
+    </Modal>
+  );
+
   return (
     <ScreensLayoutMain
       title={`${supplier.fullName}`}
@@ -48,9 +106,9 @@ const Supplier = ({ match, t }) => {
             {supplier.providerImages ? (
               <Carousel>
                 {Object.values(supplier.providerImages).map(image => (
-                  <Carousel.Item className="carousel-image">
+                  <Carousel.Item className="carousel-image" key={uniqid()}>
                     <img
-                      className="d-block h-100 mx-auto"
+                      className="d-block mx-auto"
                       src={image}
                       alt="supplier-slide"
                     />
@@ -103,6 +161,7 @@ const Supplier = ({ match, t }) => {
             <Col className="p-0">
               <img src={map} alt="map" width="100%" />
             </Col>
+            <div className="divider d-sm-none" />
           </Col>
           <Col>
             <Row>
@@ -115,7 +174,7 @@ const Supplier = ({ match, t }) => {
                 >
                   {t('supplier.sendAMessage.button')}
                 </Button>
-                <MsgToSupplier
+                <MessageToSupplier
                   show={modalShow}
                   onHide={() => setModalShow(false)}
                   t={t}
@@ -156,71 +215,5 @@ const Supplier = ({ match, t }) => {
     </ScreensLayoutMain>
   );
 };
-
-const MsgToSupplier = ({ show, onHide, t }) => (
-  <Modal
-    show={show}
-    onHide={onHide}
-    size="lg"
-    aria-labelledby="send-a-message-to-supplier"
-    centered
-    className="global-modal"
-  >
-    <Modal.Body className="p-0">
-      <Row>
-        <Button className="modal-close-btn" onClick={onHide} variant="link">
-          <i className="fas fa-times fa-2x" />
-        </Button>
-        <Col sm={4} className="p-0">
-          <img src={modalimg} alt="" />
-        </Col>
-        <Col sm={8}>
-          <Form>
-            <h5>{t('supplier.sendAMessage.modalTitle')}</h5>
-            <hr className="hr-sm m-0 mt-3 mb-4" />
-            <Row>
-              <Col sm={12} className="mb-4">
-                <Form.Group controlId="">
-                  <Form.Control
-                    type="text"
-                    placeholder={t('supplier.sendAMessage.namePlaceholder')}
-                  />
-                </Form.Group>
-              </Col>
-              <Col sm={6}>
-                <Form.Group controlId="">
-                  <Form.Control
-                    type="email"
-                    placeholder={t('supplier.sendAMessage.emailPlaceholder')}
-                  />
-                </Form.Group>
-              </Col>
-              <Col sm={6}>
-                <Form.Group controlId="">
-                  <Form.Control
-                    type="number"
-                    placeholder={t('supplier.sendAMessage.mobilePlaceholder')}
-                  />
-                </Form.Group>
-              </Col>
-              <Col sm={12} className="mt-4 mb-4">
-                <Form.Group controlId="">
-                  <Form.Control
-                    as="textarea"
-                    placeholder={t('supplier.sendAMessage.messagePlaceholder')}
-                    rows="3"
-                  />
-                </Form.Group>
-              </Col>
-              <Col className="text-center text-uppercase">
-                <Button size="lg">{t('supplier.sendAMessage.sendBtn')}</Button>
-              </Col>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </Modal.Body>
-  </Modal>
-);
 
 export default withTranslation('common')(Supplier);

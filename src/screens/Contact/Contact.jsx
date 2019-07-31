@@ -20,6 +20,7 @@ class Contact extends React.Component {
       email: '',
       message: '',
       errorMsg: '',
+      successfullySent: false,
     };
   }
 
@@ -41,7 +42,12 @@ class Contact extends React.Component {
     } else {
       this.contactPageApi
         .create(`${backendUrl}/api/contact`, { name, email, message })
-        .then(res => console.log(res))
+        .then(res => {
+          console.log(res);
+          this.setState({
+            successfullySent: true,
+          });
+        })
         .catch(err => console.log(err));
 
       this.setState({
@@ -102,7 +108,14 @@ class Contact extends React.Component {
                     {this.state.errorMsg ? (
                       <Alert variant="danger">{this.state.errorMsg}</Alert>
                     ) : null}
-                    <Button size="lg" type="submit">
+                    {this.state.successfullySent ? (
+                      <Alert variant="success">Message sent successfully</Alert>
+                    ) : null}
+                    <Button
+                      hidden={this.state.successfullySent}
+                      size="lg"
+                      type="submit"
+                    >
                       {t('contact.sendBtn')}
                     </Button>
                   </Col>

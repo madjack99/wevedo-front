@@ -5,6 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import logo from '../../../assets/images/symbol.png';
 
+import { withScrollToTop } from '../../../components/HOC';
+
 const ScreensLayoutsMinimalistForm = ({ title, children }) => (
   <Container className="minimalist-form">
     <Row>
@@ -26,4 +28,4 @@ const ScreensLayoutsMinimalistForm = ({ title, children }) => (
   </Container>
 );
 
-export default ScreensLayoutsMinimalistForm;
+export default withScrollToTop()(ScreensLayoutsMinimalistForm);

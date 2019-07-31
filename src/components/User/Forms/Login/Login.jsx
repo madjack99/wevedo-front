@@ -14,7 +14,7 @@ import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
-import ResetPasswordWindow from '../../../Dialogs/ResetPassword';
+import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 import SocialButton from '../../../SocialButton';
 import Checkbox from '../../../UI/Checkbox';
 
@@ -150,7 +150,7 @@ const UserFormsLogin = ({ login, t }) => {
                   </Button>
                 </Col>
               </Row>
-              <ResetPasswordWindow
+              <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
