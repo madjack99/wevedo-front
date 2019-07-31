@@ -4,11 +4,15 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const SearchPanel = ({ title, t }) => {
-  const [providerTitle, setProviderTitle] = useState();
+  const [providerTitle, setProviderTitle] = useState('');
   const handleChange = e => {
     setProviderTitle(e.target.value);
   };
-  console.log(providerTitle);
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('submitting');
+    setProviderTitle('');
+  };
   return (
     <Row
       className={
@@ -19,7 +23,7 @@ const SearchPanel = ({ title, t }) => {
     >
       <Col sm={12}>
         {title ? <h1>Find your best wedding supplier by Location</h1> : null}
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Row>
             <Col className="boxed-form">
               <Row>
@@ -34,12 +38,13 @@ const SearchPanel = ({ title, t }) => {
                   <Form.Control
                     placeholder={t('home.findForm.providerTitlePlaceholder')}
                     onChange={handleChange}
+                    value={providerTitle}
                   />
                 </Col>
               </Row>
             </Col>
             <Col sm={3}>
-              <Button variant="light" size="lg">
+              <Button variant="light" size="lg" type="submint">
                 {t('home.findForm.searchBtn')}
               </Button>
             </Col>
