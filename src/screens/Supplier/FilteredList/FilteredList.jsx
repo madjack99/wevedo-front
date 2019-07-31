@@ -45,7 +45,6 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
 
   const onPaginationChange = pageNumber => {
     history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
-    window.scrollTo(0, 0);
   };
 
   return (
