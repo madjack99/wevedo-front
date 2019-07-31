@@ -3,14 +3,14 @@ import { withTranslation } from 'react-i18next';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-const SearchPanel = ({ title, t, getProvidersByFilters, params }) => {
+const SearchPanel = ({ title, t, setProviderTitleQuery }) => {
   const [providerTitle, setProviderTitle] = useState('');
   const handleChange = e => {
     setProviderTitle(e.target.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    getProvidersByFilters(...params, providerTitle);
+    setProviderTitleQuery(providerTitle);
     setProviderTitle('');
   };
   return (

@@ -20,6 +20,8 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
 
   const [filterOptions, setFilterOptions] = useState({});
 
+  const [providerTitleQuery, setProviderTitleQuery] = useState('');
+
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.name;
   const currentPage = +match.params.pageNumber || 1;
@@ -35,13 +37,20 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
         supplierCategory,
         currentPage,
         filterOptions,
+        providerTitleQuery,
       );
 
       setProviders(newProviders);
       setNumberOfProviders(newNumberOfProviders);
     };
     fetchProviders();
-  }, [wevedoService, currentPage, supplierCategory, filterOptions]);
+  }, [
+    wevedoService,
+    currentPage,
+    supplierCategory,
+    filterOptions,
+    providerTitleQuery,
+  ]);
 
   const onPaginationChange = pageNumber => {
     history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
@@ -61,10 +70,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
         </Row>
       </Container>
 
-      <SearchPanel
-        getProvidersByFilters={wevedoService.getProvidersByFilters}
-        params={[supplierCategory, currentPage, filterOptions]}
-      />
+      <SearchPanel setProviderTitleQuery={setProviderTitleQuery} />
       <Container className="venues-results">
         <Row>
           <Col sm={4} className="results-filters d-none d-sm-inline">
