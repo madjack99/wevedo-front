@@ -105,7 +105,10 @@ const Supplier = ({ match, t }) => {
           <Col>
             {supplier.providerImages ? (
               <Carousel>
-                {Object.values(supplier.providerImages).map(image => (
+                {[
+                  supplier.profileImageURL,
+                  ...Object.values(supplier.providerImages),
+                ].map(image => (
                   <Carousel.Item className="carousel-image" key={uniqid()}>
                     <img
                       className="d-block mx-auto"
