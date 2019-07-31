@@ -175,6 +175,7 @@ const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
             // setGuestsNumber(guestsDefaultNumber);
             // setVenueTypes(defaultVenueTypes);
             // setVenueStyles(defaultVenueStyles);
+            setFilterOptions({});
           }}
         >
           Clear

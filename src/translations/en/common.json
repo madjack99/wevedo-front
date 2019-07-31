@@ -46,7 +46,7 @@
       "title": "Find your best wedding supplier by Location",
       "category": "Category",
       "options": "...",
-      "locationPlaceholder": "Location",
+      "providerTitlePlaceholder": "Provider Title",
       "searchBtn": "Search"
     }
   },
