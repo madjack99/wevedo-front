@@ -51,8 +51,30 @@ class ImageUpload extends React.Component {
   };
 
   handleDrop = files => {
-    const droppedImgs = files.map(img => URL.createObjectURL(img));
-    this.setState({ files: [...this.state.files, ...droppedImgs] });
+    const droppedFiles = Array.from(files);
+
+    this.setState({ uploading: true });
+
+    const formData = new FormData();
+
+    droppedFiles.forEach((file, i) => {
+      formData.append(i, file);
+    });
+
+    fetch(`${config.backendUrl}/api/img-upload`, {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(images => {
+        console.log(images);
+        this.setState({
+          uploading: false,
+          images: [...this.state.images, ...images],
+        });
+      });
+
+    console.log(files);
   };
 
   handleDelete = index => {
