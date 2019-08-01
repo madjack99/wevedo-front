@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+import queryString from 'query-string';
+
 import { Row, Container, Col } from 'react-bootstrap';
 
 import './FilteredList.scss';
@@ -14,13 +16,13 @@ import SearchPanelMobile from '../../../components/Search/Panel/Mobile';
 import FilterPanel from '../../../components/Filter/Panel';
 import SupplierList from '../../../components/Supplier/List';
 
-const ScreensSupplierFilteredList = ({ history, match }) => {
+const ScreensSupplierFilteredList = ({ history, match, location }) => {
   const [providers, setProviders] = useState([]);
   const [numberOfProviders, setNumberOfProviders] = useState(0);
 
   const [filterOptions, setFilterOptions] = useState({});
 
-  const [providerTitleQuery, setProviderTitleQuery] = useState('');
+  const providerTitleQuery = queryString.parse(location.search).supplier || '';
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.name;
@@ -69,7 +71,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
         </Row>
       </Container>
 
-      <SearchPanel setProviderTitleQuery={setProviderTitleQuery} />
+      <SearchPanel />
       <Container className="venues-results">
         <Row>
           <Col sm={4} className="results-filters d-none d-sm-inline">
