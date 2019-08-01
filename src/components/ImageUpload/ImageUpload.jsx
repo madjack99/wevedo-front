@@ -14,21 +14,37 @@ import {
 
 import './ImageUpload.scss';
 
+import config from '../../config';
+
 import { updateUser } from '../../actions/user-actions';
 
 class ImageUpload extends React.Component {
   state = {
     files: [],
     errorMsg: null,
+    uploading: false,
+    images: [],
   };
 
   handleUpload = e => {
-    const newImg = e.target.files[0];
-    if (newImg) {
+    const files = Array.from(e.target.files);
+    this.setState({ uploading: true });
+
+    const formData = new FormData();
+
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+
+    fetch(`${config.backendUrl}/api/img-upload`, {
+      method: 'POST',
+      body: formData,
+    }).then(images => {
       this.setState({
-        files: [...this.state.files, URL.createObjectURL(newImg)],
+        uploading: false,
+        images,
       });
-    }
+    });
   };
 
   handleDrop = files => {
