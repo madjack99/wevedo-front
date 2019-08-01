@@ -45,7 +45,7 @@ class ImageUpload extends React.Component {
         console.log(images);
         this.setState({
           uploading: false,
-          images,
+          images: [...this.state.images, ...images],
         });
       });
   };
