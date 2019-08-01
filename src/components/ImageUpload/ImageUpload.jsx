@@ -39,12 +39,15 @@ class ImageUpload extends React.Component {
     fetch(`${config.backendUrl}/api/img-upload`, {
       method: 'POST',
       body: formData,
-    }).then(images => {
-      this.setState({
-        uploading: false,
-        images,
+    })
+      .then(res => res.json())
+      .then(images => {
+        console.log(images);
+        this.setState({
+          uploading: false,
+          images,
+        });
       });
-    });
   };
 
   handleDrop = files => {
@@ -77,6 +80,7 @@ class ImageUpload extends React.Component {
     const { t } = this.props;
     const { errorMsg } = this.state;
     const { files } = this.state;
+    const { images } = this.state;
     const customClassName = files.length
       ? 'custom-height-with-photos'
       : 'custom-hight-without-photos';
@@ -113,8 +117,8 @@ class ImageUpload extends React.Component {
               </Form>
             </Col>
 
-            {files
-              ? files.map((src, i) => (
+            {images
+              ? images.map((image, i) => (
                   <Col
                     sm={4}
                     key={i}
@@ -122,7 +126,7 @@ class ImageUpload extends React.Component {
                     onClick={() => this.handleDelete(i)}
                   >
                     <h3 className="delete-icon">&times;</h3>
-                    <Image src={src} alt="new img" fluid />
+                    <Image src={image.secure_url} alt="new img" fluid />
                   </Col>
                 ))
               : null}
