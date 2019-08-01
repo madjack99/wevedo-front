@@ -42,7 +42,6 @@ class ImageUpload extends React.Component {
     })
       .then(res => res.json())
       .then(images => {
-        console.log(images);
         this.setState({
           uploading: false,
           images: [...this.state.images, ...images],
@@ -67,20 +66,17 @@ class ImageUpload extends React.Component {
     })
       .then(res => res.json())
       .then(images => {
-        console.log(images);
         this.setState({
           uploading: false,
           images: [...this.state.images, ...images],
         });
       });
-
-    console.log(files);
   };
 
   handleDelete = index => {
-    const { files } = this.state;
-    const filteredImgs = files.filter(img => files.indexOf(img) !== index);
-    this.setState({ files: filteredImgs });
+    const { images } = this.state;
+    const filteredImgs = images.filter(image => image.public_id !== index);
+    this.setState({ images: filteredImgs });
   };
 
   handleNextStep = () => {
@@ -143,9 +139,9 @@ class ImageUpload extends React.Component {
               ? images.map((image, i) => (
                   <Col
                     sm={4}
-                    key={i}
+                    key={image.public_id}
                     className="position-relative"
-                    onClick={() => this.handleDelete(i)}
+                    onClick={() => this.handleDelete(image.public_id)}
                   >
                     <h3 className="delete-icon">&times;</h3>
                     <Image src={image.secure_url} alt="new img" fluid />
