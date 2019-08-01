@@ -20,7 +20,6 @@ import { updateUser } from '../../actions/user-actions';
 
 class ImageUpload extends React.Component {
   state = {
-    files: [],
     errorMsg: null,
     uploading: false,
     images: [],
@@ -81,12 +80,12 @@ class ImageUpload extends React.Component {
 
   handleNextStep = () => {
     const { updateUser } = this.props;
-    const { files } = this.state;
-    if (files.length < 1) {
+    const { images } = this.state;
+    if (images.length < 1) {
       this.setState({ errorMsg: 'Please, provide at least 1 photos.' });
     } else {
-      const photoObject = files.reduce((acc, photo, index) => {
-        acc[index] = photo;
+      const photoObject = images.reduce((acc, image, index) => {
+        acc[index] = image;
         return acc;
       }, {});
       updateUser()({ providerImages: photoObject });
@@ -97,9 +96,8 @@ class ImageUpload extends React.Component {
   render() {
     const { t } = this.props;
     const { errorMsg } = this.state;
-    const { files } = this.state;
     const { images } = this.state;
-    const customClassName = files.length
+    const customClassName = images.length
       ? 'custom-height-with-photos'
       : 'custom-hight-without-photos';
     return (
