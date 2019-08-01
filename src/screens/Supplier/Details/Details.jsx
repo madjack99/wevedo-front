@@ -103,11 +103,11 @@ const Supplier = ({ match, t }) => {
       <Container className="supplier-results">
         <Row className="mt-5 mb-5">
           <Col>
-            {supplier.providerImages ? (
+            {supplier.profileImageURL || supplier.providerImages ? (
               <Carousel>
                 {[
                   supplier.profileImageURL,
-                  ...Object.values(supplier.providerImages),
+                  ...Object.values(supplier.providerImages || {}),
                 ].map(image => (
                   <Carousel.Item className="carousel-image" key={uniqid()}>
                     <img
