@@ -7,7 +7,7 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const SearchPanel = ({ title, categories, t, history }) => {
-  const [supplierCategory, setSupplierCategory] = useState('');
+  const [supplierCategory, setSupplierCategory] = useState('default');
   const [supplierTitle, setSupplierTitle] = useState('');
   const handleChange = e => {
     setSupplierTitle(e.target.value);
@@ -38,7 +38,9 @@ const SearchPanel = ({ title, categories, t, history }) => {
                     onChange={e => setSupplierCategory(e.target.value)}
                     value={supplierCategory}
                   >
-                    <option disabled />
+                    <option value="default" disabled>
+                      Category
+                    </option>
                     {categories.map(({ _id, name }) => (
                       <option key={_id} style={{ color: 'black' }}>
                         {name}
