@@ -7,15 +7,15 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const SearchPanel = ({ title, categories, t, history }) => {
-  const [providerCategory, setProviderCategory] = useState('');
-  const [providerTitle, setProviderTitle] = useState('');
+  const [supplierCategory, setSupplierCategory] = useState('');
+  const [supplierTitle, setSupplierTitle] = useState('');
   const handleChange = e => {
-    setProviderTitle(e.target.value);
+    setSupplierTitle(e.target.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    if (providerCategory !== '' && providerTitle !== '') {
-      history.push(`/suppliers/${providerCategory}?supplier=${providerTitle}`);
+    if (supplierCategory !== '' && supplierTitle !== '') {
+      history.push(`/suppliers/${supplierCategory}?supplier=${supplierTitle}`);
     }
   };
   return (
@@ -35,8 +35,8 @@ const SearchPanel = ({ title, categories, t, history }) => {
                 <Col sm={6} md>
                   <Form.Control
                     as="select"
-                    onChange={e => setProviderCategory(e.target.value)}
-                    value={providerCategory}
+                    onChange={e => setSupplierCategory(e.target.value)}
+                    value={supplierCategory}
                   >
                     <option disabled />
                     {categories.map(({ _id, name }) => (
@@ -49,9 +49,9 @@ const SearchPanel = ({ title, categories, t, history }) => {
                 <div className="divider d-none d-sm-none d-md-inline" />
                 <Col sm={6} md>
                   <Form.Control
-                    placeholder={t('home.findForm.providerTitlePlaceholder')}
+                    placeholder={t('home.findForm.supplierTitlePlaceholder')}
                     onChange={handleChange}
-                    value={providerTitle}
+                    value={supplierTitle}
                   />
                 </Col>
               </Row>

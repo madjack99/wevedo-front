@@ -13,9 +13,9 @@ import supplierMap from '../../../assets/images/aMap.png';
 import config from '../../../config';
 
 const SupplierList = ({
-  providers,
+  suppliers,
   supplierCategory,
-  numberOfProviders,
+  numberOfSuppliers,
   currentPage,
   onPaginationChange,
 }) => {
@@ -26,26 +26,26 @@ const SupplierList = ({
   };
   const [displayType, setDisplayType] = useState(displayTypes.GRID);
 
-  function SupplierGrid({ provider }) {
-    const { _id: providerId } = provider;
+  function SupplierGrid({ supplier }) {
+    const { _id: supplierId } = supplier;
     return (
-      <Link to={`/suppliers/details/${providerId}`}>
+      <Link to={`/suppliers/details/${supplierId}`}>
         <Card className="h-100">
           <Card.Img
             className="supplier-list__image supplier-list__image_grid"
             variant="top"
-            src={provider.profileImageURL}
+            src={supplier.profileImageURL}
             alt="Wevedo Venues"
           />
           <Card.Body>
-            <Card.Title className="mb-1">{provider.fullName}</Card.Title>
+            <Card.Title className="mb-1">{supplier.fullName}</Card.Title>
             <span className="results-data-location">
               <i className="fas fa-map-marker-alt mr-2" />
-              {provider.regionName}
+              {supplier.regionName}
             </span>
             <ClampLines
               className="mt-3"
-              text={provider.bio || ''}
+              text={supplier.bio || ''}
               id="supplier-grid-text"
               ellipsis="..."
               lines={2}
@@ -53,12 +53,12 @@ const SupplierList = ({
               innerElement={Card.Text}
             />
           </Card.Body>
-          {provider.minPrice && provider.maxPrice ? (
+          {supplier.minPrice && supplier.maxPrice ? (
             <Card.Footer>
               <Row>
                 <Col className="pl-md-3 text-center">
                   <b>
-                    ${provider.minPrice} - ${provider.maxPrice}
+                    ${supplier.minPrice} - ${supplier.maxPrice}
                   </b>
                 </Col>
               </Row>
@@ -69,36 +69,36 @@ const SupplierList = ({
     );
   }
 
-  function SupplierCard({ provider }) {
-    const { _id: providerId } = provider;
+  function SupplierCard({ supplier }) {
+    const { _id: supplierId } = supplier;
     return (
-      <Link to={`/suppliers/details/${providerId}`}>
+      <Link to={`/suppliers/details/${supplierId}`}>
         <Row>
           <Col className="h-100" sm={5}>
             <img
               className="supplier-list__image supplier-list__image_card"
-              src={provider.profileImageURL}
+              src={supplier.profileImageURL}
               alt=""
             />
           </Col>
           <Col sm={7}>
-            <h5>{provider.firstName}</h5>
+            <h5>{supplier.firstName}</h5>
             <span className="results-data-location">
               <i className="fas fa-map-marker-alt mr-2" />
-              {provider.regionName}
+              {supplier.regionName}
             </span>
             <ClampLines
               className="mt-2 mb-2"
-              text={provider.bio || ''}
+              text={supplier.bio || ''}
               id="supplier-grid-text"
               ellipsis="..."
               lines={3}
               buttons={false}
               innerElement="p"
             />
-            {provider.minPrice && provider.maxPrice ? (
+            {supplier.minPrice && supplier.maxPrice ? (
               <b>
-                ${provider.minPrice} - ${provider.maxPrice}
+                ${supplier.minPrice} - ${supplier.maxPrice}
               </b>
             ) : null}
           </Col>
@@ -112,11 +112,11 @@ const SupplierList = ({
       case displayTypes.GRID:
         return (
           <Row>
-            {providers.map(provider => {
-              const { _id: id } = provider;
+            {suppliers.map(supplier => {
+              const { _id: id } = supplier;
               return (
                 <Col className="mb-4" sm={6} key={id}>
-                  <SupplierGrid provider={provider} />
+                  <SupplierGrid supplier={supplier} />
                 </Col>
               );
             })}
@@ -124,11 +124,11 @@ const SupplierList = ({
         );
 
       case displayTypes.LIST:
-        return providers.map(provider => {
-          const { _id: id } = provider;
+        return suppliers.map(supplier => {
+          const { _id: id } = supplier;
           return (
             <React.Fragment key={id}>
-              <SupplierCard provider={provider} />
+              <SupplierCard supplier={supplier} />
               <div className="divider" />
             </React.Fragment>
           );
@@ -146,18 +146,18 @@ const SupplierList = ({
 
   function PaginationButtons() {
     function ResultsArea() {
-      const numberOfProvidersShown = config.providersPerPage * currentPage;
-      const beginRangeCount = providers.length
-        ? config.providersPerPage * (currentPage - 1) + 1
+      const numberOfSuppliersShown = config.suppliersPerPage * currentPage;
+      const beginRangeCount = suppliers.length
+        ? config.suppliersPerPage * (currentPage - 1) + 1
         : 0;
       const endRangeCount =
-        numberOfProvidersShown > numberOfProviders
-          ? numberOfProviders
-          : numberOfProvidersShown;
+        numberOfSuppliersShown > numberOfSuppliers
+          ? numberOfSuppliers
+          : numberOfSuppliersShown;
 
       return (
         <span className="text-muted">
-          {`Showing ${beginRangeCount} - ${endRangeCount} of ${numberOfProviders} results`}
+          {`Showing ${beginRangeCount} - ${endRangeCount} of ${numberOfSuppliers} results`}
         </span>
       );
     }
@@ -171,10 +171,10 @@ const SupplierList = ({
               prevPageText={<i className="fa fa-angle-left" />}
               nextPageText={<i className="fa fa-angle-right" />}
               lastPageText={<i className="fa fa-angle-double-right" />}
-              itemsCountPerPage={config.providersPerPage}
+              itemsCountPerPage={config.suppliersPerPage}
               pageRangeDisplayed={config.pageRangeDisplayed}
               activePage={+currentPage}
-              totalItemsCount={numberOfProviders}
+              totalItemsCount={numberOfSuppliers}
               onChange={onPaginationChange}
               itemClass="paginationItem"
               itemClassLast="paginationIcon"
@@ -195,7 +195,7 @@ const SupplierList = ({
     <React.Fragment>
       <Row className="mb-4">
         <Col md={6} xs={4} className="mr-auto text-uppercase">
-          <h4 className="pt-2">{`${numberOfProviders} ${supplierCategory}`}</h4>
+          <h4 className="pt-2">{`${numberOfSuppliers} ${supplierCategory}`}</h4>
         </Col>
         <Col md={6} xs={8} className="text-right">
           <Button
@@ -226,10 +226,10 @@ const SupplierList = ({
         </Col>
       </Row>
       <Suppliers />
-      {displayType !== displayTypes.MAP && providers.length !== 0 ? (
+      {displayType !== displayTypes.MAP && suppliers.length !== 0 ? (
         <PaginationButtons className="mt-5" />
       ) : null}
-      {providers.length === 0 ? (
+      {suppliers.length === 0 ? (
         <p className="supplier-list__legend">Suppliers not found</p>
       ) : null}
     </React.Fragment>

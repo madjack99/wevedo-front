@@ -17,41 +17,41 @@ import FilterPanel from '../../../components/Filter/Panel';
 import SupplierList from '../../../components/Supplier/List';
 
 const ScreensSupplierFilteredList = ({ history, match, location }) => {
-  const [providers, setProviders] = useState([]);
-  const [numberOfProviders, setNumberOfProviders] = useState(0);
+  const [suppliers, setSuppliers] = useState([]);
+  const [numberOfSuppliers, setNumberOfSuppliers] = useState(0);
 
   const [filterOptions, setFilterOptions] = useState({});
 
-  const providerTitleQuery = queryString.parse(location.search).supplier || '';
+  const supplierTitleQuery = queryString.parse(location.search).supplier || '';
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.name;
   const currentPage = +match.params.pageNumber || 1;
 
   useEffect(() => {
-    const fetchProviders = async () => {
+    const fetchSuppliers = async () => {
       const {
         data: {
-          providers: newProviders,
-          numberOfProviders: newNumberOfProviders,
+          providers: newSuppliers,
+          numberOfProviders: newNumberOfSuppliers,
         },
-      } = await wevedoService.getProvidersByFilters(
+      } = await wevedoService.getSuppliersByFilters(
         supplierCategory,
         currentPage,
         filterOptions,
-        providerTitleQuery,
+        supplierTitleQuery,
       );
 
-      setProviders(newProviders);
-      setNumberOfProviders(newNumberOfProviders);
+      setSuppliers(newSuppliers);
+      setNumberOfSuppliers(newNumberOfSuppliers);
     };
-    fetchProviders();
+    fetchSuppliers();
   }, [
     wevedoService,
     currentPage,
     supplierCategory,
     filterOptions,
-    providerTitleQuery,
+    supplierTitleQuery,
   ]);
 
   const onPaginationChange = pageNumber => {
@@ -79,10 +79,10 @@ const ScreensSupplierFilteredList = ({ history, match, location }) => {
           </Col>
           <Col sm={8} className="results-data">
             <SupplierList
-              providers={providers}
+              suppliers={suppliers}
               supplierCategory={supplierCategory}
               currentPage={currentPage}
-              numberOfProviders={numberOfProviders}
+              numberOfSuppliers={numberOfSuppliers}
               onPaginationChange={onPaginationChange}
             />
           </Col>
