@@ -49,11 +49,11 @@ const ScreensRoot = () => {
           component={ScreensSupplierDetails}
         />
         <Route
-          path="/suppliers/:name/:pageNumber"
+          path="/suppliers/:category/:pageNumber"
           component={ScreensSupplierFilteredList}
         />
         <Route
-          path="/suppliers/:name/"
+          path="/suppliers/:category/"
           component={ScreensSupplierFilteredList}
         />
         <Route path="/contact" component={ScreensContact} />

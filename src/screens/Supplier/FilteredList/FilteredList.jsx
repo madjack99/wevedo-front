@@ -25,7 +25,7 @@ const ScreensSupplierFilteredList = ({ history, match, location }) => {
   const supplierTitleQuery = queryString.parse(location.search).supplier || '';
 
   const wevedoService = useContext(WevedoServiceContext);
-  const supplierCategory = match.params.name;
+  const supplierCategory = match.params.category;
   const currentPage = +match.params.pageNumber || 1;
 
   useEffect(() => {
