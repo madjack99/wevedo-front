@@ -95,6 +95,12 @@ const Supplier = ({ match, t }) => {
     </Modal>
   );
 
+  const providerImagesList = supplier.providerImages
+    ? Object.values(supplier.providerImages).map(
+        imageObj => imageObj.secure_url,
+      )
+    : [];
+
   return (
     <ScreensLayoutMain
       title={`${supplier.fullName}`}
@@ -105,18 +111,17 @@ const Supplier = ({ match, t }) => {
           <Col>
             {supplier.profileImageURL || supplier.providerImages ? (
               <Carousel>
-                {[
-                  supplier.profileImageURL,
-                  ...Object.values(supplier.providerImages || {}),
-                ].map(image => (
-                  <Carousel.Item className="carousel-image" key={uniqid()}>
-                    <img
-                      className="d-block mx-auto"
-                      src={image}
-                      alt="supplier-slide"
-                    />
-                  </Carousel.Item>
-                ))}
+                {[supplier.profileImageURL, ...providerImagesList].map(
+                  image => (
+                    <Carousel.Item className="carousel-image" key={uniqid()}>
+                      <img
+                        className="d-block mx-auto"
+                        src={image}
+                        alt="supplier-slide"
+                      />
+                    </Carousel.Item>
+                  ),
+                )}
               </Carousel>
             ) : null}
           </Col>
