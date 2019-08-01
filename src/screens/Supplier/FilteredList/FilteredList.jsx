@@ -16,7 +16,7 @@ import SearchPanelMobile from '../../../components/Search/Panel/Mobile';
 import FilterPanel from '../../../components/Filter/Panel';
 import SupplierList from '../../../components/Supplier/List';
 
-const ScreensSupplierFilteredList = ({ history, match, location }) => {
+const ScreensSupplierFilteredList = ({ history, location, match }) => {
   const [suppliers, setSuppliers] = useState([]);
   const [numberOfSuppliers, setNumberOfSuppliers] = useState(0);
 
