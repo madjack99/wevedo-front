@@ -19,8 +19,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
-import { fetchSignOut, fetchCategories } from '../../actions';
-
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
 
@@ -182,15 +180,7 @@ const mapStateToProps = ({ sessionData, categoryList, userData }) => ({
   ...userData,
 });
 
-const mapDispatchToProps = dispatch => ({
-  signOut: fetchSignOut(dispatch),
-  getCategories: fetchCategories(dispatch),
-});
-
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps),
   withTranslation('common'),
 )(Header);

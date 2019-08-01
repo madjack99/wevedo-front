@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { Row, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
 import { Range } from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
+const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
   const budgetDefaultValues = [500, 1000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
@@ -40,6 +42,18 @@ const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
   //     [venueStyle]: !venueStyles[venueStyle],
   //   });
   // };
+
+  const handleClear = () => {
+    setBudgetValues(budgetDefaultValues);
+    // setGuestsNumber(guestsDefaultNumber);
+    // setVenueTypes(defaultVenueTypes);
+    // setVenueStyles(defaultVenueStyles);
+    setFilterOptions({});
+  };
+
+  useEffect(() => {
+    handleClear();
+  }, [match.params.category, handleClear]);
 
   return (
     <React.Fragment>
@@ -168,16 +182,7 @@ const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
         >
           Apply Filter
         </Button>
-        <Button
-          variant="dark"
-          onClick={() => {
-            setBudgetValues(budgetDefaultValues);
-            // setGuestsNumber(guestsDefaultNumber);
-            // setVenueTypes(defaultVenueTypes);
-            // setVenueStyles(defaultVenueStyles);
-            setFilterOptions({});
-          }}
-        >
+        <Button variant="dark" onClick={handleClear}>
           Clear
         </Button>
       </ButtonToolbar>
@@ -185,4 +190,4 @@ const FilterPanel = ({ setFilterOptions, onHideDialog }) => {
   );
 };
 
-export default FilterPanel;
+export default withRouter(FilterPanel);

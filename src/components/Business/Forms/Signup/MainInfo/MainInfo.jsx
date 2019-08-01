@@ -155,7 +155,7 @@ const BusinessFormsSignupMainInfo = ({
               isInvalid={touched.categories && !!errors.categories}
               autoComplete="new-categories"
             >
-              <option disabled />
+              <option value="" disabled />
               {categoryList.map(({ _id: id, name }) => (
                 <option key={id}>{name}</option>
               ))}

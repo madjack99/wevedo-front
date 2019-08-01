@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+import queryString from 'query-string';
+
 import { Row, Container, Col } from 'react-bootstrap';
 
 import './FilteredList.scss';
@@ -14,42 +16,42 @@ import SearchPanelMobile from '../../../components/Search/Panel/Mobile';
 import FilterPanel from '../../../components/Filter/Panel';
 import SupplierList from '../../../components/Supplier/List';
 
-const ScreensSupplierFilteredList = ({ history, match }) => {
-  const [providers, setProviders] = useState([]);
-  const [numberOfProviders, setNumberOfProviders] = useState(0);
+const ScreensSupplierFilteredList = ({ history, location, match }) => {
+  const [suppliers, setSuppliers] = useState([]);
+  const [numberOfSuppliers, setNumberOfSuppliers] = useState(0);
 
   const [filterOptions, setFilterOptions] = useState({});
 
-  const [providerTitleQuery, setProviderTitleQuery] = useState('');
+  const supplierTitleQuery = queryString.parse(location.search).supplier || '';
 
   const wevedoService = useContext(WevedoServiceContext);
-  const supplierCategory = match.params.name;
+  const supplierCategory = match.params.category;
   const currentPage = +match.params.pageNumber || 1;
 
   useEffect(() => {
-    const fetchProviders = async () => {
+    const fetchSuppliers = async () => {
       const {
         data: {
-          providers: newProviders,
-          numberOfProviders: newNumberOfProviders,
+          providers: newSuppliers,
+          numberOfProviders: newNumberOfSuppliers,
         },
-      } = await wevedoService.getProvidersByFilters(
+      } = await wevedoService.getSuppliersByFilters(
         supplierCategory,
         currentPage,
         filterOptions,
-        providerTitleQuery,
+        supplierTitleQuery,
       );
 
-      setProviders(newProviders);
-      setNumberOfProviders(newNumberOfProviders);
+      setSuppliers(newSuppliers);
+      setNumberOfSuppliers(newNumberOfSuppliers);
     };
-    fetchProviders();
+    fetchSuppliers();
   }, [
     wevedoService,
     currentPage,
     supplierCategory,
     filterOptions,
-    providerTitleQuery,
+    supplierTitleQuery,
   ]);
 
   const onPaginationChange = pageNumber => {
@@ -69,7 +71,7 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
         </Row>
       </Container>
 
-      <SearchPanel setProviderTitleQuery={setProviderTitleQuery} />
+      <SearchPanel />
       <Container className="venues-results">
         <Row>
           <Col sm={4} className="results-filters d-none d-sm-inline">
@@ -77,10 +79,10 @@ const ScreensSupplierFilteredList = ({ history, match }) => {
           </Col>
           <Col sm={8} className="results-data">
             <SupplierList
-              providers={providers}
+              suppliers={suppliers}
               supplierCategory={supplierCategory}
               currentPage={currentPage}
-              numberOfProviders={numberOfProviders}
+              numberOfSuppliers={numberOfSuppliers}
               onPaginationChange={onPaginationChange}
             />
           </Col>

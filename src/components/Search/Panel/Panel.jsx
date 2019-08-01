@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-const SearchPanel = ({ title, t, setProviderTitleQuery }) => {
-  const [providerTitle, setProviderTitle] = useState('');
+const SearchPanel = ({ title, categories, t, history }) => {
+  const [supplierCategory, setSupplierCategory] = useState('default');
+  const [supplierTitle, setSupplierTitle] = useState('');
   const handleChange = e => {
-    setProviderTitle(e.target.value);
+    setSupplierTitle(e.target.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    setProviderTitleQuery(providerTitle);
-    setProviderTitle('');
+    if (supplierCategory !== '' && supplierTitle !== '') {
+      history.push(`/suppliers/${supplierCategory}?supplier=${supplierTitle}`);
+    }
   };
   return (
     <Row
@@ -28,17 +33,27 @@ const SearchPanel = ({ title, t, setProviderTitleQuery }) => {
             <Col className="boxed-form">
               <Row>
                 <Col sm={6} md>
-                  <Form.Control as="select">
-                    <option>{t('home.findForm.category')}</option>
-                    <option>{t('home.findForm.options')}</option>
+                  <Form.Control
+                    as="select"
+                    onChange={e => setSupplierCategory(e.target.value)}
+                    value={supplierCategory}
+                  >
+                    <option value="default" disabled>
+                      Category
+                    </option>
+                    {categories.map(({ _id, name }) => (
+                      <option key={_id} style={{ color: 'black' }}>
+                        {name}
+                      </option>
+                    ))}
                   </Form.Control>
                 </Col>
                 <div className="divider d-none d-sm-none d-md-inline" />
                 <Col sm={6} md>
                   <Form.Control
-                    placeholder={t('home.findForm.providerTitlePlaceholder')}
+                    placeholder={t('home.findForm.supplierTitlePlaceholder')}
                     onChange={handleChange}
-                    value={providerTitle}
+                    value={supplierTitle}
                   />
                 </Col>
               </Row>
@@ -55,4 +70,10 @@ const SearchPanel = ({ title, t, setProviderTitleQuery }) => {
   );
 };
 
-export default withTranslation('common')(SearchPanel);
+const mapStateToProps = ({ categoryList }) => categoryList;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+  withRouter,
+)(SearchPanel);

@@ -12,8 +12,6 @@ import {
   Alert,
 } from 'react-bootstrap';
 
-import config from '../../config';
-
 import './ImageUpload.scss';
 
 import { updateUser } from '../../actions/user-actions';

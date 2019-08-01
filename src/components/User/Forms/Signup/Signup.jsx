@@ -22,11 +22,11 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
 
   const handleSocialSignUp = async ({
     _profile: profile,
-    _provider: provider,
+    _provider: supplier,
   }) => {
     login(wevedoService.socialLogin, {
       ...profile,
-      provider,
+      supplier,
     });
   };
 
