@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { Row, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
@@ -51,9 +51,11 @@ const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
     setFilterOptions({});
   };
 
+  const handleClearCallback = useCallback(handleClear, []);
+
   useEffect(() => {
-    handleClear();
-  }, [match.params.category, handleClear]);
+    handleClearCallback();
+  }, [match.params.category, handleClearCallback]);
 
   return (
     <React.Fragment>
