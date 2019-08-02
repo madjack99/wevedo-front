@@ -84,7 +84,7 @@ class ImageUpload extends React.Component {
       this.setState({ errorMsg: 'Please, provide at least 1 photos.' });
     } else {
       const photoObject = images.reduce((acc, image, index) => {
-        acc[index] = image;
+        acc[index] = image.secure_url;
         return acc;
       }, {});
       updateUser()({ providerImages: photoObject });

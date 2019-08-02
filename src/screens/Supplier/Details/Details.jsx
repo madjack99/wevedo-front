@@ -96,9 +96,7 @@ const Supplier = ({ match, t }) => {
   );
 
   const providerImagesList = supplier.providerImages
-    ? Object.values(supplier.providerImages).map(
-        imageObj => imageObj.secure_url,
-      )
+    ? Object.values(supplier.providerImages)
     : [];
 
   return (
