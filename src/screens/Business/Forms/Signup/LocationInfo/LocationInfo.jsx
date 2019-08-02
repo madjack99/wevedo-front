@@ -5,14 +5,14 @@ import BusinessFormsSignupLocationInfo from '../../../../../components/Business/
 
 import sideBackground from '../../../../../assets/images/businesslogin.png';
 
-const ScreensBusinessFormsSignupLocationInfo = () => (
+const ScreensBusinessFormsSignupLocationInfo = ({ nextStep }) => (
   <EnterLayoutScreen
     sideBackground={sideBackground}
     welcomeTitle="Hey,"
     welcomeSubtitle="Glad to see you..."
     welcomeText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   >
-    <BusinessFormsSignupLocationInfo />
+    <BusinessFormsSignupLocationInfo nextStep={nextStep} />
   </EnterLayoutScreen>
 );
 

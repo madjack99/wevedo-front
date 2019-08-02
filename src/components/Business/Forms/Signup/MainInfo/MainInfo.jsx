@@ -15,7 +15,7 @@ const BusinessFormsSignupMainInfo = ({
   isLoggedIn,
   categories: categoryList,
   updateUser,
-  history,
+  nextStep,
   t,
 }) => {
   if (isLoggedIn) {
@@ -52,7 +52,7 @@ const BusinessFormsSignupMainInfo = ({
           website,
         });
 
-        history.push('/business/signup/location-info');
+        nextStep();
       }}
       validationSchema={formSchema}
       render={({

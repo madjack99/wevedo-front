@@ -133,7 +133,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
             <div className="form__question text-center mt-5">
               <span>
                 {t('signAndLogForm.noAccount')}{' '}
-                <Link className="text-wevedo" to="/business/signup/main-info">
+                <Link className="text-wevedo" to="/business/signup">
                   {t('signAndLogForm.signUp')}
                 </Link>
               </span>

@@ -3,9 +3,9 @@ import React from 'react';
 import ScreensLayoutsMinimalistForm from '../../../../Layouts/MinimalistForm';
 import BusinessFormsSignupServiceInfo from '../../../../../components/Business/Forms/Signup/ServiceInfo';
 
-const ScreensBusinessFormsSignupServiceInfo = () => (
+const ScreensBusinessFormsSignupServiceInfo = ({ nextStep }) => (
   <ScreensLayoutsMinimalistForm title="Basic info">
-    <BusinessFormsSignupServiceInfo />
+    <BusinessFormsSignupServiceInfo nextStep={nextStep} />
   </ScreensLayoutsMinimalistForm>
 );
 
