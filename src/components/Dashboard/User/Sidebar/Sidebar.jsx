@@ -13,7 +13,7 @@ const Sidebar = () => (
         <i className="far fa-comment-alt" />
       </Link>
     </div>
-    <div>
+    {/* <div>
       <Link to="/">
         <i className="fas fa-scroll" />
       </Link>
@@ -22,7 +22,7 @@ const Sidebar = () => (
       <Link to="/">
         <i className="fas fa-calculator" />
       </Link>
-    </div>
+    </div> */}
     <div>
       <Link to="/">
         <i className="fas fa-power-off" />
