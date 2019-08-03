@@ -10,6 +10,7 @@ import ScreensBusinessFormsSignupLocationInfo from './Business/Forms/Signup/Loca
 import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
 import ScreensDashboardUserHome from './Dashboard/User/Home';
+import ScreensDashboardUserMessages from './Dashboard/User/Messages';
 import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensSupplierFilteredList from './Supplier/FilteredList';
 import ScreensSupplierDetails from './Supplier/Details';
@@ -40,6 +41,10 @@ const ScreensRoot = () => {
         <Route
           path="/business/signup/service-info"
           component={ScreensBusinessFormsSignupServiceInfo}
+        />
+        <Route
+          path="/dashboard/user/messages"
+          component={ScreensDashboardUserMessages}
         />
         <Route path="/dashboard/user/" component={ScreensDashboardUserHome} />
         <Route
