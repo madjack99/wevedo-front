@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
-import { withoutAuth } from '../../../../components/HOC';
-
 import EnterLayoutScreen from '../../../Layouts/EnterForm';
 import UserFormsLogin from '../../../../components/User/Forms/Login';
 
@@ -26,6 +24,5 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 
 export default compose(
   connect(mapStateToProps),
-  withoutAuth(),
   withTranslation('common'),
 )(ScreensUserFormsLogin);
