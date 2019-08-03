@@ -37,9 +37,9 @@ const DashboardBusinessHeader = ({ user }) => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="text-uppercase mr-auto">
-            <LinkContainer to="/dashboard/business/home">
+            <LinkContainer to="/dashboard/business/profile">
               <Nav.Link>
-                <b>Home</b>
+                <b>Business profile</b>
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/dashboard/business/messages">
