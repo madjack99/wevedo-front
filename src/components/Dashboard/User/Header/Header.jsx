@@ -5,10 +5,10 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import logo from '../../../assets/images/symbol.png';
-import defaultAvatar from '../../../assets/images/default-avatar.png';
+import logo from '../../../../assets/images/symbol.png';
+import defaultAvatar from '../../../../assets/images/default-avatar.png';
 
-const Header = ({ user }) => {
+const DashboardUserHeader = ({ user }) => {
   return (
     <React.Fragment>
       <Navbar
@@ -47,6 +47,11 @@ const Header = ({ user }) => {
                 <b>Messages</b>
               </Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/dashboard/user/account">
+              <Nav.Link>
+                <b>Account settings</b>
+              </Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/">
               <Nav.Link>
                 <b>Log Out</b>
@@ -68,7 +73,7 @@ function ProfileArea({ user }) {
   return (
     <div className="dashboard-header__user ml-auto">
       <Link
-        to="/dashboard/businessaccount"
+        to="/dashboard/user/account"
         className="d-flex justify-content-between align-items-center"
       >
         <img
@@ -87,4 +92,4 @@ function ProfileArea({ user }) {
 
 const mapStateToProps = ({ userData }) => userData;
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(DashboardUserHeader);
