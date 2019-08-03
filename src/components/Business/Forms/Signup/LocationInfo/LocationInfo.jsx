@@ -22,8 +22,8 @@ const BusinessFormsSignupLocationInfo = ({
   updateUser,
   emailStatus,
   phoneStatus,
-  history,
   t,
+  nextStep,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -66,7 +66,7 @@ const BusinessFormsSignupLocationInfo = ({
             country,
           });
 
-          return history.push('/business/signup/image-upload'); // TO-DO: add route to load images
+          return nextStep();
         }
 
         setErrors({

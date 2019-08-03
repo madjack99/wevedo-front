@@ -14,7 +14,7 @@ import {
 
 import './ImageUpload.scss';
 
-import { updateUser } from '../../actions/user-actions';
+import { updateUser } from '../../../../../actions/user-actions';
 
 class ImageUpload extends React.Component {
   state = {
@@ -53,7 +53,7 @@ class ImageUpload extends React.Component {
         return acc;
       }, {});
       updateUser()({ providerImages: photoObject });
-      this.props.history.push('/business/signup/service-info');
+      this.props.nextStep();
     }
   };
 

@@ -18,8 +18,8 @@ const BusinessFormsSignupServiceInfo = ({
   isLoggedIn,
   login,
   signUp,
-  history,
   t,
+  nextStep,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -57,7 +57,7 @@ const BusinessFormsSignupServiceInfo = ({
 
         if (isRegisterSuccessful) {
           await login(wevedoService.login, body);
-          return history.push('/');
+          return nextStep();
         }
 
         return setSubmitting(false);

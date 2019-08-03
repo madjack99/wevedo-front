@@ -5,10 +5,7 @@ import ScreensHome from './Home';
 import ScreensUserFormsLogin from './User/Forms/Login';
 import ScreensUserFormsSignup from './User/Forms/Signup';
 import ScreensBusinessFormsLogin from './Business/Forms/Login';
-import ScreensBusinessFormsSignupMainInfo from './Business/Forms/Signup/MainInfo';
-import ScreensBusinessFormsSignupLocationInfo from './Business/Forms/Signup/LocationInfo';
-import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/ImageUpload';
-import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
+import ScreensBusinessFormsSignupControl from './Business/Forms/Signup/Control';
 import ScreensUserDashboardHome from './User/Dashboard/Home';
 import ScreensUserDashboardAccount from './User/Dashboard/Account';
 import ScreensUserDashboardMessages from './User/Dashboard/Messages';
@@ -31,20 +28,8 @@ const ScreensRoot = () => {
         <Route path="/signup" component={ScreensUserFormsSignup} />
         <Route path="/business/login" component={ScreensBusinessFormsLogin} />
         <Route
-          path="/business/signup/main-info"
-          component={ScreensBusinessFormsSignupMainInfo}
-        />
-        <Route
-          path="/business/signup/location-info"
-          component={ScreensBusinessFormsSignupLocationInfo}
-        />
-        <Route
-          path="/business/signup/image-upload"
-          component={ScreensBusinessFormsSignupImageUpload}
-        />
-        <Route
-          path="/business/signup/service-info"
-          component={ScreensBusinessFormsSignupServiceInfo}
+          path="/business/signup"
+          component={ScreensBusinessFormsSignupControl}
         />
         <Route
           path="/dashboard/user/account"

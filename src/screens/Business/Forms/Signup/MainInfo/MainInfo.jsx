@@ -6,14 +6,14 @@ import FirstStepSignUpBusinessForm from '../../../../../components/Business/Form
 
 import sideBackground from '../../../../../assets/images/businesslogin.png';
 
-const ScreensBusinessFormsSignupMainInfo = ({ t }) => (
+const ScreensBusinessFormsSignupMainInfo = ({ t, nextStep }) => (
   <EnterLayoutScreen
     sideBackground={sideBackground}
     welcomeTitle={t('businessAndUserSignup.jumbotron.largeTitle')}
     welcomeSubtitle={t('businessAndUserSignup.jumbotron.smallTitle')}
     welcomeText={t('businessAndUserSignup.jumbotron.text')}
   >
-    <FirstStepSignUpBusinessForm />
+    <FirstStepSignUpBusinessForm nextStep={nextStep} />
   </EnterLayoutScreen>
 );
 
