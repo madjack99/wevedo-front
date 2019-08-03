@@ -1,13 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { Redirect } from 'react-router-dom';
 
-const withoutAuth = () => Wrapped => ({ isLoggedIn, ...props }) => {
-  if (isLoggedIn) {
-    return <Redirect to="/" />;
-  }
+const mapStateToProps = ({ sessionData }) => sessionData;
 
-  return <Wrapped {...props} />;
-};
+const withoutAuth = () => Wrapped =>
+  connect(mapStateToProps)(({ isLoggedIn, ...props }) => {
+    if (isLoggedIn) {
+      return <Redirect to="/" />;
+    }
+
+    return <Wrapped {...props} />;
+  });
 
 export default withoutAuth;
