@@ -9,8 +9,8 @@ import ScreensBusinessFormsSignupMainInfo from './Business/Forms/Signup/MainInfo
 import ScreensBusinessFormsSignupLocationInfo from './Business/Forms/Signup/LocationInfo';
 import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
-import ScreensDashboardUserHome from './Dashboard/User/Home';
-import ScreensDashboardUserMessages from './Dashboard/User/Messages';
+import ScreensUserDashboardHome from './User/Dashboard/Home';
+import ScreensUserDashboardMessages from './User/Dashboard/Messages';
 import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensSupplierFilteredList from './Supplier/FilteredList';
 import ScreensSupplierDetails from './Supplier/Details';
@@ -44,9 +44,9 @@ const ScreensRoot = () => {
         />
         <Route
           path="/dashboard/user/messages"
-          component={ScreensDashboardUserMessages}
+          component={ScreensUserDashboardMessages}
         />
-        <Route path="/dashboard/user/" component={ScreensDashboardUserHome} />
+        <Route path="/dashboard/user/" component={ScreensUserDashboardHome} />
         <Route
           path="/suppliers/categories"
           component={ScreensSupplierCategories}

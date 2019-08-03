@@ -9,7 +9,7 @@ import ScreensLayoutsDashboardUser from '../../../Layouts/Dashboard/User';
 import SearchPanel from '../../../../components/Search/Panel';
 import SearchPanelMobile from '../../../../components/Search/Panel/Mobile';
 
-const ScreensDashboardUserHome = () => (
+const ScreensUserDashboardHome = () => (
   <ScreensLayoutsDashboardUser>
     <div className="dashboard dashboard-user__home">
       <div className="dashboard-background" />
@@ -145,4 +145,4 @@ const ScreensDashboardUserHome = () => (
   </ScreensLayoutsDashboardUser>
 );
 
-export default ScreensDashboardUserHome;
+export default ScreensUserDashboardHome;

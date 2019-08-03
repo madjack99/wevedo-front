@@ -3,10 +3,10 @@ import React from 'react';
 import ScreensLayoutsDashboardUser from '../../../Layouts/Dashboard/User';
 import DashboardMessages from '../../../../components/Dashboard/Messages';
 
-const ScreensDashboardUserMessages = () => (
+const ScreensUserDashboardMessages = () => (
   <ScreensLayoutsDashboardUser>
     <DashboardMessages />
   </ScreensLayoutsDashboardUser>
 );
 
-export default ScreensDashboardUserMessages;
+export default ScreensUserDashboardMessages;
