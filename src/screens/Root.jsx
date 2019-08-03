@@ -11,6 +11,7 @@ import ScreensBusinessFormsSignupImageUpload from './Business/Forms/Signup/Image
 import ScreensBusinessFormsSignupServiceInfo from './Business/Forms/Signup/ServiceInfo';
 import ScreensUserDashboardHome from './User/Dashboard/Home';
 import ScreensUserDashboardMessages from './User/Dashboard/Messages';
+import ScreensBusinessDashboardMessages from './Business/Dashboard/Messages';
 import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensSupplierFilteredList from './Supplier/FilteredList';
 import ScreensSupplierDetails from './Supplier/Details';
@@ -47,6 +48,10 @@ const ScreensRoot = () => {
           component={ScreensUserDashboardMessages}
         />
         <Route path="/dashboard/user/" component={ScreensUserDashboardHome} />
+        <Route
+          path="/dashboard/business/messages"
+          component={ScreensBusinessDashboardMessages}
+        />
         <Route
           path="/suppliers/categories"
           component={ScreensSupplierCategories}
