@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Sidebar = () => (
+const DashboardUserSidebar = () => (
   <div className="sidebar d-none d-sm-block">
     <div className="active">
       <Link to="/dashboard/user">
@@ -31,4 +31,4 @@ const Sidebar = () => (
   </div>
 );
 
-export default Sidebar;
+export default DashboardUserSidebar;
