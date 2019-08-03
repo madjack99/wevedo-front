@@ -9,7 +9,7 @@ const Sidebar = () => (
       </Link>
     </div>
     <div>
-      <Link to="/">
+      <Link to="/dashboard/user/messages">
         <i className="far fa-comment-alt" />
       </Link>
     </div>

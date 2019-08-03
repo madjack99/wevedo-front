@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import logo from '../../../assets/images/symbol.png';
 import defaultAvatar from '../../../assets/images/default-avatar.png';
@@ -36,18 +37,21 @@ const Header = ({ user }) => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="text-uppercase mr-auto">
-            <Nav.Link href="/dashboard/userhome">
-              <b>Home</b>
-            </Nav.Link>
-            <Nav.Link href="/dashboard/messages">
-              <b>Messages</b>
-            </Nav.Link>
-            <Nav.Link href="/dashboard/businessaccount">
-              <b>Account Settings</b>
-            </Nav.Link>
-            <Nav.Link href="/">
-              <b>Log Out</b>
-            </Nav.Link>
+            <LinkContainer to="/dashboard/user/home">
+              <Nav.Link>
+                <b>Home</b>
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/dashboard/user/messages">
+              <Nav.Link>
+                <b>Messages</b>
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/">
+              <Nav.Link>
+                <b>Log Out</b>
+              </Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Brand>
