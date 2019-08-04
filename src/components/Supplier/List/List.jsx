@@ -82,7 +82,7 @@ const SupplierList = ({
             />
           </Col>
           <Col sm={7}>
-            <h5>{supplier.firstName}</h5>
+            <h5>{supplier.fullName}</h5>
             <span className="results-data-location">
               <i className="fas fa-map-marker-alt mr-2" />
               {supplier.regionName}

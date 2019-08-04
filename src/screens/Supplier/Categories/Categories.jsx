@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Row, Container, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import Beauty from '../../../assets/images/w-beauty.png';
 import Cakes from '../../../assets/images/w-cakes.png';
@@ -29,28 +31,40 @@ export default function ScreensSupplierCategories() {
         </Row>
         <Row>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Beauty} alt="Beauty" />
-            <p>Beauty</p>
+            <Link to="/suppliers/Beauty">
+              <img src={Beauty} alt="Beauty" />
+              <p>Beauty</p>
+            </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Cakes} alt="Cakes" />
-            <p>Cakes</p>
+            <Link to="/suppliers/Cake">
+              <img src={Cakes} alt="Cakes" />
+              <p>Cakes</p>
+            </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Decoration} alt="Decoration" />
-            <p>Decoration</p>
+            <Link to="/suppliers/Decoration">
+              <img src={Decoration} alt="Decoration" />
+              <p>Decoration</p>
+            </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Florist} alt="Florist" />
-            <p>Florist</p>
+            <Link to="/suppliers/Florist">
+              <img src={Florist} alt="Florist" />
+              <p>Florist</p>
+            </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Music} alt="Music" />
-            <p>Music</p>
+            <Link to="/suppliers/Entertainment">
+              <img src={Music} alt="Music" />
+              <p>Music</p>
+            </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <img src={Rings} alt="Rings" />
-            <p>Rings</p>
+            <Link to="/suppliers/Jewelry">
+              <img src={Rings} alt="Rings" />
+              <p>Rings</p>
+            </Link>
           </Col>
         </Row>
       </Container>
