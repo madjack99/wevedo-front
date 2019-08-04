@@ -8,9 +8,9 @@ import ScreensBusinessFormsSignupServiceInfo from '../ServiceInfo';
 const ScreensBusinessFormsSignupControl = ({ history }) => {
   const SCREENS = {
     MAIN_INFO: 'main-info',
-    LOCATION_INFO: 'location_info',
-    IMAGE_UPLOAD: 'image_upload',
-    SERVICE_INFO: 'service_info',
+    LOCATION_INFO: 'location-info',
+    IMAGE_UPLOAD: 'image-upload',
+    SERVICE_INFO: 'service-info',
   };
   const [currentScreen, setCurrentScreen] = useState(SCREENS.MAIN_INFO);
 
