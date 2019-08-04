@@ -1,4 +1,5 @@
+import withAuth from './WithAuth';
 import withoutAuth from './WithoutAuth';
 import withScrollToTop from './WithScrollToTop';
 
-export { withoutAuth, withScrollToTop };
+export { withAuth, withoutAuth, withScrollToTop };
