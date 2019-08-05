@@ -1,27 +1,50 @@
-.custom-hight-without-photos {
-  height: 50vh;
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../../../assets/styles/variables';
+
+.image-upload {
+  &__form {
+    min-height: 400px;
+  }
+
+  &__container {
+    cursor: pointer;
+
+    &:hover {
+      border-color: #c9cfd6;
+      background-color: #ecf1f9;
+    }
+  }
+
+  &__image {
+    &_small {
+      width: 50px;
+      height: 45px;
+      margin-left: 75px;
+    }
+  }
+
+  &__title {
+    font-size: 0.9rem;
+  }
 }
 
-.custom-height-with-photos {
-  height: 25vh;
+.preview-zone {
+  &__photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+  }
 }
 
-.custom-border {
-  border: 2px dashed black;
-}
-
-.custom-bg {
-  background-color: #f4f7fc;
-}
-
-.custom-bg-upload {
-  background-color: rgba(141, 142, 145, 0.8);
-}
-
-.delete-icon {
-  cursor: pointer;
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  color: rgb(0, 0, 0);
+@include media-breakpoint-down(md) {
+  .image-upload {
+    &__image {
+      &_small {
+        margin-left: 0;
+      }
+    }
+  }
 }

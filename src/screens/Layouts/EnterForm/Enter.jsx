@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -7,7 +8,7 @@ import './Enter.scss';
 
 import logo from '../../../assets/images/symbol.png';
 
-import { withScrollToTop } from '../../../components/HOC';
+import { withoutAuth, withScrollToTop } from '../../../components/HOC';
 
 const ScreensLayoutEnter = ({
   sideBackground,
@@ -45,4 +46,7 @@ const ScreensLayoutEnter = ({
   );
 };
 
-export default withScrollToTop()(ScreensLayoutEnter);
+export default compose(
+  withoutAuth(),
+  withScrollToTop(),
+)(ScreensLayoutEnter);

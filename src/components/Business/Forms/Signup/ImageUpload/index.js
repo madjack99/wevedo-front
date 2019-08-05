@@ -1,3 +1,3 @@
-import ImageUpload from './ImageUpload';
+import BusinessFormsSignupImageUpload from './ImageUpload';
 
-export default ImageUpload;
+export default BusinessFormsSignupImageUpload;

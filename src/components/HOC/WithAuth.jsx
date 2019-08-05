@@ -5,13 +5,13 @@ import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = ({ sessionData }) => sessionData;
 
-const withoutAuth = () => Wrapped =>
+const withAuth = () => Wrapped =>
   connect(mapStateToProps)(({ isLoggedIn, ...props }) => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       return <Redirect to="/" />;
     }
 
     return <Wrapped {...props} />;
   });
 
-export default withoutAuth;
+export default withAuth;

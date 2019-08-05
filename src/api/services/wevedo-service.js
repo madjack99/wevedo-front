@@ -27,5 +27,7 @@ export default class WevedoService extends ApiBase {
       );
     };
     this.getSupplierById = id => this.get(`providers/${id}`);
+
+    this.loadImagesToServer = body => this.create(`img-upload`, body);
   }
 }
