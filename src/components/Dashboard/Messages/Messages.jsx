@@ -5,7 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { WevedoServiceContext } from '../../../contexts';
 
 import DashboardMessagesInboxView from './Inbox/View';
-import DashboardMessagesInboxViewMobile from './Inbox/View/Mobile';
 import DashboardMessagesChatView from './Chat/View';
 import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
 
@@ -44,16 +43,29 @@ const DashboardMessages = () => {
         </Row>
         <Row>
           <Col xs sm={4}>
-            <DashboardMessagesInboxView rooms={rooms} />
-            <DashboardMessagesInboxViewMobile
+            {/* Desktop Inbox */}
+            <DashboardMessagesInboxView
+              className="d-sm-block d-none"
               rooms={rooms}
-              onOpenChat={() => setModalShow(true)}
+              onOpenChat={room => {
+                console.log(room);
+              }}
+            />
+            {/* Mobile Inbox */}
+            <DashboardMessagesInboxView
+              className="d-block d-sm-none"
+              rooms={rooms}
+              onOpenChat={room => {
+                setModalShow(true);
+                console.log(room);
+              }}
             />
           </Col>
           <Col sm={8} className="d-none d-sm-block">
             <DashboardMessagesChatView />
           </Col>
           <DashboardMessagesChatViewMobile
+            // room={room}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
