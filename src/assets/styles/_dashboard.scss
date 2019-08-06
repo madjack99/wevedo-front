@@ -43,25 +43,19 @@
       padding: 2rem;
       padding-right: 1rem;
       margin-bottom: 15px;
+      transition: box-shadow 0.3s ease;
+      &:hover {
+        box-shadow: 0px 8px 20px $gray-400;
+      }
       .dashboard-business__messageBox-img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: red;
-        p {
-          color: white;
-          font-weight: bold;
-          text-align: center;
-          padding-top: 8px;
-        }
       }
       .dashboard-business__messageBox-img-sm {
         width: 25px;
         height: 25px;
-        p {
-          padding-top: 1px;
-          font-size: 0.6rem;
-        }
+        border-radius: 50%;
       }
       .dashboard-business__messageBox-message {
         background: #f4f7fc;
