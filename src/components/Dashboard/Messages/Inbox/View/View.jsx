@@ -1,21 +1,18 @@
 import React from 'react';
+import uniqid from 'uniqid';
 
 import { Row, Col } from 'react-bootstrap';
 
 import DashboardMessagesInboxItem from '../Item';
 
-const DashboardMessagesInboxView = () => {
+const DashboardMessagesInboxView = ({ rooms }) => {
   return (
     <Row className="d-none d-sm-block">
-      <Col sm={12}>
-        <DashboardMessagesInboxItem />
-      </Col>
-      <Col sm={12}>
-        <DashboardMessagesInboxItem />
-      </Col>
-      <Col sm={12}>
-        <DashboardMessagesInboxItem />
-      </Col>
+      {rooms.map(room => (
+        <Col sm={12} key={uniqid}>
+          <DashboardMessagesInboxItem room={room} />
+        </Col>
+      ))}
     </Row>
   );
 };

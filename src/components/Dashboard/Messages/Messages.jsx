@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
+
+import { WevedoServiceContext } from '../../../contexts';
 
 import DashboardMessagesInboxView from './Inbox/View';
 import DashboardMessagesInboxViewMobile from './Inbox/View/Mobile';
@@ -8,7 +10,25 @@ import DashboardMessagesChatView from './Chat/View';
 import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
 
 const DashboardMessages = () => {
+  const [rooms, setRooms] = useState([]);
+
   const [modalShow, setModalShow] = useState(false);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const { data: newRooms } = await wevedoService.getRooms();
+      setRooms(newRooms);
+    };
+
+    fetchRooms();
+
+    // const intervalId = setInterval(() => fetchRooms(), 2500);
+
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
+  }, [wevedoService]);
 
   return (
     <div className="dashboard">
@@ -24,8 +44,9 @@ const DashboardMessages = () => {
         </Row>
         <Row>
           <Col xs sm={4}>
-            <DashboardMessagesInboxView />
+            <DashboardMessagesInboxView rooms={rooms} />
             <DashboardMessagesInboxViewMobile
+              rooms={rooms}
               onOpenChat={() => setModalShow(true)}
             />
           </Col>

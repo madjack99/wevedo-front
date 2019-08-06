@@ -1,32 +1,20 @@
 import React from 'react';
+import uniqid from 'uniqid';
 
 import { Row, Col } from 'react-bootstrap';
 
 import DashboardMessagesInboxItem from '../../Item';
 
-const DashbordMessagesInboxViewMobile = ({ onOpenChat }) => {
+const DashbordMessagesInboxViewMobile = ({ rooms, onOpenChat }) => {
   return (
     <Row className="d-block d-sm-none">
       <Col onClick={onOpenChat}>
         <Row>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
-          <Col sm={12}>
-            <DashboardMessagesInboxItem />
-          </Col>
+          {rooms.map(room => (
+            <Col sm={12} key={uniqid}>
+              <DashboardMessagesInboxItem room={room} />
+            </Col>
+          ))}
         </Row>
       </Col>
     </Row>

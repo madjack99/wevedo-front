@@ -1,34 +1,62 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import { Row, Col, Badge } from 'react-bootstrap';
+import ClampLines from 'react-clamp-lines';
 
-const DashboardMessagesInboxItem = () => {
+const DashboardMessagesInboxItem = ({ room, user: authUser }) => {
+  const { user, provider: supplier } = room;
+  const sender = authUser.isProvider ? user : supplier;
+
+  const lastMessage = room.messages[room.messages.length - 1];
+  const numberOfUnreadMessages = authUser.isProvider
+    ? room.unreadByProvider.length
+    : room.unreadByUser.length;
+
   return (
     <div className="dashboard-business__messageBox">
       <Row>
         <Col xs={2}>
-          <div className="dashboard-business__messageBox-img">
-            <span className="circle" />
-            <p>RB</p>
-          </div>
+          <img
+            className="dashboard-business__messageBox-img"
+            src={sender.profileImageURL}
+            alt="Sender avatar"
+          />
         </Col>
         <Col xs={10}>
-          <p className="d-flex">
-            <b className="mr-auto">Ryan Bradley</b>
-            <small className="text-muted">3 days ago</small>
-          </p>
-          <p className="m-0 d-flex align-items-start">
-            <span className="text-muted">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit...
-            </span>
-            <Badge pill variant="success">
-              1
-            </Badge>
-          </p>
+          <Row className="d-flex mb-2">
+            <Col xs={8}>
+              <b className="mr-auto">{sender.fullName}</b>
+            </Col>
+            <Col xs={4} className="text-right">
+              <small className="text-muted">3 days ago</small>
+            </Col>
+          </Row>
+          <Row className="d-flex align-items-start">
+            <Col xs={10}>
+              <ClampLines
+                className="text-muted"
+                text={lastMessage.body}
+                id="supplier-grid-text"
+                ellipsis="..."
+                lines={2}
+                buttons={false}
+                innerElement="span"
+              />
+            </Col>
+            <Col xs={2}>
+              <Badge pill variant="success">
+                {numberOfUnreadMessages}
+              </Badge>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </div>
   );
 };
 
-export default DashboardMessagesInboxItem;
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(connect(mapStateToProps))(DashboardMessagesInboxItem);
