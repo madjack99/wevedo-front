@@ -115,7 +115,7 @@ const Supplier = ({ match, t }) => {
                 <SupplierMessageDialog
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-                  t={t}
+                  supplier={supplier}
                 />
               </Col>
               <Col sm={12}>
