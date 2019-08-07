@@ -28,11 +28,7 @@ const DashboardAccount = () => (
               </Col>
               <Col sm={9}>
                 <Col sm={12} className="mb-4">
-                  <Form.Group className="mb-2">
-                    <p className="text-muted">Full Name</p>
-                    <Form.Control size="lg" placeholder="John Smith" />
-                  </Form.Group>
-                  <Button size="lg">Save</Button>
+                  <NameChangeForm />
                 </Col>
 
                 <Col sm={12} className="mb-4">
@@ -69,6 +65,7 @@ const DashboardAccount = () => (
 const NameChangeForm = () => {
   return (
     <Formik
+      className="form"
       initialValues={{
         fullName: '', // Get from redux
       }}
@@ -77,16 +74,36 @@ const NameChangeForm = () => {
       }}
       validationSchema={nameSchema}
     >
-      {({ handleSubmit }) => {
+      {({
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting,
+      }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
-            <Col sm={12} className="mb-4">
-              <Form.Group className="mb-2">
-                <p className="text-muted">Full Name</p>
-                <Form.Control size="lg" placeholder="John Smith" />
-              </Form.Group>
-              <Button size="lg">Save</Button>
-            </Col>
+            <Form.Group className="mb-2">
+              <p className="text-muted">Full Name</p>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="fullName"
+                value={values.fullName}
+                onChange={handleChange}
+                isValid={values.fullName && !errors.fullName}
+                isInvalid={touched.fullName && !!errors.fullName}
+                size="lg"
+                placeholder="John Smith"
+              />
+            </Form.Group>
+            <Form.Control.Feedback className="form__feedback" type="invalid">
+              {errors.fullName}
+            </Form.Control.Feedback>
+            <Button type="submit" size="lg" disabled={isSubmitting}>
+              Save
+            </Button>
           </Form>
         );
       }}
