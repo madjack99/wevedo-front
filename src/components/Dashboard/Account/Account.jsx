@@ -6,6 +6,8 @@ import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 
 import addImage from '../../../assets/images/addimg.png';
 
+import nameSchema from './nameSchema';
+
 const DashboardAccount = () => (
   <div className="dashboard">
     <div className="dashboard-background" />
@@ -25,9 +27,6 @@ const DashboardAccount = () => (
                 </div>
               </Col>
               <Col sm={9}>
-
-
-
                 <Col sm={12} className="mb-4">
                   <Form.Group className="mb-2">
                     <p className="text-muted">Full Name</p>
@@ -35,8 +34,6 @@ const DashboardAccount = () => (
                   </Form.Group>
                   <Button size="lg">Save</Button>
                 </Col>
-
-
 
                 <Col sm={12} className="mb-4">
                   <p className="text-muted">E-Mail address</p>
@@ -72,15 +69,15 @@ const DashboardAccount = () => (
 const NameChangeForm = () => {
   return (
     <Formik
-      initialValues = {{
-        fullName: '' //Get from redux
+      initialValues={{
+        fullName: '', // Get from redux
       }}
-      handleSubmit = {() => {
+      handleSubmit={() => {
         // Send POST to backend
       }}
-      validationSchema = {}
+      validationSchema={nameSchema}
     >
-      {({handleSubmit}) => {
+      {({ handleSubmit }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <Col sm={12} className="mb-4">
@@ -91,12 +88,10 @@ const NameChangeForm = () => {
               <Button size="lg">Save</Button>
             </Col>
           </Form>
-        )
+        );
       }}
     </Formik>
-  )
-}
-
-                
+  );
+};
 
 export default DashboardAccount;
