@@ -81,8 +81,12 @@ const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
       initialValues={{
         fullName: fullName || '',
       }}
-      handleSubmit={() => {
-        // Send POST to backend
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
+        const result = await updateUser(updateProfile)({
+          fullName: values.fullName,
+        });
+        console.log(result);
+        setSubmitting(false);
       }}
       validationSchema={nameSchema}
       render={({
