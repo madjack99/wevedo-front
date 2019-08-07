@@ -6,6 +6,8 @@ import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 
 import addImage from '../../../assets/images/addimg.png';
 
+import { updateUser } from '../../../actions/user-actions';
+
 import nameSchema from './nameSchema';
 
 const DashboardAccount = ({ user }) => (
@@ -113,4 +115,11 @@ const NameChangeForm = ({ fullName }) => {
 
 const mapStateToProps = ({ userData }) => userData;
 
-export default connect(mapStateToProps)(DashboardAccount);
+const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardAccount);
