@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Formik } from 'formik';
+
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 
 import addImage from '../../../assets/images/addimg.png';
@@ -23,6 +25,9 @@ const DashboardAccount = () => (
                 </div>
               </Col>
               <Col sm={9}>
+
+
+
                 <Col sm={12} className="mb-4">
                   <Form.Group className="mb-2">
                     <p className="text-muted">Full Name</p>
@@ -30,6 +35,9 @@ const DashboardAccount = () => (
                   </Form.Group>
                   <Button size="lg">Save</Button>
                 </Col>
+
+
+
                 <Col sm={12} className="mb-4">
                   <p className="text-muted">E-Mail address</p>
                   <InputGroup className="d-none d-sm-flex">
@@ -60,5 +68,35 @@ const DashboardAccount = () => (
     </Container>
   </div>
 );
+
+const NameChangeForm = () => {
+  return (
+    <Formik
+      initialValues = {{
+        fullName: '' //Get from redux
+      }}
+      handleSubmit = {() => {
+        // Send POST to backend
+      }}
+      validationSchema = {}
+    >
+      {({handleSubmit}) => {
+        return (
+          <Form noValidate onSubmit={handleSubmit}>
+            <Col sm={12} className="mb-4">
+              <Form.Group className="mb-2">
+                <p className="text-muted">Full Name</p>
+                <Form.Control size="lg" placeholder="John Smith" />
+              </Form.Group>
+              <Button size="lg">Save</Button>
+            </Col>
+          </Form>
+        )
+      }}
+    </Formik>
+  )
+}
+
+                
 
 export default DashboardAccount;
