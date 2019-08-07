@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import addImage from '../../../assets/images/addimg.png';
 
 import nameSchema from './nameSchema';
 
-const DashboardAccount = () => (
+const DashboardAccount = ({ user }) => (
   <div className="dashboard">
     <div className="dashboard-background" />
     <Container className="dashboard-business__profile">
@@ -28,7 +28,7 @@ const DashboardAccount = () => (
               </Col>
               <Col sm={9}>
                 <Col sm={12} className="mb-4">
-                  <NameChangeForm />
+                  <NameChangeForm fullName={user.fullName} />
                 </Col>
 
                 <Col sm={12} className="mb-4">
@@ -62,19 +62,19 @@ const DashboardAccount = () => (
   </div>
 );
 
-const NameChangeForm = () => {
+const NameChangeForm = ({ fullName }) => {
   return (
     <Formik
       className="form"
+      enableReinitialize
       initialValues={{
-        fullName: '', // Get from redux
+        fullName: fullName || '',
       }}
       handleSubmit={() => {
         // Send POST to backend
       }}
       validationSchema={nameSchema}
-    >
-      {({
+      render={({
         handleSubmit,
         handleChange,
         values,
@@ -82,6 +82,7 @@ const NameChangeForm = () => {
         errors,
         isSubmitting,
       }) => {
+        console.log(values);
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
@@ -95,7 +96,6 @@ const NameChangeForm = () => {
                 isValid={values.fullName && !errors.fullName}
                 isInvalid={touched.fullName && !!errors.fullName}
                 size="lg"
-                placeholder="John Smith"
               />
             </Form.Group>
             <Form.Control.Feedback className="form__feedback" type="invalid">
@@ -107,8 +107,10 @@ const NameChangeForm = () => {
           </Form>
         );
       }}
-    </Formik>
+    />
   );
 };
 
-export default DashboardAccount;
+const mapStateToProps = ({ userData }) => userData;
+
+export default connect(mapStateToProps)(DashboardAccount);
