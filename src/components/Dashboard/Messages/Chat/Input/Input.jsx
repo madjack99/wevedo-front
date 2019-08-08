@@ -8,7 +8,7 @@ import './Input.scss';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 
-const DashboardMessagesChatInput = ({ chat }) => {
+const DashboardMessagesChatInput = ({ user: authUser, chat }) => {
   const [message, setMessage] = useState('');
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -17,12 +17,16 @@ const DashboardMessagesChatInput = ({ chat }) => {
 
     setMessage('');
 
+    const { _id: authUserId } = authUser;
     const { _id: userId } = chat.user;
     const { _id: supplierId } = chat.provider;
     const { _id: roomId } = chat;
+
+    const recipient = authUser.isProvider ? userId : supplierId;
+
     const body = {
-      sender: userId,
-      recipient: supplierId,
+      sender: authUserId,
+      recipient,
       body: message,
     };
 

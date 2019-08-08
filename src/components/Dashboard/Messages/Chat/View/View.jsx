@@ -15,9 +15,6 @@ const DashboardMessagesChatView = ({
 }) => {
   const { _id: userId } = authUser;
 
-  console.log(messages);
-  console.log(userId);
-
   return (
     <div className="dashboard-business__messageBox pt-2 pl-0 pr-0">
       <div className="d-flex align-items-center dashboard-business__messageBox-header pl-4 pb-0">
