@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -8,26 +10,68 @@ import DashboardMessagesInboxView from './Inbox/View';
 import DashboardMessagesChatView from './Chat/View';
 import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
 
-const DashboardMessages = () => {
+const DashboardMessages = ({ user: authUser }) => {
   const [rooms, setRooms] = useState([]);
+  const [chat, setChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [unreadMessages, setUnreadMessages] = useState([]);
 
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
+  const timeOfUpdate = 5000;
+  const startPooling = (handler, time) => setInterval(() => handler(), time);
+
   useEffect(() => {
     const fetchRooms = async () => {
+      // console.log('GET ROOMS BEGIN');
       const { data: newRooms } = await wevedoService.getRooms();
       setRooms(newRooms);
     };
 
     fetchRooms();
 
-    // const intervalId = setInterval(() => fetchRooms(), 2500);
+    const intervalId = startPooling(fetchRooms, timeOfUpdate);
 
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
+    return () => {
+      // console.log('GET ROOMS END');
+      clearInterval(intervalId);
+    };
   }, [wevedoService]);
+
+  useEffect(() => {
+    if (!chat) {
+      return undefined; // returns 'undefined'. not 'null', as the documentation requires it
+    }
+
+    const { _id: chatId } = chat;
+
+    setUnreadMessages(
+      authUser.isProvider ? chat.unreadByProvider : chat.unreadByUser,
+    );
+
+    const fetchMessages = async () => {
+      // console.log('GET CHAT BEGIN');
+      const { data: newMessages } = await wevedoService.getRoomMessages(chatId);
+      setMessages(newMessages);
+    };
+
+    fetchMessages();
+
+    // mark messages as read after 2 seconds after opening the chat
+    setTimeout(() => {
+      // console.log('READ MESSAGES');
+      wevedoService.getRoom(chatId);
+      setUnreadMessages(0);
+    }, 5000);
+
+    const intervalId = startPooling(fetchMessages, timeOfUpdate);
+
+    return () => {
+      // console.log('GET CHAT END');
+      clearInterval(intervalId);
+    };
+  }, [chat, authUser, wevedoService]);
 
   return (
     <div className="dashboard">
@@ -47,9 +91,7 @@ const DashboardMessages = () => {
             <DashboardMessagesInboxView
               className="d-sm-block d-none"
               rooms={rooms}
-              onOpenChat={room => {
-                console.log(room);
-              }}
+              onOpenChat={room => setChat(room)}
             />
             {/* Mobile Inbox */}
             <DashboardMessagesInboxView
@@ -57,22 +99,30 @@ const DashboardMessages = () => {
               rooms={rooms}
               onOpenChat={room => {
                 setModalShow(true);
-                console.log(room);
+                setChat(room);
               }}
             />
           </Col>
-          <Col sm={8} className="d-none d-sm-block">
-            <DashboardMessagesChatView />
-          </Col>
-          <DashboardMessagesChatViewMobile
-            // room={room}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
+          {chat && (
+            <Col sm={8} className="d-none d-sm-block">
+              <DashboardMessagesChatView
+                messages={messages}
+                unreadMessages={unreadMessages}
+              />
+              <DashboardMessagesChatViewMobile
+                messages={messages}
+                unreadMessages={unreadMessages}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
+            </Col>
+          )}
         </Row>
       </Container>
     </div>
   );
 };
 
-export default DashboardMessages;
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(connect(mapStateToProps))(DashboardMessages);
