@@ -46,9 +46,15 @@ const DashboardMessagesChatViewMobile = ({
           <Col>
             {messages.map(message =>
               message.sender === userId ? (
-                <DashboardMessagesChatItemSender key={uniqid()} />
+                <DashboardMessagesChatItemSender
+                  text={message.body}
+                  key={uniqid()}
+                />
               ) : (
-                <DashboardMessagesChatItemRecipient key={uniqid()} />
+                <DashboardMessagesChatItemRecipient
+                  text={message.body}
+                  key={uniqid()}
+                />
               ),
             )}
           </Col>
