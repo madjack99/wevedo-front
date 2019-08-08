@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 import nameSchema from './nameSchema';
 
@@ -50,10 +50,12 @@ export const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
                 isInvalid={touched.fullName && !!errors.fullName}
                 size="lg"
               />
+              {errors.fullName && (
+                <Alert variant="danger" className="mt-1">
+                  {errors.fullName}
+                </Alert>
+              )}
             </Form.Group>
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.fullName}
-            </Form.Control.Feedback>
             <Button type="submit" size="lg" disabled={isSubmitting}>
               Save
             </Button>

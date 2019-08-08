@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export default Yup.object().shape({
   fullName: Yup.string()
-    .min(6, 'at least 6 symbols')
-    .max(50, 'maximum 50 characters')
-    .required('name is required'),
+    .min(6, 'At least 6 symbols')
+    .max(50, 'Maximum 50 characters')
+    .required('Enter valid name'),
 });
