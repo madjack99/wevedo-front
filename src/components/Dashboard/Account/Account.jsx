@@ -42,7 +42,11 @@ const DashboardAccount = ({ user, updateUser }) => {
                   </Col>
 
                   <Col sm={12} className="mb-4">
-                    <EmailChangeForm />
+                    <EmailChangeForm
+                      email={user.email}
+                      updateProfile={wevedoService.updateProfile}
+                      updateUser={updateUser}
+                    />
                   </Col>
                   <Col sm={12}>
                     <div className="mb-3">
