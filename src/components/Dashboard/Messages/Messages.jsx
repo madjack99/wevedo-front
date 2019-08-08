@@ -19,7 +19,7 @@ const DashboardMessages = ({ user: authUser }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
-  const timeOfUpdate = 5000;
+  const timeOfUpdate = 1000;
   const startPooling = (handler, time) => setInterval(() => handler(), time);
 
   useEffect(() => {
