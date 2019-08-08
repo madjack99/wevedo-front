@@ -3,6 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import DashboardMessagesChatItemRecipient from '../Item/Recipient';
 import DashboardMessagesChatItemSender from '../Item/Sender';
 import DashboardMessagesInput from '../Input';
@@ -16,7 +18,7 @@ const DashboardMessagesChatView = ({
   const { _id: userId } = authUser;
 
   return (
-    <div className="dashboard-business__messageBox pt-2 pl-0 pr-0">
+    <div className="dashboard-business__messageBox d-flex flex-column w-100 pt-2 px-0 mb-0">
       <div className="d-flex align-items-center dashboard-business__messageBox-header pl-4 pb-0">
         <div className="dashboard-business__messageBox-img dashboard-business__messageBox-img-sm">
           <p>RB</p>
@@ -26,16 +28,21 @@ const DashboardMessagesChatView = ({
         </p>
       </div>
       <div className="divider m-0 mb-4" />
-      {messages.map(message =>
-        message.sender === userId ? (
-          <DashboardMessagesChatItemSender text={message.body} key={uniqid()} />
-        ) : (
-          <DashboardMessagesChatItemRecipient
-            text={message.body}
-            key={uniqid()}
-          />
-        ),
-      )}
+      <Scrollbars className="align-self-stretch">
+        {messages.map(message =>
+          message.sender === userId ? (
+            <DashboardMessagesChatItemSender
+              text={message.body}
+              key={uniqid()}
+            />
+          ) : (
+            <DashboardMessagesChatItemRecipient
+              text={message.body}
+              key={uniqid()}
+            />
+          ),
+        )}
+      </Scrollbars>
       <DashboardMessagesInput chat={chat} />
     </div>
   );

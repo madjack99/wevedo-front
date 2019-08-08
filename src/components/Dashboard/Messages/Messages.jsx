@@ -85,11 +85,10 @@ const DashboardMessages = ({ user: authUser }) => {
             <i className="fa fa-search" />
           </Col>
         </Row>
-        <Row>
-          <Col xs sm={4}>
+        <Row style={{ height: 600 }}>
+          <Col className="d-flex" sm={4} xs>
             {/* Desktop Inbox */}
             <DashboardMessagesInboxView
-              className="d-sm-block d-none"
               rooms={rooms}
               onOpenChat={room => setChat(room)}
             />
@@ -104,7 +103,7 @@ const DashboardMessages = ({ user: authUser }) => {
             />
           </Col>
           {chat && (
-            <Col sm={8} className="d-none d-sm-block">
+            <Col className="d-flex" sm={8}>
               <DashboardMessagesChatView
                 chat={chat}
                 messages={messages}
