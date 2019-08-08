@@ -56,11 +56,7 @@ export const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
                 </Button>
               </div>
             </InputGroup>
-            {errors.email && (
-              <Alert variant="danger" className="mt-1">
-                {errors.email}
-              </Alert>
-            )}
+            {errors.email && <p style={{ color: '#dc3545' }}>{errors.email}</p>}
             <Form.Group className="d-block d-sm-none">
               <Form.Control
                 className=" form__control__account "

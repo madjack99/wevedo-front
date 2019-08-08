@@ -53,7 +53,7 @@ const DashboardAccount = ({ user, updateUser }) => {
                       <p className="text-muted mb-0">
                         Want to change your password?
                       </p>
-                      <b>You will recieve an email with intructions.</b>
+                      <b>You will recieve an email with instructions.</b>
                     </div>
                     <Button size="lg">Change password</Button>
                   </Col>

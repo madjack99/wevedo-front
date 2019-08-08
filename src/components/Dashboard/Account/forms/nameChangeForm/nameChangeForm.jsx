@@ -52,9 +52,7 @@ export const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
                 size="lg"
               />
               {errors.fullName && (
-                <Alert variant="danger" className="mt-1">
-                  {errors.fullName}
-                </Alert>
+                <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
               )}
             </Form.Group>
             <Button type="submit" size="lg" disabled={isSubmitting}>
