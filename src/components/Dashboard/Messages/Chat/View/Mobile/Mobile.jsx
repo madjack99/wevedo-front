@@ -10,6 +10,7 @@ import DashboardMessagesChatItemSender from '../../Item/Sender';
 import DashboardMessagesInput from '../../Input';
 
 const DashboardMessagesChatViewMobile = ({
+  chat,
   user: authUser,
   messages,
   unreadMessages,
@@ -54,7 +55,7 @@ const DashboardMessagesChatViewMobile = ({
         </Row>
       </Modal.Body>
       <Modal.Footer className="d-block">
-        <DashboardMessagesInput />
+        <DashboardMessagesInput chat={chat} />
       </Modal.Footer>
     </Modal>
   );

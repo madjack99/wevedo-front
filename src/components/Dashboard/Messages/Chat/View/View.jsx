@@ -8,6 +8,7 @@ import DashboardMessagesChatItemSender from '../Item/Sender';
 import DashboardMessagesInput from '../Input';
 
 const DashboardMessagesChatView = ({
+  chat,
   user: authUser,
   messages,
   unreadMessages,
@@ -32,7 +33,7 @@ const DashboardMessagesChatView = ({
           <DashboardMessagesChatItemRecipient key={uniqid()} />
         ),
       )}
-      <DashboardMessagesInput />
+      <DashboardMessagesInput chat={chat} />
     </div>
   );
 };

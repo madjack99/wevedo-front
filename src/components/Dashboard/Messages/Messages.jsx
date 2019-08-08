@@ -106,10 +106,12 @@ const DashboardMessages = ({ user: authUser }) => {
           {chat && (
             <Col sm={8} className="d-none d-sm-block">
               <DashboardMessagesChatView
+                chat={chat}
                 messages={messages}
                 unreadMessages={unreadMessages}
               />
               <DashboardMessagesChatViewMobile
+                chat={chat}
                 messages={messages}
                 unreadMessages={unreadMessages}
                 show={modalShow}
