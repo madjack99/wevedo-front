@@ -32,6 +32,11 @@
     border-radius: 0;
   }
 
+  &__control__account {
+    border: 1px solid $form-border-color !important;
+    border-radius: 0.3rem !important;
+  }
+
   &__textarea {
     resize: none;
   }
