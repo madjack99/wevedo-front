@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+
+import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 
 import './Details.scss';
 
@@ -13,7 +16,7 @@ import { WevedoServiceContext } from '../../../contexts';
 import ScreensLayoutMain from '../../Layouts/Main';
 import SupplierMessageDialog from '../../../components/Supplier/MessageDialog';
 
-const Supplier = ({ match, t }) => {
+const SupplierDetails = ({ user, match, t }) => {
   const [supplier, setSupplier] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
@@ -103,21 +106,23 @@ const Supplier = ({ match, t }) => {
           </Col>
           <Col>
             <Row>
-              <Col sm={12}>
-                <Button
-                  block
-                  size="lg"
-                  className="text-uppercase"
-                  onClick={() => setModalShow(true)}
-                >
-                  {t('supplier.sendAMessage.button')}
-                </Button>
-                <SupplierMessageDialog
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                  supplier={supplier}
-                />
-              </Col>
+              {!user.isProvider && (
+                <Col sm={12}>
+                  <Button
+                    className="text-uppercase mb-4"
+                    block
+                    size="lg"
+                    onClick={() => setModalShow(true)}
+                  >
+                    {t('supplier.sendAMessage.button')}
+                  </Button>
+                  <SupplierMessageDialog
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    supplier={supplier}
+                  />
+                </Col>
+              )}
               <Col sm={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||
                 supplier.facilities ? (
@@ -154,4 +159,9 @@ const Supplier = ({ match, t }) => {
   );
 };
 
-export default withTranslation('common')(Supplier);
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(SupplierDetails);
