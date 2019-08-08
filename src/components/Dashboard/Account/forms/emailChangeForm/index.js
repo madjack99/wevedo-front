@@ -1,3 +1,3 @@
-import { EmailChangeForm } from './EmailChangeForm';
+import EmailChangeForm from './EmailChangeForm';
 
 export default EmailChangeForm;

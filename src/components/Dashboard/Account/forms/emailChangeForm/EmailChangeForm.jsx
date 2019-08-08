@@ -4,7 +4,7 @@ import { Form, Button, InputGroup, Alert } from 'react-bootstrap';
 
 import emailSchema from './emailSchema';
 
-export const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
+const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
   return (
     <Formik
       className="form"
@@ -83,3 +83,5 @@ export const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
     </Formik>
   );
 };
+
+export default EmailChangeForm;

@@ -4,7 +4,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import nameSchema from './nameSchema';
 
-export const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
+const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
   return (
     <Formik
       className="form"
@@ -64,3 +64,5 @@ export const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
     />
   );
 };
+
+export default NameChangeForm;
