@@ -63,7 +63,7 @@ const DashboardMessages = ({ user: authUser }) => {
       // console.log('READ MESSAGES');
       wevedoService.getRoom(chatId);
       setUnreadMessages(0);
-    }, 5000);
+    }, 1000);
 
     const intervalId = startPooling(fetchMessages, timeOfUpdate);
 
