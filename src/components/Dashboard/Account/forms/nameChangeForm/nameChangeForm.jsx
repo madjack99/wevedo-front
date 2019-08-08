@@ -23,8 +23,9 @@ export const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
           setSubmitting(false);
         } catch (err) {
           setErrors({
-            fullName: 'Server error',
+            fullName: err.message,
           });
+          setSubmitting(false);
         }
       }}
       validationSchema={nameSchema}
