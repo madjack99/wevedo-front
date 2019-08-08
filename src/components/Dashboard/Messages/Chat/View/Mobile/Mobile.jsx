@@ -3,10 +3,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 
-import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Modal } from 'react-bootstrap';
 
 import DashboardMessagesChatItemRecipient from '../../Item/Recipient';
 import DashboardMessagesChatItemSender from '../../Item/Sender';
+import DashboardMessagesInput from '../../Input';
 
 const DashboardMessagesChatViewMobile = ({
   user: authUser,
@@ -53,16 +54,7 @@ const DashboardMessagesChatViewMobile = ({
         </Row>
       </Modal.Body>
       <Modal.Footer className="d-block">
-        <div className="d-flex">
-          <Form.Control
-            type="text"
-            placeholder="Type something..."
-            className="mr-2"
-          />
-          <Button className="pl-4 pr-4">
-            <i className="fas fa-paper-plane" />
-          </Button>
-        </div>
+        <DashboardMessagesInput />
       </Modal.Footer>
     </Modal>
   );

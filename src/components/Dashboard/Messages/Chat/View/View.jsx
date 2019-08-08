@@ -3,10 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 
-import { Form, Button } from 'react-bootstrap';
-
 import DashboardMessagesChatItemRecipient from '../Item/Recipient';
 import DashboardMessagesChatItemSender from '../Item/Sender';
+import DashboardMessagesInput from '../Input';
 
 const DashboardMessagesChatView = ({
   user: authUser,
@@ -26,7 +25,6 @@ const DashboardMessagesChatView = ({
         </p>
       </div>
       <div className="divider m-0 mb-4" />
-
       {messages.map(message =>
         message.sender === userId ? (
           <DashboardMessagesChatItemSender key={uniqid()} />
@@ -34,18 +32,7 @@ const DashboardMessagesChatView = ({
           <DashboardMessagesChatItemRecipient key={uniqid()} />
         ),
       )}
-
-      <div className="d-flex dashboard-business__messageBox-submit">
-        <Form.Control
-          size="lg"
-          type="text"
-          placeholder="Type something..."
-          className="mr-2"
-        />
-        <Button>
-          <i className="fas fa-paper-plane" />
-        </Button>
-      </div>
+      <DashboardMessagesInput />
     </div>
   );
 };
