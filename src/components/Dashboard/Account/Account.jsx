@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 
 import NameChangeForm from './forms/nameChangeForm';
+import EmailChangeForm from './forms/emailChangeForm';
 
 import addImage from '../../../assets/images/addimg.png';
 
@@ -41,17 +42,7 @@ const DashboardAccount = ({ user, updateUser }) => {
                   </Col>
 
                   <Col sm={12} className="mb-4">
-                    <p className="text-muted">E-Mail address</p>
-                    <InputGroup className="d-none d-sm-flex">
-                      <Form.Control size="lg" type="email" />
-                      <div className="input-group-append">
-                        <Button>Change the email</Button>
-                      </div>
-                    </InputGroup>
-                    <Form.Group className="d-block d-sm-none">
-                      <Form.Control size="lg" type="email" className="mb-2" />
-                      <Button size="lg">Change the email</Button>
-                    </Form.Group>
+                    <EmailChangeForm />
                   </Col>
                   <Col sm={12}>
                     <div className="mb-3">
