@@ -10,7 +10,7 @@ const DashboardMessagesInboxView = ({ rooms, onOpenChat, ...rest }) => {
     <Row className="d-none d-sm-block" {...rest}>
       {rooms.map(room => {
         return (
-          <Col sm={12} key={uniqid} onClick={() => onOpenChat(room)}>
+          <Col sm={12} key={uniqid()} onClick={() => onOpenChat(room)}>
             <DashboardMessagesInboxItem room={room} />
           </Col>
         );
