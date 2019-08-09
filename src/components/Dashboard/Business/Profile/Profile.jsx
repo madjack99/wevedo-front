@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { WevedoServiceContext } from '../../../../contexts';
 import { updateUser } from '../../../../actions/user-actions';
 import BasicInfoFrom from './forms/basicInfoForm';
+import ContactDetailsForm from './forms/contactDetailsForm';
 import Icon from '../../../../assets/images/uploadImg.png';
 import sample1 from '../../../../assets/images/dnd-1.png';
 import sample3 from '../../../../assets/images/dnd-3.png';
@@ -28,52 +29,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Contact Details{' '}
         </h6>
-        <Row className="mb-5">
-          <Col>
-            <div className="dashboard-business__profile__whitebox">
-              <Row className="p-3">
-                <Col sm={6} className="mb-4">
-                  <p className="text-muted">Service Name</p>
-                  <Form.Control />
-                </Col>
-                <Col sm={6} className="mb-4">
-                  <p className="text-muted">Website Url</p>
-                  <Form.Control />
-                </Col>
-                <Col sm={6} className="mb-4">
-                  <p className="text-muted">Email Address</p>
-                  <Form.Control />
-                </Col>
-                <Col sm={6} className="mb-4">
-                  <p className="text-muted">Mobile Number</p>
-                  <Form.Control />
-                </Col>
-              </Row>
-              <Col className="mb-4">
-                <p className="text-muted">Address</p>
-                <Row className="mb-sm-3">
-                  <Col sm={5} className="mb-2">
-                    <Form.Control />
-                  </Col>
-                  <Col sm={4} className="mb-2">
-                    <Form.Control />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={5} className="mb-2">
-                    <Form.Control />
-                  </Col>
-                  <Col sm={4} className="mb-2">
-                    <Form.Control />
-                  </Col>
-                  <Col sm={3} className="mb-2">
-                    <Form.Control />
-                  </Col>
-                </Row>
-              </Col>
-            </div>
-          </Col>
-        </Row>
+        <ContactDetailsForm />
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
           Upload Photos{' '}
