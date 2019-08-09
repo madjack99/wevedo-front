@@ -20,4 +20,5 @@ export default Yup.object().shape({
   website: Yup.string()
     .url('enter a valid URL')
     .required('website is required'),
+  appearInCountries: Yup.string().required('countries are required'),
 });
