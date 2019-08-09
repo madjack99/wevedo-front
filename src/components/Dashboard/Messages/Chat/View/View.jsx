@@ -52,13 +52,10 @@ const DashboardMessagesChatView = ({
       <Scrollbars className="align-self-stretch" ref={scrollbars}>
         {messages.map(message =>
           message.sender === userId ? (
-            <DashboardMessagesChatItemSender
-              text={message.body}
-              key={uniqid()}
-            />
+            <DashboardMessagesChatItemSender message={message} key={uniqid()} />
           ) : (
             <DashboardMessagesChatItemRecipient
-              text={message.body}
+              message={message}
               key={uniqid()}
             />
           ),

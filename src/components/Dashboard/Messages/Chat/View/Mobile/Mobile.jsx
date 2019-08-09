@@ -30,7 +30,6 @@ const DashboardMessagesChatViewMobile = ({
       return undefined;
     }
 
-    console.log(scrollbars);
     return scrollbars.current.scrollIntoView();
   }, [messages.length]);
 
@@ -77,12 +76,12 @@ const DashboardMessagesChatViewMobile = ({
             {messages.map(message =>
               message.sender === userId ? (
                 <DashboardMessagesChatItemSender
-                  text={message.body}
+                  message={message}
                   key={uniqid()}
                 />
               ) : (
                 <DashboardMessagesChatItemRecipient
-                  text={message.body}
+                  message={message}
                   key={uniqid()}
                 />
               ),
