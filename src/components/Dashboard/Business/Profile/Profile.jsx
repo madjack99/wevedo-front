@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import BasicInfoFrom from './forms/basicInfoForm';
 import Icon from '../../../../assets/images/uploadImg.png';
 import sample1 from '../../../../assets/images/dnd-1.png';
 import sample3 from '../../../../assets/images/dnd-3.png';
 
-const DashboardBusinessProfile = () => (
+const DashboardBusinessProfile = ({ user }) => (
   <div className="dashboard">
     <div className="dashboard-background" />
     <Container className="dashboard-business__profile">
@@ -14,7 +15,7 @@ const DashboardBusinessProfile = () => (
         {' '}
         Basic Info{' '}
       </h6>
-      <BasicInfoFrom />
+      <BasicInfoFrom user={user} />
       <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
         {' '}
         Contact Details{' '}
@@ -131,4 +132,6 @@ const DashboardBusinessProfile = () => (
   </div>
 );
 
-export default DashboardBusinessProfile;
+const mapStateToProps = ({ userData }) => userData;
+
+export default connect(mapStateToProps)(DashboardBusinessProfile);

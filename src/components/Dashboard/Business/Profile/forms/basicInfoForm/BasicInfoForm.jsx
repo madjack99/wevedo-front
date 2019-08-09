@@ -2,16 +2,16 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
-const BasicInfoForm = () => {
+const BasicInfoForm = ({ user }) => {
   return (
     <Formik
       className="form"
       enableReinitialize
       initialValues={{
-        bio: 'bio',
-        minPrice: 'minPrice',
-        maxPrice: 'maxPrice',
-        facilities: 'facilities',
+        bio: user.bio || 'bio',
+        minPrice: user.minPrice || 'minPrice',
+        maxPrice: user.maxPrice || 'maxPrice',
+        facilities: user.facilities || 'facilities',
       }}
     >
       {({ values }) => {
