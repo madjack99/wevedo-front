@@ -52,18 +52,13 @@ const DashboardMessages = ({ user: authUser }) => {
 
     const fetchMessages = async () => {
       // console.log('GET CHAT BEGIN');
-      const { data: newMessages } = await wevedoService.getRoomMessages(chatId);
+      const {
+        data: { messages: newMessages },
+      } = await wevedoService.getRoom(chatId);
       setMessages(newMessages);
     };
 
     fetchMessages();
-
-    // mark messages as read after 2 seconds after opening the chat
-    setTimeout(() => {
-      // console.log('READ MESSAGES');
-      wevedoService.getRoom(chatId);
-      setUnreadMessages(0);
-    }, 1000);
 
     const intervalId = startPooling(fetchMessages, timeOfUpdate);
 
