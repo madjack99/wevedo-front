@@ -10,4 +10,10 @@ export default {
     '692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com',
   suppliersPerPage: 10,
   pageRangeDisplayed: 3,
+  cloudinary: {
+    apiKey: '294357151451223',
+    apiSecret: '8Q03lPaNnsQ3vNbwlypnGKdDwO0',
+    cloud: 'wevedo',
+  },
+  timeForServerRequest: 2500,
 };

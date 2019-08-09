@@ -1,94 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-import {
-  Container,
-  Row,
-  Col,
-  Badge,
-  Form,
-  Button,
-  Modal,
-} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const DashboardMessages = () => {
+import config from '../../../config';
+import { WevedoServiceContext } from '../../../contexts';
+
+import DashboardMessagesInboxView from './Inbox/View';
+import DashboardMessagesInboxViewMobile from './Inbox/View/Mobile';
+import DashboardMessagesChatView from './Chat/View';
+import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
+
+const DashboardMessages = ({ user: authUser }) => {
+  const [rooms, setRooms] = useState([]);
+  const [chat, setChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [unreadMessages, setUnreadMessages] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const wevedoService = useContext(WevedoServiceContext);
 
-  const MessageToCustomer = ({ show, onHide, ...rest }) => (
-    <Modal
-      show={show}
-      onHide={onHide}
-      {...rest}
-      size="lg"
-      aria-labelledby="send-a-message-to-customer"
-      centered
-      className="send-a-message-to-customer m-0"
-    >
-      <Modal.Header>
-        <Row className="w-100 align-items-center">
-          <Col xs={2} className="d-flex" onClick={onHide}>
-            <i className="fas fa-arrow-left fa-2x" />
-          </Col>
-          <Col xs={2} className="align-self-center">
-            <span className="username-circle">RB</span>
-          </Col>
-          <Col xs={8}>
-            <p className="m-0">Ryan Bradley</p>
-          </Col>
-        </Row>
-      </Modal.Header>
-      <Modal.Body className="d-flex align-items-end">
-        <Row className="w-100 m-0">
-          <Col>
-            <div className="dashboard-business__messageBox-message p-4">
-              <p className="d-flex">
-                Hi, <br />
-                we are interested
-              </p>
-              <p className="text-right m-0">
-                <small>2:15pm</small>
-              </p>
-            </div>
-            <div className="dashboard-business__messageBox-message dashboard-business__messageBox-message-reciever p-4">
-              <p className="d-flex">Ok</p>
-              <p className="text-right m-0">
-                <small>2:16pm</small>
-              </p>
-            </div>
-            <div className="dashboard-business__messageBox-message p-4">
-              <p className="d-flex">Ok</p>
-              <p className="text-right m-0">
-                <small>2:15pm</small>
-              </p>
-            </div>
-            <div className="dashboard-business__messageBox-message dashboard-business__messageBox-message-reciever p-4">
-              <p className="d-flex">Ok</p>
-              <p className="text-right m-0">
-                <small>2:16pm</small>
-              </p>
-            </div>
-            <div className="dashboard-business__messageBox-message p-4">
-              <p className="d-flex">Got it</p>
-              <p className="text-right m-0">
-                <small>2:15pm</small>
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Modal.Body>
-      <Modal.Footer className="d-block">
-        <div className="d-flex">
-          <Form.Control
-            type="text"
-            placeholder="Type something..."
-            className="mr-2"
-          />
-          <Button className="pl-4 pr-4">
-            <i className="fas fa-paper-plane" />
-          </Button>
-        </div>
-      </Modal.Footer>
-    </Modal>
-  );
+  const startPooling = (handler, time) => setInterval(() => handler(), time);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      // console.log('GET ROOMS BEGIN');
+      const { data: newRooms } = await wevedoService.getRooms();
+      setRooms(newRooms);
+    };
+
+    fetchRooms();
+
+    const intervalId = startPooling(fetchRooms, config.timeForServerRequest);
+
+    return () => {
+      // console.log('GET ROOMS END');
+      clearInterval(intervalId);
+    };
+  }, [wevedoService]);
+
+  useEffect(() => {
+    if (!chat) {
+      return undefined; // returns 'undefined'. not 'null', as the documentation requires it
+    }
+
+    const { _id: chatId } = chat;
+
+    setUnreadMessages(
+      authUser.isProvider ? chat.unreadByProvider : chat.unreadByUser,
+    );
+
+    const fetchMessages = async () => {
+      // console.log('GET CHAT BEGIN');
+      const {
+        data: { messages: newMessages },
+      } = await wevedoService.getRoom(chatId);
+      setMessages(newMessages);
+    };
+
+    fetchMessages();
+
+    const intervalId = startPooling(fetchMessages, config.timeForServerRequest);
+
+    return () => {
+      // console.log('GET CHAT END');
+      clearInterval(intervalId);
+    };
+  }, [chat, authUser, wevedoService]);
 
   return (
     <div className="dashboard">
@@ -102,118 +81,59 @@ const DashboardMessages = () => {
             <i className="fa fa-search" />
           </Col>
         </Row>
-        <Row>
-          <Col xs sm={4}>
-            <Row>
-              {/*  // Msg Box for mobile   */}
-              <span
-                onClick={() => setModalShow(true)}
-                className="d-flex d-sm-none"
-              >
-                <Col sm={12}>
-                  <div className="dashboard-business__messageBox">
-                    <Row>
-                      <Col xs={2}>
-                        <div className="dashboard-business__messageBox-img">
-                          <span className="circle" />
-                          <p>RB</p>
-                        </div>
-                      </Col>
-                      <Col xs={10}>
-                        <p className="d-flex">
-                          <b className="mr-auto">Ryan Bradley</b>
-                          <small className="text-muted">3 days ago</small>
-                        </p>
-                        <p className="m-0 d-flex align-items-start">
-                          <span className="text-muted">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit...
-                          </span>
-                          <Badge pill variant="success">
-                            1
-                          </Badge>
-                        </p>
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-              </span>
-              {/*  // Msg Box for Desktop   */}
-              <span className="d-none d-sm-flex">
-                <Col sm={12}>
-                  <div className="dashboard-business__messageBox">
-                    <Row>
-                      <Col xs={2}>
-                        <div className="dashboard-business__messageBox-img">
-                          <span className="circle" />
-                          <p>RB</p>
-                        </div>
-                      </Col>
-                      <Col xs={10}>
-                        <p className="d-flex">
-                          <b className="mr-auto">Ryan Bradley</b>
-                          <small className="text-muted">3 days ago</small>
-                        </p>
-                        <p className="m-0 d-flex align-items-start">
-                          <span className="text-muted">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit...
-                          </span>
-                          <Badge pill variant="success">
-                            1
-                          </Badge>
-                        </p>
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-              </span>
-            </Row>
-          </Col>
-          <Col sm={8} className="d-none d-sm-block">
-            <div className="dashboard-business__messageBox pt-2 pl-0 pr-0">
-              <div className="d-flex align-items-center dashboard-business__messageBox-header pl-4 pb-0">
-                <div className="dashboard-business__messageBox-img dashboard-business__messageBox-img-sm">
-                  <p>RB</p>
-                </div>
-                <p className="pl-3 pt-3">
-                  <b>Ryan Bradley</b>
-                </p>
-              </div>
-              <div className="divider m-0 mb-4" />
-              <div className="dashboard-business__messageBox-message p-4">
-                <p className="d-flex">
-                  Hi, <br />
-                  we are interested
-                </p>
-                <p className="text-right m-0">
-                  <small>2:15pm</small>
-                </p>
-              </div>
-              <div className="dashboard-business__messageBox-message dashboard-business__messageBox-message-reciever p-4">
-                <p className="d-flex">Ok</p>
-                <p className="text-right m-0">
-                  <small>2:16pm</small>
-                </p>
-              </div>
-              <div className="d-flex dashboard-business__messageBox-submit">
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Type something..."
-                  className="mr-2"
+        <Row style={{ height: 600 }}>
+          <Col className="d-flex" sm={4} xs>
+            {!rooms.length ? (
+              <p className="text-center mx-auto mt-3">
+                You have no message.
+                <br />
+                To start a message, write to the{' '}
+                <Link to="/suppliers/categories">
+                  <b>providers</b>
+                </Link>
+              </p>
+            ) : (
+              <React.Fragment>
+                <DashboardMessagesInboxView
+                  rooms={rooms}
+                  onOpenChat={room => setChat(room)}
                 />
-                <Button>
-                  <i className="fas fa-paper-plane" />
-                </Button>
-              </div>
-            </div>
+                <DashboardMessagesInboxViewMobile
+                  rooms={rooms}
+                  onOpenChat={room => {
+                    setModalShow(true);
+                    setChat(room);
+                  }}
+                />
+              </React.Fragment>
+            )}
           </Col>
+          {chat && (
+            <React.Fragment>
+              <Col className="d-none d-sm-flex" sm={8}>
+                <DashboardMessagesChatView
+                  chat={chat}
+                  messages={messages}
+                  unreadMessages={unreadMessages}
+                />
+              </Col>
+              <Col className="d-flex d-sm-none" sm={12}>
+                <DashboardMessagesChatViewMobile
+                  chat={chat}
+                  messages={messages}
+                  unreadMessages={unreadMessages}
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+              </Col>
+            </React.Fragment>
+          )}
         </Row>
       </Container>
-      <MessageToCustomer show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };
 
-export default DashboardMessages;
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(connect(mapStateToProps))(DashboardMessages);

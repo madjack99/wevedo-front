@@ -29,5 +29,12 @@ export default class WevedoService extends ApiBase {
     this.getSupplierById = id => this.get(`providers/${id}`);
 
     this.loadImagesToServer = body => this.create(`img-upload`, body);
+
+    this.getRooms = () => this.get(`chat/rooms`);
+    this.getRoom = roomId => this.get(`chat/rooms/${roomId}`);
+    this.getRoomMessages = roomId => this.get(`chat/rooms/${roomId}/messages`);
+    this.createRoom = body => this.create(`chat/rooms`, body);
+    this.addMessage = (roomId, body) =>
+      this.create(`chat/rooms/${roomId}/messages`, body);
   }
 }
