@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -13,29 +13,58 @@ import './ImageUpload.scss';
 import imageUpload from '../../../../../assets/images/uploadImg.png';
 
 import { updateUser } from '../../../../../actions/user-actions';
+import { WevedoServiceContext } from '../../../../../contexts';
 
 const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
   const [photos, setPhotos] = useState([]);
+  const [photosURL, setPhotosURL] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onDrop = acceptedFiles =>
-    setPhotos([
-      ...photos,
+  const wevedoService = useContext(WevedoServiceContext);
+
+  const onDrop = acceptedFiles => {
+    setPhotos([...photos, ...acceptedFiles]);
+    setPhotosURL([
+      ...photosURL,
       ...acceptedFiles.map(acceptedFile => URL.createObjectURL(acceptedFile)),
     ]);
+  };
 
-  const onDeletePhoto = photoIndex =>
+  const onDeletePhoto = photoIndex => {
     setPhotos(photos.filter((photo, index) => index !== photoIndex));
+    setPhotosURL(photosURL.filter((photoURL, index) => index !== photoIndex));
+  };
 
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
 
-    const photoObject = photos.reduce(
-      (acc, photo, index) => ({ ...acc, [index]: photo }),
-      {},
-    );
+    const formData = new FormData();
+    photos.forEach((photo, index) => formData.append(index, photo));
 
-    updateUser()({ providerImages: photoObject });
-    nextStep();
+    setIsLoading(true);
+
+    try {
+      const { data: serverPhotos } = await wevedoService.loadImagesToServer(
+        formData,
+      );
+
+      setIsLoading(false);
+
+      const photoObject = serverPhotos.reduce(
+        (acc, serverPhoto, index) => ({
+          ...acc,
+          [index]: serverPhoto.secure_url,
+        }),
+        {},
+      );
+
+      console.log(photoObject);
+
+      updateUser()({ providerImages: photoObject });
+      nextStep();
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   const getBackgroundColor = ({ isDragAccept, isDragReject }) => {
@@ -75,10 +104,14 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
 
   const PreviewZone = props => (
     <Row {...props}>
-      {photos.map((photo, index) => (
+      {photosURL.map((photoURL, index) => (
         <Col md={4} xs={12} key={uniqid()}>
           <div className="position-relative">
-            <Image className="preview-zone__photo my-2" src={photo} rounded />
+            <Image
+              className="preview-zone__photo my-2"
+              src={photoURL}
+              rounded
+            />
             <Button
               className="modal-close-btn"
               onClick={() => onDeletePhoto(index)}
@@ -137,9 +170,9 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
           className="mt-4"
           type="submit"
           size="lg"
-          disabled={!photos.length}
+          disabled={!photos.length || isLoading}
         >
-          {t('business-signup.form.nextStepBtn')}
+          {isLoading ? 'Loading...' : t('business-signup.form.nextStepBtn')}
         </Button>
       </FormGroup>
     </Form>
