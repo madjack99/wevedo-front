@@ -2,6 +2,8 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
+import contactDetailsSchema from './contactDetailsSchema';
+
 const ContactDetailsForm = ({ user }) => {
   return (
     <Formik
@@ -17,8 +19,9 @@ const ContactDetailsForm = ({ user }) => {
         country: user.country || '',
         postcode: user.postcode || '',
       }}
+      validationSchema={contactDetailsSchema}
     >
-      {({ values, handleChange }) => {
+      {({ values, handleChange, errors }) => {
         return (
           <Form>
             <Row className="mb-5">
@@ -33,6 +36,9 @@ const ContactDetailsForm = ({ user }) => {
                         name="fullName"
                         onChange={handleChange}
                       />
+                      {errors.fullName && (
+                        <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
+                      )}
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Website Url</p>
@@ -42,6 +48,9 @@ const ContactDetailsForm = ({ user }) => {
                         name="website"
                         onChange={handleChange}
                       />
+                      {errors.website && (
+                        <p style={{ color: '#dc3545' }}>{errors.website}</p>
+                      )}
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Email Address</p>
@@ -51,6 +60,9 @@ const ContactDetailsForm = ({ user }) => {
                         name="email"
                         onChange={handleChange}
                       />
+                      {errors.email && (
+                        <p style={{ color: '#dc3545' }}>{errors.email}</p>
+                      )}
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Mobile Number</p>
@@ -60,6 +72,9 @@ const ContactDetailsForm = ({ user }) => {
                         name="phoneNumber"
                         onChange={handleChange}
                       />
+                      {errors.phoneNumber && (
+                        <p style={{ color: '#dc3545' }}>{errors.phoneNumber}</p>
+                      )}
                     </Col>
                   </Row>
                   <Col className="mb-4">
@@ -72,13 +87,22 @@ const ContactDetailsForm = ({ user }) => {
                           name="address"
                           onChange={handleChange}
                         />
+                        {errors.address && (
+                          <p style={{ color: '#dc3545' }}>{errors.address}</p>
+                        )}
                       </Col>
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
                           value={values.regionName}
+                          name="regionName"
                           onChange={handleChange}
                         />
+                        {errors.regionName && (
+                          <p style={{ color: '#dc3545' }}>
+                            {errors.regionName}
+                          </p>
+                        )}
                       </Col>
                     </Row>
                     <Row>
@@ -92,6 +116,9 @@ const ContactDetailsForm = ({ user }) => {
                           name="country"
                           onChange={handleChange}
                         />
+                        {errors.country && (
+                          <p style={{ color: '#dc3545' }}>{errors.country}</p>
+                        )}
                       </Col>
                       <Col sm={3} className="mb-2">
                         <Form.Control
@@ -100,6 +127,9 @@ const ContactDetailsForm = ({ user }) => {
                           name="postcode"
                           onChange={handleChange}
                         />
+                        {errors.postcode && (
+                          <p style={{ color: '#dc3545' }}>{errors.postcode}</p>
+                        )}
                       </Col>
                     </Row>
                   </Col>
