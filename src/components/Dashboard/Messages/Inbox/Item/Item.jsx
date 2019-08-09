@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { Row, Col, Badge } from 'react-bootstrap';
+import ReactTimeAgo from 'react-time-ago';
 import ClampLines from 'react-clamp-lines';
 
 const DashboardMessagesInboxItem = ({ room, user: authUser }) => {
@@ -30,7 +31,9 @@ const DashboardMessagesInboxItem = ({ room, user: authUser }) => {
               <b className="mr-auto">{sender.fullName}</b>
             </Col>
             <Col xs={4} className="text-right">
-              <small className="text-muted">3 days ago</small>
+              <small className="text-muted">
+                <ReactTimeAgo date={new Date(lastMessage.createdAt)} />
+              </small>
             </Col>
           </Row>
           <Row className="d-flex align-items-start">
