@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 
 import { Row, Col, Modal } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import DashboardMessagesChatItemRecipient from '../../Item/Recipient';
 import DashboardMessagesChatItemSender from '../../Item/Sender';
@@ -17,6 +18,9 @@ const DashboardMessagesChatViewMobile = ({
   show,
   onHide,
 }) => {
+  const { user, provider: supplier } = chat;
+  const sender = authUser.isProvider ? user : supplier;
+  const { _id: senderId } = sender;
   const { _id: userId } = authUser;
 
   return (
@@ -34,11 +38,26 @@ const DashboardMessagesChatViewMobile = ({
             <i className="fas fa-arrow-left fa-2x" />
           </Col>
           <Col xs={2} className="align-self-center">
-            <span className="username-circle">RB</span>
+            <img
+              className="username-circle"
+              src={sender.profileImageURL}
+              alt="Sender avatar"
+            />
           </Col>
-          <Col xs={8}>
-            <p className="m-0">{authUser.fullName}</p>
-          </Col>
+          {sender.isProvider ? (
+            <LinkContainer
+              to={`/suppliers/details/${senderId}`}
+              style={{ cursor: 'pointer' }}
+            >
+              <Col xs={8}>
+                <p className="m-0">{authUser.fullName}</p>
+              </Col>
+            </LinkContainer>
+          ) : (
+            <Col xs={8}>
+              <p className="m-0">{authUser.fullName}</p>
+            </Col>
+          )}
         </Row>
       </Modal.Header>
       <Modal.Body className="d-flex align-items-end">

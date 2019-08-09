@@ -113,21 +113,23 @@ const DashboardMessages = ({ user: authUser }) => {
             )}
           </Col>
           {chat && (
-            <Col className="d-none d-sm-flex" sm={8}>
-              <DashboardMessagesChatView
+            <React.Fragment>
+              <Col className="d-none d-sm-flex" sm={8}>
+                <DashboardMessagesChatView
+                  chat={chat}
+                  messages={messages}
+                  unreadMessages={unreadMessages}
+                />
+              </Col>
+              <DashboardMessagesChatViewMobile
                 chat={chat}
                 messages={messages}
                 unreadMessages={unreadMessages}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
               />
-            </Col>
+            </React.Fragment>
           )}
-          <DashboardMessagesChatViewMobile
-            chat={chat}
-            messages={messages}
-            unreadMessages={unreadMessages}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
         </Row>
       </Container>
     </div>
