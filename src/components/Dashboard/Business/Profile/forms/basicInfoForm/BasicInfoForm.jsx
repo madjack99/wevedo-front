@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import basicInfoSchema from './basicInfoSchema';
 
 const BasicInfoForm = ({ user }) => {
   return (
@@ -13,8 +14,9 @@ const BasicInfoForm = ({ user }) => {
         maxPrice: user.maxPrice || 'maxPrice',
         facilities: user.facilities || 'facilities',
       }}
+      validationSchema={basicInfoSchema}
     >
-      {({ values, handleChange }) => {
+      {({ values, handleChange, errors }) => {
         return (
           <Form>
             <Row className="mb-5">
@@ -31,6 +33,9 @@ const BasicInfoForm = ({ user }) => {
                         className=" form__control__account "
                         onChange={handleChange}
                       />
+                      {errors.bio && (
+                        <p style={{ color: '#dc3545' }}>{errors.bio}</p>
+                      )}
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mb-4">
@@ -43,6 +48,9 @@ const BasicInfoForm = ({ user }) => {
                           className=" form__control__account "
                           onChange={handleChange}
                         />
+                        {errors.minPrice && (
+                          <p style={{ color: '#dc3545' }}>{errors.minPrice}</p>
+                        )}
                       </Col>
                       <Col sm={4}>
                         <Form.Control
@@ -51,6 +59,9 @@ const BasicInfoForm = ({ user }) => {
                           className=" form__control__account "
                           onChange={handleChange}
                         />
+                        {errors.maxPrice && (
+                          <p style={{ color: '#dc3545' }}>{errors.maxPrice}</p>
+                        )}
                       </Col>
                     </Row>
                   </Col>
@@ -79,6 +90,9 @@ const BasicInfoForm = ({ user }) => {
                       className=" form__control__account "
                       onChange={handleChange}
                     />
+                    {errors.facilities && (
+                      <p style={{ color: '#dc3545' }}>{errors.facilities}</p>
+                    )}
                   </Col>
                   <Col sm={12} className="text-uppercase mt-2 mb-4">
                     <Button size="lg">Save</Button>
