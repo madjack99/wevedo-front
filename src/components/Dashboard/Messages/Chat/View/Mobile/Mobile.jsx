@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
@@ -18,10 +18,14 @@ const DashboardMessagesChatViewMobile = ({
   show,
   onHide,
 }) => {
+  const scrollbars = useRef(null);
+
   const { user, provider: supplier } = chat;
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
+
+  useEffect(() => scrollbars.current.scrollIntoView(), [messages.length]);
 
   return (
     <Modal
@@ -78,6 +82,7 @@ const DashboardMessagesChatViewMobile = ({
             )}
           </Col>
         </Row>
+        <div style={{ float: 'left', clear: 'both' }} ref={scrollbars} />
       </Modal.Body>
       <Modal.Footer className="d-block">
         <DashboardMessagesInput chat={chat} />

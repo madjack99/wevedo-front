@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
@@ -16,10 +16,14 @@ const DashboardMessagesChatView = ({
   messages,
   unreadMessages,
 }) => {
+  const scrollbars = useRef(null);
+
   const { user, provider: supplier } = chat;
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
+
+  useEffect(() => scrollbars.current.scrollToBottom(), [messages.length]);
 
   return (
     <div className="dashboard-business__messageBox d-none d-sm-flex flex-column w-100 pt-2 px-0 mb-0">
@@ -45,7 +49,7 @@ const DashboardMessagesChatView = ({
         )}
       </div>
       <div className="divider m-0 mb-4" />
-      <Scrollbars className="align-self-stretch">
+      <Scrollbars className="align-self-stretch" ref={scrollbars}>
         {messages.map(message =>
           message.sender === userId ? (
             <DashboardMessagesChatItemSender
