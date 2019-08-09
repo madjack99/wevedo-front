@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { WevedoServiceContext } from '../../../contexts';
 
@@ -82,21 +83,34 @@ const DashboardMessages = ({ user: authUser }) => {
         </Row>
         <Row style={{ height: 600 }}>
           <Col className="d-flex" sm={4} xs>
-            {/* Desktop Inbox */}
-            <DashboardMessagesInboxView
-              className="d-none d-sm-flex flex-column w-100"
-              rooms={rooms}
-              onOpenChat={room => setChat(room)}
-            />
-            {/* Mobile Inbox */}
-            <DashboardMessagesInboxView
-              className="d-block d-sm-none w-100"
-              rooms={rooms}
-              onOpenChat={room => {
-                setModalShow(true);
-                setChat(room);
-              }}
-            />
+            {!rooms.length ? (
+              <p className="text-center mx-auto mt-3">
+                You have no message.
+                <br />
+                To start a message, write to the{' '}
+                <Link to="/suppliers/categories">
+                  <b>providers</b>
+                </Link>
+              </p>
+            ) : (
+              <React.Fragment>
+                {/* Desktop Inbox */}
+                <DashboardMessagesInboxView
+                  className="d-none d-sm-flex flex-column w-100"
+                  rooms={rooms}
+                  onOpenChat={room => setChat(room)}
+                />
+                {/* Mobile Inbox */}
+                <DashboardMessagesInboxView
+                  className="d-block d-sm-none w-100"
+                  rooms={rooms}
+                  onOpenChat={room => {
+                    setModalShow(true);
+                    setChat(room);
+                  }}
+                />
+              </React.Fragment>
+            )}
           </Col>
           {chat && (
             <Col className="d-none d-sm-flex" sm={8}>
