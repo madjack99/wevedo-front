@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import config from '../../../config';
 import { WevedoServiceContext } from '../../../contexts';
 
 import DashboardMessagesInboxView from './Inbox/View';
@@ -20,7 +21,6 @@ const DashboardMessages = ({ user: authUser }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
-  const timeOfUpdate = 2500;
   const startPooling = (handler, time) => setInterval(() => handler(), time);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const DashboardMessages = ({ user: authUser }) => {
 
     fetchRooms();
 
-    const intervalId = startPooling(fetchRooms, timeOfUpdate);
+    const intervalId = startPooling(fetchRooms, config.timeForServerRequest);
 
     return () => {
       // console.log('GET ROOMS END');
@@ -61,7 +61,7 @@ const DashboardMessages = ({ user: authUser }) => {
 
     fetchMessages();
 
-    const intervalId = startPooling(fetchMessages, timeOfUpdate);
+    const intervalId = startPooling(fetchMessages, config.timeForServerRequest);
 
     return () => {
       // console.log('GET CHAT END');
