@@ -14,40 +14,40 @@ const ContactDetailsForm = () => {
                   <Row className="p-3">
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Service Name</p>
-                      <Form.Control />
+                      <Form.Control className=" form__control__account " />
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Website Url</p>
-                      <Form.Control />
+                      <Form.Control className=" form__control__account " />
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Email Address</p>
-                      <Form.Control />
+                      <Form.Control className=" form__control__account " />
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">Mobile Number</p>
-                      <Form.Control />
+                      <Form.Control className=" form__control__account " />
                     </Col>
                   </Row>
                   <Col className="mb-4">
                     <p className="text-muted">Address</p>
                     <Row className="mb-sm-3">
                       <Col sm={5} className="mb-2">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                       <Col sm={4} className="mb-2">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                     </Row>
                     <Row>
                       <Col sm={5} className="mb-2">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                       <Col sm={4} className="mb-2">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                       <Col sm={3} className="mb-2">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                     </Row>
                   </Col>
