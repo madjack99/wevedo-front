@@ -4,7 +4,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
-const ContactDetailsForm = ({ user }) => {
+const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
   return (
     <Formik
       className="form"
@@ -19,11 +19,29 @@ const ContactDetailsForm = ({ user }) => {
         country: user.country || '',
         postcode: user.postcode || '',
       }}
+      onSubmit={(values, { setSubmitting }) => {
+        try {
+          updateUser(updateProfile)({
+            fullName: values.fullName,
+            website: values.website,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            address: values.address,
+            regionName: values.regionName,
+            country: values.country,
+            postcode: values.postcode,
+          });
+          setSubmitting(false);
+        } catch (err) {
+          console.log(err.message);
+          setSubmitting(false);
+        }
+      }}
       validationSchema={contactDetailsSchema}
     >
-      {({ values, handleChange, errors }) => {
+      {({ values, handleChange, errors, handleSubmit, isSubmitting }) => {
         return (
-          <Form>
+          <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-5">
               <Col>
                 <div className="dashboard-business__profile__whitebox">
@@ -35,6 +53,7 @@ const ContactDetailsForm = ({ user }) => {
                         value={values.fullName}
                         name="fullName"
                         onChange={handleChange}
+                        isValid={values.fullName && !errors.fullName}
                       />
                       {errors.fullName && (
                         <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
@@ -47,6 +66,7 @@ const ContactDetailsForm = ({ user }) => {
                         value={values.website}
                         name="website"
                         onChange={handleChange}
+                        isValid={values.website && !errors.website}
                       />
                       {errors.website && (
                         <p style={{ color: '#dc3545' }}>{errors.website}</p>
@@ -59,6 +79,7 @@ const ContactDetailsForm = ({ user }) => {
                         value={values.email}
                         name="email"
                         onChange={handleChange}
+                        isValid={values.email && !errors.email}
                       />
                       {errors.email && (
                         <p style={{ color: '#dc3545' }}>{errors.email}</p>
@@ -71,6 +92,7 @@ const ContactDetailsForm = ({ user }) => {
                         value={values.phoneNumber}
                         name="phoneNumber"
                         onChange={handleChange}
+                        isValid={values.phoneNumber && !errors.phoneNumber}
                       />
                       {errors.phoneNumber && (
                         <p style={{ color: '#dc3545' }}>{errors.phoneNumber}</p>
@@ -86,6 +108,7 @@ const ContactDetailsForm = ({ user }) => {
                           value={values.address}
                           name="address"
                           onChange={handleChange}
+                          isValid={values.address && !errors.address}
                         />
                         {errors.address && (
                           <p style={{ color: '#dc3545' }}>{errors.address}</p>
@@ -97,6 +120,7 @@ const ContactDetailsForm = ({ user }) => {
                           value={values.regionName}
                           name="regionName"
                           onChange={handleChange}
+                          isValid={values.regionName && !errors.regionName}
                         />
                         {errors.regionName && (
                           <p style={{ color: '#dc3545' }}>
@@ -115,6 +139,7 @@ const ContactDetailsForm = ({ user }) => {
                           value={values.country}
                           name="country"
                           onChange={handleChange}
+                          isValid={values.country && !errors.country}
                         />
                         {errors.country && (
                           <p style={{ color: '#dc3545' }}>{errors.country}</p>
@@ -126,6 +151,7 @@ const ContactDetailsForm = ({ user }) => {
                           value={values.postcode}
                           name="postcode"
                           onChange={handleChange}
+                          isValid={values.postcode && !errors.postcode}
                         />
                         {errors.postcode && (
                           <p style={{ color: '#dc3545' }}>{errors.postcode}</p>
@@ -134,7 +160,7 @@ const ContactDetailsForm = ({ user }) => {
                     </Row>
                   </Col>
                   <Col sm={12} className="text-uppercase mt-2 mb-4">
-                    <Button size="lg" type="submit">
+                    <Button size="lg" type="submit" disabled={isSubmitting}>
                       Save
                     </Button>
                   </Col>
