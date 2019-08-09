@@ -10,13 +10,20 @@ const DashboardMessagesInboxView = ({ rooms, onOpenChat, ...rest }) => {
   return (
     <div className="d-none d-sm-flex flex-column w-100" {...rest}>
       <Scrollbars className="align-self-stretch">
-        {rooms.map(room => {
-          return (
-            <Col sm={12} key={uniqid()} onClick={() => onOpenChat(room)}>
-              <DashboardMessagesInboxItem room={room} />
-            </Col>
-          );
-        })}
+        <Row className="m-0">
+          {rooms.map(room => {
+            return (
+              <Col
+                className="p-0"
+                sm={12}
+                key={uniqid()}
+                onClick={() => onOpenChat(room)}
+              >
+                <DashboardMessagesInboxItem room={room} />
+              </Col>
+            );
+          })}
+        </Row>
       </Scrollbars>
     </div>
   );
