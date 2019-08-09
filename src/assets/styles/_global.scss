@@ -83,6 +83,9 @@ form {
     transition: all 0.3s ease;
   }
   //to do: custom checkbox
+  textarea {
+    resize: none;
+  }
 }
 
 .rc-slider {

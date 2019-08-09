@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 
+import JavascriptTimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+
 import App from './components/App';
 import WevedoService from './api/services/wevedo-service';
 import { WevedoServiceContext } from './contexts';
@@ -21,6 +24,9 @@ i18next.init({
     },
   },
 });
+
+// Adding locales for react-time-ago component
+JavascriptTimeAgo.locale(en);
 
 ReactDOM.render(
   <I18nextProvider i18n={i18next}>
