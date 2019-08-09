@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
 
-const BasicInfoForm = ({ user }) => {
+const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
   return (
     <Formik
       className="form"
