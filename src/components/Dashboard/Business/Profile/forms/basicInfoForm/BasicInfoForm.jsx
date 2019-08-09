@@ -89,7 +89,7 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col sm={12} className="mb-4">
+                  <Col sm={12} className="mb-4 d-none">
                     <p className="text-muted">Guests Capacity</p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
