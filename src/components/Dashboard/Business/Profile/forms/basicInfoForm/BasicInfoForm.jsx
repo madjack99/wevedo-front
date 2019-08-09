@@ -9,16 +9,37 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
       className="form"
       enableReinitialize
       initialValues={{
-        bio: user.bio || 'bio',
-        minPrice: user.minPrice || 'minPrice',
-        maxPrice: user.maxPrice || 'maxPrice',
-        facilities: user.facilities || 'facilities',
+        bio: user.bio || '',
+        minPrice: user.minPrice || '',
+        maxPrice: user.maxPrice || '',
+        facilities: user.facilities || '',
+      }}
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        try {
+          updateUser(updateProfile)({
+            bio: values.bio,
+            minPrice: values.minPrice,
+            maxPrice: values.maxPrice,
+            facilities: values.facilities,
+          });
+          setSubmitting(false);
+        } catch (err) {
+          console.log(err.message);
+          setSubmitting(false);
+        }
       }}
       validationSchema={basicInfoSchema}
     >
-      {({ values, handleChange, errors }) => {
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        touched,
+        errors,
+      }) => {
         return (
-          <Form>
+          <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-5">
               <Col>
                 <div className="dashboard-business__profile__whitebox">
@@ -32,6 +53,7 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
                         value={values.bio}
                         className=" form__control__account "
                         onChange={handleChange}
+                        isValid={values.bio && !errors.bio}
                       />
                       {errors.bio && (
                         <p style={{ color: '#dc3545' }}>{errors.bio}</p>
@@ -47,6 +69,7 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
                           value={values.minPrice}
                           className=" form__control__account "
                           onChange={handleChange}
+                          isValid={values.minPrice && !errors.minPrice}
                         />
                         {errors.minPrice && (
                           <p style={{ color: '#dc3545' }}>{errors.minPrice}</p>
@@ -58,6 +81,7 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
                           value={values.maxPrice}
                           className=" form__control__account "
                           onChange={handleChange}
+                          isValid={values.maxPrice && !errors.maxPrice}
                         />
                         {errors.maxPrice && (
                           <p style={{ color: '#dc3545' }}>{errors.maxPrice}</p>
@@ -89,13 +113,16 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
                       value={values.facilities}
                       className=" form__control__account "
                       onChange={handleChange}
+                      isValid={values.facilities && !errors.facilities}
                     />
                     {errors.facilities && (
                       <p style={{ color: '#dc3545' }}>{errors.facilities}</p>
                     )}
                   </Col>
                   <Col sm={12} className="text-uppercase mt-2 mb-4">
-                    <Button size="lg">Save</Button>
+                    <Button size="lg" type="submit" disabled={isSubmitting}>
+                      Save
+                    </Button>
                   </Col>
                 </div>
               </Col>
