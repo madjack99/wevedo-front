@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { WevedoServiceContext } from '../../../contexts';
 
 import DashboardMessagesInboxView from './Inbox/View';
+import DashboardMessagesInboxViewMobile from './Inbox/View/Mobile';
 import DashboardMessagesChatView from './Chat/View';
 import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
 
@@ -16,7 +17,6 @@ const DashboardMessages = ({ user: authUser }) => {
   const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState([]);
-
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -94,15 +94,11 @@ const DashboardMessages = ({ user: authUser }) => {
               </p>
             ) : (
               <React.Fragment>
-                {/* Desktop Inbox */}
                 <DashboardMessagesInboxView
-                  className="d-none d-sm-flex flex-column w-100"
                   rooms={rooms}
                   onOpenChat={room => setChat(room)}
                 />
-                {/* Mobile Inbox */}
-                <DashboardMessagesInboxView
-                  className="d-block d-sm-none w-100"
+                <DashboardMessagesInboxViewMobile
                   rooms={rooms}
                   onOpenChat={room => {
                     setModalShow(true);
@@ -121,13 +117,15 @@ const DashboardMessages = ({ user: authUser }) => {
                   unreadMessages={unreadMessages}
                 />
               </Col>
-              <DashboardMessagesChatViewMobile
-                chat={chat}
-                messages={messages}
-                unreadMessages={unreadMessages}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+              <Col className="d-flex d-sm-none" sm={12}>
+                <DashboardMessagesChatViewMobile
+                  chat={chat}
+                  messages={messages}
+                  unreadMessages={unreadMessages}
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+              </Col>
             </React.Fragment>
           )}
         </Row>

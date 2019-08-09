@@ -6,26 +6,24 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import DashboardMessagesInboxItem from '../Item';
 
-const DashboardMessagesInboxView = ({ rooms, onOpenChat, ...rest }) => {
+const DashboardMessagesInboxView = ({ rooms, onOpenChat }) => {
   return (
-    <div {...rest}>
-      <Scrollbars className="align-self-stretch">
-        <Row className="m-0">
-          {rooms.map(room => {
-            return (
-              <Col
-                className="p-0"
-                sm={12}
-                key={uniqid()}
-                onClick={() => onOpenChat(room)}
-              >
-                <DashboardMessagesInboxItem room={room} />
-              </Col>
-            );
-          })}
-        </Row>
-      </Scrollbars>
-    </div>
+    <Scrollbars className="d-none d-sm-flex flex-column align-self-stretch w-100">
+      <Row className="m-0">
+        {rooms.map(room => {
+          return (
+            <Col
+              className="p-0"
+              sm={12}
+              key={uniqid()}
+              onClick={() => onOpenChat(room)}
+            >
+              <DashboardMessagesInboxItem room={room} />
+            </Col>
+          );
+        })}
+      </Row>
+    </Scrollbars>
   );
 };
 

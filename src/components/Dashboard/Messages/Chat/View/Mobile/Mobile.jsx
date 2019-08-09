@@ -25,7 +25,14 @@ const DashboardMessagesChatViewMobile = ({
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
 
-  useEffect(() => scrollbars.current.scrollIntoView(), [messages.length]);
+  useEffect(() => {
+    if (!scrollbars.current) {
+      return undefined;
+    }
+
+    console.log(scrollbars);
+    return scrollbars.current.scrollIntoView();
+  }, [messages.length]);
 
   return (
     <Modal
