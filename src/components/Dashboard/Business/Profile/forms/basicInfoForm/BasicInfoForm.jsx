@@ -23,17 +23,28 @@ const BasicInfoForm = () => {
                   <Col sm={12} className="mb-4">
                     <Form.Group>
                       <p className="text-muted">Description</p>
-                      <Form.Control as="textarea" rows="3" value={values.bio} />
+                      <Form.Control
+                        as="textarea"
+                        rows="3"
+                        value={values.bio}
+                        className=" form__control__account "
+                      />
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mb-4">
                     <p className="text-muted">Pricing</p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
-                        <Form.Control value={values.minPrice} />
+                        <Form.Control
+                          value={values.minPrice}
+                          className=" form__control__account "
+                        />
                       </Col>
                       <Col sm={4}>
-                        <Form.Control value={values.minPrice} />
+                        <Form.Control
+                          value={values.minPrice}
+                          className=" form__control__account "
+                        />
                       </Col>
                     </Row>
                   </Col>
@@ -41,16 +52,19 @@ const BasicInfoForm = () => {
                     <p className="text-muted">Guests Capacity</p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                       <Col sm={4}>
-                        <Form.Control />
+                        <Form.Control className=" form__control__account " />
                       </Col>
                     </Row>
                   </Col>
                   <Col sm={12} className="mb-4">
                     <p className="text-muted">Facilities</p>
-                    <Form.Control value={values.facilities} />
+                    <Form.Control
+                      value={values.facilities}
+                      className=" form__control__account "
+                    />
                   </Col>
                   <Col sm={12} className="text-uppercase mt-2 mb-4">
                     <Button size="lg">Save</Button>
