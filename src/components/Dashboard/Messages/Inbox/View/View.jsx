@@ -8,7 +8,7 @@ import DashboardMessagesInboxItem from '../Item';
 
 const DashboardMessagesInboxView = ({ rooms, onOpenChat, ...rest }) => {
   return (
-    <div className="d-none d-sm-flex flex-column w-100" {...rest}>
+    <div {...rest}>
       <Scrollbars className="align-self-stretch">
         <Row className="m-0">
           {rooms.map(room => {

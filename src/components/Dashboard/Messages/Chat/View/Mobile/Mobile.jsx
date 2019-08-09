@@ -21,12 +21,12 @@ const DashboardMessagesChatViewMobile = ({
 
   return (
     <Modal
+      className="send-a-message-to-customer m-0"
       show={show}
       onHide={onHide}
       size="lg"
       aria-labelledby="send-a-message-to-customer"
       centered
-      className="send-a-message-to-customer m-0"
     >
       <Modal.Header>
         <Row className="w-100 align-items-center">

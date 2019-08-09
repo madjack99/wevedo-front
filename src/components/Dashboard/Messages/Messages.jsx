@@ -84,12 +84,13 @@ const DashboardMessages = ({ user: authUser }) => {
           <Col className="d-flex" sm={4} xs>
             {/* Desktop Inbox */}
             <DashboardMessagesInboxView
+              className="d-none d-sm-flex flex-column w-100"
               rooms={rooms}
               onOpenChat={room => setChat(room)}
             />
             {/* Mobile Inbox */}
             <DashboardMessagesInboxView
-              className="d-block d-sm-none"
+              className="d-block d-sm-none w-100"
               rooms={rooms}
               onOpenChat={room => {
                 setModalShow(true);
@@ -98,21 +99,21 @@ const DashboardMessages = ({ user: authUser }) => {
             />
           </Col>
           {chat && (
-            <Col className="d-flex" sm={8}>
+            <Col className="d-none d-sm-flex" sm={8}>
               <DashboardMessagesChatView
                 chat={chat}
                 messages={messages}
                 unreadMessages={unreadMessages}
               />
-              <DashboardMessagesChatViewMobile
-                chat={chat}
-                messages={messages}
-                unreadMessages={unreadMessages}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
             </Col>
           )}
+          <DashboardMessagesChatViewMobile
+            chat={chat}
+            messages={messages}
+            unreadMessages={unreadMessages}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
         </Row>
       </Container>
     </div>

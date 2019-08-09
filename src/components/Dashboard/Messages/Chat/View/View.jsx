@@ -18,7 +18,7 @@ const DashboardMessagesChatView = ({
   const { _id: userId } = authUser;
 
   return (
-    <div className="dashboard-business__messageBox d-flex flex-column w-100 pt-2 px-0 mb-0">
+    <div className="dashboard-business__messageBox d-none d-sm-flex flex-column w-100 pt-2 px-0 mb-0">
       <div className="d-flex align-items-center dashboard-business__messageBox-header pl-4 pb-0">
         <div className="dashboard-business__messageBox-img dashboard-business__messageBox-img-sm">
           <p>RB</p>
