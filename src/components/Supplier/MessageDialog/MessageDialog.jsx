@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 
@@ -9,7 +10,7 @@ import modalimg from '../../../assets/images/wedding dress.png';
 
 import { WevedoServiceContext } from '../../../contexts';
 
-const SupplierMessageDialog = ({ show, onHide, supplier, user }) => {
+const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
   const [message, setMessage] = useState('');
 
   const wevedoService = useContext(WevedoServiceContext);
@@ -30,7 +31,9 @@ const SupplierMessageDialog = ({ show, onHide, supplier, user }) => {
       body: message,
     };
 
-    return wevedoService.addMessage(roomId, body);
+    wevedoService.addMessage(roomId, body);
+
+    history.push('/dashboard/user/messages');
   };
 
   return (
@@ -99,4 +102,5 @@ const mapStateToProps = ({ userData }) => userData;
 export default compose(
   connect(mapStateToProps),
   withTranslation('common'),
+  withRouter,
 )(SupplierMessageDialog);
