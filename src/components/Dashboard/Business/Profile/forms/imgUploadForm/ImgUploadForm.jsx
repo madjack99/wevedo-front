@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
@@ -15,9 +15,16 @@ import './ImageUpload.scss';
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
 function ImgUploadForm({ user, updateUser, t }) {
+  console.log('user', user);
+  console.log('user provider img', user.providerImages);
+  const [serverPhotos, setServerPhotos] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    user.providerImages && setServerPhotos(Object.values(user.providerImages));
+  }, [user]);
 
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -95,6 +102,34 @@ function ImgUploadForm({ user, updateUser, t }) {
     </Row>
   );
 
+  const PreviewZoneForServerPhotos = props => {
+    console.log('serverPhotos', serverPhotos);
+    return (
+      <Row {...props}>
+        {serverPhotos.length === 0
+          ? null
+          : serverPhotos.map((serverPhotoUrl, index) => (
+              <Col md={4} xs={12} key={uniqid()}>
+                <div className="position-relative">
+                  <Image
+                    className="preview-zone__photo my-2"
+                    src={serverPhotoUrl}
+                    rounded
+                  />
+                  <Button
+                    className="modal-close-btn"
+                    onClick={() => onDeletePhoto(index)}
+                    variant="link"
+                  >
+                    <i className="fas fa-times fa-2x" />
+                  </Button>
+                </div>
+              </Col>
+            ))}
+      </Row>
+    );
+  };
+
   return (
     <Form onSubmit={onSubmit}>
       <FormGroup className="image-upload__form">
@@ -134,6 +169,7 @@ function ImgUploadForm({ user, updateUser, t }) {
           }}
         </Dropzone>
         <PreviewZoneForNewPhotos className="mt-4" />
+        <PreviewZoneForServerPhotos className="mt-4" />
       </FormGroup>
       <FormGroup className="text-center text-md-right">
         <Button
