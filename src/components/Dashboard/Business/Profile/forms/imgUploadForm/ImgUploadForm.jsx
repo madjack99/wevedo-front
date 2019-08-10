@@ -41,6 +41,12 @@ function ImgUploadForm({ user, updateUser, t }) {
     setPhotosURL(photosURL.filter((photoURL, index) => index !== photoIndex));
   };
 
+  const onDeleteServerPhoto = photoIndex => {
+    setServerPhotos(
+      serverPhotos.filter((servePhoto, index) => index !== photoIndex),
+    );
+  };
+
   const onSubmit = async event => {
     console.log('submitting');
   };
@@ -119,7 +125,7 @@ function ImgUploadForm({ user, updateUser, t }) {
                   />
                   <Button
                     className="modal-close-btn"
-                    onClick={() => onDeleteNewPhoto(index)}
+                    onClick={() => onDeleteServerPhoto(index)}
                     variant="link"
                   >
                     <i className="fas fa-times fa-2x" />
