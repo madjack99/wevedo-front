@@ -1,14 +1,20 @@
 import React, { useState, useContext } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
+import { withTranslation } from 'react-i18next';
 
-import { Container, Row, Col, Form, Image, Button } from 'react-bootstrap';
+import { Form, Row, Col, FormGroup, Image, Button } from 'react-bootstrap';
 import { WevedoServiceContext } from '../../../../../../contexts';
 import { updateUser } from '../../../../../../actions';
 
-function ImgUploadForm({ user, updateUser }) {
+import './ImageUpload.scss';
+
+import imageUpload from '../../../../../../assets/images/uploadImg.png';
+
+function ImgUploadForm({ user, updateUser, t }) {
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -90,9 +96,56 @@ function ImgUploadForm({ user, updateUser }) {
   );
 
   return (
-    <div>
-      <h1>Test</h1>
-    </div>
+    <Form onSubmit={onSubmit}>
+      <FormGroup className="image-upload__form">
+        <Dropzone accept="image/*" onDrop={onDrop}>
+          {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
+            return (
+              <Container {...getRootProps({ isDragAccept, isDragReject })}>
+                <input {...getInputProps()} />
+                <img
+                  className={
+                    photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
+                  }
+                  src={imageUpload}
+                  alt="Upload icon"
+                />
+                <div
+                  className={`d-flex flex-column ${
+                    photos.length > 0 ? 'text-left' : 'text-center'
+                  }`}
+                >
+                  <p
+                    className={`image-upload__title mb-2 ${
+                      photos.length === 0 ? 'mt-4' : 'mt-0'
+                    }`}
+                  >
+                    <b>{t('imgUpload.uploadPhotos')}</b>{' '}
+                    <span className="text-muted d-none d-md-inline">
+                      {t('imgUpload.dragAndDrop')}
+                    </span>
+                  </p>
+                  <span className="text-muted">
+                    {t('imgUpload.addAtLeast')}
+                  </span>
+                </div>
+              </Container>
+            );
+          }}
+        </Dropzone>
+        <PreviewZoneForNewPhotos className="mt-4" />
+      </FormGroup>
+      <FormGroup className="text-center text-md-right">
+        <Button
+          className="mt-4"
+          type="submit"
+          size="lg"
+          disabled={!photos.length || isLoading}
+        >
+          {isLoading ? 'Loading...' : t('business-signup.form.nextStepBtn')}
+        </Button>
+      </FormGroup>
+    </Form>
   );
 }
 
@@ -100,9 +153,12 @@ const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
 )(ImgUploadForm);
 
 {
