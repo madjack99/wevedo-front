@@ -2,12 +2,13 @@ import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
+import uniqid from 'uniqid';
 
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Image, Button } from 'react-bootstrap';
 import { WevedoServiceContext } from '../../../../../../contexts';
 import { updateUser } from '../../../../../../actions';
 
-function ImgUploadForm() {
+function ImgUploadForm({ user, updateUser }) {
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +65,29 @@ function ImgUploadForm() {
     outline: none;
     transition: border 0.24s ease-in-out;
   `;
+
+  const PreviewZoneForNewPhotos = props => (
+    <Row {...props}>
+      {photosURL.map((photoURL, index) => (
+        <Col md={4} xs={12} key={uniqid()}>
+          <div className="position-relative">
+            <Image
+              className="preview-zone__photo my-2"
+              src={photoURL}
+              rounded
+            />
+            <Button
+              className="modal-close-btn"
+              onClick={() => onDeletePhoto(index)}
+              variant="link"
+            >
+              <i className="fas fa-times fa-2x" />
+            </Button>
+          </div>
+        </Col>
+      ))}
+    </Row>
+  );
 
   return (
     <div>
