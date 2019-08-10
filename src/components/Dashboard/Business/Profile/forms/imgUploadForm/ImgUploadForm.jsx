@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
+
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { WevedoServiceContext } from '../../../../../../contexts';
 import { updateUser } from '../../../../../../actions';
@@ -19,6 +21,50 @@ function ImgUploadForm() {
       ...acceptedFiles.map(acceptedFile => URL.createObjectURL(acceptedFile)),
     ]);
   };
+
+  const onDeletePhoto = photoIndex => {
+    console.log('deleting');
+  };
+
+  const onSubmit = async event => {
+    console.log('submitting');
+  };
+
+  const getBackgroundColor = ({ isDragAccept, isDragReject }) => {
+    if (isDragAccept || isDragReject) {
+      return '#ecf1f9';
+    }
+    return '#f4f7fc';
+  };
+
+  const getBorderColor = ({ isDragAccept, isDragReject }) => {
+    if (isDragAccept) {
+      return '#4ea745';
+    }
+    if (isDragReject) {
+      return '#dd868d';
+    }
+    return '#ced4da';
+  };
+
+  const Container = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: ${photos.length === 0 ? 'column' : 'row'};
+    align-items: center;
+    justify-content: ${photos.length === 0 ? 'center' : 'start'};
+    height: ${photos.length === 0 ? '400px' : '100px'};
+    padding: 20px;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: ${props => getBorderColor(props)};
+    border-style: dashed;
+    background-color: ${props => getBackgroundColor(props)};
+    color: #bdbdbd;
+    outline: none;
+    transition: border 0.24s ease-in-out;
+  `;
+
   return (
     <div>
       <h1>Test</h1>
@@ -26,9 +72,9 @@ function ImgUploadForm() {
   );
 }
 
-const mapDispatchToProps = dispatch => {
-  updateUser(dispatch);
-};
+const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
+});
 
 export default connect(
   null,
