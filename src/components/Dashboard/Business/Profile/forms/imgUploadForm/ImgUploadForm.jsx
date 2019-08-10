@@ -14,13 +14,15 @@ import './ImageUpload.scss';
 
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
-function ImgUploadForm({ user, updateUser, t }) {
+function ImgUploadForm({ user, updateUser, t, updateProfile }) {
   console.log('user', user);
   console.log('user provider img', user.providerImages);
   const [serverPhotos, setServerPhotos] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  console.log('server photos', serverPhotos);
+  console.log('photosURL photos', photosURL);
 
   useEffect(() => {
     user.providerImages && setServerPhotos(Object.values(user.providerImages));
@@ -48,7 +50,49 @@ function ImgUploadForm({ user, updateUser, t }) {
   };
 
   const onSubmit = async event => {
-    console.log('submitting');
+    event.preventDefault();
+
+    const formData = new FormData();
+    photos.forEach((photo, index) => formData.append(index, photo));
+
+    setIsLoading(true);
+
+    try {
+      const { data: cloudinaryPhotos } = await wevedoService.loadImagesToServer(
+        formData,
+      );
+
+      setIsLoading(false);
+
+      const cloudinaryPhotosObject = cloudinaryPhotos.reduce(
+        (acc, photo, index) => ({
+          ...acc,
+          [index]: photo.secure_url,
+        }),
+        {},
+      );
+
+      const serverPhotosObject = serverPhotos.reduce(
+        (acc, photo, index) => ({
+          ...acc,
+          [uniqid()]: photo,
+        }),
+        {},
+      );
+
+      const oldAndNewlyUploadedPhotos = Object.assign(
+        {},
+        cloudinaryPhotosObject,
+        serverPhotosObject,
+      );
+
+      updateUser(updateProfile)({ providerImages: oldAndNewlyUploadedPhotos });
+
+      setPhotosURL([]);
+      setPhotos([]);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   const getBackgroundColor = ({ isDragAccept, isDragReject }) => {
@@ -183,7 +227,7 @@ function ImgUploadForm({ user, updateUser, t }) {
           className="mt-4"
           type="submit"
           size="lg"
-          disabled={!photos.length || isLoading}
+          disabled={(!photos.length && !serverPhotos.length) || isLoading}
         >
           {isLoading ? 'Loading...' : t('business-signup.form.nextStepBtn')}
         </Button>

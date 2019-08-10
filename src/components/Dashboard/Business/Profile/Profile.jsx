@@ -39,7 +39,10 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Upload Photos{' '}
         </h6>
-        <ImgUploadForm user={user} />
+        <ImgUploadForm
+          user={user}
+          updateProfile={wevedoService.updateProfile}
+        />
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
           Upload Video{' '}
