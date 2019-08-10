@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
 import { Container, Row, Col, Form } from 'react-bootstrap';
+import { WevedoServiceContext } from '../../../../../../contexts';
+import { updateUser } from '../../../../../../actions';
 
 function ImgUploadForm() {
+  const [photos, setPhotos] = useState([]);
+  const [photosURL, setPhotosURL] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const wevedoService = useContext(WevedoServiceContext);
+
+  const onDrop = acceptedFiles => {
+    setPhotos([...photos, ...acceptedFiles]);
+    setPhotosURL([
+      ...photosURL,
+      ...acceptedFiles.map(acceptedFile => URL.createObjectURL(acceptedFile)),
+    ]);
+  };
   return (
     <div>
       <h1>Test</h1>
@@ -9,7 +26,14 @@ function ImgUploadForm() {
   );
 }
 
-export default ImgUploadForm;
+const mapDispatchToProps = dispatch => {
+  updateUser(dispatch);
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ImgUploadForm);
 
 {
   /* <Row className="mb-3">
