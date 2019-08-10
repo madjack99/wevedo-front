@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScreensLayoutsDashboardBusiness from '../../../Layouts/Dashboard/Business';
+import ScreensLayoutsDashboardBusiness from '../../../Layouts/Dashboard';
 import DashboardBusinessProfile from '../../../../components/Dashboard/Business/Profile';
 
 const ScreensBusinessDashboardProfile = () => (
