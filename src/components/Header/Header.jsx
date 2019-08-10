@@ -129,7 +129,7 @@ function ProfileArea({ user }) {
       <Link
         to={
           user.isProvider
-            ? '/dashboard/business/account'
+            ? '/dashboard/business/messages'
             : '/dashboard/user/account'
         }
         className="d-flex justify-content-between align-items-center"
