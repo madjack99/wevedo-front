@@ -1,6 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
@@ -15,14 +13,10 @@ import './ImageUpload.scss';
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
 function ImgUploadForm({ user, updateUser, t, updateProfile }) {
-  console.log('user', user);
-  console.log('user provider img', user.providerImages);
   const [serverPhotos, setServerPhotos] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('server photos', serverPhotos);
-  console.log('photosURL photos', photosURL);
 
   useEffect(() => {
     user.providerImages && setServerPhotos(Object.values(user.providerImages));
@@ -115,10 +109,10 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
   const Container = styled.div`
     flex: 1;
     display: flex;
-    flex-direction: ${photos.length === 0 ? 'column' : 'row'};
+    flex-direction: ${serverPhotos.length === 0 ? 'column' : 'row'};
     align-items: center;
-    justify-content: ${photos.length === 0 ? 'center' : 'start'};
-    height: ${photos.length === 0 ? '400px' : '100px'};
+    justify-content: ${serverPhotos.length === 0 ? 'center' : 'start'};
+    height: ${serverPhotos.length === 0 ? '400px' : '100px'};
     padding: 20px;
     border-width: 2px;
     border-radius: 2px;
@@ -154,7 +148,6 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
   );
 
   const PreviewZoneForServerPhotos = props => {
-    console.log('serverPhotos', serverPhotos);
     return (
       <Row {...props}>
         {serverPhotos.length === 0
@@ -191,19 +184,21 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
                 <input {...getInputProps()} />
                 <img
                   className={
-                    photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
+                    serverPhotos.length > 0
+                      ? 'mr-5 image-upload__image_small'
+                      : ''
                   }
                   src={imageUpload}
                   alt="Upload icon"
                 />
                 <div
                   className={`d-flex flex-column ${
-                    photos.length > 0 ? 'text-left' : 'text-center'
+                    serverPhotos.length > 0 ? 'text-left' : 'text-center'
                   }`}
                 >
                   <p
                     className={`image-upload__title mb-2 ${
-                      photos.length === 0 ? 'mt-4' : 'mt-0'
+                      serverPhotos.length === 0 ? 'mt-4' : 'mt-0'
                     }`}
                   >
                     <b>{t('imgUpload.uploadPhotos')}</b>{' '}
@@ -222,75 +217,18 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
         <PreviewZoneForNewPhotos className="mt-4" />
         <PreviewZoneForServerPhotos className="mt-4" />
       </FormGroup>
-      <FormGroup className="text-center text-md-right">
+      <FormGroup>
         <Button
           className="mt-4"
           type="submit"
           size="lg"
           disabled={(!photos.length && !serverPhotos.length) || isLoading}
         >
-          {isLoading ? 'Loading...' : t('business-signup.form.nextStepBtn')}
+          {isLoading ? 'Saving...' : t('serviceInfo.save')}
         </Button>
       </FormGroup>
     </Form>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  updateUser: updateUser(dispatch),
-});
-
-export default compose(
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
-  withTranslation('common'),
-)(ImgUploadForm);
-
-{
-  /* <Row className="mb-3">
-          <Col>
-            <div className="busines-signup-config__uploadImg-inverse">
-              <Row className="d-flex align-items-center">
-                <div className="ml-sm-5 p-4 pr-sm-5">
-                  <img src={Icon} width="40px" alt="" />
-                </div>
-                <div className="d-block align-self-center">
-                  <p className="mb-2">
-                    <b>Upload Photos</b>{' '}
-                    <span className="text-muted">or just drag and drop</span>
-                  </p>
-                  <span className="text-muted">+ Add at least 3 photos</span>
-                </div>
-              </Row>
-            </div>
-          </Col>
-        </Row>
-        <Row className="mb-3 busines-signup-config__uploadImg-loaded">
-          <Col sm={4} className="mb-3">
-            <div className="overlayed">
-              <img src={sample1} alt="" />
-              <div className="overlay">
-                <i className="fas fa-pencil-alt fa-2x" />
-              </div>
-            </div>
-          </Col>
-          <Col sm={4} className="mb-3">
-            <div className="overlayed">
-              <img src={sample1} alt="" />
-              <div className="overlay">
-                <i className="fas fa-pencil-alt fa-2x" />
-              </div>
-            </div>
-          </Col>
-          <Col sm={4} className="mb-3">
-            <div className="overlayed">
-              <img src={sample3} alt="" />
-              <div className="overlay">
-                <i className="fas fa-pencil-alt fa-2x" />
-              </div>
-            </div>
-          </Col>
-        </Row> */
-}
+export default withTranslation('common')(ImgUploadForm);
