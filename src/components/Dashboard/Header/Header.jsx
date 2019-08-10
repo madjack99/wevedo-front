@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
 import { Nav, Navbar } from 'react-bootstrap';
@@ -8,7 +8,12 @@ import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../../../assets/images/symbol.png';
 import defaultAvatar from '../../../assets/images/default-avatar.png';
 
-const DashboardHeader = ({ user }) => {
+import { fetchSignOut } from '../../../actions';
+import { WevedoServiceContext } from '../../../contexts';
+
+const DashboardHeader = ({ user, signOut }) => {
+  const wevedoService = useContext(WevedoServiceContext);
+
   return (
     <React.Fragment>
       <Navbar
@@ -54,7 +59,10 @@ const DashboardHeader = ({ user }) => {
                     <b>Account settings</b>
                   </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/">
+                <LinkContainer
+                  to="/"
+                  onClick={() => signOut(wevedoService.signOut)}
+                >
                   <Nav.Link>
                     <b>Log Out</b>
                   </Nav.Link>
@@ -77,7 +85,10 @@ const DashboardHeader = ({ user }) => {
                     <b>Account settings</b>
                   </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/">
+                <LinkContainer
+                  to="/"
+                  onClick={() => signOut(wevedoService.signOut)}
+                >
                   <Nav.Link>
                     <b>Log Out</b>
                   </Nav.Link>
@@ -119,4 +130,11 @@ function ProfileArea({ user }) {
 
 const mapStateToProps = ({ userData }) => userData;
 
-export default connect(mapStateToProps)(DashboardHeader);
+const mapDispatchToProps = dispatch => ({
+  signOut: fetchSignOut(dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardHeader);
