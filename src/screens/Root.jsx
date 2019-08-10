@@ -6,7 +6,7 @@ import ScreensUserFormsLogin from './User/Forms/Login';
 import ScreensUserFormsSignup from './User/Forms/Signup';
 import ScreensBusinessFormsLogin from './Business/Forms/Login';
 import ScreensBusinessFormsSignupControl from './Business/Forms/Signup/Control';
-import ScreensUserDashboardHome from './User/Dashboard/Home';
+// import ScreensUserDashboardHome from './User/Dashboard/Home';
 import ScreensUserDashboardAccount from './User/Dashboard/Account';
 import ScreensUserDashboardMessages from './User/Dashboard/Messages';
 import ScreensBusinessDashboardAccount from './Business/Dashboard/Account';
@@ -39,7 +39,11 @@ const ScreensRoot = () => {
           path="/dashboard/user/messages"
           component={ScreensUserDashboardMessages}
         />
-        <Route path="/dashboard/user/" component={ScreensUserDashboardHome} />
+        {/* <Route path="/dashboard/user/" component={ScreensUserDashboardHome} /> */}
+        <Route
+          path="/dashboard/user/"
+          component={ScreensUserDashboardAccount}
+        />
         <Route
           path="/dashboard/business/account"
           component={ScreensBusinessDashboardAccount}
