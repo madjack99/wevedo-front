@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Fragment } from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
@@ -58,14 +58,6 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
 
       setIsLoading(false);
 
-      const cloudinaryPhotosObject = cloudinaryPhotos.reduce(
-        (acc, photo, index) => ({
-          ...acc,
-          [index]: photo.secure_url,
-        }),
-        {},
-      );
-
       const serverPhotosObject = serverPhotos.reduce(
         (acc, photo, index) => ({
           ...acc,
@@ -74,11 +66,21 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
         {},
       );
 
+      const cloudinaryPhotosObject = cloudinaryPhotos.reduce(
+        (acc, photo, index) => ({
+          ...acc,
+          [uniqid()]: photo.secure_url,
+        }),
+        {},
+      );
+
       const oldAndNewlyUploadedPhotos = Object.assign(
         {},
-        cloudinaryPhotosObject,
         serverPhotosObject,
+        cloudinaryPhotosObject,
       );
+
+      console.log('old and new photos at submit', oldAndNewlyUploadedPhotos);
 
       updateUser(updateProfile)({ providerImages: oldAndNewlyUploadedPhotos });
 
@@ -125,7 +127,7 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
   `;
 
   const PreviewZoneForNewPhotos = props => (
-    <Row {...props}>
+    <Fragment>
       {photosURL.map((photoURL, index) => (
         <Col md={4} xs={12} key={uniqid()}>
           <div className="position-relative">
@@ -144,12 +146,12 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
           </div>
         </Col>
       ))}
-    </Row>
+    </Fragment>
   );
 
   const PreviewZoneForServerPhotos = props => {
     return (
-      <Row {...props}>
+      <Fragment>
         {serverPhotos.length === 0
           ? null
           : serverPhotos.map((serverPhotoUrl, index) => (
@@ -170,9 +172,11 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
                 </div>
               </Col>
             ))}
-      </Row>
+      </Fragment>
     );
   };
+
+  console.log('serverPhotos', serverPhotos);
 
   return (
     <Form onSubmit={onSubmit}>
@@ -214,8 +218,10 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
             );
           }}
         </Dropzone>
-        <PreviewZoneForNewPhotos className="mt-4" />
-        <PreviewZoneForServerPhotos className="mt-4" />
+        <Row className="mt-4">
+          <PreviewZoneForServerPhotos />
+          <PreviewZoneForNewPhotos />
+        </Row>
       </FormGroup>
       <FormGroup>
         <Button
