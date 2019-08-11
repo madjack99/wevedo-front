@@ -222,16 +222,17 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
           <PreviewZoneForServerPhotos />
           <PreviewZoneForNewPhotos />
         </Row>
-      </FormGroup>
-      <FormGroup>
-        <Button
-          className="mt-4"
-          type="submit"
-          size="lg"
-          disabled={(!photos.length && !serverPhotos.length) || isLoading}
-        >
-          {isLoading ? 'Saving...' : t('serviceInfo.save')}
-        </Button>
+        <Row>
+          <Col sm={12} className="text-uppercase mt-4 mb-4">
+            <Button
+              type="submit"
+              size="lg"
+              disabled={(!photos.length && !serverPhotos.length) || isLoading}
+            >
+              {isLoading ? 'Saving...' : t('serviceInfo.save')}
+            </Button>
+          </Col>
+        </Row>
       </FormGroup>
     </Form>
   );
