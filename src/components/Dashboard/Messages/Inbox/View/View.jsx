@@ -9,7 +9,7 @@ import config from '../../../../../config';
 import DashboardMessagesInboxViewDesktop from './Desktop';
 import DashboardMessagesInboxViewMobile from './Mobile';
 
-const DashboardMessagesInboxView = ({ onOpenRoom }) => {
+const DashboardMessagesInboxView = ({ onOpenRoom, onOpenModalRoom }) => {
   const [rooms, setRooms] = useState([]);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -47,7 +47,7 @@ const DashboardMessagesInboxView = ({ onOpenRoom }) => {
           />
           <DashboardMessagesInboxViewMobile
             rooms={rooms}
-            onOpenRoom={onOpenRoom}
+            onOpenModalRoom={onOpenModalRoom}
           />
         </React.Fragment>
       )}

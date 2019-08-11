@@ -6,19 +6,18 @@ import uniqid from 'uniqid';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import DashboardMessagesChatItemRecipient from '../Item/Recipient';
-import DashboardMessagesChatItemSender from '../Item/Sender';
-import DashboardMessagesInput from '../Input';
+import DashboardMessagesRoomItemRecipient from '../../Item/Recipient';
+import DashboardMessagesRoomItemSender from '../../Item/Sender';
+import DashboardMessagesInput from '../../Input';
 
-const DashboardMessagesChatView = ({
-  chat,
-  user: authUser,
+const DashboardMessagesRoomViewDesktop = ({
+  room,
   messages,
-  unreadMessages,
+  user: authUser,
 }) => {
   const scrollbars = useRef(null);
 
-  const { user, provider: supplier } = chat;
+  const { user, provider: supplier } = room;
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
@@ -52,20 +51,22 @@ const DashboardMessagesChatView = ({
       <Scrollbars className="align-self-stretch" ref={scrollbars}>
         {messages.map(message =>
           message.sender === userId ? (
-            <DashboardMessagesChatItemSender message={message} key={uniqid()} />
+            <DashboardMessagesRoomItemSender message={message} key={uniqid()} />
           ) : (
-            <DashboardMessagesChatItemRecipient
+            <DashboardMessagesRoomItemRecipient
               message={message}
               key={uniqid()}
             />
           ),
         )}
       </Scrollbars>
-      <DashboardMessagesInput chat={chat} />
+      <DashboardMessagesInput room={room} />
     </div>
   );
 };
 
 const mapStateToProps = ({ userData }) => userData;
 
-export default compose(connect(mapStateToProps))(DashboardMessagesChatView);
+export default compose(connect(mapStateToProps))(
+  DashboardMessagesRoomViewDesktop,
+);

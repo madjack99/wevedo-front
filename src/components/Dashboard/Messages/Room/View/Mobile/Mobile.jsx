@@ -6,21 +6,20 @@ import uniqid from 'uniqid';
 import { Row, Col, Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import DashboardMessagesChatItemRecipient from '../../Item/Recipient';
-import DashboardMessagesChatItemSender from '../../Item/Sender';
+import DashboardMessagesRoomItemRecipient from '../../Item/Recipient';
+import DashboardMessagesRoomItemSender from '../../Item/Sender';
 import DashboardMessagesInput from '../../Input';
 
-const DashboardMessagesChatViewMobile = ({
-  chat,
-  user: authUser,
+const DashboardMessagesRoomViewMobile = ({
+  room,
   messages,
-  unreadMessages,
   show,
   onHide,
+  user: authUser,
 }) => {
   const scrollbars = useRef(null);
 
-  const { user, provider: supplier } = chat;
+  const { user, provider: supplier } = room;
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
@@ -35,7 +34,7 @@ const DashboardMessagesChatViewMobile = ({
 
   return (
     <Modal
-      className="send-a-message-to-customer m-0"
+      className="d-block d-sm-none send-a-message-to-customer m-0"
       show={show}
       onHide={onHide}
       size="lg"
@@ -75,12 +74,12 @@ const DashboardMessagesChatViewMobile = ({
           <Col>
             {messages.map(message =>
               message.sender === userId ? (
-                <DashboardMessagesChatItemSender
+                <DashboardMessagesRoomItemSender
                   message={message}
                   key={uniqid()}
                 />
               ) : (
-                <DashboardMessagesChatItemRecipient
+                <DashboardMessagesRoomItemRecipient
                   message={message}
                   key={uniqid()}
                 />
@@ -91,7 +90,7 @@ const DashboardMessagesChatViewMobile = ({
         <div style={{ float: 'left', clear: 'both' }} ref={scrollbars} />
       </Modal.Body>
       <Modal.Footer className="d-block">
-        <DashboardMessagesInput chat={chat} />
+        <DashboardMessagesInput room={room} />
       </Modal.Footer>
     </Modal>
   );
@@ -100,5 +99,5 @@ const DashboardMessagesChatViewMobile = ({
 const mapStateToProps = ({ userData }) => userData;
 
 export default compose(connect(mapStateToProps))(
-  DashboardMessagesChatViewMobile,
+  DashboardMessagesRoomViewMobile,
 );
