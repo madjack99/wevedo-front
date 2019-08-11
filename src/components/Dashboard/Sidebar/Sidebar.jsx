@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { fetchSignOut } from '../../../actions';
 import { WevedoServiceContext } from '../../../contexts';
@@ -13,49 +13,49 @@ const DashboardSidebar = ({ user, signOut }) => {
     <div className="sidebar d-none d-sm-block">
       {user.isProvider ? (
         <React.Fragment>
-          <div className="active">
-            <Link to="/dashboard/messages">
+          <NavLink to="/dashboard/messages">
+            <div>
               <i className="far fa-comment-alt" />
-            </Link>
-          </div>
-          <div>
-            <Link to="/dashboard/business/profile">
+            </div>
+          </NavLink>
+          <NavLink to="/dashboard/business/profile">
+            <div>
               <i className="far fa-user" />
-            </Link>
-          </div>
-          <div>
-            <Link to="/" onClick={() => signOut(wevedoService.signOut)}>
+            </div>
+          </NavLink>
+          <NavLink exact to="/" onClick={() => signOut(wevedoService.signOut)}>
+            <div>
               <i className="fas fa-power-off" />
-            </Link>
-          </div>
+            </div>
+          </NavLink>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="active">
-            <Link to="/dashboard/user">
+          <NavLink to="/dashboard/user">
+            <div>
               <i className="fas fa-home" />
-            </Link>
-          </div>
-          <div>
-            <Link to="/dashboard/messages">
+            </div>
+          </NavLink>
+          <NavLink to="/dashboard/messages">
+            <div>
               <i className="far fa-comment-alt" />
-            </Link>
-          </div>
-          {/* <div>
-            <Link to="/">
+            </div>
+          </NavLink>
+          {/* <NavLink to="/">
+            <div>
               <i className="fas fa-scroll" />
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
+            </div>
+          </NavLink>
+          <NavLink to="/">
+            <div>
               <i className="fas fa-calculator" />
-            </Link>
-          </div> */}
-          <div>
-            <Link to="/" onClick={() => signOut(wevedoService.signOut)}>
+            </div>
+          </NavLink> */}
+          <NavLink exact to="/" onClick={() => signOut(wevedoService.signOut)}>
+            <div>
               <i className="fas fa-power-off" />
-            </Link>
-          </div>
+            </div>
+          </NavLink>
         </React.Fragment>
       )}
     </div>
