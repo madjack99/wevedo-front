@@ -132,7 +132,7 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm={5} className="mb-2">
+                      <Col sm={5} className="mb-2 d-none">
                         <Form.Control
                           className=" form__control__account "
                           value={values.appearInCountries}
