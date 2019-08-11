@@ -7,9 +7,6 @@ import { updateUser } from '../../../../actions/user-actions';
 import BasicInfoFrom from './forms/basicInfoForm';
 import ContactDetailsForm from './forms/contactDetailsForm';
 import ImgUploadForm from './forms/imgUploadForm';
-import Icon from '../../../../assets/images/uploadImg.png';
-import sample1 from '../../../../assets/images/dnd-1.png';
-import sample3 from '../../../../assets/images/dnd-3.png';
 
 const DashboardBusinessProfile = ({ user, updateUser }) => {
   const wevedoService = useContext(WevedoServiceContext);

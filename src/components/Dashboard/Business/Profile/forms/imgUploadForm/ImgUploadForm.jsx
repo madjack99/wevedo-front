@@ -6,7 +6,6 @@ import { withTranslation } from 'react-i18next';
 
 import { Form, Row, Col, FormGroup, Image, Button } from 'react-bootstrap';
 import { WevedoServiceContext } from '../../../../../../contexts';
-import { updateUser } from '../../../../../../actions';
 
 import './ImageUpload.scss';
 
@@ -79,8 +78,6 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
         serverPhotosObject,
         cloudinaryPhotosObject,
       );
-
-      console.log('old and new photos at submit', oldAndNewlyUploadedPhotos);
 
       updateUser(updateProfile)({ providerImages: oldAndNewlyUploadedPhotos });
 
@@ -175,8 +172,6 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
       </Fragment>
     );
   };
-
-  console.log('serverPhotos', serverPhotos);
 
   return (
     <Form onSubmit={onSubmit}>
