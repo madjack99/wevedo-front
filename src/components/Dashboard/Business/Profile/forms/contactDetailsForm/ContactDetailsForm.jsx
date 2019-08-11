@@ -20,9 +20,9 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
         country: user.country || '',
         postcode: user.postcode || '',
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         try {
-          updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             fullName: values.fullName,
             website: values.website,
             email: values.email,

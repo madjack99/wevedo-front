@@ -14,9 +14,9 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
         maxPrice: user.maxPrice || '',
         facilities: user.facilities || '',
       }}
-      onSubmit={(values, { setSubmitting, setErrors }) => {
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
         try {
-          updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             bio: values.bio,
             minPrice: values.minPrice,
             maxPrice: values.maxPrice,
