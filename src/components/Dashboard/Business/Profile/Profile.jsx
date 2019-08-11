@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import { WevedoServiceContext } from '../../../../contexts';
 import { updateUser } from '../../../../actions/user-actions';
-import BasicInfoFrom from './forms/basicInfoForm';
-import ContactDetailsForm from './forms/contactDetailsForm';
-import ImgUploadForm from './forms/imgUploadForm';
+import DashboardBusinessProfileFormsBasicInfo from './forms/BasicInfo';
+import DashboardBusinessProfileFormsContactDetails from './forms/ContactDetails';
+import DashboardBusinessProfileFormsImageUpload from './forms/ImageUpload';
 
 const DashboardBusinessProfile = ({ user, updateUser }) => {
   const wevedoService = useContext(WevedoServiceContext);
@@ -18,7 +18,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Basic Info{' '}
         </h6>
-        <BasicInfoFrom
+        <DashboardBusinessProfileFormsBasicInfo
           user={user}
           updateUser={updateUser}
           updateProfile={wevedoService.updateProfile}
@@ -27,7 +27,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Contact Details{' '}
         </h6>
-        <ContactDetailsForm
+        <DashboardBusinessProfileFormsContactDetails
           user={user}
           updateUser={updateUser}
           updateProfile={wevedoService.updateProfile}
@@ -36,7 +36,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Upload Photos{' '}
         </h6>
-        <ImgUploadForm
+        <DashboardBusinessProfileFormsImageUpload
           user={user}
           updateUser={updateUser}
           updateProfile={wevedoService.updateProfile}

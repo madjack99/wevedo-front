@@ -3,7 +3,11 @@ import { Formik } from 'formik';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
 
-const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
+const DashboardBusinessProfileFormsBasicInfo = ({
+  user,
+  updateUser,
+  updateProfile,
+}) => {
   return (
     <Formik
       className="form"
@@ -134,4 +138,4 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
   );
 };
 
-export default BasicInfoForm;
+export default DashboardBusinessProfileFormsBasicInfo;

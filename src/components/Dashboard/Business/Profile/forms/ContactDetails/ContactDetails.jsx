@@ -4,7 +4,11 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
-const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
+const DashboardBusinessProfileFormsContactDetails = ({
+  user,
+  updateUser,
+  updateProfile,
+}) => {
   return (
     <Formik
       className="form"
@@ -190,4 +194,4 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
   );
 };
 
-export default ContactDetailsForm;
+export default DashboardBusinessProfileFormsContactDetails;

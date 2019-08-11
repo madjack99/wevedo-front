@@ -11,7 +11,12 @@ import './ImageUpload.scss';
 
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
-function ImgUploadForm({ user, updateUser, t, updateProfile }) {
+function DashboardBusinessProfileFormsImageUpload({
+  user,
+  updateUser,
+  t,
+  updateProfile,
+}) {
   const [serverPhotos, setServerPhotos] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [photosURL, setPhotosURL] = useState([]);
@@ -233,4 +238,6 @@ function ImgUploadForm({ user, updateUser, t, updateProfile }) {
   );
 }
 
-export default withTranslation('common')(ImgUploadForm);
+export default withTranslation('common')(
+  DashboardBusinessProfileFormsImageUpload,
+);
