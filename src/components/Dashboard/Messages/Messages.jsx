@@ -3,18 +3,15 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import config from '../../../config';
 import { WevedoServiceContext } from '../../../contexts';
 
 import DashboardMessagesInboxView from './Inbox/View';
-import DashboardMessagesInboxViewMobile from './Inbox/View/Mobile';
 import DashboardMessagesChatView from './Chat/View';
 import DashboardMessagesChatViewMobile from './Chat/View/Mobile';
 
 const DashboardMessages = ({ user: authUser }) => {
-  const [rooms, setRooms] = useState([]);
   const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState([]);
@@ -22,23 +19,6 @@ const DashboardMessages = ({ user: authUser }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const startPooling = (handler, time) => setInterval(() => handler(), time);
-
-  useEffect(() => {
-    const fetchRooms = async () => {
-      // console.log('GET ROOMS BEGIN');
-      const { data: newRooms } = await wevedoService.getRooms();
-      setRooms(newRooms);
-    };
-
-    fetchRooms();
-
-    const intervalId = startPooling(fetchRooms, config.timeForServerRequest);
-
-    return () => {
-      // console.log('GET ROOMS END');
-      clearInterval(intervalId);
-    };
-  }, [wevedoService]);
 
   useEffect(() => {
     if (!chat) {
@@ -52,7 +32,6 @@ const DashboardMessages = ({ user: authUser }) => {
     );
 
     const fetchMessages = async () => {
-      // console.log('GET CHAT BEGIN');
       const {
         data: { messages: newMessages },
       } = await wevedoService.getRoom(chatId);
@@ -64,7 +43,6 @@ const DashboardMessages = ({ user: authUser }) => {
     const intervalId = startPooling(fetchMessages, config.timeForServerRequest);
 
     return () => {
-      // console.log('GET CHAT END');
       clearInterval(intervalId);
     };
   }, [chat, authUser, wevedoService]);
@@ -83,30 +61,7 @@ const DashboardMessages = ({ user: authUser }) => {
         </Row>
         <Row style={{ height: 600 }}>
           <Col className="d-flex" sm={4} xs>
-            {!rooms.length ? (
-              <p className="text-center mx-auto mt-3">
-                You have no message.
-                <br />
-                To start a message, write to the{' '}
-                <Link to="/suppliers/categories">
-                  <b>providers</b>
-                </Link>
-              </p>
-            ) : (
-              <React.Fragment>
-                <DashboardMessagesInboxView
-                  rooms={rooms}
-                  onOpenChat={room => setChat(room)}
-                />
-                <DashboardMessagesInboxViewMobile
-                  rooms={rooms}
-                  onOpenChat={room => {
-                    setModalShow(true);
-                    setChat(room);
-                  }}
-                />
-              </React.Fragment>
-            )}
+            <DashboardMessagesInboxView onOpenRoom={room => setChat(room)} />
           </Col>
           {chat && (
             <React.Fragment>
