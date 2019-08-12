@@ -18,6 +18,9 @@ const DashboardAccountFormsImageChange = ({
     try {
       const { data: cloudinaryPhotos } = await loadImagesToServer(formData);
       console.log(cloudinaryPhotos);
+      const newProfileImageURL = cloudinaryPhotos[0].secure_url;
+      console.log(newProfileImageURL);
+      updateUser(updateProfile)({ profileImageURL: newProfileImageURL });
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +33,7 @@ const DashboardAccountFormsImageChange = ({
           <Col sm={3} {...getRootProps()}>
             <input {...getInputProps()} />
             <div className="text-center">
-              <img src={addImage} alt="" />
+              <img src={profileImageURL || addImage} alt="" />
               <p className="mt-2">Upload Photo</p>
             </div>
           </Col>
