@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import uniqid from 'uniqid';
 
 import { Scrollbars } from 'react-custom-scrollbars';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -50,16 +49,21 @@ const DashboardMessagesRoomViewDesktop = ({
       </div>
       <div className="divider m-0 mb-4" />
       <Scrollbars className="align-self-stretch" ref={scrollbars}>
-        {messages.map(message =>
-          message.sender === userId ? (
-            <DashboardMessagesRoomItemSender message={message} key={uniqid()} />
+        {messages.map(message => {
+          const { _id: messageId } = message;
+
+          return message.sender === userId ? (
+            <DashboardMessagesRoomItemSender
+              message={message}
+              key={messageId}
+            />
           ) : (
             <DashboardMessagesRoomItemRecipient
               message={message}
-              key={uniqid()}
+              key={messageId}
             />
-          ),
-        )}
+          );
+        })}
       </Scrollbars>
       <DashboardMessagesInput room={room} onSend={onSend} />
     </div>

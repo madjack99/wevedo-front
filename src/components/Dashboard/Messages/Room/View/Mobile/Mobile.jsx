@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import uniqid from 'uniqid';
 
 import { Row, Col, Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -73,19 +72,20 @@ const DashboardMessagesRoomViewMobile = ({
       <Modal.Body className="d-flex align-items-end">
         <Row className="w-100 m-0">
           <Col>
-            {messages.map(message =>
-              message.sender === userId ? (
+            {messages.map(message => {
+              const { _id: messageId } = message;
+              return message.sender === userId ? (
                 <DashboardMessagesRoomItemSender
                   message={message}
-                  key={uniqid()}
+                  key={messageId}
                 />
               ) : (
                 <DashboardMessagesRoomItemRecipient
                   message={message}
-                  key={uniqid()}
+                  key={messageId}
                 />
-              ),
-            )}
+              );
+            })}
           </Col>
         </Row>
         <div style={{ float: 'left', clear: 'both' }} ref={scrollbars} />

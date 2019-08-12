@@ -1,5 +1,4 @@
 import React from 'react';
-import uniqid from 'uniqid';
 
 import { Row, Col } from 'react-bootstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -17,11 +16,12 @@ const DashboardMessagesInboxViewDesktop = ({ rooms, onOpenRoom }) => {
               new Date(a.messages[a.messages.length - 1].createdAt),
           )
           .map(room => {
+            const { _id: roomId } = room;
             return (
               <Col
                 className="p-0"
                 sm={12}
-                key={uniqid()}
+                key={roomId}
                 onClick={() => onOpenRoom(room)}
               >
                 <DashboardMessagesInboxItem room={room} />
