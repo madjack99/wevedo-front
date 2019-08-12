@@ -48,7 +48,8 @@ const DashboardAccount = ({ user, updateUser }) => {
                       updateUser={updateUser}
                     />
                   </Col>
-                  <Col sm={12}>
+                  {/* Hide password change */}
+                  <Col sm={12} className="d-none">
                     <div className="mb-3">
                       <p className="text-muted mb-0">
                         Want to change your password?
