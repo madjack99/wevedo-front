@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
 
@@ -16,7 +17,7 @@ import { WevedoServiceContext } from '../../../contexts';
 import ScreensLayoutMain from '../../Layouts/Main';
 import SupplierMessageDialog from '../../../components/Supplier/MessageDialog';
 
-const SupplierDetails = ({ user, match, t }) => {
+const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const [supplier, setSupplier] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
@@ -115,7 +116,9 @@ const SupplierDetails = ({ user, match, t }) => {
                     className="text-uppercase mb-4"
                     block
                     size="lg"
-                    onClick={() => setModalShow(true)}
+                    onClick={() =>
+                      isLoggedIn ? setModalShow(true) : history.push('/login')
+                    }
                   >
                     {t('supplier.sendAMessage.button')}
                   </Button>
@@ -162,9 +165,13 @@ const SupplierDetails = ({ user, match, t }) => {
   );
 };
 
-const mapStateToProps = ({ userData }) => userData;
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
 
 export default compose(
   connect(mapStateToProps),
   withTranslation('common'),
+  withRouter,
 )(SupplierDetails);
