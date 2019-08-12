@@ -13,6 +13,7 @@ import DashboardMessagesInput from '../../Input';
 const DashboardMessagesRoomViewDesktop = ({
   room,
   messages,
+  onSend,
   user: authUser,
 }) => {
   const scrollbars = useRef(null);
@@ -60,7 +61,7 @@ const DashboardMessagesRoomViewDesktop = ({
           ),
         )}
       </Scrollbars>
-      <DashboardMessagesInput room={room} />
+      <DashboardMessagesInput room={room} onSend={onSend} />
     </div>
   );
 };

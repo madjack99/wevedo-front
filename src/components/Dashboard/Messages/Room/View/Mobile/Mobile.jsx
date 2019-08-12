@@ -15,6 +15,7 @@ const DashboardMessagesRoomViewMobile = ({
   messages,
   show,
   onHide,
+  onSend,
   user: authUser,
 }) => {
   const scrollbars = useRef(null);
@@ -90,7 +91,7 @@ const DashboardMessagesRoomViewMobile = ({
         <div style={{ float: 'left', clear: 'both' }} ref={scrollbars} />
       </Modal.Body>
       <Modal.Footer className="d-block">
-        <DashboardMessagesInput room={room} />
+        <DashboardMessagesInput room={room} onSend={onSend} />
       </Modal.Footer>
     </Modal>
   );

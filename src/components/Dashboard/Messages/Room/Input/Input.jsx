@@ -8,11 +8,11 @@ import './Input.scss';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 
-const DashboardMessagesChatInput = ({ user: authUser, room }) => {
+const DashboardMessagesChatInput = ({ user: authUser, room, onSend }) => {
   const [message, setMessage] = useState('');
   const wevedoService = useContext(WevedoServiceContext);
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
 
     setMessage('');
@@ -30,7 +30,8 @@ const DashboardMessagesChatInput = ({ user: authUser, room }) => {
       body: message,
     };
 
-    wevedoService.addMessage(roomId, body);
+    await wevedoService.addMessage(roomId, body);
+    onSend();
   };
 
   return (

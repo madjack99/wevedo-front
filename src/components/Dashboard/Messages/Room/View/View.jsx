@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 
@@ -11,16 +11,18 @@ const DashboardMessagesRoomView = ({ room, showRoom, onCloseRoom }) => {
   const [messages, setMessages] = useState([]);
   const wevedoService = useContext(WevedoServiceContext);
 
-  useEffect(() => {
+  const fetchMessages = useCallback(async () => {
     const { _id: roomId } = room;
 
-    const fetchMessages = async () => {
-      const {
-        data: { messages: newMessages },
-      } = await wevedoService.getRoom(roomId);
-      setMessages(newMessages);
-    };
+    const {
+      data: { messages: newMessages },
+    } = await wevedoService.getRoom(roomId);
+    setMessages(newMessages);
+  }, [room, wevedoService]);
 
+  const onSend = () => fetchMessages();
+
+  useEffect(() => {
     fetchMessages();
 
     const intervalId = setInterval(
@@ -28,16 +30,21 @@ const DashboardMessagesRoomView = ({ room, showRoom, onCloseRoom }) => {
       config.timeForServerRequest,
     );
     return () => clearInterval(intervalId);
-  }, [wevedoService, room]);
+  }, [fetchMessages]);
 
   return (
     <React.Fragment>
-      <DashboardMessagesRoomViewDesktop room={room} messages={messages} />
+      <DashboardMessagesRoomViewDesktop
+        room={room}
+        messages={messages}
+        onSend={onSend}
+      />
       <DashboardMessagesRoomViewMobile
         room={room}
         messages={messages}
         show={showRoom}
         onHide={onCloseRoom}
+        onSend={onSend}
       />
     </React.Fragment>
   );
