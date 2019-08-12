@@ -127,11 +127,7 @@ function ProfileArea({ user }) {
   return (
     <div className="dashboard-header__user ml-auto">
       <Link
-        to={
-          user.isProvider
-            ? '/dashboard/business/account'
-            : '/dashboard/user/account'
-        }
+        to="/dashboard/account"
         className="d-flex justify-content-between align-items-center"
       >
         <img

@@ -15,4 +15,5 @@ export default {
     apiSecret: '8Q03lPaNnsQ3vNbwlypnGKdDwO0',
     cloud: 'wevedo',
   },
+  timeForServerRequest: 2500,
 };

@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import Sample from '../../../../assets/images/sample-dashboard.png';
 import Sample2 from '../../../../assets/images/sample-dashboard2.png';
 
-import ScreensLayoutsDashboardUser from '../../../Layouts/Dashboard/User';
+import ScreensLayoutsDashboardUser from '../../../Layouts/Dashboard';
 import SearchPanel from '../../../../components/Search/Panel';
 import SearchPanelMobile from '../../../../components/Search/Panel/Mobile';
 

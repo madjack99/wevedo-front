@@ -25,16 +25,14 @@ export default class ApiBase {
       return instance;
     };
 
-    this.create = async (path, body) => this.withToken(instance)
-      .post(path, body);
+    this.create = async (path, body) =>
+      this.withToken(instance).post(path, body);
 
-    this.get = async path => this.withToken(instance)
-      .get(path);
+    this.get = async path => this.withToken(instance).get(path);
 
-    this.update = async (path, body) => this.withToken(instance)
-      .patch(path, body);
+    this.update = async (path, body) =>
+      this.withToken(instance).patch(path, body);
 
-    this.remove = async path => this.withToken(instance)
-      .delete(path);
+    this.remove = async path => this.withToken(instance).delete(path);
   }
 }

@@ -1,27 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Row,
-  Container,
-  Col,
-  Button,
-  Carousel,
-  Modal,
-  Form,
-} from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+
+import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 
 import './Details.scss';
 
 import backgroundImage from '../../../assets/images/supplier-bg.png';
 import map from '../../../assets/images/map.png';
-import modalimg from '../../../assets/images/wedding dress.png';
 
 import { WevedoServiceContext } from '../../../contexts';
 
 import ScreensLayoutMain from '../../Layouts/Main';
+import SupplierMessageDialog from '../../../components/Supplier/MessageDialog';
 
-const Supplier = ({ match, t }) => {
+const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const [supplier, setSupplier] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
@@ -38,62 +34,9 @@ const Supplier = ({ match, t }) => {
     fetchSupplier();
   }, [wevedoService, supplierId]);
 
-  const MessageToSupplier = ({ show, onHide }) => (
-    <Modal
-      show={show}
-      onHide={onHide}
-      size="lg"
-      aria-labelledby="send-a-message-to-supplier"
-      centered
-      className="global-modal"
-    >
-      <Modal.Body className="p-0 send-a-message-to-supplier">
-        <Row>
-          <Button className="modal-close-btn" onClick={onHide} variant="link">
-            <i className="fas fa-times fa-2x" />
-          </Button>
-          <Col sm={4} className="p-0 d-none d-md-flex">
-            <img src={modalimg} alt="" />
-          </Col>
-          <Col sm={8}>
-            <Form>
-              <h5>Send a message to Supplier Name</h5>
-              <hr className="hr-sm m-0 mt-3 mb-4 d-none d-md-block" />
-              <Row>
-                <Col sm={12} className="mb-4">
-                  <Form.Group controlId="">
-                    <Form.Control type="text" placeholder="Name" />
-                  </Form.Group>
-                </Col>
-                <Col sm={6}>
-                  <Form.Group controlId="">
-                    <Form.Control type="email" placeholder="Email" />
-                  </Form.Group>
-                </Col>
-                <Col sm={6}>
-                  <Form.Group controlId="">
-                    <Form.Control type="number" placeholder="Mobile Number" />
-                  </Form.Group>
-                </Col>
-                <Col sm={12} className="mt-4 mb-4">
-                  <Form.Group controlId="">
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Message"
-                      rows="3"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col className="text-center text-uppercase">
-                  <Button size="lg">Send</Button>
-                </Col>
-              </Row>
-            </Form>
-          </Col>
-        </Row>
-      </Modal.Body>
-    </Modal>
-  );
+  const providerImagesList = supplier.providerImages
+    ? Object.values(supplier.providerImages)
+    : [];
 
   return (
     <ScreensLayoutMain
@@ -105,18 +48,17 @@ const Supplier = ({ match, t }) => {
           <Col>
             {supplier.profileImageURL || supplier.providerImages ? (
               <Carousel>
-                {[
-                  supplier.profileImageURL,
-                  ...Object.values(supplier.providerImages || {}),
-                ].map(image => (
-                  <Carousel.Item className="carousel-image" key={uniqid()}>
-                    <img
-                      className="d-block mx-auto"
-                      src={image}
-                      alt="supplier-slide"
-                    />
-                  </Carousel.Item>
-                ))}
+                {[supplier.profileImageURL, ...providerImagesList].map(
+                  image => (
+                    <Carousel.Item className="carousel-image" key={uniqid()}>
+                      <img
+                        className="d-block mx-auto"
+                        src={image}
+                        alt="supplier-slide"
+                      />
+                    </Carousel.Item>
+                  ),
+                )}
               </Carousel>
             ) : null}
           </Col>
@@ -156,33 +98,40 @@ const Supplier = ({ match, t }) => {
                 <b>{` ${supplier.phoneNumber}`}</b>
               </div>
             ) : null}
-            <div className="divider" />
-            <b className="text-uppercase">
-              {t('supplier.contactSection.findUs')}
-            </b>
-            <hr className="hr-xs" />
-            <Col className="p-0">
-              <img src={map} alt="map" width="100%" />
-            </Col>
-            <div className="divider d-sm-none" />
+            {/* Hidden map */}
+            <div className="d-none">
+              <div className="divider" />
+              <b className="text-uppercase">
+                {t('supplier.contactSection.findUs')}
+              </b>
+              <hr className="hr-xs" />
+              <Col className="p-0">
+                <img src={map} alt="map" width="100%" />
+              </Col>
+              <div className="divider d-sm-none" />
+            </div>
           </Col>
           <Col>
             <Row>
-              <Col sm={12}>
-                <Button
-                  block
-                  size="lg"
-                  className="text-uppercase"
-                  onClick={() => setModalShow(true)}
-                >
-                  {t('supplier.sendAMessage.button')}
-                </Button>
-                <MessageToSupplier
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                  t={t}
-                />
-              </Col>
+              {!user.isProvider && (
+                <Col sm={12}>
+                  <Button
+                    className="text-uppercase mb-4"
+                    block
+                    size="lg"
+                    onClick={() =>
+                      isLoggedIn ? setModalShow(true) : history.push('/login')
+                    }
+                  >
+                    {t('supplier.sendAMessage.button')}
+                  </Button>
+                  <SupplierMessageDialog
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    supplier={supplier}
+                  />
+                </Col>
+              )}
               <Col sm={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||
                 supplier.facilities ? (
@@ -206,7 +155,8 @@ const Supplier = ({ match, t }) => {
               </Col>
             </Row>
           </Col>
-          <Col sm={12} className="text-right">
+          {/* Hidden next result */}
+          <Col sm={12} className="text-right d-none">
             <div className="divider" />
             <b className="supplier-results-next-btn">
               {t('supplier.nextResult')}
@@ -219,4 +169,13 @@ const Supplier = ({ match, t }) => {
   );
 };
 
-export default withTranslation('common')(Supplier);
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+  withRouter,
+)(SupplierDetails);

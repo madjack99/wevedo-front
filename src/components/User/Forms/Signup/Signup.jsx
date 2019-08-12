@@ -76,6 +76,8 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
             const body = {
               email,
               password,
+              profileImageURL:
+                'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
               deviceOS: 'android', // TO-DO: 'web' should be later
             };
 

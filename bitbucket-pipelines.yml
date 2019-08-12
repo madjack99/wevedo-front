@@ -1,16 +1,29 @@
 image: node:8.12.0
 pipelines:
-   branches:
-      develop: # develop branch 
-      - step: 
-         deployment: test
-         caches:
-         - node
-         script:
-         - npm install
-         - npm install -g firebase-tools 
-         - npm test
-         - npm rebuild node-sass
-         - REACT_APP_STAGE=QA npm run build
-         - ls -laR ./dist
-         - firebase deploy --token=$FIREBASE_TOKEN --project wevedo-76b03 --non-interactive
+  branches:
+    develop:
+      - step:
+          deployment: test
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g firebase-tools
+            - npm test
+            - npm rebuild node-sass
+            - REACT_APP_STAGE=QA npm run build
+            - ls -laR ./dist
+            - firebase deploy --token=$FIREBASE_TOKEN --project wevedo-76b03 --non-interactive
+    master:
+      - step:
+          deployment: prod
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g firebase-tools
+            - npm test
+            - npm rebuild node-sass
+            - REACT_APP_STAGE=PROD npm run build
+            - ls -laR ./dist
+            - firebase deploy --token=$FIREBASE_PROD_TOKEN --project wevedo-website --non-interactive
