@@ -1,10 +1,14 @@
-import React from 'react';
 import { Formik } from 'formik';
-import { Form, Button, InputGroup, Alert } from 'react-bootstrap';
+import React from 'react';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 
 import emailSchema from './emailSchema';
 
-const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
+const DashboardAccountFormsEmailChange = ({
+  email,
+  updateProfile,
+  updateUser,
+}) => {
   return (
     <Formik
       className="form"
@@ -14,7 +18,7 @@ const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
       }}
       onSubmit={async (values, { setSubmitting, setErrors }) => {
         try {
-          const result = await updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             email: values.email,
           });
           setSubmitting(false);
@@ -84,4 +88,4 @@ const EmailChangeForm = ({ email, updateProfile, updateUser }) => {
   );
 };
 
-export default EmailChangeForm;
+export default DashboardAccountFormsEmailChange;

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
-import NameChangeForm from './forms/nameChangeForm';
-import EmailChangeForm from './forms/emailChangeForm';
+import DashboardAccountFormsNameChange from './forms/NameChange';
+import DashboardAccountFormsEmailChange from './forms/EmailChange';
 
 import addImage from '../../../assets/images/addimg.png';
 
@@ -34,7 +34,7 @@ const DashboardAccount = ({ user, updateUser }) => {
                 </Col>
                 <Col sm={9}>
                   <Col sm={12} className="mb-4">
-                    <NameChangeForm
+                    <DashboardAccountFormsNameChange
                       fullName={user.fullName}
                       updateProfile={wevedoService.updateProfile}
                       updateUser={updateUser}
@@ -42,7 +42,7 @@ const DashboardAccount = ({ user, updateUser }) => {
                   </Col>
 
                   <Col sm={12} className="mb-4">
-                    <EmailChangeForm
+                    <DashboardAccountFormsEmailChange
                       email={user.email}
                       updateProfile={wevedoService.updateProfile}
                       updateUser={updateUser}

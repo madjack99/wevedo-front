@@ -1,10 +1,14 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 import nameSchema from './nameSchema';
 
-const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
+const DashboardAccountFormsNameChange = ({
+  fullName,
+  updateProfile,
+  updateUser,
+}) => {
   return (
     <Formik
       className="form"
@@ -15,7 +19,7 @@ const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
       onSubmit={async (values, { setSubmitting, setErrors }) => {
         const [firstName, ...lastName] = values.fullName.split(' ');
         try {
-          const result = await updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             fullName: values.fullName,
             firstName,
             lastName: lastName.join(' '),
@@ -65,4 +69,4 @@ const NameChangeForm = ({ fullName, updateProfile, updateUser }) => {
   );
 };
 
-export default NameChangeForm;
+export default DashboardAccountFormsNameChange;
