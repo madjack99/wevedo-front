@@ -27,4 +27,3 @@ pipelines:
             - REACT_APP_STAGE=PROD npm run build
             - ls -laR ./dist
             - firebase deploy --token=$FIREBASE_PROD_TOKEN --project wevedo-website --non-interactive
-∏
