@@ -5,8 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import DashboardAccountFormsNameChange from './forms/NameChange';
 import DashboardAccountFormsEmailChange from './forms/EmailChange';
-
-import addImage from '../../../assets/images/addimg.png';
+import DashboardAccountFormsImageChange from './forms/ImageChange';
 
 import { WevedoServiceContext } from '../../../contexts';
 
@@ -26,12 +25,7 @@ const DashboardAccount = ({ user, updateUser }) => {
           <Col>
             <div className="dashboard-business__profile__whitebox">
               <Row>
-                <Col sm={3}>
-                  <div className="text-center">
-                    <img src={addImage} alt="" />
-                    <p className="mt-2">Upload Photo</p>
-                  </div>
-                </Col>
+                <DashboardAccountFormsImageChange />
                 <Col sm={9}>
                   <Col sm={12} className="mb-4">
                     <DashboardAccountFormsNameChange
