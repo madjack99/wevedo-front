@@ -98,15 +98,18 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 <b>{` ${supplier.phoneNumber}`}</b>
               </div>
             ) : null}
-            <div className="divider" />
-            <b className="text-uppercase">
-              {t('supplier.contactSection.findUs')}
-            </b>
-            <hr className="hr-xs" />
-            <Col className="p-0">
-              <img src={map} alt="map" width="100%" />
-            </Col>
-            <div className="divider d-sm-none" />
+            {/* Hidden map */}
+            <div className="d-none">
+              <div className="divider" />
+              <b className="text-uppercase">
+                {t('supplier.contactSection.findUs')}
+              </b>
+              <hr className="hr-xs" />
+              <Col className="p-0">
+                <img src={map} alt="map" width="100%" />
+              </Col>
+              <div className="divider d-sm-none" />
+            </div>
           </Col>
           <Col>
             <Row>
@@ -152,7 +155,8 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               </Col>
             </Row>
           </Col>
-          <Col sm={12} className="text-right">
+          {/* Hidden next result */}
+          <Col sm={12} className="text-right d-none">
             <div className="divider" />
             <b className="supplier-results-next-btn">
               {t('supplier.nextResult')}

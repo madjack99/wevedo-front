@@ -3,7 +3,11 @@ import { Formik } from 'formik';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
 
-const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
+const DashboardBusinessProfileFormsBasicInfo = ({
+  user,
+  updateUser,
+  updateProfile,
+}) => {
   return (
     <Formik
       className="form"
@@ -14,9 +18,9 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
         maxPrice: user.maxPrice || '',
         facilities: user.facilities || '',
       }}
-      onSubmit={(values, { setSubmitting, setErrors }) => {
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
         try {
-          updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             bio: values.bio,
             minPrice: values.minPrice,
             maxPrice: values.maxPrice,
@@ -134,4 +138,4 @@ const BasicInfoForm = ({ user, updateUser, updateProfile }) => {
   );
 };
 
-export default BasicInfoForm;
+export default DashboardBusinessProfileFormsBasicInfo;

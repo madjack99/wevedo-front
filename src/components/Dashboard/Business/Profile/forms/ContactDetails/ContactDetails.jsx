@@ -4,7 +4,11 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
-const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
+const DashboardBusinessProfileFormsContactDetails = ({
+  user,
+  updateUser,
+  updateProfile,
+}) => {
   return (
     <Formik
       className="form"
@@ -16,20 +20,18 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
         phoneNumber: user.phoneNumber || '',
         address: user.address || '',
         regionName: user.regionName || '',
-        appearInCountries: user.appearInCountries || '',
         country: user.country || '',
         postcode: user.postcode || '',
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         try {
-          updateUser(updateProfile)({
+          await updateUser(updateProfile)({
             fullName: values.fullName,
             website: values.website,
             email: values.email,
             phoneNumber: values.phoneNumber,
             address: values.address,
             regionName: values.regionName,
-            appearInCountries: values.appearInCountries,
             country: values.country,
             postcode: values.postcode,
           });
@@ -132,23 +134,6 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm={5} className="mb-2">
-                        <Form.Control
-                          className=" form__control__account "
-                          value={values.appearInCountries}
-                          name="appearInCountries"
-                          onChange={handleChange}
-                          isValid={
-                            values.appearInCountries &&
-                            !errors.appearInCountries
-                          }
-                        />
-                        {errors.appearInCountries && (
-                          <p style={{ color: '#dc3545' }}>
-                            {errors.appearInCountries}
-                          </p>
-                        )}
-                      </Col>
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
@@ -190,4 +175,4 @@ const ContactDetailsForm = ({ user, updateUser, updateProfile }) => {
   );
 };
 
-export default ContactDetailsForm;
+export default DashboardBusinessProfileFormsContactDetails;
