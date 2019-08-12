@@ -1,0 +1,82 @@
+@import '../../../assets/styles/variables';
+
+.section {
+  color: white;
+  margin-top: 75px;
+  background-size: cover;
+  background-position: center;
+}
+
+.supplier-list-results {
+  margin: 80px auto;
+
+  .results-filters {
+    b {
+      font-size: 13px;
+    }
+  }
+
+  .results-data {
+    img {
+      width: 100%;
+      border-radius: 0.25rem;
+    }
+
+    h4 {
+      font-family: 'Proxima Nova';
+      font-size: 1rem;
+    }
+
+    h5 {
+      font-family: 'Proxima Nova Bold';
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    .results-data-location {
+      i {
+        color: $wevedo;
+      }
+
+      color: $gray-600;
+    }
+
+    b {
+      font-size: 13px;
+    }
+  }
+}
+
+.findseparator-sm {
+  height: 120px;
+  margin: 0;
+
+  form {
+    margin: 30px 100px;
+  }
+}
+
+.paginationItem.active {
+  background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+
+  a {
+    color: white;
+  }
+}
+
+.paginationItem {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 9.5px 13px;
+  font-family: 'Proxima Nova Bold';
+  border: 0;
+  border-radius: 0.25rem;
+  background: #e9ecef;
+  margin-right: 0.5rem;
+}
+
+.paginationIcon {
+  background-color: #f8f9fa;
+  margin-right: 0.5rem;
+}

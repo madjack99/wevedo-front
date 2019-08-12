@@ -1,0 +1,18 @@
+.supplier-list {
+  &__image {
+    width: 100%;
+    object-fit: cover;
+
+    &_card {
+      height: 175px;
+    }
+
+    &_grid {
+      height: 250px;
+    }
+  }
+
+  &__legend {
+    font-size: 1rem;
+  }
+}

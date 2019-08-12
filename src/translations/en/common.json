@@ -1,0 +1,203 @@
+{
+  "contact": {
+    "jumbotron": "Contact Us",
+    "title": "Contact to wevedo",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "sendBtn": "Send"
+  },
+  "popularSearches": {
+    "title": "Popular venue serches",
+    "text": "At some stage in all our lives we want clearer, fresher, younger looking skin. Well it can be achieved without spending a lot of money.",
+    "essex": "Essex",
+    "hertforshire": "Hertforshire",
+    "westMidlands": "West Midlands",
+    "hampshire": "Hampshire"
+  },
+  "privacy": {
+    "jumbotron": "Privacy Policy",
+    "mainTitle": "Data protection policy",
+    "firstText": {
+      "titleOne": "1. Controller",
+      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    },
+    "secondText": {
+      "titleOne": "2. Personal data",
+      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    }
+  },
+  "home": {
+    "jumbotron": {
+      "smallTitle": "Special moment",
+      "largeTitleOne": "We can make",
+      "largeTitleTwo": "it happen"
+    },
+    "mainSectionTitle": "How it works",
+    "howItWorks": {
+      "boxOne": "Search for your perfect venue or supplier by category, location and budget.",
+      "boxTwo": "See real time availability for your venue or supplier booking.",
+      "boxThree": "Message suppliers directly through the app to make enquiries or bookings."
+    },
+    "findForm": {
+      "title": "Find your best wedding supplier by Location",
+      "category": "Category",
+      "options": "...",
+      "supplierTitlePlaceholder": "Supplier Title",
+      "searchBtn": "Search"
+    }
+  },
+  "weddingTools": {
+    "title": "Weddingtools page"
+  },
+  "supplier": {
+    "jumbotron": "Fulham Palace",
+    "section": {
+      "primaryTitle": "Fulham Palace",
+      "subTitle": "Church Road, Clearwell, Forest of Dean Gloucestershire, GL16 8LG",
+      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "pTwo": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
+    },
+    "contactSection": {
+      "title": "Contact",
+      "website": "Website",
+      "email": "Email",
+      "number": "Number",
+      "findUs": "Find us"
+    },
+    "sendAMessage": {
+      "button": "Send a message to supplier",
+      "modalTitle": "Send a message to Supplier Name",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "mobilePlaceholder": "Mobile Number",
+      "messagePlaceholder": "Message",
+      "sendBtn": "Send"
+    },
+    "results": {
+      "budget": "Budget",
+      "amount": "$8.500 - $50.000",
+      "services": "Services",
+      "servicesList": "Photography, pre wedding, post wedding, albums, mini albums, digital album, high resolution photos."
+    },
+    "nextResult": "Next result"
+  },
+  "terms": {
+    "jumbotron": "Terms & Conditions",
+    "mainTitle": "Legal terms and conditions for users of the wevedo website",
+    "firstText": {
+      "titleOne": "1. Legal Information",
+      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    },
+    "secondText": {
+      "titleOne": "2. Purpose",
+      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    }
+  },
+
+  "pricing": {
+    "mainTitle": "Pricing Plans",
+    "mainText": "Sign up to the the UK's most popular wedding planning web site and get access to more than 100,000 registered wedding couples. Start growing your wedding business today.",
+    "dollarSign": "$",
+    "standard": {
+      "title": "Standard",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    },
+    "enhanced": {
+      "title": "Enhanced",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    },
+    "premium": {
+      "title": "Premium",
+      "pOne": "You will feature above Standard listings",
+      "pTwo": "3x more couples will view your listing than the Standard listing",
+      "getStarted": "Get Started"
+    }
+  },
+
+  "business-signup": {
+    "form": {
+      "usernamePlaceholder": "Username",
+      "passwordPlaceholder": "Password",
+      "passwordConfirmationPlaceholder": "Confirm Password",
+      "businessNamePlaceholder": "Business Name",
+      "categoryPlaceholder": "Select Category",
+      "websitePlaceholder": "Business Website",
+      "emailPlaceholder": "Business Email",
+      "numberPlaceholder": "Business Phone Number",
+      "postcodePlaceholder": "Your Postcode",
+      "addressPlaceholder": "Business Address",
+      "cityPlaceholder": "Town/City",
+      "countryPlaceholder": "Country",
+      "nextStepBtn": "Next step"
+    }
+  },
+  "footer": {
+    "wevedo": "© 2019 Wewedo",
+    "contact": "Contact",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "header": {
+    "venues": "Venues",
+    "viewAllSuppliers": "View all suppliers",
+    "login": "Login",
+    "businessLogin": "Bussiness Login",
+    "signOut": "Sign Out"
+  },
+
+  "signAndLogForm": {
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "rememberMe": "Remember me",
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot password?",
+    "logIn": "Login",
+    "noAccount": "Don't have and account?",
+    "or": "OR",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "businessAndUserLogin": {
+    "jumbotron": {
+      "largeTitle": "Welcome Back,",
+      "smallTitle": "Please login to your account..."
+    },
+    "passResetModal": {
+      "title": "Reset Password",
+      "pOne": "Reset password has been sent to user@email.com address.",
+      "pTwo": "Please check your e-mail."
+    }
+  },
+  "businessAndUserSignup": {
+    "jumbotron": {
+      "largeTitle": "Hey,",
+      "smallTitle": "Glad to see you...",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+  },
+
+  "imgUpload": {
+    "uploadPhotos": "Upload Photos",
+    "dragAndDrop": "or just drag and drop",
+    "addAtLeast": "+ Add at least 1 Photos"
+  },
+  "serviceInfo": {
+    "describeService": "Describe your business and services",
+    "startingPrice": "From which price can I hire Service name?",
+    "startingPriceDescription": "Enter your average pricing in order for your Shopfont to appear in results when couples search by price",
+    "minPricePlaceholder": "Minimum Price",
+    "maxPricePlaceholder": "Maximum Price",
+    "whatFacilities": "Which facilities do you provide?",
+    "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
+    "save": "Save"
+  }
+}

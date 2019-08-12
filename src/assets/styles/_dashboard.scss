@@ -1,0 +1,287 @@
+.dashboard-header {
+  height: 80px;
+  box-shadow: 0px 1px 30px #ddd;
+  z-index: 9999;
+}
+
+.dashboard-header__user {
+  font: 0.9rem 'Proxima Nova', sans-serif;
+}
+
+.dashboard {
+  position: relative;
+  width: calc(100% - 70px);
+  height: 100%;
+  margin-top: 80px;
+  margin-left: 70px;
+  padding: 4rem 1rem;
+  h6 {
+    letter-spacing: 0;
+  }
+  input,
+  textarea {
+    background-color: #f4f7fc;
+  }
+  input::placeholder {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .dashboard-background {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #f4f7fc;
+    z-index: -1;
+  }
+  .dashboard-business__messages {
+    .dashboard-business__messageBox {
+      background: white;
+      border: 1px solid $gray-200;
+      border-radius: 5px;
+      padding: 2rem;
+      padding-right: 1rem;
+      margin-bottom: 15px;
+      .dashboard-business__messageBox-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      .dashboard-business__messageBox-img-sm {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+      .dashboard-business__messageBox-message {
+        background: #f4f7fc;
+        margin-left: 25px;
+        margin-right: 20%;
+        border-radius: 5px;
+        p {
+          font-size: 13px;
+          font-weight: bold;
+        }
+      }
+      .dashboard-business__messageBox-message-reciever {
+        margin-top: 15px;
+        margin-left: 20%;
+        margin-right: 25px;
+        background: $gray-100;
+      }
+      .dashboard-business__messageBox-submit {
+        margin: 25px;
+        button {
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+      }
+    }
+  }
+  .dashboard-business__profile {
+    .dashboard-business__profile__whitebox {
+      background: white;
+      border: 1px solid $gray-200;
+      border-radius: 5px;
+      font-weight: bold;
+      padding: 2rem 1rem;
+      input,
+      textarea {
+        font-weight: bold;
+      }
+    }
+    .busines-signup-config__uploadImg-inverse {
+      background: white;
+      border: 2px dashed $gray-400;
+      border-radius: 5px;
+      padding: 0 1rem;
+      text-align: left;
+      p {
+        font-size: 0.9rem;
+      }
+    }
+    .busines-signup-config__uploadImg-loaded {
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: all 0.3s ease;
+        background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+        border-radius: 5px;
+      }
+      .overlayed {
+        position: relative;
+        &:hover {
+          .overlay {
+            opacity: 0.85;
+          }
+        }
+        .fas {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          text-align: center;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.dashboard-user__home {
+  position: relative;
+  padding: 0;
+  img {
+    width: 100%;
+  }
+  .findseparator-sm {
+    height: 100px;
+    form {
+      margin: 25px 100px;
+    }
+  }
+  .h-scroll__item-cardtype1 {
+    -ms-flex: 0 0 30.333333%;
+    flex: 0 0 30.333333%;
+    max-width: 30.333333%;
+  }
+  .h-scroll__item-cardtype2 {
+    -ms-flex: 0 0 22.333333%;
+    flex: 0 0 22.333333%;
+    max-width: 22.333333%;
+  }
+  .dashboard-user__home-cardtype1 {
+    background: white;
+    border: 1px solid $gray-200;
+    border-radius: 5px;
+  }
+  .dashboard-user__home-cardtype2 {
+    img {
+      width: 100%;
+    }
+    b {
+      position: absolute;
+      bottom: 15px;
+      left: 35px;
+      color: white;
+    }
+  }
+}
+
+.send-a-message-to-customer {
+  .modal-dialog {
+    margin: 0;
+    height: 100%;
+    overflow-y: initial !important;
+    .modal-content {
+      height: 100%;
+      width: 100%;
+      border: 0;
+      border-radius: 0;
+      .modal-header {
+        padding-top: 1.45rem;
+        padding-bottom: 1.4rem;
+        box-shadow: 0px 1px 10px $gray-200;
+        .username-circle {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        p {
+          font-size: 15px;
+        }
+      }
+      .modal-body {
+        height: 250px;
+        overflow-y: auto;
+        flex-wrap: wrap;
+        .dashboard-business__messageBox-message {
+          background: #f4f7fc;
+          margin-top: 15px;
+          margin-left: 0;
+          margin-right: 20%;
+          border-radius: 5px;
+          p {
+            font-size: 13px;
+            font-weight: bold;
+          }
+        }
+        .dashboard-business__messageBox-message-reciever {
+          margin-bottom: 15px;
+          margin-left: 20%;
+          margin-right: 0;
+          background: $gray-100;
+        }
+      }
+      .modal-footer {
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .dashboard {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 30px;
+    .dashboard-business__messages {
+      .dashboard-business__messageBox {
+        padding: 2rem 1rem;
+      }
+    }
+    .dashboard-business__profile {
+      padding: 0;
+      .dashboard-business__profile__whitebox {
+        padding: 15px 0;
+      }
+    }
+  }
+  .dashboard-user__home {
+    margin-top: 75px;
+    .venues-filters {
+      input {
+        background: white;
+      }
+    }
+    .h-scroll {
+      flex-wrap: wrap;
+      .h-scroll__item {
+        margin-bottom: 15px;
+        .dashboard-user__home-cardtype1 {
+          h6 {
+            font-size: 20px;
+          }
+          b {
+            font-size: 14px;
+          }
+        }
+        .dashboard-user__home-cardtype2 {
+          b {
+            font-size: 18px;
+          }
+        }
+      }
+      .h-scroll__item-cardtype1 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .h-scroll__item-cardtype2 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
