@@ -16,7 +16,13 @@ const DashboardMessagesInboxView = ({ onOpenRoom, onOpenModalRoom }) => {
   useEffect(() => {
     const fetchRooms = async () => {
       const { data: newRooms } = await wevedoService.getRooms();
-      setRooms(newRooms);
+      setRooms(
+        newRooms.sort(
+          (a, b) =>
+            new Date(b.messages[b.messages.length - 1].createdAt) -
+            new Date(a.messages[a.messages.length - 1].createdAt),
+        ),
+      );
     };
 
     fetchRooms();
