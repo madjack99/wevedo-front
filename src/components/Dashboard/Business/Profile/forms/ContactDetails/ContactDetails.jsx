@@ -20,7 +20,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
         phoneNumber: user.phoneNumber || '',
         address: user.address || '',
         regionName: user.regionName || '',
-        appearInCountries: user.appearInCountries || '',
         country: user.country || '',
         postcode: user.postcode || '',
       }}
@@ -33,7 +32,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
             phoneNumber: values.phoneNumber,
             address: values.address,
             regionName: values.regionName,
-            appearInCountries: values.appearInCountries,
             country: values.country,
             postcode: values.postcode,
           });
@@ -136,23 +134,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm={5} className="mb-2 d-none">
-                        <Form.Control
-                          className=" form__control__account "
-                          value={values.appearInCountries}
-                          name="appearInCountries"
-                          onChange={handleChange}
-                          isValid={
-                            values.appearInCountries &&
-                            !errors.appearInCountries
-                          }
-                        />
-                        {errors.appearInCountries && (
-                          <p style={{ color: '#dc3545' }}>
-                            {errors.appearInCountries}
-                          </p>
-                        )}
-                      </Col>
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
