@@ -25,7 +25,12 @@ const DashboardAccount = ({ user, updateUser }) => {
           <Col>
             <div className="dashboard-business__profile__whitebox">
               <Row>
-                <DashboardAccountFormsImageChange />
+                <DashboardAccountFormsImageChange
+                  profileImageURL={user.profileImageURL}
+                  updateProfile={wevedoService.updateProfile}
+                  loadImagesToServer={wevedoService.loadImagesToServer}
+                  updateUser={updateUser}
+                />
                 <Col sm={9}>
                   <Col sm={12} className="mb-4">
                     <DashboardAccountFormsNameChange

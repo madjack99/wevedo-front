@@ -1,15 +1,42 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
+import { Col, Container } from 'react-bootstrap';
 import addImage from '../../../../../assets/images/addimg.png';
 
-const DashboardAccountFormsImageChange = () => {
+const DashboardAccountFormsImageChange = ({
+  profileImageURL,
+  updateProfile,
+  updateUser,
+  loadImagesToServer,
+}) => {
+  const onDrop = async acceptedFiles => {
+    const firstPhoto = acceptedFiles[0];
+
+    const formData = new FormData();
+    formData.append(1, firstPhoto);
+
+    try {
+      const { data: cloudinaryPhotos } = await loadImagesToServer(formData);
+      console.log(cloudinaryPhotos);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log('profileImageURL:', profileImageURL);
   return (
-    <Col sm={3}>
-      <div className="text-center">
-        <img src={addImage} alt="" />
-        <p className="mt-2">Upload Photo</p>
-      </div>
-    </Col>
+    <Dropzone accept="image/*" onDrop={onDrop}>
+      {({ getRootProps, getInputProps }) => {
+        return (
+          <Col sm={3} {...getRootProps()}>
+            <input {...getInputProps()} />
+            <div className="text-center">
+              <img src={addImage} alt="" />
+              <p className="mt-2">Upload Photo</p>
+            </div>
+          </Col>
+        );
+      }}
+    </Dropzone>
   );
 };
 
