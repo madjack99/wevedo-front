@@ -41,6 +41,7 @@ const UserFormsLogin = ({ login, t }) => {
             provider="facebook"
             appId={config.facebookAppId}
             onLoginSuccess={handleSocialSignUp}
+            onLoginFailure={error => console.error(error)}
           >
             <i className="fab fa-facebook-f mr-3" />
             {' Login with Facebook'}
@@ -52,6 +53,7 @@ const UserFormsLogin = ({ login, t }) => {
             provider="google"
             appId={config.googleAppId}
             onLoginSuccess={handleSocialSignUp}
+            onLoginFailure={error => console.error(error)}
           >
             <i className="fab fa-google mr-3" />
             {' Login with Google'}
