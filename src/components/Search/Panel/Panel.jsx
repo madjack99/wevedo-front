@@ -7,7 +7,7 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const SearchPanel = ({ title, categories, t, history }) => {
-  const [supplierCategory, setSupplierCategory] = useState('default');
+  const [supplierCategory, setSupplierCategory] = useState('Venue');
   const [supplierTitle, setSupplierTitle] = useState('');
   const handleChange = e => {
     setSupplierTitle(e.target.value);
