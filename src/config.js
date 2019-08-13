@@ -5,7 +5,7 @@ export default {
       : process.env.REACT_APP_STAGE === 'PROD'
       ? 'https://wevedo-backend.appspot.com'
       : 'http://localhost:8000',
-  facebookAppId: '348292309185098',
+  facebookAppId: '2867895813227533',
   googleAppId:
     '692103359776-ge0g7j149nbis5m09amuegnjm5hgg603.apps.googleusercontent.com',
   suppliersPerPage: 10,
