@@ -1,64 +1,79 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { connect } from 'react-redux';
 
-import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
-import addImage from '../../../assets/images/addimg.png';
+import DashboardAccountFormsNameChange from './forms/NameChange';
+import DashboardAccountFormsEmailChange from './forms/EmailChange';
+import DashboardAccountFormsImageChange from './forms/ImageChange';
 
-const DashboardAccount = () => (
-  <div className="dashboard">
-    <div className="dashboard-background" />
-    <Container className="dashboard-business__profile">
-      <h6 className="mb-3 mb-sm-5 pl-3 pl-sm-0 text-proxima-bold">
-        {' '}
-        Your Account{' '}
-      </h6>
-      <Row>
-        <Col>
-          <div className="dashboard-business__profile__whitebox">
-            <Row>
-              <Col sm={3}>
-                <div className="text-center">
-                  <img src={addImage} alt="" />
-                  <p className="mt-2">Upload Photo</p>
-                </div>
-              </Col>
-              <Col sm={9}>
-                <Col sm={12} className="mb-4">
-                  <Form.Group className="mb-2">
-                    <p className="text-muted">Full Name</p>
-                    <Form.Control size="lg" placeholder="John Smith" />
-                  </Form.Group>
-                  <Button size="lg">Save</Button>
-                </Col>
-                <Col sm={12} className="mb-4">
-                  <p className="text-muted">E-Mail address</p>
-                  <InputGroup className="d-none d-sm-flex">
-                    <Form.Control size="lg" type="email" />
-                    <div className="input-group-append">
-                      <Button>Change the email</Button>
+import { WevedoServiceContext } from '../../../contexts';
+
+import { updateUser } from '../../../actions/user-actions';
+
+const DashboardAccount = ({ user, updateUser }) => {
+  const wevedoService = useContext(WevedoServiceContext);
+  return (
+    <div className="dashboard">
+      <div className="dashboard-background" />
+      <Container className="dashboard-business__profile">
+        <h6 className="mb-3 mb-sm-5 pl-3 pl-sm-0 text-proxima-bold">
+          {' '}
+          Your Account{' '}
+        </h6>
+        <Row>
+          <Col>
+            <div className="dashboard-business__profile__whitebox">
+              <Row>
+                <DashboardAccountFormsImageChange
+                  profileImageURL={user.profileImageURL}
+                  updateProfile={wevedoService.updateProfile}
+                  loadImagesToServer={wevedoService.loadImagesToServer}
+                  updateUser={updateUser}
+                />
+                <Col sm={9}>
+                  <Col sm={12} className="mb-4">
+                    <DashboardAccountFormsNameChange
+                      fullName={user.fullName}
+                      updateProfile={wevedoService.updateProfile}
+                      updateUser={updateUser}
+                    />
+                  </Col>
+
+                  <Col sm={12} className="mb-4">
+                    <DashboardAccountFormsEmailChange
+                      email={user.email}
+                      updateProfile={wevedoService.updateProfile}
+                      updateUser={updateUser}
+                    />
+                  </Col>
+                  {/* Hide password change */}
+                  <Col sm={12} className="d-none">
+                    <div className="mb-3">
+                      <p className="text-muted mb-0">
+                        Want to change your password?
+                      </p>
+                      <b>You will recieve an email with instructions.</b>
                     </div>
-                  </InputGroup>
-                  <Form.Group className="d-block d-sm-none">
-                    <Form.Control size="lg" type="email" className="mb-2" />
-                    <Button size="lg">Change the email</Button>
-                  </Form.Group>
+                    <Button size="lg">Change password</Button>
+                  </Col>
                 </Col>
-                <Col sm={12}>
-                  <div className="mb-3">
-                    <p className="text-muted mb-0">
-                      Want to change your password?
-                    </p>
-                    <b>You will recieve an email with intructions.</b>
-                  </div>
-                  <Button size="lg">Change password</Button>
-                </Col>
-              </Col>
-            </Row>
-          </div>
-        </Col>
-      </Row>
-    </Container>
-  </div>
-);
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
 
-export default DashboardAccount;
+const mapStateToProps = ({ userData }) => userData;
+
+const mapDispatchToProps = dispatch => ({
+  updateUser: updateUser(dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardAccount);
