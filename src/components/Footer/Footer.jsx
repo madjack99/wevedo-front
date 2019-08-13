@@ -27,6 +27,8 @@ const Footer = ({ t }) => (
             <LinkContainer to="/privacy-policy">
               <Nav.Link>{t('footer.privacy')}</Nav.Link>
             </LinkContainer>
+            <span className="footer-dot" />
+            <Nav.Link href="/app">{t('footer.mobileApp')}</Nav.Link>
           </Nav>
         </Col>
         <Col sm={2} xs className="text-center social-links">
