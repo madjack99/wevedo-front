@@ -31,9 +31,13 @@ const DashboardAccountFormsImageChange = ({
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               <div className="text-center">
-                <Image
-                  roundedCircle
-                  style={{ width: 150, height: 150 }}
+                <img
+                  style={{
+                    width: 150,
+                    height: 150,
+                    objectFit: 'cover',
+                    borderRadius: '50%',
+                  }}
                   src={profileImageURL || addImage}
                   alt="profile image"
                 />
