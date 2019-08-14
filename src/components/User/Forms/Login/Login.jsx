@@ -22,13 +22,13 @@ const UserFormsLogin = ({ login, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
-  const handleSocialSignUp = async ({
+  const handleSocialLogin = async ({
     _profile: profile,
-    _provider: supplier,
+    _provider: provider,
   }) => {
     login(wevedoService.socialLogin, {
       ...profile,
-      supplier,
+      provider,
     });
   };
 
@@ -40,7 +40,7 @@ const UserFormsLogin = ({ login, t }) => {
             variant="facebook"
             provider="facebook"
             appId={config.facebookAppId}
-            onLoginSuccess={handleSocialSignUp}
+            onLoginSuccess={handleSocialLogin}
             onLoginFailure={error => console.error(error)}
           >
             <i className="fab fa-facebook-f mr-3" />
@@ -52,7 +52,7 @@ const UserFormsLogin = ({ login, t }) => {
             variant="google"
             provider="google"
             appId={config.googleAppId}
-            onLoginSuccess={handleSocialSignUp}
+            onLoginSuccess={handleSocialLogin}
             onLoginFailure={error => console.error(error)}
           >
             <i className="fab fa-google mr-3" />
