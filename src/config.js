@@ -7,7 +7,7 @@ export default {
       : 'http://localhost:8000',
   facebookAppId: '2867895813227533',
   googleAppId:
-    '692103359776-jh8ulhpi3poep9k4taio9j3iadhij0mb.apps.googleusercontent.com',
+    '692103359776-fin2edefs5entl9ulje563slm29hu62m.apps.googleusercontent.com',
   suppliersPerPage: 10,
   pageRangeDisplayed: 3,
   cloudinary: {
