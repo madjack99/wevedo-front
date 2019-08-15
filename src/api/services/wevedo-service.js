@@ -9,6 +9,7 @@ export default class WevedoService extends ApiBase {
     this.socialLogin = async body => this.create('social-login', body);
     this.checkEmail = async body => this.create('check-email', body);
     this.checkPhone = async body => this.create('check-phone', body);
+    this.checkPassword = async body => this.create('check-password', body);
     this.signOut = async () => this.get('signout');
 
     this.getProfile = async () => this.get('users/me');
