@@ -67,7 +67,7 @@ const DashboardAccountFormsEmailChange = ({
           <Form noValidate onSubmit={handleSubmit}>
             <p className="text-muted">E-Mail address</p>
             {/* Desktop */}
-            <div className={mailIsChanging ? 'd-none' : 'd-sm-block'}>
+            <div className={mailIsChanging ? 'd-none' : 'd-none d-sm-block'}>
               <InputGroup>
                 <Form.Control
                   className=" form__control__account "
@@ -95,7 +95,7 @@ const DashboardAccountFormsEmailChange = ({
                 </p>
               )}
             </div>
-            <div className={mailIsChanging ? 'd-sm-block' : 'd-none'}>
+            <div className={mailIsChanging ? 'd-block' : 'd-none'}>
               <Form.Group>
                 <Form.Control
                   className=" form__control__account "
@@ -130,26 +130,35 @@ const DashboardAccountFormsEmailChange = ({
               </Button>
             </div>
             {/* Mobile */}
-            <Form.Group className="d-block d-sm-none">
-              <Form.Control
-                className=" form__control__account "
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                isValid={values.email && !errors.email}
-                isInvalid={touched.email && !!errors.email}
-                size="lg"
-              />
-              <Button
-                size="lg"
-                type="submit"
-                className="mt-2"
-                disabled={isSubmitting}
-              >
-                Change the email
-              </Button>
-            </Form.Group>
+            <div className={mailIsChanging ? 'd-none' : 'd-block d-sm-none'}>
+              <Form.Group>
+                <Form.Control
+                  className=" form__control__account "
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  isValid={values.email && !errors.email}
+                  isInvalid={touched.email && !!errors.email}
+                  size="lg"
+                />
+                {errors.email && (
+                  <p style={{ color: '#dc3545' }}>{errors.email}</p>
+                )}
+                {emailIsChanged && (
+                  <p style={{ color: '#28a745' }}>
+                    email was successfuly changed
+                  </p>
+                )}
+                <Button
+                  className="mt-2"
+                  onClick={() => setMailIsChanging(true)}
+                  size="lg"
+                >
+                  Change
+                </Button>
+              </Form.Group>
+            </div>
           </Form>
         );
       }}
