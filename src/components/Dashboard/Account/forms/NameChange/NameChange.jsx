@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 
@@ -9,6 +9,8 @@ const DashboardAccountFormsNameChange = ({
   updateProfile,
   updateUser,
 }) => {
+  const [nameIsChanged, setNameIsChanged] = useState(false);
+
   return (
     <Formik
       className="form"
@@ -24,6 +26,8 @@ const DashboardAccountFormsNameChange = ({
             firstName,
             lastName: lastName.join(' '),
           });
+
+          setNameIsChanged(true);
           setSubmitting(false);
         } catch (err) {
           setErrors({
@@ -57,6 +61,11 @@ const DashboardAccountFormsNameChange = ({
               />
               {errors.fullName && (
                 <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
+              )}
+              {nameIsChanged && (
+                <p style={{ color: '#28a745' }}>
+                  full name was successfuly changed
+                </p>
               )}
             </Form.Group>
             <Button type="submit" size="lg" disabled={isSubmitting}>
