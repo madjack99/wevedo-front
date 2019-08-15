@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 
-import nameSchema from './nameSchema';
+import nameSchema from './schema';
 
 const DashboardAccountFormsNameChange = ({
   fullName,
