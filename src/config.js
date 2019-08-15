@@ -16,4 +16,5 @@ export default {
     cloud: 'wevedo',
   },
   timeForServerRequest: 2500,
+  allowedInCountries: ['GB'],
 };
