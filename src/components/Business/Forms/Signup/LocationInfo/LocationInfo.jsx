@@ -175,6 +175,31 @@ const BusinessFormsSignupLocationInfo = ({
               </Form.Control.Feedback>
             </Form.Group>
 
+            <Form.Group className="mb-5" controlId="formCountry">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.countryPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="country"
+                as="select"
+                value={values.country}
+                onChange={handleChange}
+                isValid={values.country && !errors.country}
+                isInvalid={touched.country && !!errors.country}
+                autoComplete="new-country"
+              >
+                <option value="" disabled />
+                {config.allowedInCountries.map((country, index) => (
+                  <option key={index}>{countries[country].default.name}</option>
+                ))}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.country}
+              </Form.Control.Feedback>
+            </Form.Group>
+
             <Form.Group className="mb-5" controlId="formTownOrCity">
               <Form.Label className="form__label mb-0">
                 {t('business-signup.form.cityPlaceholder')}
@@ -198,31 +223,6 @@ const BusinessFormsSignupLocationInfo = ({
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.regionName}
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-5" controlId="formCountry">
-              <Form.Label className="form__label mb-0">
-                {t('business-signup.form.countryPlaceholder')}
-              </Form.Label>
-              <Form.Control
-                className="form__control"
-                type="text"
-                name="country"
-                as="select"
-                value={values.country}
-                onChange={handleChange}
-                isValid={values.country && !errors.country}
-                isInvalid={touched.country && !!errors.country}
-                autoComplete="new-country"
-              >
-                <option value="" disabled />
-                {config.allowedInCountries.map((country, index) => (
-                  <option key={index}>{countries[country].default.name}</option>
-                ))}
-              </Form.Control>
-              <Form.Control.Feedback className="form__feedback" type="invalid">
-                {errors.country}
               </Form.Control.Feedback>
             </Form.Group>
 
