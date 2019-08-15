@@ -9,6 +9,8 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
+import countries from '../../../../../countryLib';
+
 import {
   updateUser,
   fetchEmailStatus,
@@ -16,6 +18,9 @@ import {
 } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../../contexts';
 import formScheme from './schema';
+
+const GB = countries.GB.default;
+console.log(GB);
 
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
