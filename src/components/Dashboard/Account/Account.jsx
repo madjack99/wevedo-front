@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-import DashboardAccountFormsNameChange from './forms/NameChange';
-import DashboardAccountFormsEmailChange from './forms/EmailChange';
-import DashboardAccountFormsImageChange from './forms/ImageChange';
+import DashboardAccountFormsNameChange from './Forms/NameChange';
+import DashboardAccountFormsEmailChange from './Forms/EmailChange';
+import DashboardAccountFormsImageChange from './Forms/ImageChange';
 
 import { WevedoServiceContext } from '../../../contexts';
 
