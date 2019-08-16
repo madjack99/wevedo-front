@@ -4,6 +4,10 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
+import countries from '../../../../../../countryLib';
+
+import config from '../../../../../../config';
+
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
@@ -137,11 +141,18 @@ const DashboardBusinessProfileFormsContactDetails = ({
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
-                          value={values.country}
                           name="country"
+                          as="select"
                           onChange={handleChange}
                           isValid={values.country && !errors.country}
-                        />
+                        >
+                          <option>{values.country}</option>
+                          {config.allowedInCountries.map((country, index) => (
+                            <option key={index}>
+                              {countries[country].default.name}
+                            </option>
+                          ))}
+                        </Form.Control>
                         {errors.country && (
                           <p style={{ color: '#dc3545' }}>{errors.country}</p>
                         )}
