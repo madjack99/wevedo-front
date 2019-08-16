@@ -22,7 +22,12 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
 
   const [filterOptions, setFilterOptions] = useState({});
 
-  const supplierTitleQuery = queryString.parse(location.search).supplier || '';
+  const supplierLocationQuery =
+    queryString.parse(location.search).supplier || '';
+
+  console.log(location);
+  console.log(queryString.parse(location.search));
+  console.log(supplierLocationQuery);
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.category;
@@ -39,7 +44,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
         supplierCategory,
         currentPage,
         filterOptions,
-        supplierTitleQuery,
+        supplierLocationQuery,
       );
 
       setSuppliers(newSuppliers);
@@ -51,7 +56,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     currentPage,
     supplierCategory,
     filterOptions,
-    supplierTitleQuery,
+    supplierLocationQuery,
   ]);
 
   const onPaginationChange = pageNumber => {
