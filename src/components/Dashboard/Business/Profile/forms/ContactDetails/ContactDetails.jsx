@@ -7,6 +7,7 @@ import contactDetailsSchema from './contactDetailsSchema';
 import countries from '../../../../../../countryLib';
 
 import config from '../../../../../../config';
+import '../Forms.scss';
 
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
@@ -72,7 +73,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.fullName && !errors.fullName}
                       />
                       {errors.fullName && (
-                        <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
+                        <p className="errorMessage">{errors.fullName}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -85,7 +86,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.website && !errors.website}
                       />
                       {errors.website && (
-                        <p style={{ color: '#dc3545' }}>{errors.website}</p>
+                        <p className="errorMessage">{errors.website}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -98,7 +99,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.email && !errors.email}
                       />
                       {errors.email && (
-                        <p style={{ color: '#dc3545' }}>{errors.email}</p>
+                        <p className="errorMessage">{errors.email}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -111,7 +112,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.phoneNumber && !errors.phoneNumber}
                       />
                       {errors.phoneNumber && (
-                        <p style={{ color: '#dc3545' }}>{errors.phoneNumber}</p>
+                        <p className="errorMessage">{errors.phoneNumber}</p>
                       )}
                     </Col>
                   </Row>
@@ -127,7 +128,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.address && !errors.address}
                         />
                         {errors.address && (
-                          <p style={{ color: '#dc3545' }}>{errors.address}</p>
+                          <p className="errorMessage">{errors.address}</p>
                         )}
                       </Col>
 
@@ -147,7 +148,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           ))}
                         </Form.Control>
                         {errors.country && (
-                          <p style={{ color: '#dc3545' }}>{errors.country}</p>
+                          <p className="errorMessage">{errors.country}</p>
                         )}
                       </Col>
                     </Row>
@@ -170,9 +171,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                             )}
                         </Form.Control>
                         {errors.regionName && (
-                          <p style={{ color: '#dc3545' }}>
-                            {errors.regionName}
-                          </p>
+                          <p className="errorMessage">{errors.regionName}</p>
                         )}
                       </Col>
                       <Col sm={3} className="mb-2">
@@ -184,7 +183,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.postcode && !errors.postcode}
                         />
                         {errors.postcode && (
-                          <p style={{ color: '#dc3545' }}>{errors.postcode}</p>
+                          <p className="errorMessage">{errors.postcode}</p>
                         )}
                       </Col>
                     </Row>
