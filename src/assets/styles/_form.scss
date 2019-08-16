@@ -53,6 +53,13 @@
   &__feedback {
     font-size: 0.8rem;
   }
+
+  &__question {
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
 }
 
 .password-btn {

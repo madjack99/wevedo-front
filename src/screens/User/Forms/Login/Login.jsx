@@ -12,8 +12,7 @@ const ScreensUserFormsLogin = ({ t }) => {
   return (
     <EnterLayoutScreen
       sideBackground={sideBackground}
-      welcomeTitle={t('businessAndUserLogin.jumbotron.largeTitle')}
-      welcomeSubtitle={t('businessAndUserLogin.jumbotron.smallTitle')}
+      welcomeSubtitle={t('businessAndUserLogin.jumbotron.title')}
     >
       <UserFormsLogin />
     </EnterLayoutScreen>

@@ -27,12 +27,14 @@ const ScreensLayoutEnter = ({
             alt="background"
           />
           <div className="welcome-block p-3 p-sm-5">
-            <h2 className="welcome-block__title">{welcomeTitle}</h2>
-            <p className="welcome-block__subtitle">{welcomeSubtitle}</p>
+            <h2 className="welcome-block__title">
+              {welcomeTitle && welcomeTitle}
+            </h2>
+            <p className="welcome-block__subtitle">
+              {welcomeSubtitle && welcomeSubtitle}
+            </p>
             <div className="welcome-block__divider" />
-            {welcomeText ? (
-              <p className="welcome-block__text">{welcomeText}</p>
-            ) : null}
+            <p className="welcome-block__text">{welcomeText && welcomeText}</p>
           </div>
         </Col>
         <Col className="enter-business-screen_right" lg={6} sm={12}>
