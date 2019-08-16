@@ -13,6 +13,14 @@ const DashboardBusinessProfileFormsContactDetails = ({
   updateUser,
   updateProfile,
 }) => {
+  const defineListOfCities = countryName => {
+    const listOfCountries = Object.values(countries);
+    const country = listOfCountries.filter(
+      module => module.default.name === countryName,
+    );
+    return country[0].default.provinces;
+  };
+
   return (
     <Formik
       className="form"
@@ -127,9 +135,18 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           className=" form__control__account "
                           value={values.regionName}
                           name="regionName"
+                          as="select"
                           onChange={handleChange}
                           isValid={values.regionName && !errors.regionName}
-                        />
+                        >
+                          <option>{values.regionName}</option>
+                          {values.country &&
+                            defineListOfCities(values.country).map(
+                              (city, index) => (
+                                <option key={index}>{city}</option>
+                              ),
+                            )}
+                        </Form.Control>
                         {errors.regionName && (
                           <p style={{ color: '#dc3545' }}>
                             {errors.regionName}
