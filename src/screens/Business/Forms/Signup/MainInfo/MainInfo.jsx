@@ -11,7 +11,6 @@ const ScreensBusinessFormsSignupMainInfo = ({ t, nextStep }) => (
     sideBackground={sideBackground}
     welcomeTitle={t('businessAndUserSignup.jumbotron.largeTitle')}
     welcomeSubtitle={t('businessAndUserSignup.jumbotron.smallTitle')}
-    welcomeText={t('businessAndUserSignup.jumbotron.text')}
   >
     <FirstStepSignUpBusinessForm nextStep={nextStep} />
   </EnterLayoutScreen>

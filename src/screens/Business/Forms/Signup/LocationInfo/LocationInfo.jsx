@@ -10,7 +10,6 @@ const ScreensBusinessFormsSignupLocationInfo = ({ nextStep }) => (
     sideBackground={sideBackground}
     welcomeTitle="Hey,"
     welcomeSubtitle="Glad to see you..."
-    welcomeText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   >
     <BusinessFormsSignupLocationInfo nextStep={nextStep} />
   </EnterLayoutScreen>
