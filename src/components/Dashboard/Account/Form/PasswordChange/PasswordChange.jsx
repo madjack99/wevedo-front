@@ -6,11 +6,7 @@ import passwordSchema from './schema';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 
-const DashboardAccountFormPasswordChange = ({
-  email,
-  updateUser,
-  updateProfile,
-}) => {
+const DashboardAccountFormPasswordChange = ({ email }) => {
   const [changeRequested, setChangeRequested] = useState(false);
   const [resetCodeIsSended, setResetCodeIsSended] = useState(false);
   const [passwordWasChanged, setPasswordWasChanged] = useState(false);

@@ -49,11 +49,7 @@ const DashboardAccount = ({ user, updateUser }) => {
                     />
                   </Col>
                   <Col sm={12}>
-                    <DashboardAccountFormPasswordChange
-                      email={user.email}
-                      updateProfile={wevedoService.updateProfile}
-                      updateUser={updateUser}
-                    />
+                    <DashboardAccountFormPasswordChange email={user.email} />
                   </Col>
                 </Col>
               </Row>
