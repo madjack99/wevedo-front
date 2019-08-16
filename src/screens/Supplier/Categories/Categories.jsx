@@ -38,8 +38,8 @@ export default function ScreensSupplierCategories() {
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
             <Link to="/suppliers/Cake">
-              <img src={Cakes} alt="Cakes" />
-              <p>Cakes</p>
+              <img src={Cakes} alt="Cake" />
+              <p>Cake</p>
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
@@ -49,21 +49,21 @@ export default function ScreensSupplierCategories() {
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <Link to="/suppliers/Florist">
-              <img src={Florist} alt="Florist" />
-              <p>Florist</p>
+            <Link to="/suppliers/Boutique">
+              <img src={Florist} alt="Boutique" />
+              <p>Boutique</p>
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
             <Link to="/suppliers/Entertainment">
-              <img src={Music} alt="Music" />
-              <p>Music</p>
+              <img src={Music} alt="Entertainment" />
+              <p>Entertainment</p>
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
             <Link to="/suppliers/Jewelry">
-              <img src={Rings} alt="Rings" />
-              <p>Rings</p>
+              <img src={Rings} alt="Jewelry" />
+              <p>Jewelry</p>
             </Link>
           </Col>
         </Row>
