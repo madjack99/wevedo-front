@@ -169,8 +169,7 @@
   },
   "businessAndUserLogin": {
     "jumbotron": {
-      "largeTitle": "Welcome Back,",
-      "smallTitle": "Please login to your account..."
+      "title": "Please login to your account..."
     },
     "passResetModal": {
       "title": "Reset Password",

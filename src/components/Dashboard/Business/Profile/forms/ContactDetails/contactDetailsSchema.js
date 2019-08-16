@@ -4,7 +4,7 @@ const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]
 
 export default Yup.object().shape({
   email: Yup.string()
-    .email()
+    .email('invalid email or mobile number')
     .required('email is required!'),
   phoneNumber: Yup.string()
     .matches(phoneRegex, 'number is not valid')
@@ -14,7 +14,7 @@ export default Yup.object().shape({
   regionName: Yup.string().required('town/city is required'),
   country: Yup.string().required('country is required'),
   fullName: Yup.string()
-    .min(6, 'at least 6 symbols')
+    .min(6, 'minimum 6 characters')
     .max(50, 'maximum 50 characters')
     .required('name is required'),
   website: Yup.string()

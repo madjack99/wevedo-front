@@ -9,8 +9,7 @@ import sideBackground from '../../../../assets/images/businesslogin.png';
 const ScreensBusinessFormsLogin = ({ t }) => (
   <EnterLayoutScreen
     sideBackground={sideBackground}
-    welcomeTitle={t('businessAndUserLogin.jumbotron.largeTitle')}
-    welcomeSubtitle={t('businessAndUserLogin.jumbotron.smallTitle')}
+    welcomeSubtitle={t('businessAndUserLogin.jumbotron.title')}
   >
     <BusinessFormsLogin />
   </EnterLayoutScreen>

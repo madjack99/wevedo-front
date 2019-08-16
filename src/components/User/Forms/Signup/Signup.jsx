@@ -22,11 +22,11 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
 
   const handleSocialSignUp = async ({
     _profile: profile,
-    _provider: supplier,
+    _provider: provider,
   }) => {
     login(wevedoService.socialLogin, {
       ...profile,
-      supplier,
+      provider,
     });
   };
 
@@ -160,9 +160,7 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
             <div className="form__question text-center mt-5">
               <span>
                 {t('signAndLogForm.alreadyHaveAccount')}{' '}
-                <Link className="text-wevedo" to="/login">
-                  {t('signAndLogForm.logIn')}
-                </Link>
+                <Link to="/login">{t('signAndLogForm.logIn')}</Link>
               </span>
             </div>
           </Form>
