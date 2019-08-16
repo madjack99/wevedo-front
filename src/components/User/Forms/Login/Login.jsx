@@ -173,9 +173,7 @@ const UserFormsLogin = ({ login, t }) => {
             <div className="form__question text-center mt-5">
               <span>
                 {t('signAndLogForm.noAccount')}{' '}
-                <Link className="text-wevedo" to="/signup">
-                  {t('signAndLogForm.signUp')}
-                </Link>
+                <Link to="/signup">{t('signAndLogForm.signUp')}</Link>
               </span>
             </div>
           </Form>
