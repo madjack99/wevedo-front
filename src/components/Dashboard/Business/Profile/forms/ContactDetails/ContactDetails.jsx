@@ -130,6 +130,28 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <p style={{ color: '#dc3545' }}>{errors.address}</p>
                         )}
                       </Col>
+
+                      <Col sm={4} className="mb-2">
+                        <Form.Control
+                          className=" form__control__account "
+                          name="country"
+                          as="select"
+                          onChange={handleChange}
+                          isValid={values.country && !errors.country}
+                        >
+                          <option>{values.country}</option>
+                          {config.allowedInCountries.map((country, index) => (
+                            <option key={index}>
+                              {countries[country].default.name}
+                            </option>
+                          ))}
+                        </Form.Control>
+                        {errors.country && (
+                          <p style={{ color: '#dc3545' }}>{errors.country}</p>
+                        )}
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
@@ -151,27 +173,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <p style={{ color: '#dc3545' }}>
                             {errors.regionName}
                           </p>
-                        )}
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={4} className="mb-2">
-                        <Form.Control
-                          className=" form__control__account "
-                          name="country"
-                          as="select"
-                          onChange={handleChange}
-                          isValid={values.country && !errors.country}
-                        >
-                          <option>{values.country}</option>
-                          {config.allowedInCountries.map((country, index) => (
-                            <option key={index}>
-                              {countries[country].default.name}
-                            </option>
-                          ))}
-                        </Form.Control>
-                        {errors.country && (
-                          <p style={{ color: '#dc3545' }}>{errors.country}</p>
                         )}
                       </Col>
                       <Col sm={3} className="mb-2">
