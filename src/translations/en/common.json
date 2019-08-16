@@ -9,7 +9,7 @@
     "sendBtn": "Send"
   },
   "popularSearches": {
-    "title": "Popular venue serches",
+    "title": "Popular venue searches",
     "text": "At some stage in all our lives we want clearer, fresher, younger looking skin. Well it can be achieved without spending a lot of money.",
     "essex": "Essex",
     "hertforshire": "Hertforshire",
@@ -142,7 +142,7 @@
     }
   },
   "footer": {
-    "wevedo": "© 2019 Wewedo",
+    "wevedo": "© 2019 Wevedo",
     "contact": "Contact",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
