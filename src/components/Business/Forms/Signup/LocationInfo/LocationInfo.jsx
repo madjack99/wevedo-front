@@ -9,6 +9,10 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
+import countries from '../../../../../countryLib';
+
+import config from '../../../../../config';
+
 import {
   updateUser,
   fetchEmailStatus,
@@ -30,6 +34,14 @@ const BusinessFormsSignupLocationInfo = ({
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
+
+  const defineListOfCities = countryName => {
+    const listOfCountries = Object.values(countries);
+    const country = listOfCountries.filter(
+      module => module.default.name === countryName,
+    );
+    return country[0].default.provinces;
+  };
 
   return (
     <Formik
@@ -83,136 +95,151 @@ const BusinessFormsSignupLocationInfo = ({
         touched,
         errors,
         isSubmitting,
-      }) => (
-        <Form noValidate onSubmit={handleSubmit}>
-          <Form.Group className="mb-5" controlId="formEmail">
-            <Form.Label className="form__label mb-0">
-              {' '}
-              {t('business-signup.form.emailPlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              isValid={values.email && !errors.email}
-              isInvalid={touched.email && !!errors.email}
-              autoComplete="new-email"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.email}
-            </Form.Control.Feedback>
-          </Form.Group>
+      }) => {
+        return (
+          <Form noValidate onSubmit={handleSubmit}>
+            <Form.Group className="mb-5" controlId="formEmail">
+              <Form.Label className="form__label mb-0">
+                {' '}
+                {t('business-signup.form.emailPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                isValid={values.email && !errors.email}
+                isInvalid={touched.email && !!errors.email}
+                autoComplete="new-email"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group className="mb-5" controlId="formPhoneNumber">
-            <Form.Label className="form__label mb-0">
-              {t('business-signup.form.numberPlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="text"
-              name="phoneNumber"
-              value={values.phoneNumber}
-              onChange={handleChange}
-              isValid={values.phoneNumber && !errors.phoneNumber}
-              isInvalid={touched.phoneNumber && !!errors.phoneNumber}
-              autoComplete="new-phone-number"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.phoneNumber}
-            </Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group className="mb-5" controlId="formPhoneNumber">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.numberPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChange={handleChange}
+                isValid={values.phoneNumber && !errors.phoneNumber}
+                isInvalid={touched.phoneNumber && !!errors.phoneNumber}
+                autoComplete="new-phone-number"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.phoneNumber}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group className="mb-5" controlId="formPostcode">
-            <Form.Label className="form__label mb-0">
-              {t('business-signup.form.postcodePlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="text"
-              name="postcode"
-              value={values.postcode}
-              onChange={handleChange}
-              isValid={values.postcode && !errors.postcode}
-              isInvalid={touched.postcode && !!errors.postcode}
-              autoComplete="new-postcode"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.postcode}
-            </Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group className="mb-5" controlId="formPostcode">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.postcodePlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="postcode"
+                value={values.postcode}
+                onChange={handleChange}
+                isValid={values.postcode && !errors.postcode}
+                isInvalid={touched.postcode && !!errors.postcode}
+                autoComplete="new-postcode"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.postcode}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group className="mb-5" controlId="formAddress">
-            <Form.Label className="form__label mb-0">
-              {t('business-signup.form.addressPlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="text"
-              name="address"
-              value={values.address}
-              onChange={handleChange}
-              isValid={values.address && !errors.address}
-              isInvalid={touched.address && !!errors.address}
-              autoComplete="new-address"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.address}
-            </Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group className="mb-5" controlId="formAddress">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.addressPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="address"
+                value={values.address}
+                onChange={handleChange}
+                isValid={values.address && !errors.address}
+                isInvalid={touched.address && !!errors.address}
+                autoComplete="new-address"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.address}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group className="mb-5" controlId="formTownOrCity">
-            <Form.Label className="form__label mb-0">
-              {t('business-signup.form.cityPlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="text"
-              name="regionName"
-              value={values.regionName}
-              onChange={handleChange}
-              isValid={values.regionName && !errors.regionName}
-              isInvalid={touched.regionName && !!errors.regionName}
-              autoComplete="new-town-or-city"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.regionName}
-            </Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group className="mb-5" controlId="formCountry">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.countryPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="country"
+                as="select"
+                value={values.country}
+                onChange={handleChange}
+                isValid={values.country && !errors.country}
+                isInvalid={touched.country && !!errors.country}
+                autoComplete="new-country"
+              >
+                <option value="" disabled />
+                {config.allowedInCountries.map((country, index) => (
+                  <option key={index}>{countries[country].default.name}</option>
+                ))}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.country}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group className="mb-5" controlId="formCountry">
-            <Form.Label className="form__label mb-0">
-              {t('business-signup.form.countryPlaceholder')}
-            </Form.Label>
-            <Form.Control
-              className="form__control"
-              type="text"
-              name="country"
-              value={values.country}
-              onChange={handleChange}
-              isValid={values.country && !errors.country}
-              isInvalid={touched.country && !!errors.country}
-              autoComplete="new-country"
-            />
-            <Form.Control.Feedback className="form__feedback" type="invalid">
-              {errors.country}
-            </Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group className="mb-5" controlId="formTownOrCity">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.cityPlaceholder')}
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="regionName"
+                as="select"
+                value={values.regionName}
+                onChange={handleChange}
+                isValid={values.regionName && !errors.regionName}
+                isInvalid={touched.regionName && !!errors.regionName}
+                autoComplete="new-town-or-city"
+              >
+                <option value="" disabled />
+                {values.country &&
+                  defineListOfCities(values.country).map((city, index) => (
+                    <option key={index}>{city}</option>
+                  ))}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.regionName}
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <FormGroup className="text-center text-uppercase">
-            <Button
-              className="mt-4"
-              variant="primary"
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
-            >
-              {t('business-signup.form.nextStepBtn')}
-            </Button>
-          </FormGroup>
-        </Form>
-      )}
+            <FormGroup className="text-center text-uppercase">
+              <Button
+                className="mt-4"
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                {t('business-signup.form.nextStepBtn')}
+              </Button>
+            </FormGroup>
+          </Form>
+        );
+      }}
     />
   );
 };

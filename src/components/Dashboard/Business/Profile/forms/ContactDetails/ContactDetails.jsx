@@ -4,11 +4,24 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
+import countries from '../../../../../../countryLib';
+
+import config from '../../../../../../config';
+import '../Forms.scss';
+
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
   updateProfile,
 }) => {
+  const defineListOfCities = countryName => {
+    const listOfCountries = Object.values(countries);
+    const country = listOfCountries.filter(
+      module => module.default.name === countryName,
+    );
+    return country[0].default.provinces;
+  };
+
   return (
     <Formik
       className="form"
@@ -60,7 +73,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.fullName && !errors.fullName}
                       />
                       {errors.fullName && (
-                        <p style={{ color: '#dc3545' }}>{errors.fullName}</p>
+                        <p className="errorMessage">{errors.fullName}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -73,7 +86,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.website && !errors.website}
                       />
                       {errors.website && (
-                        <p style={{ color: '#dc3545' }}>{errors.website}</p>
+                        <p className="errorMessage">{errors.website}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -86,7 +99,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.email && !errors.email}
                       />
                       {errors.email && (
-                        <p style={{ color: '#dc3545' }}>{errors.email}</p>
+                        <p className="errorMessage">{errors.email}</p>
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
@@ -99,7 +112,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         isValid={values.phoneNumber && !errors.phoneNumber}
                       />
                       {errors.phoneNumber && (
-                        <p style={{ color: '#dc3545' }}>{errors.phoneNumber}</p>
+                        <p className="errorMessage">{errors.phoneNumber}</p>
                       )}
                     </Col>
                   </Row>
@@ -115,21 +128,27 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.address && !errors.address}
                         />
                         {errors.address && (
-                          <p style={{ color: '#dc3545' }}>{errors.address}</p>
+                          <p className="errorMessage">{errors.address}</p>
                         )}
                       </Col>
+
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
-                          value={values.regionName}
-                          name="regionName"
+                          name="country"
+                          as="select"
                           onChange={handleChange}
-                          isValid={values.regionName && !errors.regionName}
-                        />
-                        {errors.regionName && (
-                          <p style={{ color: '#dc3545' }}>
-                            {errors.regionName}
-                          </p>
+                          isValid={values.country && !errors.country}
+                        >
+                          <option>{values.country}</option>
+                          {config.allowedInCountries.map((country, index) => (
+                            <option key={index}>
+                              {countries[country].default.name}
+                            </option>
+                          ))}
+                        </Form.Control>
+                        {errors.country && (
+                          <p className="errorMessage">{errors.country}</p>
                         )}
                       </Col>
                     </Row>
@@ -137,13 +156,22 @@ const DashboardBusinessProfileFormsContactDetails = ({
                       <Col sm={4} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
-                          value={values.country}
-                          name="country"
+                          value={values.regionName}
+                          name="regionName"
+                          as="select"
                           onChange={handleChange}
-                          isValid={values.country && !errors.country}
-                        />
-                        {errors.country && (
-                          <p style={{ color: '#dc3545' }}>{errors.country}</p>
+                          isValid={values.regionName && !errors.regionName}
+                        >
+                          <option>{values.regionName}</option>
+                          {values.country &&
+                            defineListOfCities(values.country).map(
+                              (city, index) => (
+                                <option key={index}>{city}</option>
+                              ),
+                            )}
+                        </Form.Control>
+                        {errors.regionName && (
+                          <p className="errorMessage">{errors.regionName}</p>
                         )}
                       </Col>
                       <Col sm={3} className="mb-2">
@@ -155,7 +183,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.postcode && !errors.postcode}
                         />
                         {errors.postcode && (
-                          <p style={{ color: '#dc3545' }}>{errors.postcode}</p>
+                          <p className="errorMessage">{errors.postcode}</p>
                         )}
                       </Col>
                     </Row>

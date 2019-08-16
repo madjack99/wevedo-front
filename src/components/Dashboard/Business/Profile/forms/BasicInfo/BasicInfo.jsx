@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
+import '../Forms.scss';
 
 const DashboardBusinessProfileFormsBasicInfo = ({
   user,
@@ -60,7 +61,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                         isValid={values.bio && !errors.bio}
                       />
                       {errors.bio && (
-                        <p style={{ color: '#dc3545' }}>{errors.bio}</p>
+                        <p className="errorMessage">{errors.bio}</p>
                       )}
                     </Form.Group>
                   </Col>
@@ -76,7 +77,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                           isValid={values.minPrice && !errors.minPrice}
                         />
                         {errors.minPrice && (
-                          <p style={{ color: '#dc3545' }}>{errors.minPrice}</p>
+                          <p className="errorMessage">{errors.minPrice}</p>
                         )}
                       </Col>
                       <Col sm={4}>
@@ -88,7 +89,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                           isValid={values.maxPrice && !errors.maxPrice}
                         />
                         {errors.maxPrice && (
-                          <p style={{ color: '#dc3545' }}>{errors.maxPrice}</p>
+                          <p className="errorMessage">{errors.maxPrice}</p>
                         )}
                       </Col>
                     </Row>
@@ -120,7 +121,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                       isValid={values.facilities && !errors.facilities}
                     />
                     {errors.facilities && (
-                      <p style={{ color: '#dc3545' }}>{errors.facilities}</p>
+                      <p className="errorMessage">{errors.facilities}</p>
                     )}
                   </Col>
                   <Col sm={12} className="text-uppercase mt-2 mb-4">

@@ -2,14 +2,14 @@ import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
-import serches1 from '../../assets/images/serches1.png';
-import serches2 from '../../assets/images/serches2.png';
-import serches3 from '../../assets/images/serches3.png';
-import serches4 from '../../assets/images/serches4.png';
+import searches1 from '../../assets/images/searches1.png';
+import searches2 from '../../assets/images/searches2.png';
+import searches3 from '../../assets/images/searches3.png';
+import searches4 from '../../assets/images/searches4.png';
 
 function PopularSearches({ t }) {
   return (
-    <div className="popularserches">
+    <div className="popularsearches">
       <Container className="pb-5">
         <Row>
           <Col sm={6}>
@@ -48,25 +48,25 @@ function PopularSearches({ t }) {
       </Container>
       <Row className="m-0">
         <Col xs={3} className="p-0 overlayed">
-          <img src={serches1} alt="" />
+          <img src={searches1} alt="" />
           <div className="overlay">
             <i className="fa fa-search fa-2x" />
           </div>
         </Col>
         <Col xs={3} className="p-0 overlayed">
-          <img src={serches2} alt="" />
+          <img src={searches2} alt="" />
           <div className="overlay">
             <i className="fa fa-search fa-2x" />
           </div>
         </Col>
         <Col xs={3} className="p-0 overlayed">
-          <img src={serches3} alt="" />
+          <img src={searches3} alt="" />
           <div className="overlay">
             <i className="fa fa-search fa-2x" />
           </div>
         </Col>
         <Col xs={3} className="p-0 overlayed">
-          <img src={serches4} alt="" />
+          <img src={searches4} alt="" />
           <div className="overlay">
             <i className="fa fa-search fa-2x" />
           </div>
