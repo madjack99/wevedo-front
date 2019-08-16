@@ -34,17 +34,29 @@ const Footer = ({ t }) => (
         <Col sm={2} xs className="text-center social-links">
           <Row className="d-flex justify-content-center">
             <Col className="p-0" xs={2} sm={4}>
-              <a href="/">
+              <a
+                href="https://www.instagram.com/wevedoofficial"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <i className="fab fa-instagram" />
               </a>
             </Col>
             <Col className="p-0" xs={2} sm={4}>
-              <a href="/">
+              <a
+                href="https://www.facebook.com/wevedoofficial"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <i className="fab fa-facebook" />
               </a>
             </Col>
             <Col className="p-0" xs={2} sm={4}>
-              <a href="/">
+              <a
+                href="https://twitter.com/wevedoofficial"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <i className="fab fa-twitter" />
               </a>
             </Col>
