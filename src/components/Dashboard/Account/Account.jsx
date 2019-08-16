@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import DashboardAccountFormsNameChange from './Form/NameChange';
 import DashboardAccountFormsEmailChange from './Form/EmailChange';
 import DashboardAccountFormsImageChange from './Form/ImageChange';
+import DashboardAccountFormPasswordChange from './Form/PasswordChange';
 
 import { WevedoServiceContext } from '../../../contexts';
 
@@ -47,15 +48,12 @@ const DashboardAccount = ({ user, updateUser }) => {
                       updateUser={updateUser}
                     />
                   </Col>
-                  {/* Hide password change */}
-                  <Col sm={12} className="d-none">
-                    <div className="mb-3">
-                      <p className="text-muted mb-0">
-                        Want to change your password?
-                      </p>
-                      <b>You will recieve an email with instructions.</b>
-                    </div>
-                    <Button size="lg">Change password</Button>
+                  <Col sm={12}>
+                    <DashboardAccountFormPasswordChange
+                      email={user.email}
+                      updateProfile={wevedoService.updateProfile}
+                      updateUser={updateUser}
+                    />
                   </Col>
                 </Col>
               </Row>
