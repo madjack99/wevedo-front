@@ -14,12 +14,13 @@ const SearchPanel = ({ title, categories, t, history }) => {
   const [supplierLocation, setSupplierLocation] = useState('Location');
   const handleSubmit = e => {
     e.preventDefault();
-    if (supplierCategory !== '' && supplierLocation !== '') {
+    if (supplierCategory !== '' && supplierLocation !== 'Location') {
       history.push(
         `/suppliers/${supplierCategory}?supplier=${supplierLocation}`,
       );
     }
   };
+
   return (
     <Row
       className={
@@ -57,9 +58,7 @@ const SearchPanel = ({ title, categories, t, history }) => {
                     onChange={e => setSupplierLocation(e.target.value)}
                     value={supplierLocation}
                   >
-                    <option value="default" disabled>
-                      Location
-                    </option>
+                    <option value="Location">Location</option>
                     {UKCities.map((city, index) => (
                       <option key={index}>{city}</option>
                     ))}

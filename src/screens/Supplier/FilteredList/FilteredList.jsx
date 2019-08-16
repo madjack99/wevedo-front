@@ -25,10 +25,6 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
   const supplierLocationQuery =
     queryString.parse(location.search).supplier || '';
 
-  console.log(location);
-  console.log(queryString.parse(location.search));
-  console.log(supplierLocationQuery);
-
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.category;
   const currentPage = +match.params.pageNumber || 1;
