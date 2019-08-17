@@ -11,7 +11,7 @@ import googlePlayImage from '../../assets/images/app-google-play.png';
 import appStoreImage from '../../assets/images/app-app-store.png';
 
 const Footer = ({ t }) => (
-  <React.Fragment className="footer">
+  <div className="footer">
     <div className="footer-border" />
     <Container className="footer">
       <Row className="h-100 align-items-center">
@@ -84,7 +84,7 @@ const Footer = ({ t }) => (
         </Col>
       </Row>
     </Container>
-  </React.Fragment>
+  </div>
 );
 
 export default compose(withTranslation('common'))(Footer);
