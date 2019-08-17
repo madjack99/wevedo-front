@@ -19,6 +19,7 @@ import SocialButton from '../../../SocialButton';
 import Checkbox from '../../../UI/Checkbox';
 
 const UserFormsLogin = ({ login, t }) => {
+  const [resetPassword, setResetPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -72,20 +73,41 @@ const UserFormsLogin = ({ login, t }) => {
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const isLoginSuccessful = await login(wevedoService.login, {
-            email: values.emailPhone,
-            password: values.password,
-            deviseOS: 'android', // TO-DO: 'web' should be later
-          });
+          const isEmailEntered = values.emailPhone.includes('@'); // only email includes '@'
+
+          if (resetPassword) {
+            setResetPassword(false);
+            if (isEmailEntered) {
+              setModalShow(true);
+            }
+            setErrors({
+              emailPhone: 'password recovery email is required',
+            });
+            return setSubmitting(false);
+          }
+
+          const body = isEmailEntered
+            ? {
+                email: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              }
+            : {
+                phoneNumber: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              };
+
+          const isLoginSuccessful = await login(wevedoService.login, body);
 
           if (!isLoginSuccessful) {
             setErrors({
               emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
-
-            setSubmitting(false);
           }
+
+          return setSubmitting(false);
         }}
         validationSchema={formSchema}
         render={({
@@ -147,9 +169,8 @@ const UserFormsLogin = ({ login, t }) => {
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => {
-                      if (values.emailPhone && !errors.emailPhone) {
-                        setModalShow(true);
-                      }
+                      setResetPassword(true);
+                      handleSubmit();
                     }}
                   >
                     {t('signAndLogForm.forgotPassword')}
