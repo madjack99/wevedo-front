@@ -16,6 +16,7 @@ import Checkbox from '../../../UI/Checkbox';
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 
 const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
+  const [resetPassword, setResetPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -28,24 +29,38 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
       <Formik
         className="form"
         initialValues={{
-          email: '',
+          emailPhone: '',
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const loggedInUser = await login(wevedoService.login, {
-            email: values.email,
-            password: values.password,
-            deviseOS: 'android', // TO-DO: 'web' should be later
-          });
+          if (resetPassword) {
+            setResetPassword(false);
+            setSubmitting(false);
+            return setModalShow(true);
+          }
+
+          const body = values.emailPhone.includes('@') // only email includes '@'
+            ? {
+                email: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              }
+            : {
+                phoneNumber: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              };
+
+          const loggedInUser = await login(wevedoService.login, body);
 
           if (!loggedInUser) {
             setErrors({
-              email: 'wrong credentials',
+              emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
-
-            setSubmitting(false);
           }
+
+          return setSubmitting(false);
         }}
         validationSchema={formSchema}
         render={({
@@ -64,15 +79,15 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               <Form.Control
                 className="form__control"
                 type="email"
-                name="email"
-                value={values.email}
+                name="emailPhone"
+                value={values.emailPhone}
                 onChange={handleChange}
-                isValid={values.email && !errors.email}
-                isInvalid={touched.email && !!errors.email}
+                isValid={values.emailPhone && !errors.emailPhone}
+                isInvalid={touched.emailPhone && !!errors.emailPhone}
                 autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
-                {errors.email}
+                {errors.emailPhone}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -106,7 +121,8 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
                 <Col className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    onClick={() => setModalShow(true)}
+                    type="submit"
+                    onClick={() => setResetPassword(true)}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
@@ -115,6 +131,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                email={values.emailPhone}
               />
             </FormGroup>
 

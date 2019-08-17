@@ -55,7 +55,7 @@ const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
           </Col>
           <Col sm={8}>
             <Form onSubmit={onSubmit}>
-              <h5>Send a message to Supplier Name</h5>
+              <h5>Send a message to {supplier.fullName}</h5>
               <hr className="hr-sm m-0 mt-3 mb-4 d-none d-md-block" />
               <Row>
                 <Col sm={12} className="mb-4">

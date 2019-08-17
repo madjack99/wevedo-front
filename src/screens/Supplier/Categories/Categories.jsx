@@ -13,7 +13,7 @@ import decoration from '../../../assets/images/w-decoration.png';
 import cake from '../../../assets/images/w-cakes.png';
 import transport from '../../../assets/images/w-transport.png';
 import jewelry from '../../../assets/images/w-rings.png';
-import stationery from '../../../assets/images/w-stationery.png';
+import stationary from '../../../assets/images/w-stationary.png';
 import honeymoon from '../../../assets/images/w-honeymoon.png';
 
 import backgroundImage from '../../../assets/images/wedding-suppliers-bg.png';
@@ -97,9 +97,9 @@ export default function ScreensSupplierCategories() {
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
-            <Link to="/suppliers/Stationery">
-              <img src={stationery} alt="Stationery" />
-              <p>Stationery</p>
+            <Link to="/suppliers/Stationary">
+              <img src={stationary} alt="Stationary" />
+              <p>Stationary</p>
             </Link>
           </Col>
           <Col sm={4} className="wedding-suppliers-grid__child">
