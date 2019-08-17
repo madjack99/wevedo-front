@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export default Yup.object().shape({
   resetPassword: Yup.string()
-    .min(6, 'at least 6 symbols')
+    .min(6, 'minimum 6 characters')
     .max(50, 'maximum 50 characters')
     .required('password is required!'),
   confirmResetPassword: Yup.string()
