@@ -16,6 +16,7 @@ import Checkbox from '../../../UI/Checkbox';
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 
 const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
+  const [resetPassword, setResetPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -32,6 +33,11 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
+          if (resetPassword) {
+            setResetPassword(false);
+            setSubmitting(false);
+            return setModalShow(true);
+          }
           const loggedInUser = await login(wevedoService.login, {
             email: values.email,
             password: values.password,
@@ -43,9 +49,9 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               email: 'wrong credentials',
               password: 'wrong credentials',
             });
-
-            setSubmitting(false);
           }
+
+          return setSubmitting(false);
         }}
         validationSchema={formSchema}
         render={({
@@ -106,7 +112,8 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
                 <Col className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    onClick={() => setModalShow(true)}
+                    type="submit"
+                    onClick={() => setResetPassword(true)}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
@@ -115,6 +122,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                email={values.email}
               />
             </FormGroup>
 

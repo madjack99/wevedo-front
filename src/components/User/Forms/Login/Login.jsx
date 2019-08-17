@@ -146,7 +146,11 @@ const UserFormsLogin = ({ login, t }) => {
                 <Col md={6} className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    onClick={() => setModalShow(true)}
+                    onClick={() => {
+                      if (values.email && !errors.email) {
+                        setModalShow(true);
+                      }
+                    }}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
@@ -155,6 +159,7 @@ const UserFormsLogin = ({ login, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                email={values.email}
               />
             </FormGroup>
 
