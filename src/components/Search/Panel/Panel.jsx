@@ -6,18 +6,23 @@ import { withTranslation } from 'react-i18next';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
+import countries from '../../../countryLib';
+
 const SearchPanel = ({ title, categories, t, history }) => {
+  const UKCities = countries.GB.default.provinces;
   const [supplierCategory, setSupplierCategory] = useState('Venue');
-  const [supplierTitle, setSupplierTitle] = useState('');
-  const handleChange = e => {
-    setSupplierTitle(e.target.value);
-  };
+  const [supplierLocation, setSupplierLocation] = useState('Location');
   const handleSubmit = e => {
     e.preventDefault();
-    if (supplierCategory !== '' && supplierTitle !== '') {
-      history.push(`/suppliers/${supplierCategory}?supplier=${supplierTitle}`);
+    if (supplierCategory !== '' && supplierLocation !== '') {
+      history.push(
+        `/suppliers/${supplierCategory}?supplier=${supplierLocation}`,
+      );
     }
   };
+
+  console.log(supplierLocation);
+
   return (
     <Row
       className={
@@ -51,10 +56,16 @@ const SearchPanel = ({ title, categories, t, history }) => {
                 <div className="divider d-none d-sm-none d-md-inline" />
                 <Col sm={6} md>
                   <Form.Control
-                    placeholder={t('home.findForm.supplierTitlePlaceholder')}
-                    onChange={handleChange}
-                    value={supplierTitle}
-                  />
+                    as="select"
+                    onChange={e => setSupplierLocation(e.target.value)}
+                    value={supplierLocation}
+                  >
+                    <option value="Location">Location</option>
+                    <option value="All">All</option>
+                    {UKCities.map((city, index) => (
+                      <option key={index}>{city}</option>
+                    ))}
+                  </Form.Control>
                 </Col>
               </Row>
             </Col>

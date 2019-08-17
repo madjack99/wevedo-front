@@ -5,8 +5,13 @@ import { compose } from 'redux';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import './Footer.scss';
+
+import googlePlayImage from '../../assets/images/app-google-play.png';
+import appStoreImage from '../../assets/images/app-app-store.png';
+
 const Footer = ({ t }) => (
-  <React.Fragment>
+  <div className="footer">
     <div className="footer-border" />
     <Container className="footer">
       <Row className="h-100 align-items-center">
@@ -28,7 +33,22 @@ const Footer = ({ t }) => (
               <Nav.Link>{t('footer.privacy')}</Nav.Link>
             </LinkContainer>
             <span className="footer-dot" />
-            <Nav.Link href="/app">{t('footer.mobileApp')}</Nav.Link>
+            <a
+              className="footer__app-link mx-3"
+              href="https://goo.gl/Vnw14E"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={googlePlayImage} alt="Google Play" />
+            </a>
+            <a
+              className="footer__app-link"
+              href="https://goo.gl/ZRgmSZ"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={appStoreImage} alt="App Store" />
+            </a>
           </Nav>
         </Col>
         <Col sm={2} xs className="text-center social-links">
@@ -64,7 +84,7 @@ const Footer = ({ t }) => (
         </Col>
       </Row>
     </Container>
-  </React.Fragment>
+  </div>
 );
 
 export default compose(withTranslation('common'))(Footer);
