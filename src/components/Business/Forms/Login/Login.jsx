@@ -29,7 +29,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
       <Formik
         className="form"
         initialValues={{
-          email: '',
+          emailPhone: '',
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
@@ -38,15 +38,24 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
             setSubmitting(false);
             return setModalShow(true);
           }
-          const loggedInUser = await login(wevedoService.login, {
-            email: values.email,
-            password: values.password,
-            deviseOS: 'android', // TO-DO: 'web' should be later
-          });
+
+          const body = values.emailPhone.includes('@') // only email includes '@'
+            ? {
+                email: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              }
+            : {
+                phoneNumber: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              };
+
+          const loggedInUser = await login(wevedoService.login, body);
 
           if (!loggedInUser) {
             setErrors({
-              email: 'wrong credentials',
+              emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
           }
@@ -70,15 +79,15 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               <Form.Control
                 className="form__control"
                 type="email"
-                name="email"
-                value={values.email}
+                name="emailPhone"
+                value={values.emailPhone}
                 onChange={handleChange}
-                isValid={values.email && !errors.email}
-                isInvalid={touched.email && !!errors.email}
+                isValid={values.emailPhone && !errors.emailPhone}
+                isInvalid={touched.emailPhone && !!errors.emailPhone}
                 autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
-                {errors.email}
+                {errors.emailPhone}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -122,7 +131,7 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                email={values.email}
+                email={values.emailPhone}
               />
             </FormGroup>
 

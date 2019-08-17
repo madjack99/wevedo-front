@@ -68,19 +68,19 @@ const UserFormsLogin = ({ login, t }) => {
       <Formik
         className="form"
         initialValues={{
-          email: '',
+          emailPhone: '',
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           const isLoginSuccessful = await login(wevedoService.login, {
-            email: values.email,
+            email: values.emailPhone,
             password: values.password,
             deviseOS: 'android', // TO-DO: 'web' should be later
           });
 
           if (!isLoginSuccessful) {
             setErrors({
-              email: 'wrong credentials',
+              emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
 
@@ -104,15 +104,15 @@ const UserFormsLogin = ({ login, t }) => {
               <Form.Control
                 className="form__control"
                 type="email"
-                name="email"
-                value={values.email}
+                name="emailPhone"
+                value={values.emailPhone}
                 onChange={handleChange}
-                isValid={values.email && !errors.email}
-                isInvalid={touched.email && !!errors.email}
+                isValid={values.emailPhone && !errors.emailPhone}
+                isInvalid={touched.emailPhone && !!errors.emailPhone}
                 autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
-                {errors.email}
+                {errors.emailPhone}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -147,7 +147,7 @@ const UserFormsLogin = ({ login, t }) => {
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => {
-                      if (values.email && !errors.email) {
+                      if (values.emailPhone && !errors.emailPhone) {
                         setModalShow(true);
                       }
                     }}
@@ -159,7 +159,7 @@ const UserFormsLogin = ({ login, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                email={values.email}
+                email={values.emailPhone}
               />
             </FormGroup>
 
