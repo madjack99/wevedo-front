@@ -21,6 +21,8 @@ const SearchPanel = ({ title, categories, t, history }) => {
     }
   };
 
+  console.log(supplierLocation);
+
   return (
     <Row
       className={
@@ -58,7 +60,10 @@ const SearchPanel = ({ title, categories, t, history }) => {
                     onChange={e => setSupplierLocation(e.target.value)}
                     value={supplierLocation}
                   >
-                    <option value="Location">Location</option>
+                    <option value="Location" disabled>
+                      Location
+                    </option>
+                    <option value="All">All</option>
                     {UKCities.map((city, index) => (
                       <option key={index}>{city}</option>
                     ))}
