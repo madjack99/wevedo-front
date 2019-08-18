@@ -22,8 +22,6 @@ const SearchPanel = ({ title, categories, t, history }) => {
     }
   };
 
-  console.log(supplierLocation);
-
   return (
     <Row
       className={
