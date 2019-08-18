@@ -24,11 +24,11 @@ const PromotedSupplier = ({ supplierId }) => {
 
   return (
     <LinkContainer to={`/suppliers/details/${supplierId}`}>
-      <div className="promoted-supplier__box overlayed">
+      <div className="promoted-suppliers__box overlayed">
         {supplier.profileImageURL && (
           <React.Fragment>
             <img
-              className="promoted-supplier__avatar"
+              className="promoted-suppliers__avatar"
               src={supplier.profileImageURL}
               alt="Supplier"
             />

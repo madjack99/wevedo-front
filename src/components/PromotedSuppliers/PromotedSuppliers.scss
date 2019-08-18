@@ -1,4 +1,9 @@
-.promoted-supplier {
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../assets/styles/variables';
+
+.promoted-suppliers {
   &__box {
     position: relative;
     height: 350px;
@@ -34,6 +39,14 @@
   &:hover {
     .overlay {
       opacity: 0.85;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .promoted-suppliers {
+    &__box {
+      height: 150px;
     }
   }
 }
