@@ -11,18 +11,32 @@ function PopularSearches({ t }) {
 
   const randomNumbersArray = [];
 
+  const randomLinks = [];
+
   while (randomNumbersArray.length < 12) {
     const randomNumber = rn({ min: 0, max: UKCities.length, integer: true });
     if (randomNumbersArray.includes(randomNumber)) continue;
-    else randomNumbersArray.push(randomNumber);
+    else {
+      const randomCity = UKCities[randomNumber];
+      randomLinks.push(
+        <li key={randomNumber}>
+          <Link to={`/suppliers/Venue?supplier=${randomCity}`}>
+            {randomCity}
+          </Link>
+        </li>,
+      );
+      randomNumbersArray.push(randomNumber);
+    }
   }
 
-  const randomCities = randomNumbersArray.map(number => UKCities[number]);
-  const randomLinks = randomCities.map((city, index) => (
-    <li key={index}>
-      <Link to={`/suppliers/Venue?supplier=${city}`}>{city}</Link>
-    </li>
-  ));
+  // const randomCities = randomNumbersArray.map(number => UKCities[number]);
+  // const randomLinks = randomCities.map((city, index) => (
+  //   <li key={index}>
+  //     <Link to={`/suppliers/Venue?supplier=${city}`}>{city}</Link>
+  //   </li>
+  // ));
+
+  console.log(randomLinks);
 
   return (
     <div className="popularsearches">
