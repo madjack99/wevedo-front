@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import rn from 'random-number';
@@ -6,13 +6,9 @@ import { Link } from 'react-router-dom';
 
 import countries from '../../countryLib';
 
-function PopularSearches({ t }) {
-  const UKCities = countries.GB.default.provinces;
-
+function getRandomLinks(UKCities) {
   const randomNumbersArray = [];
-
   const randomLinks = [];
-
   while (randomNumbersArray.length < 12) {
     const randomNumber = rn({ min: 0, max: UKCities.length, integer: true });
     if (randomNumbersArray.includes(randomNumber)) continue;
@@ -28,15 +24,13 @@ function PopularSearches({ t }) {
       randomNumbersArray.push(randomNumber);
     }
   }
+  return randomLinks;
+}
 
-  // const randomCities = randomNumbersArray.map(number => UKCities[number]);
-  // const randomLinks = randomCities.map((city, index) => (
-  //   <li key={index}>
-  //     <Link to={`/suppliers/Venue?supplier=${city}`}>{city}</Link>
-  //   </li>
-  // ));
+function PopularSearches({ t }) {
+  const UKCities = countries.GB.default.provinces;
 
-  console.log(randomLinks);
+  const randomLinks = useMemo(() => getRandomLinks(UKCities), [UKCities]);
 
   return (
     <div className="popularsearches">
