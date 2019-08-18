@@ -19,6 +19,7 @@ import SocialButton from '../../../SocialButton';
 import Checkbox from '../../../UI/Checkbox';
 
 const UserFormsLogin = ({ login, t }) => {
+  const [resetPassword, setResetPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -68,24 +69,45 @@ const UserFormsLogin = ({ login, t }) => {
       <Formik
         className="form"
         initialValues={{
-          email: '',
+          emailPhone: '',
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const isLoginSuccessful = await login(wevedoService.login, {
-            email: values.email,
-            password: values.password,
-            deviseOS: 'android', // TO-DO: 'web' should be later
-          });
+          const isEmailEntered = values.emailPhone.includes('@'); // only email includes '@'
+
+          if (resetPassword) {
+            setResetPassword(false);
+            if (isEmailEntered) {
+              setModalShow(true);
+            }
+            setErrors({
+              emailPhone: 'password recovery email is required',
+            });
+            return setSubmitting(false);
+          }
+
+          const body = isEmailEntered
+            ? {
+                email: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              }
+            : {
+                phoneNumber: values.emailPhone,
+                password: values.password,
+                deviseOS: 'android', // TO-DO: 'web' should be later
+              };
+
+          const isLoginSuccessful = await login(wevedoService.login, body);
 
           if (!isLoginSuccessful) {
             setErrors({
-              email: 'wrong credentials',
+              emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
-
-            setSubmitting(false);
           }
+
+          return setSubmitting(false);
         }}
         validationSchema={formSchema}
         render={({
@@ -104,15 +126,15 @@ const UserFormsLogin = ({ login, t }) => {
               <Form.Control
                 className="form__control"
                 type="email"
-                name="email"
-                value={values.email}
+                name="emailPhone"
+                value={values.emailPhone}
                 onChange={handleChange}
-                isValid={values.email && !errors.email}
-                isInvalid={touched.email && !!errors.email}
+                isValid={values.emailPhone && !errors.emailPhone}
+                isInvalid={touched.emailPhone && !!errors.emailPhone}
                 autoComplete="current-email"
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
-                {errors.email}
+                {errors.emailPhone}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -146,7 +168,10 @@ const UserFormsLogin = ({ login, t }) => {
                 <Col md={6} className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    onClick={() => setModalShow(true)}
+                    onClick={() => {
+                      setResetPassword(true);
+                      handleSubmit();
+                    }}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
@@ -155,6 +180,7 @@ const UserFormsLogin = ({ login, t }) => {
               <ResetPasswordDialog
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                email={values.emailPhone}
               />
             </FormGroup>
 

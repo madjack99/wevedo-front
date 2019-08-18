@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
+import rn from 'random-number';
+import { Link } from 'react-router-dom';
 
-import searches1 from '../../assets/images/searches1.png';
-import searches2 from '../../assets/images/searches2.png';
-import searches3 from '../../assets/images/searches3.png';
-import searches4 from '../../assets/images/searches4.png';
+import countries from '../../countryLib';
+
+function getRandomLinks(UKCities) {
+  const randomNumbersArray = [];
+  const randomLinks = [];
+  while (randomNumbersArray.length < 12) {
+    const randomNumber = rn({ min: 0, max: UKCities.length, integer: true });
+    if (randomNumbersArray.includes(randomNumber)) continue;
+    else {
+      const randomCity = UKCities[randomNumber];
+      randomLinks.push(
+        <li key={randomNumber}>
+          <Link to={`/suppliers/Venue?supplier=${randomCity}`}>
+            {randomCity}
+          </Link>
+        </li>,
+      );
+      randomNumbersArray.push(randomNumber);
+    }
+  }
+  return randomLinks;
+}
 
 function PopularSearches({ t }) {
+  const UKCities = countries.GB.default.provinces;
+
+  const randomLinks = useMemo(() => getRandomLinks(UKCities), [UKCities]);
+
   return (
     <div className="popularsearches">
       <Container className="pb-5">
@@ -19,59 +43,18 @@ function PopularSearches({ t }) {
           <Col sm={6}>
             <Row>
               <Col>
-                <ul>
-                  <li>{t('popularSearches.essex')}</li>
-                  <li>{t('popularSearches.hertforshire')}</li>
-                  <li>{t('popularSearches.westMidlands')}</li>
-                  <li>{t('popularSearches.hampshire')}</li>
-                </ul>
+                <ul>{randomLinks.slice(0, 4)}</ul>
               </Col>
               <Col>
-                <ul>
-                  <li>{t('popularSearches.essex')}</li>
-                  <li>{t('popularSearches.hertforshire')}</li>
-                  <li>{t('popularSearches.westMidlands')}</li>
-                  <li>{t('popularSearches.hampshire')}</li>
-                </ul>
+                <ul>{randomLinks.slice(4, 8)}</ul>
               </Col>
               <Col className="d-none d-sm-block">
-                <ul>
-                  <li>{t('popularSearches.essex')}</li>
-                  <li>{t('popularSearches.hertforshire')}</li>
-                  <li>{t('popularSearches.westMidlands')}</li>
-                  <li>{t('popularSearches.hampshire')}</li>
-                </ul>
+                <ul>{randomLinks.slice(8)}</ul>
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
-      <Row className="m-0">
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches1} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches2} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches3} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches4} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-      </Row>
     </div>
   );
 }

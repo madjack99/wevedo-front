@@ -10,11 +10,12 @@ import countries from '../../../countryLib';
 
 const SearchPanel = ({ title, categories, t, history }) => {
   const UKCities = countries.GB.default.provinces;
+
   const [supplierCategory, setSupplierCategory] = useState('Venue');
   const [supplierLocation, setSupplierLocation] = useState('Location');
   const handleSubmit = e => {
     e.preventDefault();
-    if (supplierCategory !== '' && supplierLocation !== 'Location') {
+    if (supplierCategory !== '' && supplierLocation !== '') {
       history.push(
         `/suppliers/${supplierCategory}?supplier=${supplierLocation}`,
       );
@@ -59,6 +60,7 @@ const SearchPanel = ({ title, categories, t, history }) => {
                     value={supplierLocation}
                   >
                     <option value="Location">Location</option>
+                    <option value="All">All</option>
                     {UKCities.map((city, index) => (
                       <option key={index}>{city}</option>
                     ))}
