@@ -10,6 +10,7 @@ import countries from '../../../countryLib';
 
 const SearchPanel = ({ title, categories, t, history }) => {
   const UKCities = countries.GB.default.provinces;
+
   const [supplierCategory, setSupplierCategory] = useState('Venue');
   const [supplierLocation, setSupplierLocation] = useState('Location');
   const handleSubmit = e => {
