@@ -40,7 +40,7 @@ const BusinessFormsSignupLocationInfo = ({
     const country = listOfCountries.filter(
       module => module.default.name === countryName,
     );
-    return country[0].default.provinces;
+    return country[0].default.provinces.sort();
   };
 
   return (
