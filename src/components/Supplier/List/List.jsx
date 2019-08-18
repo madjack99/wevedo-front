@@ -198,13 +198,13 @@ const SupplierList = ({
           <h4 className="pt-2">{`${numberOfSuppliers} ${supplierCategory}`}</h4>
         </Col>
         <Col md={6} xs={8} className="text-right">
-          <Button
+          {/* <Button
             variant={displayType === displayTypes.MAP ? 'primary' : 'secondary'}
             className="mr-2"
             onClick={() => setDisplayType(displayTypes.MAP)}
           >
             Show map
-          </Button>
+          </Button> */}
           <Button
             variant={
               displayType === displayTypes.GRID ? 'primary' : 'secondary'
