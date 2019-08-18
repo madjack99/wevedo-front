@@ -2,11 +2,6 @@ import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
-import searches1 from '../../assets/images/searches1.png';
-import searches2 from '../../assets/images/searches2.png';
-import searches3 from '../../assets/images/searches3.png';
-import searches4 from '../../assets/images/searches4.png';
-
 function PopularSearches({ t }) {
   return (
     <div className="popularsearches">
@@ -46,32 +41,6 @@ function PopularSearches({ t }) {
           </Col>
         </Row>
       </Container>
-      <Row className="m-0">
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches1} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches2} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches3} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-        <Col xs={3} className="p-0 overlayed">
-          <img src={searches4} alt="" />
-          <div className="overlay">
-            <i className="fa fa-search fa-2x" />
-          </div>
-        </Col>
-      </Row>
     </div>
   );
 }

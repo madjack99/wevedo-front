@@ -17,4 +17,10 @@ export default {
   },
   timeForServerRequest: 2500,
   allowedInCountries: ['GB'],
+  promotedSuppliers: [
+    '5badd83a0f58a3001009b5b8',
+    '5be8557422375b0010408037',
+    '5be70607170af90016ed25f6',
+    '5bacccad6b70be001a0dcb29',
+  ],
 };
