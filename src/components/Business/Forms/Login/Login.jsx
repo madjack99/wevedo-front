@@ -33,13 +33,21 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
+          const isEmailEntered = values.emailPhone.includes('@'); // only email includes '@'
+
           if (resetPassword) {
             setResetPassword(false);
-            setSubmitting(false);
-            return setModalShow(true);
+            if (isEmailEntered) {
+              setModalShow(true);
+            } else {
+              setErrors({
+                emailPhone: 'password recovery email is required',
+              });
+            }
+            return setSubmitting(false);
           }
 
-          const body = values.emailPhone.includes('@') // only email includes '@'
+          const body = isEmailEntered
             ? {
                 email: values.emailPhone,
                 password: values.password,
@@ -121,8 +129,10 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
                 <Col className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    type="submit"
-                    onClick={() => setResetPassword(true)}
+                    onClick={() => {
+                      setResetPassword(true);
+                      handleSubmit();
+                    }}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>

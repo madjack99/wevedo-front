@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import queryString from 'query-string';
 
 import { Row, Container, Col } from 'react-bootstrap';
+import Scroll from 'react-scroll';
 
 import './FilteredList.scss';
 import 'rc-slider/assets/index.css';
@@ -19,8 +20,8 @@ import SupplierList from '../../../components/Supplier/List';
 const ScreensSupplierFilteredList = ({ history, location, match }) => {
   const [suppliers, setSuppliers] = useState([]);
   const [numberOfSuppliers, setNumberOfSuppliers] = useState(0);
-
   const [filterOptions, setFilterOptions] = useState({});
+  const supplierListContainer = useRef(null);
 
   const supplierLocationQuery =
     queryString.parse(location.search).supplier || '';
@@ -57,6 +58,18 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
 
   const onPaginationChange = pageNumber => {
     history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
+    // there is timer to cancel scrolling in withScrollingToTop HOC
+    setTimeout(() => {
+      // keydown event cancels scrolling in withScrollingToTop HOC
+      document.dispatchEvent(
+        new Event('keydown', {
+          keyCode: 13,
+          which: 13,
+          key: 'Enter',
+        }),
+      );
+      Scroll.animateScroll.scrollTo(supplierListContainer.current.offsetTop);
+    }, 0);
   };
 
   return (
@@ -64,7 +77,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
       title={supplierCategory}
       backgroundImage={backgroundImage}
     >
-      <Container>
+      <Container ref={supplierListContainer}>
         <Row className="venues-filters d-flex d-sm-none pt-4 pb-4 mb-4">
           <Col className="d-inline">
             <SearchPanelMobile setFilterOptions={setFilterOptions} />
