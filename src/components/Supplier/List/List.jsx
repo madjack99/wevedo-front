@@ -58,7 +58,7 @@ const SupplierList = ({
               <Row>
                 <Col className="pl-md-3 text-center">
                   <b>
-                    ${supplier.minPrice} - ${supplier.maxPrice}
+                    £{supplier.minPrice} - £{supplier.maxPrice}
                   </b>
                 </Col>
               </Row>
@@ -98,7 +98,7 @@ const SupplierList = ({
             />
             {supplier.minPrice && supplier.maxPrice ? (
               <b>
-                ${supplier.minPrice} - ${supplier.maxPrice}
+                £{supplier.minPrice} - £{supplier.maxPrice}
               </b>
             ) : null}
           </Col>
