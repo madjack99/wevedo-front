@@ -230,7 +230,7 @@ const SupplierList = ({
         <PaginationButtons className="mt-5" />
       ) : null}
       {suppliers.length === 0 ? (
-        <p className="supplier-list__legend">Suppliers not found</p>
+        <p className="supplier-list__legend">{supplierCategory} not found</p>
       ) : null}
     </React.Fragment>
   );
