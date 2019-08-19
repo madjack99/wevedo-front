@@ -16,7 +16,10 @@ function getRandomLinks(UKCities) {
       const randomCity = UKCities[randomNumber];
       randomLinks.push(
         <li key={randomNumber}>
-          <Link to={`/suppliers/Venue?supplier=${randomCity}`}>
+          <Link
+            to={`/suppliers/Venue?supplier=${randomCity}`}
+            onClick={() => window.scrollTo(0, 0)}
+          >
             {randomCity}
           </Link>
         </li>,
