@@ -139,7 +139,7 @@ function DashboardBusinessProfileFormsImageUpload({
               rounded
             />
             <Button
-              className="modal-close-btn"
+              className="modal-close-btn  modal-close-btn_red"
               onClick={() => onDeleteNewPhoto(index)}
               variant="link"
             >
@@ -165,7 +165,7 @@ function DashboardBusinessProfileFormsImageUpload({
                     rounded
                   />
                   <Button
-                    className="modal-close-btn"
+                    className="modal-close-btn modal-close-btn_red"
                     onClick={() => onDeleteServerPhoto(index)}
                     variant="link"
                   >
