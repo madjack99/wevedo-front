@@ -7,7 +7,7 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
-  const budgetDefaultValues = [500, 1000];
+  const budgetDefaultValues = [0, 10000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
   // const guestsDefaultNumber = [30, 100];
@@ -68,16 +68,16 @@ const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
             <Col sm={12}>
               <Range
                 min={0}
-                max={10000}
+                max={100000}
                 defaultValue={[...budgetDefaultValues]}
                 value={budgetValues}
-                step={10}
+                step={100}
                 onChange={updatedValues => setBudgetValues(updatedValues)}
               />
             </Col>
             <Col sm={12} className="mt-3">
               <span className="text-muted">Price: </span>
-              {`$${budgetValues[0]} - $${budgetValues[1]}`}
+              {`£${budgetValues[0]} - £${budgetValues[1]}`}
             </Col>
           </Row>
         </div>
