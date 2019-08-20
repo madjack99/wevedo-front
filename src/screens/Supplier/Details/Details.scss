@@ -41,6 +41,14 @@
   }
 }
 
+.modal-close-btn_red {
+  color: red;
+
+  &:hover {
+    color: #cc0000;
+  }
+}
+
 .carousel {
   &-image {
     height: 400px;

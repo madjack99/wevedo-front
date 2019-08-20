@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -8,7 +8,13 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import countries from '../../../countryLib';
 
-const SearchPanel = ({ title, categories, t, history }) => {
+const SearchPanel = ({
+  title,
+  categories,
+  t,
+  history,
+  supplierLocationQuery,
+}) => {
   const UKCities = countries.GB.default.provinces;
 
   const [supplierCategory, setSupplierCategory] = useState('Venue');
@@ -21,6 +27,14 @@ const SearchPanel = ({ title, categories, t, history }) => {
       );
     }
   };
+
+  // as the state depends on the incoming supplierLocationQuery prop
+  // (for 'PopularSearches') coming from 'FilteredList' and
+  // which is set as a value for city select input
+  // useEffect is used to prevent infinite rerender
+  useEffect(() => {
+    setSupplierLocation(supplierLocationQuery);
+  }, [supplierLocationQuery]);
 
   return (
     <Row

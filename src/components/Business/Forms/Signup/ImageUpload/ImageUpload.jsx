@@ -113,7 +113,7 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
               rounded
             />
             <Button
-              className="modal-close-btn"
+              className="modal-close-btn modal-close-btn_red"
               onClick={() => onDeletePhoto(index)}
               variant="link"
             >

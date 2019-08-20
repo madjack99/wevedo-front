@@ -140,7 +140,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                       <div className="mb-4">
                         <b className="text-uppercase text-muted">Budget</b>
                         <hr className="hr-xs" />
-                        <b>{`$${supplier.minPrice} - $${supplier.maxPrice}`}</b>
+                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
                       </div>
                     ) : null}
                     {supplier.facilities ? (
