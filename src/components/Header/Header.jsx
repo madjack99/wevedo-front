@@ -16,6 +16,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
+import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
@@ -32,6 +33,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               {t('header.venues')}
             </Nav.Link>
           </LinkContainer>
+
           <CategoryDropdown categories={categories} t={t} />
           <Nav.Link
             onClick={() => setModalShow(true)}
@@ -47,7 +49,24 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
             categories={categories}
             t={t}
           />
+
+          <LocationDropdown categories={categories} t={t} />
+          <Nav.Link
+            onClick={() => setModalShow(true)}
+            className="d-block d-lg-none"
+          >
+            <span className="font-weight-bold">
+              Locations <i className="fa fa-chevron-right ml-2" />
+            </span>
+          </Nav.Link>
+          <SubMenu
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            categories={categories}
+            t={t}
+          />
         </Nav>
+
         {isLoggedIn ? <ProfileArea user={user} /> : <EnterButtons t={t} />}
       </Navbar.Collapse>
       <Navbar.Brand>
@@ -56,6 +75,83 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
         </Link>
       </Navbar.Brand>
     </Navbar>
+  );
+};
+
+const LocationDropdown = ({ categories, t }) => {
+  const [currentlyOver, setCurrentlyOver] = useState('region');
+  console.log(currentlyOver);
+  return (
+    <NavDropdown title="Locations" className="d-none d-lg-block">
+      <Row>
+        <div className="active-menu d-none d-lg-block" />
+        <Col sm="auto" className="text-left">
+          <NavDropdown.Item
+            className="search-region"
+            onMouseOver={e => setCurrentlyOver('region')}
+          >
+            Search by Region
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            className="search-county"
+            onMouseOver={e => setCurrentlyOver('county')}
+          >
+            Search by County
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            className="search-town"
+            onMouseOver={e => setCurrentlyOver('town')}
+          >
+            Search by Town
+          </NavDropdown.Item>
+        </Col>
+        <Col
+          className={`search-result region-areas ${
+            currentlyOver === 'region' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right text-center">
+              <p>Region</p>
+            </Col>
+            <Col className="border-right text-center">
+              <p>Region</p>
+            </Col>
+          </Row>
+        </Col>
+        <Col
+          className={`search-result county-areas ${
+            currentlyOver === 'county' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right text-center">
+              <p>County</p>
+            </Col>
+            <Col className="border-right text-center">
+              <p>County</p>
+            </Col>
+          </Row>
+        </Col>
+        <Col
+          className={`search-result town-areas ${
+            currentlyOver === 'town' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right text-center">
+              <p>Town</p>
+            </Col>
+            <Col className="border-right text-center">
+              <p>Town</p>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={4}>
+          <p className="text-center image">Photo</p>
+        </Col>
+      </Row>
+    </NavDropdown>
   );
 };
 
