@@ -7,7 +7,7 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
-  const budgetDefaultValues = [0, 10000];
+  const budgetDefaultValues = [0, 100000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
   // const guestsDefaultNumber = [30, 100];
