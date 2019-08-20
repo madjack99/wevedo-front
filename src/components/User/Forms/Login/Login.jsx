@@ -15,12 +15,13 @@ import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
+import ResetPasswordDialogError from '../../../ResetPassword/Dialog/Error';
 import SocialButton from '../../../SocialButton';
 import Checkbox from '../../../UI/Checkbox';
 
 const UserFormsLogin = ({ login, t }) => {
-  const [resetPassword, setResetPassword] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
+  const [showResetDialog, setShowResetDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialLogin = async ({
@@ -32,6 +33,8 @@ const UserFormsLogin = ({ login, t }) => {
       provider,
     });
   };
+
+  const isEmail = email => email.includes('@');
 
   return (
     <React.Fragment>
@@ -73,41 +76,20 @@ const UserFormsLogin = ({ login, t }) => {
           password: '',
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const isEmailEntered = values.emailPhone.includes('@'); // only email includes '@'
-
-          if (resetPassword) {
-            setResetPassword(false);
-            if (isEmailEntered) {
-              setModalShow(true);
-            }
-            setErrors({
-              emailPhone: 'password recovery email is required',
-            });
-            return setSubmitting(false);
-          }
-
-          const body = isEmailEntered
-            ? {
-                email: values.emailPhone,
-                password: values.password,
-                deviseOS: 'android', // TO-DO: 'web' should be later
-              }
-            : {
-                phoneNumber: values.emailPhone,
-                password: values.password,
-                deviseOS: 'android', // TO-DO: 'web' should be later
-              };
-
-          const isLoginSuccessful = await login(wevedoService.login, body);
+          const isLoginSuccessful = await login(wevedoService.login, {
+            email: values.emailPhone,
+            password: values.password,
+            deviseOS: 'android', // TO-DO: 'web' should be later
+          });
 
           if (!isLoginSuccessful) {
             setErrors({
               emailPhone: 'wrong credentials',
               password: 'wrong credentials',
             });
-          }
 
-          return setSubmitting(false);
+            setSubmitting(false);
+          }
         }}
         validationSchema={formSchema}
         render={({
@@ -169,8 +151,11 @@ const UserFormsLogin = ({ login, t }) => {
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => {
-                      setResetPassword(true);
-                      handleSubmit();
+                      if (values.emailPhone && !errors.emailPhone) {
+                        setShowResetDialog(true);
+                      } else {
+                        setShowErrorDialog(true);
+                      }
                     }}
                   >
                     {t('signAndLogForm.forgotPassword')}
@@ -178,9 +163,16 @@ const UserFormsLogin = ({ login, t }) => {
                 </Col>
               </Row>
               <ResetPasswordDialog
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                email={values.emailPhone}
+                show={showResetDialog}
+                onHide={() => setShowResetDialog(false)}
+                email={isEmail(values.emailPhone) ? values.emailPhone : null}
+                phoneNumber={
+                  !isEmail(values.emailPhone) ? values.emailPhone : null
+                }
+              />
+              <ResetPasswordDialogError
+                show={showErrorDialog}
+                onHide={() => setShowErrorDialog(false)}
               />
             </FormGroup>
 

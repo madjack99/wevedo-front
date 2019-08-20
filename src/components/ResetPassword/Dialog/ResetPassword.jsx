@@ -4,7 +4,7 @@ import { Row, Col, Modal } from 'react-bootstrap';
 
 import UIModal from '../../UI/Modal';
 
-const ResetPasswordDialog = ({ show, onHide, email }) => (
+const ResetPasswordDialog = ({ show, onHide, email, phoneNumber }) => (
   <UIModal show={show} onHide={onHide}>
     <Row>
       <Col sm={12} className="px-5 pb-5 text-center">
@@ -13,7 +13,8 @@ const ResetPasswordDialog = ({ show, onHide, email }) => (
         </Modal.Title>
         <hr />
         <p className="mb-0">
-          Reset password has been sent to {email} address.
+          Reset password has been sent to{' '}
+          {email ? `${email} address` : `${phoneNumber} phone number`}.
           <br />
           Please check your e-mail.
         </p>
