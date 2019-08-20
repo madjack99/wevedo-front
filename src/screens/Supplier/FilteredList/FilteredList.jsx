@@ -88,9 +88,6 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
       <SearchPanel supplierLocationQuery={supplierLocationQuery} />
       <Container className="venues-results">
         <Row>
-          <Col sm={4} className="results-filters d-none d-sm-inline">
-            <FilterPanel setFilterOptions={setFilterOptions} />
-          </Col>
           <Col sm={8} className="results-data">
             <SupplierList
               suppliers={suppliers}
@@ -99,6 +96,9 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
               numberOfSuppliers={numberOfSuppliers}
               onPaginationChange={onPaginationChange}
             />
+          </Col>
+          <Col sm={4} className="results-filters d-none d-sm-inline">
+            <FilterPanel setFilterOptions={setFilterOptions} />
           </Col>
         </Row>
       </Container>

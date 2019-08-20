@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
 import { Formik } from 'formik';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
@@ -12,73 +12,53 @@ import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 
-import Checkbox from '../../../UI/Checkbox';
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
+import ResetPasswordDialogError from '../../../ResetPassword/Dialog/Error';
+import Checkbox from '../../../UI/Checkbox';
 
-const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
-  const [resetPassword, setResetPassword] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
+const UserFormsLogin = ({ login, t }) => {
+  const [showResetDialog, setShowResetDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
-  if (isLoggedIn) {
-    return <Redirect to="/" />;
-  }
+  const isEmail = email => email.includes('@');
 
   return (
-    <React.Fragment>
-      <Formik
-        className="form"
-        initialValues={{
-          emailPhone: '',
-          password: '',
-        }}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const isEmailEntered = values.emailPhone.includes('@'); // only email includes '@'
+    <Formik
+      className="form"
+      initialValues={{
+        emailPhone: '',
+        password: '',
+      }}
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
+        const isLoginSuccessful = await login(wevedoService.login, {
+          email: values.emailPhone.includes('@') ? values.emailPhone : null,
+          phoneNumber: values.emailPhone.includes('@')
+            ? null
+            : values.emailPhone,
+          password: values.password,
+          deviseOS: 'android', // TO-DO: 'web' should be later
+        });
 
-          if (resetPassword) {
-            setResetPassword(false);
-            if (isEmailEntered) {
-              setModalShow(true);
-            } else {
-              setErrors({
-                emailPhone: 'password recovery email is required',
-              });
-            }
-            return setSubmitting(false);
-          }
+        if (!isLoginSuccessful) {
+          setErrors({
+            emailPhone: 'wrong credentials',
+            password: 'wrong credentials',
+          });
 
-          const body = isEmailEntered
-            ? {
-                email: values.emailPhone,
-                password: values.password,
-                deviseOS: 'android', // TO-DO: 'web' should be later
-              }
-            : {
-                phoneNumber: values.emailPhone,
-                password: values.password,
-                deviseOS: 'android', // TO-DO: 'web' should be later
-              };
-
-          const loggedInUser = await login(wevedoService.login, body);
-
-          if (!loggedInUser) {
-            setErrors({
-              emailPhone: 'wrong credentials',
-              password: 'wrong credentials',
-            });
-          }
-
-          return setSubmitting(false);
-        }}
-        validationSchema={formSchema}
-        render={({
-          handleSubmit,
-          handleChange,
-          values,
-          touched,
-          errors,
-          isSubmitting,
-        }) => (
+          setSubmitting(false);
+        }
+      }}
+      validationSchema={formSchema}
+      render={({
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting,
+      }) => (
+        <React.Fragment>
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-5" controlId="formEmail">
               <Form.Label className="form__label mb-0">
@@ -120,29 +100,27 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
 
             <FormGroup controlId="passwordActions">
               <Row>
-                <Col>
+                <Col md={6} className="text-left mb-2">
                   <Checkbox
                     className="form__check mr-auto"
                     labelText={t('signAndLogForm.rememberMe')}
                   />
                 </Col>
-                <Col className="text-right">
+                <Col md={6} className="text-right">
                   <Button
                     bsPrefix="password-btn"
                     onClick={() => {
-                      setResetPassword(true);
-                      handleSubmit();
+                      if (values.emailPhone && !errors.emailPhone) {
+                        setShowResetDialog(true);
+                      } else {
+                        setShowErrorDialog(true);
+                      }
                     }}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
                 </Col>
               </Row>
-              <ResetPasswordDialog
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                email={values.emailPhone}
-              />
             </FormGroup>
 
             <FormGroup className="text-center text-uppercase">
@@ -164,9 +142,19 @@ const BusinessFormLogin = ({ login, isLoggedIn, t }) => {
               </span>
             </div>
           </Form>
-        )}
-      />
-    </React.Fragment>
+          <ResetPasswordDialog
+            show={showResetDialog}
+            onHide={() => setShowResetDialog(false)}
+            email={isEmail(values.emailPhone) ? values.emailPhone : null}
+            phoneNumber={!isEmail(values.emailPhone) ? values.emailPhone : null}
+          />
+          <ResetPasswordDialogError
+            show={showErrorDialog}
+            onHide={() => setShowErrorDialog(false)}
+          />
+        </React.Fragment>
+      )}
+    />
   );
 };
 
@@ -183,4 +171,4 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
-)(BusinessFormLogin);
+)(UserFormsLogin);

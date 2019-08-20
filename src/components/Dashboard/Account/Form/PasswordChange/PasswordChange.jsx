@@ -24,7 +24,7 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
       onSubmit={async (values, { setSubmitting, setErrors }) => {
         if (changeRequested && !resetCodeIsSended) {
           try {
-            await wevedoService.resetPassword({
+            await wevedoService.resetPasswordEmail({
               email,
               resetPassword: values.resetPassword,
             });
@@ -34,7 +34,7 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
           }
         } else {
           try {
-            await wevedoService.checkResetCode({
+            await wevedoService.checkResetCodeEmail({
               email,
               resetToken: values.resetCode,
             });
