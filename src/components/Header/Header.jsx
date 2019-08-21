@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import {
   Nav,
@@ -16,12 +17,16 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
+import * as UK from '../../UK.json';
 import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
+console.log(UK.default.UK);
+
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
+  const UKLocations = UK.default.UK;
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
@@ -50,7 +55,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
             t={t}
           />
 
-          <LocationDropdown categories={categories} t={t} />
+          <LocationDropdown UKLocations={UKLocations} t={t} />
           <Nav.Link
             onClick={() => setModalShow(true)}
             className="d-block d-lg-none"
@@ -78,77 +83,94 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   );
 };
 
-const LocationDropdown = ({ categories, t }) => {
+const LocationDropdown = ({ UKLocations, t }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
-  console.log(currentlyOver);
   return (
     <NavDropdown title="Locations" className="d-none d-lg-block">
       <Row>
         <div className="active-menu d-none d-lg-block" />
         <Col sm="auto" className="text-left">
           <NavDropdown.Item
-            className="search-region"
+            className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('region')}
           >
             Search by Region
           </NavDropdown.Item>
           <NavDropdown.Item
-            className="search-county"
+            className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('county')}
           >
             Search by County
           </NavDropdown.Item>
           <NavDropdown.Item
-            className="search-town"
+            className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('town')}
           >
             Search by Town
           </NavDropdown.Item>
         </Col>
         <Col
+          sm={7}
           className={`search-result region-areas ${
             currentlyOver === 'region' ? 'search-result-active' : ''
           }`}
         >
           <Row>
             <Col className="border-right text-center">
-              <p>Region</p>
+              {UKLocations['Largest Regions'].slice(0, 4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
             <Col className="border-right text-center">
-              <p>Region</p>
+              {UKLocations['Largest Regions'].slice(4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
           </Row>
+          <p className="text-center mt-3">View more regions ></p>
         </Col>
         <Col
+          sm={7}
           className={`search-result county-areas ${
             currentlyOver === 'county' ? 'search-result-active' : ''
           }`}
         >
           <Row>
             <Col className="border-right text-center">
-              <p>County</p>
+              {UKLocations['Largest Counties'].slice(0, 4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
             <Col className="border-right text-center">
-              <p>County</p>
+              {UKLocations['Largest Counties'].slice(4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
           </Row>
+          <p className="text-center mt-3">View more counties ></p>
         </Col>
         <Col
+          sm={7}
           className={`search-result town-areas ${
             currentlyOver === 'town' ? 'search-result-active' : ''
           }`}
         >
           <Row>
             <Col className="border-right text-center">
-              <p>Town</p>
+              {UKLocations['Largest Cities'].slice(0, 4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
             <Col className="border-right text-center">
-              <p>Town</p>
+              {UKLocations['Largest Cities'].slice(4).map(region => (
+                <LocationDropdownItem key={uniqid()} name={region} />
+              ))}
             </Col>
           </Row>
+          <p className="text-center mt-3">View more cities ></p>
         </Col>
-        <Col sm={4}>
-          <p className="text-center image">Photo</p>
+        <Col className="text-center image">
+          <p>Photo</p>
         </Col>
       </Row>
     </NavDropdown>
@@ -199,6 +221,14 @@ const CategoryDropdown = ({ categories, t }) => {
 function CategoryDropdownItem({ name }) {
   return (
     <LinkContainer to={`/suppliers/${name}`}>
+      <NavDropdown.Item>{name}</NavDropdown.Item>
+    </LinkContainer>
+  );
+}
+
+function LocationDropdownItem({ name }) {
+  return (
+    <LinkContainer to={`/suppliers/Venue?supplier=${name}`}>
       <NavDropdown.Item>{name}</NavDropdown.Item>
     </LinkContainer>
   );
