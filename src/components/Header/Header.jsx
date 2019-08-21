@@ -26,6 +26,7 @@ console.log(UK.default.UK);
 
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
+  const [locationModalShow, setLocationModalShow] = useState(false);
   const UKLocations = UK.default.UK;
 
   return (
@@ -57,17 +58,17 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
 
           <LocationDropdown UKLocations={UKLocations} t={t} />
           <Nav.Link
-            onClick={() => setModalShow(true)}
+            onClick={() => setLocationModalShow(true)}
             className="d-block d-lg-none"
           >
             <span className="font-weight-bold">
               Locations <i className="fa fa-chevron-right ml-2" />
             </span>
           </Nav.Link>
-          <SubMenu
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            categories={categories}
+          <LocationSubMenu
+            show={locationModalShow}
+            onHide={() => setLocationModalShow(false)}
+            UKLocations={UKLocations}
             t={t}
           />
         </Nav>
@@ -110,7 +111,6 @@ const LocationDropdown = ({ UKLocations, t }) => {
           </NavDropdown.Item>
         </Col>
         <Col
-          sm={7}
           className={`search-result region-areas ${
             currentlyOver === 'region' ? 'search-result-active' : ''
           }`}
@@ -121,16 +121,17 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
-            <Col className="border-right text-center">
+            <Col className="text-center">
               {UKLocations['Largest Regions'].slice(4).map(region => (
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
           </Row>
-          <p className="text-center mt-3">View more regions ></p>
+          <div className="text-center mt-3">
+            <Link to="#">View more regions ></Link>
+          </div>
         </Col>
         <Col
-          sm={7}
           className={`search-result county-areas ${
             currentlyOver === 'county' ? 'search-result-active' : ''
           }`}
@@ -141,16 +142,17 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
-            <Col className="border-right text-center">
+            <Col className="text-center">
               {UKLocations['Largest Counties'].slice(4).map(region => (
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
           </Row>
-          <p className="text-center mt-3">View more counties ></p>
+          <div className="text-center mt-3">
+            <Link to="#">View more counties ></Link>
+          </div>
         </Col>
         <Col
-          sm={7}
           className={`search-result town-areas ${
             currentlyOver === 'town' ? 'search-result-active' : ''
           }`}
@@ -161,16 +163,15 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
-            <Col className="border-right text-center">
+            <Col className="text-center">
               {UKLocations['Largest Cities'].slice(4).map(region => (
                 <LocationDropdownItem key={uniqid()} name={region} />
               ))}
             </Col>
           </Row>
-          <p className="text-center mt-3">View more cities ></p>
-        </Col>
-        <Col className="text-center image">
-          <p>Photo</p>
+          <div className="text-center mt-3">
+            <Link to="#">View more cities ></Link>
+          </div>
         </Col>
       </Row>
     </NavDropdown>
@@ -269,6 +270,69 @@ function ProfileArea({ user }) {
     </div>
   );
 }
+
+const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
+  <Modal
+    {...rest}
+    size="lg"
+    aria-labelledby="location-submenu"
+    centered
+    className="location-submenu"
+  >
+    <Modal.Body>
+      <Row className="pt-2">
+        <Col xs={2} className="ml-4" onClick={onHide}>
+          <i className="fas fa-arrow-left fa-2x" />
+        </Col>
+        <Col>
+          <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
+          {UKLocations['Largest Regions'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?supplier=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="#" className="view-all-btn">
+            View all regions
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
+          {UKLocations['Largest Counties'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?supplier=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="#" className="view-all-btn">
+            View all counties
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
+          {UKLocations['Largest Cities'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?supplier=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="#" className="view-all-btn">
+            View all cities
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+        </Col>
+      </Row>
+    </Modal.Body>
+  </Modal>
+);
 
 const SubMenu = ({ categories, onHide, t, ...rest }) => (
   <Modal
