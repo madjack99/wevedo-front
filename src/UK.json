@@ -1,0 +1,458 @@
+{
+  "UK": {
+    "England": {
+      "East Midlands": {
+        "Derbyshire": [
+          "Derby",
+          "Chesterfield",
+          "Swadlincote",
+          "Ilkeston",
+          "Long Eaton"
+        ],
+        "Nottinghamshire": [
+          "Nottingham",
+          "Mansfield",
+          "Beeston",
+          "Carlton",
+          "Sutton-In-Ashfield"
+        ],
+        "Lincolnshire": [
+          "Lincoln",
+          "Grimsby",
+          "Scunthorpe",
+          "Boston",
+          "Cleethorpes"
+        ],
+        "Leicestershire": [
+          "Leicester",
+          "Loughborough",
+          "Hinckley",
+          "Wigston",
+          "Coalville"
+        ],
+        "Rutland": ["Oakham", "Uppingham", "Ketton", "Ryhall", "Langham"],
+        "Northamptonshire": [
+          "Northampton",
+          "Kettering",
+          "Corby",
+          "Wellingborough",
+          "Rushden"
+        ]
+      },
+      "East of England": {
+        "Cambridgeshire": [
+          "Peterborough",
+          "Cambridge / Milton",
+          "Wisbech",
+          "St Neots",
+          "Huntingdon"
+        ],
+        "Central Bedfordshire": [
+          "Luton",
+          "Bedford",
+          "Dunstable",
+          "Leighton Buzzard",
+          "Kempston"
+        ],
+        "Essex": [
+          "Southend-on-Sea",
+          "Colchester",
+          "Chelmsford",
+          "Basildon",
+          "Rayleigh/South Benfleet/Thundersley"
+        ],
+        "Hertfordshire": [
+          "Watford",
+          "Hemel Hempstead",
+          "Stevenage",
+          "St Albans",
+          "Welwyn Garden City"
+        ],
+        "Norfolk": [
+          "Norwich",
+          "King's Lynn",
+          "Great Yarmouth",
+          "Thetford",
+          "Gorleston-on-Sea"
+        ],
+        "Suffolk": [
+          "Ipswich",
+          "Lowestoft",
+          "Bury St Edmunds",
+          "Haverhill",
+          "Felixstowe"
+        ]
+      },
+      "London Region": {
+        "Greater London": ["London"],
+        "City of London": ["London"]
+      },
+      "North East England": {
+        "County Durham": [
+          "Darlington",
+          "Hartlepool",
+          "Stockton-on-Tees",
+          "Durham",
+          "Billingham"
+        ],
+        "Northumberland": [
+          "Blyth",
+          "Cramlington",
+          "Ashington",
+          "Bedlington",
+          "Morpeth"
+        ],
+        "Tyne and Wear": [
+          "Borough of Gateshead",
+          "Newcastle upon Tyne",
+          "North Tyneside",
+          "South Tyneside",
+          "City of Sunderland"
+        ],
+        "North Yorkshire": [
+          "York",
+          "Middlesbrough",
+          "Harrogate",
+          "Scarborough",
+          "Redcar"
+        ]
+      },
+      "North West England": {
+        "Cheshire": [
+          "Sandbach",
+          "Chester",
+          "Widnes",
+          "Warrington",
+          "Congleton"
+        ],
+        "Cumbria": [
+          "Workington",
+          "Barrow-in-Furness",
+          "Carlisle",
+          "Whitehaven",
+          "Penrith",
+          "Kendal"
+        ],
+        "Greater Manchester": [
+          "Bolton",
+          "Bury",
+          "Manchester",
+          "Wigan",
+          "Trafford"
+        ],
+        "Lancashire": [
+          "Blackburn",
+          "Blackpool",
+          "Lancaster",
+          "Ormskirk",
+          "Clitheroe"
+        ],
+        "Merseyside": [
+          "Knowsley",
+          "Liverpool",
+          "St. Helens",
+          "Sefton",
+          "Wirral"
+        ]
+      },
+      "South East England": {
+        "Berkshire": [
+          "West Berkshire",
+          "Reading",
+          "Wokingham",
+          "Bracknell Forest",
+          "Windsor and Maidenhead",
+          "Slough"
+        ],
+        "Buckinghamshire": [
+          "Milton Keynes",
+          "High Wycombe",
+          "Aylesbury",
+          "Amersham",
+          "Chesham"
+        ],
+        "East Sussex": [
+          "Brighton and Hove",
+          "Eastbourne",
+          "Hastings",
+          "Bexhill-on-Sea",
+          "Seaford"
+        ],
+        "Hampshire": [
+          "Southampton",
+          "Portsmouth",
+          "Basingstoke",
+          "Eastleigh",
+          "Gosport"
+        ],
+        "Isle of Wight": ["Isle of Wight"],
+        "Kent": ["Maidstone", "Gillingham", "Dartford", "Chatham", "Ashford"],
+        "Oxfordshire": [
+          "Oxford",
+          "Banbury",
+          "Abingdon-on-Thames",
+          "Bicester",
+          "Witney"
+        ],
+        "Surrey": ["Woking", "Guildford", "Walton-on-Thames", "Ewell", "Esher"],
+        "West Sussex": [
+          "Worthing",
+          "Crawley",
+          "Bognor Regis",
+          "Littlehampton",
+          "Shoreham-by-Sea"
+        ]
+      },
+      "South West England": {
+        "Somerset": [
+          "Bath",
+          "Weston-super-Mare",
+          "Taunton",
+          "Yeovil",
+          "Bridgwater"
+        ],
+        "Bristol": ["Bristol"],
+        "Gloucestershire": [
+          "Gloucester",
+          "Cheltenham",
+          "Kingswood",
+          "Filton",
+          "Stroud"
+        ],
+        "Wiltshire": [
+          "Swindon",
+          "Salisbury",
+          "Trowbridge",
+          "Chippenham",
+          "Melksham"
+        ],
+        "Dorset": [
+          "Bournemouth",
+          "Poole",
+          "Weymouth",
+          "Christchurch",
+          "Ferndown"
+        ],
+        "Devon": ["Plymouth", "Exeter", "Torquay", "Paignton", "Exmouth"],
+        "Cornwall": ["Redruth ", "Falmouth", "St Austell", "Truro", "Newquay"]
+      },
+      "West Midlands": {
+        "Herefordshire": [
+          "Hereford",
+          "Leominster",
+          "Ross-on-Wye",
+          "Ledbury",
+          "Bromyard"
+        ],
+        "Shropshire": [
+          "Shrewsbury",
+          "Telford",
+          "Oakengates-Donnington",
+          "Wellington",
+          "Oswestry"
+        ],
+        "Staffordshire": [
+          "Stoke-on-Trent",
+          "Tamworth",
+          "Newcastle-under-Lyme",
+          "Burton-upon-Trent",
+          "Stafford"
+        ],
+        "Warwickshire": [
+          "Nuneaton",
+          "Rugby",
+          "Royal Leamington Spa",
+          "Warwick",
+          "Bedworth"
+        ],
+        "West Midlands": [
+          "Birmingham",
+          "Coventry",
+          "Wolverhampton",
+          "Solihull",
+          "Sutton Coldfield"
+        ],
+        "Worcestershire": [
+          "Worcester",
+          "Redditch",
+          "Kidderminster",
+          "Malvern",
+          "Bromsgrove"
+        ]
+      },
+      "Yorkshire and the Humber": {
+        "South Yorkshire": [
+          "Sheffield",
+          "Doncaster",
+          "Rotherham",
+          "Barnsley",
+          "Wath-upon-Dearne"
+        ],
+        "West Yorkshire": [
+          "Leeds",
+          "Bradford",
+          "Huddersfield",
+          "Wakefield",
+          "Halifax"
+        ],
+        "East Riding of Yorkshire": [
+          "Kingston upon Hull ",
+          "Bridlington ",
+          "Goole",
+          "Cottingham",
+          "Hessle "
+        ],
+        "Lincolnshire": [
+          "Lincoln",
+          "Grimsby",
+          "Scunthorpe",
+          "Grantham",
+          "Boston"
+        ]
+      }
+    },
+    "Scotland": {
+      "Borders": {
+        "Berwickshire": ["Duns"],
+        "Ettrick and Lauderdale": ["Galashiels"],
+        "Roxburgh": ["Hawick"],
+        "Tweeddale": ["Peebles"]
+      },
+      "Central": {
+        "Clackmannan": ["Alloa"],
+        "Falkirk": ["Falkirk"],
+        "Stirling": ["Stirling"]
+      },
+      "Dumfries and Galloway": {
+        "Annandale and Eskdale": ["Annan"],
+        "Nithsdale": ["Dumfries"],
+        "Stewartry": ["Kirkcudbright"],
+        "Wigtown": ["Stranraer"]
+      },
+      "Fife": {
+        "Dunfermline": ["Dunfermline"],
+        "Kirkcaldy": ["Kirkcaldy"],
+        "North East Fife": ["Cupar"]
+      },
+      "Grampian": {
+        "Aberdeen": ["Aberdeen"],
+        "Banff and Buchan": ["Banff"],
+        "Gordon": ["Inverurie"],
+        "Kincardine and Deeside": ["Stonehaven"],
+        "Moray": ["Elgin"]
+      },
+      "Highland": {
+        "Badenoch and Strathspey": ["Kingussie"],
+        "Caithness": ["Wick"],
+        "Lochaber": ["Fort William"],
+        "Inverness": ["Inverness"],
+        "Nairn": ["Nairn"],
+        "Ross and Cromarty": ["Dingwall"],
+        "Skye and Lochalsh": ["Portree"],
+        "Sutherland": ["Golspie"]
+      },
+      "Lothian": {
+        "East Lothian": ["Haddington"],
+        "Edinburgh": ["Edinburgh"],
+        "Midlothian": ["Dalkeith"],
+        "West Lothian": ["Bathgate"]
+      },
+      "Strathclyde": {
+        "Argyll and Bute": ["Lochgilphead"],
+        "Bearsden and Milngavie": ["Bearsden"],
+        "Clydebank": ["Clydebank"],
+        "Clydesdale": ["Lanark"],
+        "Cumbernauld and Kilsyth": ["Cumbernauld"],
+        "Cumnock and Doon Valley": ["Cumnock"],
+        "Cunninghame": ["Irvine"],
+        "Dumbarton": ["Dumbarton"],
+        "East Kilbride": ["East Kilbride"],
+        "Eastwood": ["Giffnock"],
+        "Glasgow": ["Glasgow"],
+        "Hamilton": ["Hamilton"],
+        "Inverclyde": ["Greenock"],
+        "Kilmarnock and Loudoun": ["Kilmarnock"],
+        "Kyle and Carrick": ["Ayr"],
+        "Monklands": ["Coatbridge"],
+        "Motherwell": ["Motherwell"],
+        "Renfrew": ["Paisley"],
+        "Strathkelvin": ["Kirkintilloch"]
+      },
+      "Tayside": {
+        "Angus": ["Forfar"],
+        "Dundee": ["Dundee"],
+        "Perth and Kinross": ["Perth"]
+      }
+    },
+    "Wales": {
+      "North Wales": {
+        "Wrexham": ["Wrexham"],
+        "Flintshire": ["Connah's Quay", "Flint", "Buckley"],
+        "Denbighshire": ["Rhyl", "Prestatyn "],
+        "Conwy": ["Llandudno", "Llandudno Junction"],
+        "Gwynedd": ["Bangor", "Caernarfon", "Ffestiniog"],
+        "Isle of Anglesey": ["Holyhead", "Llangefni"]
+      },
+      "Mid Wales": {
+        "Ceredigion ": ["Aberystwyth", "Aberaeron"],
+        "Powys": ["Newtown", "Ystradgynlais"]
+      },
+      "South Wales": {
+        "Carmarthenshire": ["Llanelli", "Carmarthen", "Ammanford"],
+        "Pembrokeshire": ["Haverfordwest", "Pembroke", "Pembroke Dock"],
+        "Blaenau Gwent": ["Abertillery", "Brynmawr", "Ebbw Vale"],
+        "Caerphilly": [" Caerphilly", "Bedwas", "Risca"],
+        "Monmouthshire": ["Abergavenny", "Caldicot", "Chepstow"],
+        "Newport": ["Newport"],
+        "Torfaen": ["Abersychan", "Pontypool", "Cwmbran"],
+        "Bridgend": ["Bridgend"],
+        "Merthyr Tydfil": ["Merthyr Tydfil"],
+        "Rhondda Cynon Taf": ["Aberdare", "Llantrisant", "Pontypridd"],
+        "Cardiff": ["Cardiff"],
+        "Vale of Glamorgan": ["Barry", "Penarth", "Llantwit Major"],
+        "Neath Port Talbot": ["Neath", "Port Talbot", "Pontardawe"],
+        "Swansea": ["Swansea"]
+      }
+    },
+    "Northern Ireland": {
+      "Norther Ireland Region": {
+        "Antrim": ["Antrim", "Ballymena", "Carrickfergus"],
+        "Armagh": ["Newry", "Craigavon"],
+        "Down": ["Belfast", "Lisburn", "Newry"],
+        "Fermanagh": ["Enniskillen", "Lisnaskea"],
+        "Londonderry": ["Derry", "Coleraine", "Limavady"],
+        "Tyrone": ["Omagh", "Cookstown", "Dungannon", "Strabane"]
+      }
+    },
+    "Biggest Regions": [
+      "Greater London",
+      "South East England",
+      "South West England",
+      "North West England",
+      "North East England",
+      "West Midlands",
+      "Yorkshire and the Humber",
+      "East Midlands"
+    ],
+    "Largest Counties": [
+      "Yorkshire",
+      "Lincolnshire",
+      "Devon",
+      "Norfolk",
+      "Northumberland",
+      "Somerset",
+      "Hampshire",
+      "Essex"
+    ],
+    "Largest Cities": [
+      "London",
+      "Birmingham",
+      "Manchester",
+      "Liverpool",
+      "Nottingham",
+      "Sheffield",
+      "Bristol",
+      "Glasgow"
+    ]
+  }
+}
