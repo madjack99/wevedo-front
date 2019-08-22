@@ -56,8 +56,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     supplierLocationQuery,
   ]);
 
-  const onPaginationChange = pageNumber => {
-    history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
+  const scrollToSupplierList = () => {
     // there is timer to cancel scrolling in withScrollingToTop HOC
     setTimeout(() => {
       // keydown event cancels scrolling in withScrollingToTop HOC
@@ -72,6 +71,13 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     }, 0);
   };
 
+  const onSearch = () => scrollToSupplierList();
+
+  const onPaginationChange = pageNumber => {
+    history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
+    scrollToSupplierList();
+  };
+
   return (
     <ScreensLayoutMain
       title={supplierCategory}
@@ -80,12 +86,18 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
       <Container ref={supplierListContainer}>
         <Row className="venues-filters d-flex d-sm-none pt-4 pb-4 mb-4">
           <Col className="d-inline">
-            <SearchPanelMobile setFilterOptions={setFilterOptions} />
+            <SearchPanelMobile
+              onSearch={onSearch}
+              setFilterOptions={setFilterOptions}
+            />
           </Col>
         </Row>
       </Container>
 
-      <SearchPanel supplierLocationQuery={supplierLocationQuery} />
+      <SearchPanel
+        onSearch={onSearch}
+        supplierLocationQuery={supplierLocationQuery}
+      />
       <Container className="venues-results">
         <Row>
           <Col sm={8} className="results-data">
