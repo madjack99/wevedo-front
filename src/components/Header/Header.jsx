@@ -25,7 +25,7 @@ import defaultAvatar from '../../assets/images/default-avatar.png';
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
-  const UKLocations = UK.default.UK;
+  const UKLocations = UK.default;
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">

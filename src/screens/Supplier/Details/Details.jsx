@@ -68,7 +68,8 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
             {
               <b>
-                {`${supplier.address || ''} ${supplier.regionName ||
+                {`${supplier.address || ''} ${supplier.city ||
+                  ''} ${supplier.county || ''} ${supplier.regionName ||
                   ''} ${supplier.country || ''} ${supplier.postcode || ''}
                 `}
               </b>
