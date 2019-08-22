@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form, Button } from 'react-bootstrap';
+import uniqid from 'uniqid';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
@@ -9,17 +10,38 @@ import countries from '../../../../../../countryLib';
 import config from '../../../../../../config';
 import '../Forms.scss';
 
+import * as UK from '../../../../../../UK.json';
+
+console.log(UK.default.UK);
+
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
   updateProfile,
 }) => {
-  const defineListOfCities = countryName => {
-    const listOfCountries = Object.values(countries);
-    const country = listOfCountries.filter(
-      module => module.default.name === countryName,
-    );
-    return country[0].default.provinces;
+  const UKLocations = UK.default.UK;
+
+  const defineCountries = () => {
+    return Object.keys(UKLocations);
+  };
+
+  const defineRegionNames = country => {
+    return Object.keys(UKLocations[country]);
+  };
+
+  const defineCounties = (country, regionName) => {
+    return Object.keys(UKLocations[country][regionName]);
+  };
+
+  const defineCities = (country, regionName, county) => {
+    return UKLocations[country][regionName][county];
+  };
+
+  const allowSpecificCountries = country => {
+    if (defineCountries().includes(country)) {
+      return country;
+    }
+    return '';
   };
 
   return (
@@ -28,12 +50,14 @@ const DashboardBusinessProfileFormsContactDetails = ({
       enableReinitialize
       initialValues={{
         fullName: user.fullName || '',
-        website: user.website || 'No website',
+        website: user.website || '',
         email: user.email || '',
         phoneNumber: user.phoneNumber || '',
         address: user.address || '',
+        country: allowSpecificCountries(user.country),
         regionName: user.regionName || '',
-        country: user.country || '',
+        county: user.county || '',
+        city: user.city || '',
         postcode: user.postcode || '',
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -44,8 +68,10 @@ const DashboardBusinessProfileFormsContactDetails = ({
             email: values.email,
             phoneNumber: values.phoneNumber,
             address: values.address,
-            regionName: values.regionName,
             country: values.country,
+            regionName: values.regionName,
+            county: values.county,
+            city: values.city,
             postcode: values.postcode,
           });
           setSubmitting(false);
@@ -119,6 +145,113 @@ const DashboardBusinessProfileFormsContactDetails = ({
                   <Col className="mb-4">
                     <p className="text-muted">Address</p>
                     <Row className="mb-sm-3">
+                      <Col sm={4} className="mb-2">
+                        <Form.Control
+                          className=" form__control__account "
+                          value={values.country}
+                          name="country"
+                          as="select"
+                          onChange={e => {
+                            handleChange(e);
+                            values.regionName = '';
+                            values.county = '';
+                            values.city = '';
+                          }}
+                          isValid={values.country && !errors.country}
+                        >
+                          <option value="" disabled />
+                          {defineCountries().map(country => (
+                            <option key={uniqid()}>{country}</option>
+                          ))}
+                        </Form.Control>
+                        {values.country === '' ? (
+                          <p className="errorMessage">
+                            Choose a country from the list
+                          </p>
+                        ) : null}
+                        {errors.country && (
+                          <p className="errorMessage">{errors.country}</p>
+                        )}
+                      </Col>
+                      <Col sm={4} className="mb-2">
+                        <Form.Control
+                          className=" form__control__account "
+                          value={values.regionName}
+                          name="regionName"
+                          as="select"
+                          onChange={e => {
+                            handleChange(e);
+                            values.county = '';
+                            values.city = '';
+                          }}
+                          isValid={values.regionName && !errors.regionName}
+                        >
+                          <option value="" disabled />
+                          {values.country &&
+                            defineRegionNames(values.country).map(
+                              regionName => (
+                                <option key={uniqid()}>{regionName}</option>
+                              ),
+                            )}
+                        </Form.Control>
+                        {errors.regionName && (
+                          <p className="errorMessage">{errors.regionName}</p>
+                        )}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm={4} className="mb-2">
+                        <Form.Control
+                          className=" form__control__account "
+                          value={values.county}
+                          name="county"
+                          as="select"
+                          onChange={e => {
+                            handleChange(e);
+                            values.city = '';
+                          }}
+                          isValid={values.county && !errors.county}
+                        >
+                          <option value="" disabled />
+                          {values.country &&
+                            values.regionName &&
+                            defineCounties(
+                              values.country,
+                              values.regionName,
+                            ).map(county => (
+                              <option key={uniqid()}>{county}</option>
+                            ))}
+                        </Form.Control>
+                        {errors.county && (
+                          <p className="errorMessage">{errors.county}</p>
+                        )}
+                      </Col>
+                      <Col sm={4} className="mb-2">
+                        <Form.Control
+                          className=" form__control__account "
+                          value={values.city}
+                          name="city"
+                          as="select"
+                          onChange={handleChange}
+                          isValid={values.city && !errors.city}
+                        >
+                          <option value="" disabled />
+                          {values.country &&
+                            values.county &&
+                            defineCities(
+                              values.country,
+                              values.regionName,
+                              values.county,
+                            ).map(city => (
+                              <option key={uniqid()}>{city}</option>
+                            ))}
+                        </Form.Control>
+                        {errors.city && (
+                          <p className="errorMessage">{errors.city}</p>
+                        )}
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col sm={5} className="mb-2">
                         <Form.Control
                           className=" form__control__account "
@@ -132,48 +265,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         )}
                       </Col>
 
-                      <Col sm={4} className="mb-2">
-                        <Form.Control
-                          className=" form__control__account "
-                          name="country"
-                          as="select"
-                          onChange={handleChange}
-                          isValid={values.country && !errors.country}
-                        >
-                          <option>{values.country}</option>
-                          {config.allowedInCountries.map((country, index) => (
-                            <option key={index}>
-                              {countries[country].default.name}
-                            </option>
-                          ))}
-                        </Form.Control>
-                        {errors.country && (
-                          <p className="errorMessage">{errors.country}</p>
-                        )}
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={4} className="mb-2">
-                        <Form.Control
-                          className=" form__control__account "
-                          value={values.regionName}
-                          name="regionName"
-                          as="select"
-                          onChange={handleChange}
-                          isValid={values.regionName && !errors.regionName}
-                        >
-                          <option>{values.regionName}</option>
-                          {values.country &&
-                            defineListOfCities(values.country).map(
-                              (city, index) => (
-                                <option key={index}>{city}</option>
-                              ),
-                            )}
-                        </Form.Control>
-                        {errors.regionName && (
-                          <p className="errorMessage">{errors.regionName}</p>
-                        )}
-                      </Col>
                       <Col sm={3} className="mb-2">
                         <Form.Control
                           className=" form__control__account "

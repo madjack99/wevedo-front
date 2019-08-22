@@ -11,8 +11,10 @@ export default Yup.object().shape({
     .required('phone number is required!'),
   postcode: Yup.string().required('postcode is required'),
   address: Yup.string().required('address is required'),
-  regionName: Yup.string().required('town/city is required'),
   country: Yup.string().required('country is required'),
+  regionName: Yup.string().required('region name is required'),
+  county: Yup.string().required('county is required'),
+  city: Yup.string().required('city is required'),
   fullName: Yup.string()
     .min(6, 'minimum 6 characters')
     .max(50, 'maximum 50 characters')
