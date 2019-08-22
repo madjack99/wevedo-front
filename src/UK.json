@@ -423,36 +423,36 @@
         "Londonderry": ["Derry", "Coleraine", "Limavady"],
         "Tyrone": ["Omagh", "Cookstown", "Dungannon", "Strabane"]
       }
-    },
-    "Largest Regions": [
-      "Greater London",
-      "South East England",
-      "South West England",
-      "North West England",
-      "North East England",
-      "West Midlands",
-      "Yorkshire and the Humber",
-      "East Midlands"
-    ],
-    "Largest Counties": [
-      "Yorkshire",
-      "Lincolnshire",
-      "Devon",
-      "Norfolk",
-      "Northumberland",
-      "Somerset",
-      "Hampshire",
-      "Essex"
-    ],
-    "Largest Cities": [
-      "London",
-      "Birmingham",
-      "Manchester",
-      "Liverpool",
-      "Nottingham",
-      "Sheffield",
-      "Bristol",
-      "Glasgow"
-    ]
-  }
+    }
+  },
+  "Largest Regions": [
+    "Greater London",
+    "South East England",
+    "South West England",
+    "North West England",
+    "North East England",
+    "West Midlands",
+    "Yorkshire and the Humber",
+    "East Midlands"
+  ],
+  "Largest Counties": [
+    "Yorkshire",
+    "Lincolnshire",
+    "Devon",
+    "Norfolk",
+    "Northumberland",
+    "Somerset",
+    "Hampshire",
+    "Essex"
+  ],
+  "Largest Cities": [
+    "London",
+    "Birmingham",
+    "Manchester",
+    "Liverpool",
+    "Nottingham",
+    "Sheffield",
+    "Bristol",
+    "Glasgow"
+  ]
 }

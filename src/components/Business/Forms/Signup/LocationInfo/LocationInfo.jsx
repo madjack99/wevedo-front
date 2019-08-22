@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -10,6 +11,8 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
 import countries from '../../../../../countryLib';
+
+import * as UK from '../../../../../UK.json';
 
 import config from '../../../../../config';
 
@@ -21,6 +24,8 @@ import {
 import { WevedoServiceContext } from '../../../../../contexts';
 import formScheme from './schema';
 
+console.log(UK.default.UK);
+
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
   updateUser,
@@ -31,16 +36,26 @@ const BusinessFormsSignupLocationInfo = ({
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
+  const UKLocations = UK.default.UK;
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
-  const defineListOfCities = countryName => {
-    const listOfCountries = Object.values(countries);
-    const country = listOfCountries.filter(
-      module => module.default.name === countryName,
-    );
-    return country[0].default.provinces;
+  const defineCountries = () => {
+    return Object.keys(UKLocations);
+  };
+
+  const defineRegionNames = country => {
+    return Object.keys(UKLocations[country]);
+  };
+
+  const defineCounties = (country, regionName) => {
+    return Object.keys(UKLocations[country][regionName]);
+  };
+
+  const defineCities = (country, regionName, county) => {
+    return UKLocations[country][regionName][county];
   };
 
   return (
@@ -51,11 +66,22 @@ const BusinessFormsSignupLocationInfo = ({
         phoneNumber: '',
         postcode: '',
         address: '',
-        regionName: '',
         country: '',
+        regionName: '',
+        county: '',
+        city: '',
       }}
       onSubmit={async (
-        { email, phoneNumber, postcode, address, regionName, country },
+        {
+          email,
+          phoneNumber,
+          postcode,
+          address,
+          country,
+          regionName,
+          county,
+          city,
+        },
         { setSubmitting, setErrors },
       ) => {
         const isNewEmail = await emailStatus(
@@ -74,8 +100,10 @@ const BusinessFormsSignupLocationInfo = ({
             phoneNumber,
             postcode,
             address,
-            regionName,
             country,
+            regionName,
+            county,
+            city,
           });
 
           return nextStep();
@@ -185,14 +213,19 @@ const BusinessFormsSignupLocationInfo = ({
                 name="country"
                 as="select"
                 value={values.country}
-                onChange={handleChange}
+                onChange={e => {
+                  handleChange(e);
+                  values.regionName = '';
+                  values.county = '';
+                  values.city = '';
+                }}
                 isValid={values.country && !errors.country}
                 isInvalid={touched.country && !!errors.country}
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {config.allowedInCountries.map((country, index) => (
-                  <option key={index}>{countries[country].default.name}</option>
+                {defineCountries().map(country => (
+                  <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
@@ -200,29 +233,84 @@ const BusinessFormsSignupLocationInfo = ({
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-5" controlId="formTownOrCity">
-              <Form.Label className="form__label mb-0">
-                {t('business-signup.form.cityPlaceholder')}
-              </Form.Label>
+            <Form.Group className="mb-5" controlId="formRegionName">
+              <Form.Label className="form__label mb-0">Region Name</Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"
                 name="regionName"
                 as="select"
                 value={values.regionName}
-                onChange={handleChange}
+                onChange={e => {
+                  handleChange(e);
+                  values.county = '';
+                  values.city = '';
+                }}
                 isValid={values.regionName && !errors.regionName}
                 isInvalid={touched.regionName && !!errors.regionName}
-                autoComplete="new-town-or-city"
+                autoComplete="new-region-name"
               >
                 <option value="" disabled />
                 {values.country &&
-                  defineListOfCities(values.country).map((city, index) => (
-                    <option key={index}>{city}</option>
+                  defineRegionNames(values.country).map(regionName => (
+                    <option key={uniqid()}>{regionName}</option>
                   ))}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.regionName}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-5" controlId="formCounty">
+              <Form.Label className="form__label mb-0">County</Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="county"
+                as="select"
+                value={values.county}
+                onChange={e => {
+                  handleChange(e);
+                  values.city = '';
+                }}
+                isValid={values.county && !errors.county}
+                isInvalid={touched.county && !!errors.county}
+                autoComplete="new-county"
+              >
+                <option value="" disabled />
+                {values.regionName &&
+                  defineCounties(values.country, values.regionName).map(
+                    county => <option key={uniqid()}>{county}</option>,
+                  )}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.county}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-5" controlId="formCity">
+              <Form.Label className="form__label mb-0">City</Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="city"
+                as="select"
+                value={values.city}
+                onChange={handleChange}
+                isValid={values.city && !errors.city}
+                isInvalid={touched.city && !!errors.city}
+                autoComplete="new-city"
+              >
+                <option value="" disabled />
+                {values.county &&
+                  defineCities(
+                    values.country,
+                    values.regionName,
+                    values.county,
+                  ).map(city => <option key={uniqid()}>{city}</option>)}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.city}
               </Form.Control.Feedback>
             </Form.Group>
 

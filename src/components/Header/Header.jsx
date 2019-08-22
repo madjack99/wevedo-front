@@ -22,8 +22,6 @@ import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
-console.log(UK.default.UK);
-
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
