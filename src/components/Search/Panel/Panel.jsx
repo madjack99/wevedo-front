@@ -14,6 +14,7 @@ const SearchPanel = ({
   t,
   history,
   supplierLocationQuery,
+  onSearch = () => {},
 }) => {
   const UKCities = countries.GB.default.provinces;
 
@@ -26,6 +27,7 @@ const SearchPanel = ({
         `/suppliers/${supplierCategory}?supplier=${supplierLocation}`,
       );
     }
+    onSearch();
   };
 
   // as the state depends on the incoming supplierLocationQuery prop

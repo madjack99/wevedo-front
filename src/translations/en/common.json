@@ -32,9 +32,9 @@
   },
   "home": {
     "jumbotron": {
-      "smallTitle": "Special moment",
-      "largeTitleOne": "We can make",
-      "largeTitleTwo": "it happen"
+      "smallTitle": "Your day, your way",
+      "largeTitleOne": "Plan and book your wedding",
+      "largeTitleTwo": "in real time"
     },
     "mainSectionTitle": "How it works",
     "howItWorks": {
@@ -188,7 +188,7 @@
   "imgUpload": {
     "uploadPhotos": "Upload Photos",
     "dragAndDrop": "or just drag and drop",
-    "addAtLeast": "+ Add at least 1 Photos"
+    "addAtLeast": "+ Add at least 1 photo"
   },
   "serviceInfo": {
     "describeService": "Describe your business and services",
