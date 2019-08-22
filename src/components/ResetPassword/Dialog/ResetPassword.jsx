@@ -96,7 +96,7 @@ const ResetPasswordDialog = ({ show, onHide, email, phoneNumber }) => {
                       )}
                       {passwordWasChanged && (
                         <p style={{ color: '#28a745' }}>
-                          password was successfuly changed
+                          password was successfully changed
                         </p>
                       )}
                     </Form.Group>
