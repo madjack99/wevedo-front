@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { WevedoServiceContext } from '../../../../contexts';
@@ -9,7 +9,31 @@ import DashboardBusinessProfileFormsContactDetails from './forms/ContactDetails'
 import DashboardBusinessProfileFormsImageUpload from './forms/ImageUpload';
 
 const DashboardBusinessProfile = ({ user, updateUser }) => {
+  const [isSaving, setIsSaving] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+
+    await updateUser(wevedoService.updateProfile)({
+      bio: user.bio,
+      minPrice: user.minPrice,
+      maxPrice: user.maxPrice,
+      facilities: user.facilities,
+      fullName: user.fullName,
+      website: user.websiteo,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      regionName: user.regionName,
+      country: user.country,
+      postcode: user.postcode,
+      providerImages: user.providerImages,
+    });
+
+    setIsSaving(false);
+  };
+
   return (
     <div className="dashboard">
       <div className="dashboard-background" />
@@ -53,6 +77,13 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
                 <Form.Control placeholder="Enter video URL" />
               </Col>
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-uppercase mt-2 mb-4">
+            <Button size="lg" onClick={handleSave} disabled={isSaving}>
+              Save
+            </Button>
           </Col>
         </Row>
       </Container>
