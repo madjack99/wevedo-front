@@ -116,12 +116,20 @@ const LocationDropdown = ({ UKLocations, t }) => {
           <Row>
             <Col className="border-right text-center">
               {UKLocations['Largest Regions'].slice(0, 4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="regionName"
+                />
               ))}
             </Col>
             <Col className="text-center">
               {UKLocations['Largest Regions'].slice(4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="regionName"
+                />
               ))}
             </Col>
           </Row>
@@ -137,12 +145,20 @@ const LocationDropdown = ({ UKLocations, t }) => {
           <Row>
             <Col className="border-right text-center">
               {UKLocations['Largest Counties'].slice(0, 4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="county"
+                />
               ))}
             </Col>
             <Col className="text-center">
               {UKLocations['Largest Counties'].slice(4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="county"
+                />
               ))}
             </Col>
           </Row>
@@ -158,12 +174,20 @@ const LocationDropdown = ({ UKLocations, t }) => {
           <Row>
             <Col className="border-right text-center">
               {UKLocations['Largest Cities'].slice(0, 4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="city"
+                />
               ))}
             </Col>
             <Col className="text-center">
               {UKLocations['Largest Cities'].slice(4).map(region => (
-                <LocationDropdownItem key={uniqid()} name={region} />
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="city"
+                />
               ))}
             </Col>
           </Row>
@@ -225,9 +249,9 @@ function CategoryDropdownItem({ name }) {
   );
 }
 
-function LocationDropdownItem({ name }) {
+function LocationDropdownItem({ name, searchArea }) {
   return (
-    <LinkContainer to={`/suppliers/Venue?supplier=${name}`}>
+    <LinkContainer to={`/suppliers/Venue?${searchArea}=${name}`}>
       <NavDropdown.Item>{name}</NavDropdown.Item>
     </LinkContainer>
   );
@@ -288,7 +312,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
           {UKLocations['Largest Regions'].map(name => (
             <LinkContainer
               key={uniqid()}
-              to={`/suppliers/Venue?supplier=${name}`}
+              to={`/suppliers/Venue?regionName=${name}`}
               onClick={onHide}
             >
               <p>{name}</p>
@@ -302,7 +326,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
           {UKLocations['Largest Counties'].map(name => (
             <LinkContainer
               key={uniqid()}
-              to={`/suppliers/Venue?supplier=${name}`}
+              to={`/suppliers/Venue?county=${name}`}
               onClick={onHide}
             >
               <p>{name}</p>
@@ -316,7 +340,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
           {UKLocations['Largest Cities'].map(name => (
             <LinkContainer
               key={uniqid()}
-              to={`/suppliers/Venue?supplier=${name}`}
+              to={`/suppliers/Venue?city=${name}`}
               onClick={onHide}
             >
               <p>{name}</p>
