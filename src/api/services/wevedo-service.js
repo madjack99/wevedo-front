@@ -17,6 +17,7 @@ export default class WevedoService extends ApiBase {
     this.checkEmail = async body => this.create('check-email', body);
     this.checkPhone = async body => this.create('check-phone', body);
     this.checkPassword = async body => this.create('check-password', body);
+    this.checkProvider = async body => this.create('check-provider', body);
     this.signOut = async () => this.get('signout');
 
     this.getProfile = async () => this.get('users/me');
