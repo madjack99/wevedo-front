@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { WevedoServiceContext } from '../../../../contexts';
@@ -7,6 +7,7 @@ import { updateUser } from '../../../../actions/user-actions';
 import DashboardBusinessProfileFormsBasicInfo from './forms/BasicInfo';
 import DashboardBusinessProfileFormsContactDetails from './forms/ContactDetails';
 import DashboardBusinessProfileFormsImageUpload from './forms/ImageUpload';
+import DashboardBusinessProfileFormsVideoUpload from './forms/VideoUpload';
 
 const DashboardBusinessProfile = ({ user, updateUser }) => {
   const [isSaving, setIsSaving] = useState(false);
@@ -29,6 +30,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
       country: user.country,
       postcode: user.postcode,
       providerImages: user.providerImages,
+      profileVideoURL: user.profileVideoURL,
     });
 
     setIsSaving(false);
@@ -69,16 +71,10 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
           {' '}
           Upload Video{' '}
         </h6>
-        <Row className="mb-5">
-          <Col>
-            <div className="dashboard-business__profile__whitebox">
-              <Col sm={12} className="mb-4">
-                <p className="text-muted">Add a Video</p>
-                <Form.Control placeholder="Enter video URL" />
-              </Col>
-            </div>
-          </Col>
-        </Row>
+        <DashboardBusinessProfileFormsVideoUpload
+          user={user}
+          updateUser={updateUser}
+        />
         <Row>
           <Col className="text-uppercase mt-2 mb-4">
             <Button size="lg" onClick={handleSave} disabled={isSaving}>
