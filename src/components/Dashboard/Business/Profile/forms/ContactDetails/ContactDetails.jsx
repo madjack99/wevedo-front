@@ -5,9 +5,6 @@ import uniqid from 'uniqid';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
-import countries from '../../../../../../countryLib';
-
-import config from '../../../../../../config';
 import '../Forms.scss';
 
 import * as UK from '../../../../../../UK.json';

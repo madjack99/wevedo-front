@@ -4,23 +4,37 @@ import { withTranslation } from 'react-i18next';
 import rn from 'random-number';
 import { Link } from 'react-router-dom';
 
-import countries from '../../countryLib';
+import * as UK from '../../UK.json';
 
-function getRandomLinks(UKCities) {
+// import countries from '../../countryLib';
+
+console.log(UK.default.UK);
+
+function getRandomLinks(UKLocations) {
+  const UKCountries = Object.keys(UKLocations);
+  let allRegionNames = [];
+  UKCountries.forEach(country => {
+    const countryRegionNames = Object.keys(UKLocations[country]);
+    allRegionNames = allRegionNames.concat(countryRegionNames);
+  });
   const randomNumbersArray = [];
   const randomLinks = [];
   while (randomNumbersArray.length < 12) {
-    const randomNumber = rn({ min: 0, max: UKCities.length, integer: true });
+    const randomNumber = rn({
+      min: 0,
+      max: allRegionNames.length - 1,
+      integer: true,
+    });
     if (randomNumbersArray.includes(randomNumber)) continue;
     else {
-      const randomCity = UKCities[randomNumber];
+      const randomRegionName = allRegionNames[randomNumber];
       randomLinks.push(
         <li key={randomNumber}>
           <Link
-            to={`/suppliers/Venue?city=${randomCity}`}
+            to={`/suppliers/Venue?regionName=${randomRegionName}`}
             onClick={() => window.scrollTo(0, 0)}
           >
-            {randomCity}
+            {randomRegionName}
           </Link>
         </li>,
       );
@@ -31,9 +45,9 @@ function getRandomLinks(UKCities) {
 }
 
 function PopularSearches({ t }) {
-  const UKCities = countries.GB.default.provinces;
+  const UKLocations = UK.default.UK;
 
-  const randomLinks = useMemo(() => getRandomLinks(UKCities), [UKCities]);
+  const randomLinks = useMemo(() => getRandomLinks(UKLocations), [UKLocations]);
 
   return (
     <div className="popularsearches">
