@@ -100,9 +100,15 @@ const ResetPasswordDialog = ({ show, onHide, email, phoneNumber }) => {
                         </p>
                       )}
                     </Form.Group>
-                    <Button type="submit" disabled={isSubmitting}>
-                      Send code
-                    </Button>
+                    {passwordWasChanged ? (
+                      <Button onClick={onHide} disabled={isSubmitting}>
+                        Close
+                      </Button>
+                    ) : (
+                      <Button type="submit" disabled={isSubmitting}>
+                        Send code
+                      </Button>
+                    )}
                   </div>
                   <div className={resetCodeIsSended ? 'd-block' : 'd-none'}>
                     <Modal.Title className="text-center text-uppercase font-weight-bold w-100 pt-2">
