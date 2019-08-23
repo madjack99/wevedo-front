@@ -24,11 +24,11 @@ export default class WevedoService extends ApiBase {
       category,
       page,
       filterOptions,
-      supplierLocationQuery,
+      supplierLocationQueryString,
     ) => {
       const filterString = JSON.stringify(filterOptions);
       return this.get(
-        `providers/by-category/${category}?page=${page}&filterOptions=${filterString}&providerLocationQuery=${supplierLocationQuery}`,
+        `providers/by-category/${category}?page=${page}&filterOptions=${filterString}&providerLocationQuery=${supplierLocationQueryString}`,
       );
     };
     this.getSupplierById = id => this.get(`providers/${id}`);

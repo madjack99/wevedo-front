@@ -33,7 +33,7 @@ const SearchPanel = ({
   // which is set as a value for city select input
   // useEffect is used to prevent infinite rerender
   useEffect(() => {
-    setSupplierLocation(supplierLocationQuery);
+    setSupplierLocation(supplierLocationQuery.city);
   }, [supplierLocationQuery]);
 
   return (
