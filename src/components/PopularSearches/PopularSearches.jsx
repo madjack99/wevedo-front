@@ -3,6 +3,7 @@ import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import rn from 'random-number';
 import { Link } from 'react-router-dom';
+import ClampLines from 'react-clamp-lines';
 
 import * as UK from '../../UK.json';
 
@@ -34,7 +35,14 @@ function getRandomLinks(UKLocations) {
             to={`/suppliers/Venue?regionName=${randomRegionName}`}
             onClick={() => window.scrollTo(0, 0)}
           >
-            {randomRegionName}
+            <ClampLines
+              text={randomRegionName}
+              id={randomNumber}
+              lines={1}
+              ellipsis="..."
+              innerElement="p"
+              buttons={false}
+            />
           </Link>
         </li>,
       );
