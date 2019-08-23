@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { Formik } from 'formik';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form } from 'react-bootstrap';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
@@ -9,11 +10,7 @@ import countries from '../../../../../../countryLib';
 import config from '../../../../../../config';
 import '../Forms.scss';
 
-const DashboardBusinessProfileFormsContactDetails = ({
-  user,
-  updateUser,
-  updateProfile,
-}) => {
+const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
   const defineListOfCities = countryName => {
     const listOfCountries = Object.values(countries);
     const country = listOfCountries.filter(
@@ -36,27 +33,9 @@ const DashboardBusinessProfileFormsContactDetails = ({
         country: user.country || '',
         postcode: user.postcode || '',
       }}
-      onSubmit={async (values, { setSubmitting }) => {
-        try {
-          await updateUser(updateProfile)({
-            fullName: values.fullName,
-            website: values.website,
-            email: values.email,
-            phoneNumber: values.phoneNumber,
-            address: values.address,
-            regionName: values.regionName,
-            country: values.country,
-            postcode: values.postcode,
-          });
-          setSubmitting(false);
-        } catch (err) {
-          console.log(err.message);
-          setSubmitting(false);
-        }
-      }}
       validationSchema={contactDetailsSchema}
     >
-      {({ values, handleChange, errors, handleSubmit, isSubmitting }) => {
+      {({ values, handleChange, errors, handleSubmit }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-5">
@@ -70,6 +49,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         value={values.fullName}
                         name="fullName"
                         onChange={handleChange}
+                        onBlur={() =>
+                          updateUser()({
+                            fullName: values.fullName,
+                          })
+                        }
                         isValid={values.fullName && !errors.fullName}
                       />
                       {errors.fullName && (
@@ -83,6 +67,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         value={values.website}
                         name="website"
                         onChange={handleChange}
+                        onBlur={() =>
+                          updateUser()({
+                            website: values.website,
+                          })
+                        }
                         isValid={values.website && !errors.website}
                       />
                       {errors.website && (
@@ -96,6 +85,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         value={values.email}
                         name="email"
                         onChange={handleChange}
+                        onBlur={() =>
+                          updateUser()({
+                            email: values.email,
+                          })
+                        }
                         isValid={values.email && !errors.email}
                       />
                       {errors.email && (
@@ -109,6 +103,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         value={values.phoneNumber}
                         name="phoneNumber"
                         onChange={handleChange}
+                        onBlur={() =>
+                          updateUser()({
+                            phoneNumber: values.phoneNumber,
+                          })
+                        }
                         isValid={values.phoneNumber && !errors.phoneNumber}
                       />
                       {errors.phoneNumber && (
@@ -125,6 +124,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           value={values.address}
                           name="address"
                           onChange={handleChange}
+                          onBlur={() =>
+                            updateUser()({
+                              address: values.address,
+                            })
+                          }
                           isValid={values.address && !errors.address}
                         />
                         {errors.address && (
@@ -138,6 +142,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           name="country"
                           as="select"
                           onChange={handleChange}
+                          onBlur={() =>
+                            updateUser()({
+                              country: values.country,
+                            })
+                          }
                           isValid={values.country && !errors.country}
                         >
                           <option>{values.country}</option>
@@ -160,6 +169,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           name="regionName"
                           as="select"
                           onChange={handleChange}
+                          onBlur={() =>
+                            updateUser()({
+                              regionName: values.regionName,
+                            })
+                          }
                           isValid={values.regionName && !errors.regionName}
                         >
                           <option>{values.regionName}</option>
@@ -180,6 +194,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           value={values.postcode}
                           name="postcode"
                           onChange={handleChange}
+                          onBlur={() =>
+                            updateUser()({
+                              postcode: values.postcode,
+                            })
+                          }
                           isValid={values.postcode && !errors.postcode}
                         />
                         {errors.postcode && (
@@ -187,11 +206,6 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         )}
                       </Col>
                     </Row>
-                  </Col>
-                  <Col sm={12} className="text-uppercase mt-2 mb-4">
-                    <Button size="lg" type="submit" disabled={isSubmitting}>
-                      Save
-                    </Button>
                   </Col>
                 </div>
               </Col>

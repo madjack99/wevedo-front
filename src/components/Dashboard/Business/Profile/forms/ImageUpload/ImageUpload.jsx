@@ -11,86 +11,55 @@ import './ImageUpload.scss';
 
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
-function DashboardBusinessProfileFormsImageUpload({
-  user,
-  updateUser,
-  t,
-  updateProfile,
-}) {
-  const [serverPhotos, setServerPhotos] = useState([]);
+const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
   const [photos, setPhotos] = useState([]);
-  const [photosURL, setPhotosURL] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPhotos, setIsLoadingPhotos] = useState(false);
 
   useEffect(() => {
-    user.providerImages && setServerPhotos(Object.values(user.providerImages));
+    if (user.providerImages) {
+      setPhotos(Object.values(user.providerImages));
+    }
   }, [user]);
 
   const wevedoService = useContext(WevedoServiceContext);
 
-  const onDrop = acceptedFiles => {
-    setPhotos([...photos, ...acceptedFiles]);
-    setPhotosURL([
-      ...photosURL,
-      ...acceptedFiles.map(acceptedFile => URL.createObjectURL(acceptedFile)),
-    ]);
-  };
-
-  const onDeleteNewPhoto = photoIndex => {
-    setPhotos(photos.filter((photo, index) => index !== photoIndex));
-    setPhotosURL(photosURL.filter((photoURL, index) => index !== photoIndex));
-  };
-
-  const onDeleteServerPhoto = photoIndex => {
-    setServerPhotos(
-      serverPhotos.filter((servePhoto, index) => index !== photoIndex),
-    );
-  };
-
-  const onSubmit = async event => {
-    event.preventDefault();
-
+  const loadPhotosToServer = async photosToServer => {
     const formData = new FormData();
-    photos.forEach((photo, index) => formData.append(index, photo));
-
-    setIsLoading(true);
+    photosToServer.forEach((photo, index) => formData.append(index, photo));
 
     try {
       const { data: cloudinaryPhotos } = await wevedoService.loadImagesToServer(
         formData,
       );
 
-      setIsLoading(false);
-
-      const serverPhotosObject = serverPhotos.reduce(
-        (acc, photo, index) => ({
-          ...acc,
-          [uniqid()]: photo,
-        }),
-        {},
-      );
-
-      const cloudinaryPhotosObject = cloudinaryPhotos.reduce(
-        (acc, photo, index) => ({
-          ...acc,
-          [uniqid()]: photo.secure_url,
-        }),
-        {},
-      );
-
-      const oldAndNewlyUploadedPhotos = Object.assign(
-        {},
-        serverPhotosObject,
-        cloudinaryPhotosObject,
-      );
-
-      updateUser(updateProfile)({ providerImages: oldAndNewlyUploadedPhotos });
-
-      setPhotosURL([]);
-      setPhotos([]);
+      return cloudinaryPhotos;
     } catch (err) {
-      setIsLoading(false);
+      return console.error(err);
     }
+  };
+
+  const onDrop = async acceptedFiles => {
+    const newPhotos = acceptedFiles.map(photo => URL.createObjectURL(photo));
+    const updatedPhotos = [...photos, ...newPhotos];
+
+    setIsLoadingPhotos(true);
+
+    const photosOnServer = await loadPhotosToServer(acceptedFiles);
+    updateUser()({
+      providerImages: [
+        ...photos,
+        ...photosOnServer.map(({ secure_url: secureURL }) => secureURL),
+      ],
+    });
+
+    setPhotos(updatedPhotos);
+    setIsLoadingPhotos(false);
+  };
+
+  const onDeletePhoto = async photoIndex => {
+    const leftPhotos = photos.filter((photo, index) => index !== photoIndex);
+    updateUser()({ providerImages: [...leftPhotos] });
+    setPhotos(leftPhotos);
   };
 
   const getBackgroundColor = ({ isDragAccept, isDragReject }) => {
@@ -113,10 +82,10 @@ function DashboardBusinessProfileFormsImageUpload({
   const Container = styled.div`
     flex: 1;
     display: flex;
-    flex-direction: ${serverPhotos.length === 0 ? 'column' : 'row'};
+    flex-direction: ${photos.length === 0 ? 'column' : 'row'};
     align-items: center;
-    justify-content: ${serverPhotos.length === 0 ? 'center' : 'start'};
-    height: ${serverPhotos.length === 0 ? '400px' : '100px'};
+    justify-content: ${photos.length === 0 ? 'center' : 'start'};
+    height: ${photos.length === 0 ? '400px' : '100px'};
     padding: 20px;
     border-width: 2px;
     border-radius: 2px;
@@ -128,19 +97,15 @@ function DashboardBusinessProfileFormsImageUpload({
     transition: border 0.24s ease-in-out;
   `;
 
-  const PreviewZoneForNewPhotos = props => (
+  const PreviewZone = () => (
     <Fragment>
-      {photosURL.map((photoURL, index) => (
+      {photos.map((photo, index) => (
         <Col md={4} xs={12} key={uniqid()}>
           <div className="position-relative">
-            <Image
-              className="preview-zone__photo my-2"
-              src={photoURL}
-              rounded
-            />
+            <Image className="preview-zone__photo my-2" src={photo} rounded />
             <Button
               className="modal-close-btn  modal-close-btn_red"
-              onClick={() => onDeleteNewPhoto(index)}
+              onClick={() => onDeletePhoto(index)}
               variant="link"
             >
               <i className="fas fa-times fa-2x" />
@@ -148,38 +113,20 @@ function DashboardBusinessProfileFormsImageUpload({
           </div>
         </Col>
       ))}
+      {isLoadingPhotos && (
+        <Col md={4} xs={12} key={uniqid()}>
+          <div className="position-relative">
+            <div className="preview-zone__photo preview-zone__photo_loading d-flex my-2 rounded">
+              <p className="m-auto">Loading...</p>
+            </div>
+          </div>
+        </Col>
+      )}
     </Fragment>
   );
 
-  const PreviewZoneForServerPhotos = props => {
-    return (
-      <Fragment>
-        {serverPhotos.length === 0
-          ? null
-          : serverPhotos.map((serverPhotoUrl, index) => (
-              <Col md={4} xs={12} key={uniqid()}>
-                <div className="position-relative">
-                  <Image
-                    className="preview-zone__photo my-2"
-                    src={serverPhotoUrl}
-                    rounded
-                  />
-                  <Button
-                    className="modal-close-btn modal-close-btn_red"
-                    onClick={() => onDeleteServerPhoto(index)}
-                    variant="link"
-                  >
-                    <i className="fas fa-times fa-2x" />
-                  </Button>
-                </div>
-              </Col>
-            ))}
-      </Fragment>
-    );
-  };
-
   return (
-    <Form onSubmit={onSubmit}>
+    <Form>
       <FormGroup className="image-upload__form">
         <Dropzone accept="image/*" onDrop={onDrop}>
           {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
@@ -188,21 +135,19 @@ function DashboardBusinessProfileFormsImageUpload({
                 <input {...getInputProps()} />
                 <img
                   className={
-                    serverPhotos.length > 0
-                      ? 'mr-5 image-upload__image_small'
-                      : ''
+                    photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
                   }
                   src={imageUpload}
                   alt="Upload icon"
                 />
                 <div
                   className={`d-flex flex-column ${
-                    serverPhotos.length > 0 ? 'text-left' : 'text-center'
+                    photos.length > 0 ? 'text-left' : 'text-center'
                   }`}
                 >
                   <p
                     className={`image-upload__title mb-2 ${
-                      serverPhotos.length === 0 ? 'mt-4' : 'mt-0'
+                      photos.length === 0 ? 'mt-4' : 'mt-0'
                     }`}
                   >
                     <b>{t('imgUpload.uploadPhotos')}</b>{' '}
@@ -219,24 +164,12 @@ function DashboardBusinessProfileFormsImageUpload({
           }}
         </Dropzone>
         <Row className="mt-4">
-          <PreviewZoneForServerPhotos />
-          <PreviewZoneForNewPhotos />
-        </Row>
-        <Row>
-          <Col sm={12} className="text-uppercase mt-4 mb-4">
-            <Button
-              type="submit"
-              size="lg"
-              disabled={(!photos.length && !serverPhotos.length) || isLoading}
-            >
-              {isLoading ? 'Saving...' : t('serviceInfo.save')}
-            </Button>
-          </Col>
+          <PreviewZone />
         </Row>
       </FormGroup>
     </Form>
   );
-}
+};
 
 export default withTranslation('common')(
   DashboardBusinessProfileFormsImageUpload,
