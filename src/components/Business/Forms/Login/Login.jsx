@@ -10,13 +10,14 @@ import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
 import { fetchSignUp, fetchLogin } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
+import { withCheckProvider } from '../../../HOC/index';
 import formSchema from './schema';
 
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 import ResetPasswordDialogError from '../../../ResetPassword/Dialog/Error';
 import Checkbox from '../../../UI/Checkbox';
 
-const UserFormsLogin = ({ login, t }) => {
+const UserFormsLogin = ({ login, t, checkProvider }) => {
   const [showResetDialog, setShowResetDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
@@ -31,23 +32,25 @@ const UserFormsLogin = ({ login, t }) => {
         password: '',
       }}
       onSubmit={async (values, { setSubmitting, setErrors }) => {
-        const isLoginSuccessful = await login(wevedoService.login, {
-          email: values.emailPhone.includes('@') ? values.emailPhone : null,
-          phoneNumber: values.emailPhone.includes('@')
-            ? null
-            : values.emailPhone,
-          password: values.password,
-          deviseOS: 'android', // TO-DO: 'web' should be later
-        });
-
-        if (!isLoginSuccessful) {
-          setErrors({
-            emailPhone: 'wrong credentials',
-            password: 'wrong credentials',
+        try {
+          await checkProvider(values.emailPhone);
+          const isLoginSuccessful = await login(wevedoService.login, {
+            email: isEmail ? values.emailPhone : null,
+            phoneNumber: isEmail ? null : values.emailPhone,
+            password: values.password,
+            deviseOS: 'android', // TO-DO: 'web' should be later
           });
 
-          setSubmitting(false);
+          if (!isLoginSuccessful) {
+            setErrors({
+              emailPhone: 'wrong credentials',
+              password: 'wrong credentials',
+            });
+          }
+        } catch (error) {
+          setErrors({ emailPhone: 'this email is used for customer' });
         }
+        setSubmitting(false);
       }}
       validationSchema={formSchema}
       render={({
@@ -171,4 +174,5 @@ export default compose(
     mapDispatchToProps,
   ),
   withTranslation('common'),
+  withCheckProvider(),
 )(UserFormsLogin);
