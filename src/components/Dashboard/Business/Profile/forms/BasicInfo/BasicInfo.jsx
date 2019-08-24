@@ -68,6 +68,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                               })
                             }
                             isValid={values.minPrice && !errors.minPrice}
+                            placeholder="0"
                           />
                           {errors.minPrice && (
                             <p className="errorMessage">{errors.minPrice}</p>
@@ -92,6 +93,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                               })
                             }
                             isValid={values.maxPrice && !errors.maxPrice}
+                            placeholder="100000"
                           />
                           {errors.maxPrice && (
                             <p className="errorMessage">{errors.maxPrice}</p>
