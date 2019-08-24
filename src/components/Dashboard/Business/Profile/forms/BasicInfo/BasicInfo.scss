@@ -1,0 +1,10 @@
+.basic-info {
+  &__currency {
+    height: 34px;
+  }
+
+  &__pricing {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Row, Col, Form } from 'react-bootstrap';
+import { Row, Col, Form, InputGroup } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
+
+import './BasicInfo.scss';
 import '../Forms.scss';
 
 const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
@@ -49,38 +51,52 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                     <p className="text-muted">Pricing</p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
-                        <Form.Control
-                          name="minPrice"
-                          value={values.minPrice}
-                          className=" form__control__account "
-                          onChange={handleChange}
-                          onBlur={() =>
-                            updateUser()({
-                              minPrice: values.minPrice,
-                            })
-                          }
-                          isValid={values.minPrice && !errors.minPrice}
-                        />
-                        {errors.minPrice && (
-                          <p className="errorMessage">{errors.minPrice}</p>
-                        )}
+                        <InputGroup>
+                          <InputGroup.Prepend className="basic-info__currency">
+                            <InputGroup.Text id="inputGroupPrepend">
+                              £
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            className="basic-info__pricing form__control__account"
+                            name="minPrice"
+                            value={values.minPrice}
+                            onChange={handleChange}
+                            onBlur={() =>
+                              updateUser()({
+                                minPrice: values.minPrice,
+                              })
+                            }
+                            isValid={values.minPrice && !errors.minPrice}
+                          />
+                          {errors.minPrice && (
+                            <p className="errorMessage">{errors.minPrice}</p>
+                          )}
+                        </InputGroup>
                       </Col>
                       <Col sm={4}>
-                        <Form.Control
-                          name="maxPrice"
-                          value={values.maxPrice}
-                          className=" form__control__account "
-                          onChange={handleChange}
-                          onBlur={() =>
-                            updateUser()({
-                              maxPrice: values.maxPrice,
-                            })
-                          }
-                          isValid={values.maxPrice && !errors.maxPrice}
-                        />
-                        {errors.maxPrice && (
-                          <p className="errorMessage">{errors.maxPrice}</p>
-                        )}
+                        <InputGroup>
+                          <InputGroup.Prepend className="basic-info__currency">
+                            <InputGroup.Text id="inputGroupPrepend">
+                              £
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            className="basic-info__pricing form__control__account"
+                            name="maxPrice"
+                            value={values.maxPrice}
+                            onChange={handleChange}
+                            onBlur={() =>
+                              updateUser()({
+                                maxPrice: values.maxPrice,
+                              })
+                            }
+                            isValid={values.maxPrice && !errors.maxPrice}
+                          />
+                          {errors.maxPrice && (
+                            <p className="errorMessage">{errors.maxPrice}</p>
+                          )}
+                        </InputGroup>
                       </Col>
                     </Row>
                   </Col>
