@@ -5,43 +5,46 @@ import { Link } from 'react-router-dom';
 
 import * as UK from '../../../../UK.json';
 
-function LocationsSearchAreasRegionName() {
+function LocationsSearchAreasCity() {
   const [country, setCountry] = useState('England');
   const countriesObj = UK.default.UK;
   const countries = Object.keys(UK.default.UK);
 
-  const displayRegionNameInCols = selectedCountry => {
+  const displayCityInCols = selectedCountry => {
     const regionNames = Object.keys(countriesObj[selectedCountry]);
-    const firstCol = Math.floor(regionNames.length / 3);
-    const secondCol = Math.floor((regionNames.length / 3) * 2);
-    console.log(regionNames.length, firstCol, secondCol);
-    regionNames.sort();
+    let cities = [];
+    regionNames.forEach(regionName =>
+      Object.keys(countriesObj[selectedCountry][regionName]).forEach(
+        county =>
+          (cities = cities.concat(
+            countriesObj[selectedCountry][regionName][county],
+          )),
+      ),
+    );
+    cities.sort();
+    const firstCol = Math.floor(cities.length / 3);
+    const secondCol = Math.floor((cities.length / 3) * 2);
+    console.log(cities.length, firstCol, secondCol);
     return (
       <Row>
         <Col xs={6} md={4}>
-          {regionNames.slice(0, firstCol).map(regionName => (
+          {cities.slice(0, firstCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?regionName=${regionName}`}>
-                {regionName}
-              </Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
             </div>
           ))}
         </Col>
         <Col xs={6} md={4}>
-          {regionNames.slice(firstCol, secondCol).map(regionName => (
+          {cities.slice(firstCol, secondCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?regionName=${regionName}`}>
-                {regionName}
-              </Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
             </div>
           ))}
         </Col>
         <Col xs={6} md={4}>
-          {regionNames.slice(secondCol).map(regionName => (
+          {cities.slice(secondCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?regionName=${regionName}`}>
-                {regionName}
-              </Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
             </div>
           ))}
         </Col>
@@ -62,12 +65,12 @@ function LocationsSearchAreasRegionName() {
           ))}
         </Nav>
         <div className="font-weight-bold mt-2 mb-2 text-uppercase">
-          Choose region
+          Choose city
         </div>
-        {displayRegionNameInCols(country)}
+        {displayCityInCols(country)}
       </Container>
     </div>
   );
 }
 
-export default LocationsSearchAreasRegionName;
+export default LocationsSearchAreasCity;

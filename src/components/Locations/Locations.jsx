@@ -1,5 +1,7 @@
 import React from 'react';
 import LocationsSearchAreasRegionName from './SearchAreas/RegionName';
+import LocationsSearchAreasCounty from './SearchAreas/County';
+import LocationsSearchAreasCity from './SearchAreas/City';
 
 function Locations({ match }) {
   const { searchArea } = match.params;
@@ -9,11 +11,11 @@ function Locations({ match }) {
       case 'regionName':
         return <LocationsSearchAreasRegionName />;
       case 'county':
-        return 'Showing counties';
+        return <LocationsSearchAreasCounty />;
       case 'city':
-        return 'Showing cities';
+        return <LocationsSearchAreasCity />;
       default:
-        return 'Showing default';
+        return <LocationsSearchAreasRegionName />;
     }
   };
 
