@@ -134,7 +134,9 @@ const LocationDropdown = ({ UKLocations, t }) => {
             </Col>
           </Row>
           <div className="text-center mt-3">
-            <Link to="#">View more regions ></Link>
+            <Link to="/locations/regionName" className="view-all-btn">
+              View more regions >
+            </Link>
           </div>
         </Col>
         <Col
@@ -163,7 +165,9 @@ const LocationDropdown = ({ UKLocations, t }) => {
             </Col>
           </Row>
           <div className="text-center mt-3">
-            <Link to="#">View more counties ></Link>
+            <Link to="/locations/county" className="view-all-btn">
+              View more counties >
+            </Link>
           </div>
         </Col>
         <Col
@@ -192,7 +196,9 @@ const LocationDropdown = ({ UKLocations, t }) => {
             </Col>
           </Row>
           <div className="text-center mt-3">
-            <Link to="#">View more cities ></Link>
+            <Link to="/locations/city" className="view-all-btn">
+              View more cities >
+            </Link>
           </div>
         </Col>
       </Row>
@@ -318,7 +324,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
               <p>{name}</p>
             </LinkContainer>
           ))}
-          <Link to="#" className="view-all-btn">
+          <Link to="/locations/regionName" className="view-all-btn">
             View all regions
             <i className="fa fa-arrow-right ml-3" />
           </Link>
@@ -332,7 +338,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
               <p>{name}</p>
             </LinkContainer>
           ))}
-          <Link to="#" className="view-all-btn">
+          <Link to="/locations/county" className="view-all-btn">
             View all counties
             <i className="fa fa-arrow-right ml-3" />
           </Link>
@@ -346,7 +352,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
               <p>{name}</p>
             </LinkContainer>
           ))}
-          <Link to="#" className="view-all-btn">
+          <Link to="/locations/city" className="view-all-btn">
             View all cities
             <i className="fa fa-arrow-right ml-3" />
           </Link>
