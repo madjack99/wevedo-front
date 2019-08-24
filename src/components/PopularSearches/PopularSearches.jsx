@@ -7,8 +7,6 @@ import ClampLines from 'react-clamp-lines';
 
 import * as UK from '../../UK.json';
 
-console.log(UK.default.UK);
-
 function getRandomLinks(UKLocations) {
   const UKCountries = Object.keys(UKLocations);
   let allRegionNames = [];

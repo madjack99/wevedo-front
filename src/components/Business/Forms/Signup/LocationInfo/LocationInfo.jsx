@@ -20,8 +20,6 @@ import {
 import { WevedoServiceContext } from '../../../../../contexts';
 import formScheme from './schema';
 
-console.log(UK.default.UK);
-
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
   updateUser,

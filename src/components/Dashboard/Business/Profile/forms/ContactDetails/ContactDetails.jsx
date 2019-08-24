@@ -9,8 +9,6 @@ import '../Forms.scss';
 
 import * as UK from '../../../../../../UK.json';
 
-console.log(UK.default.UK);
-
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
