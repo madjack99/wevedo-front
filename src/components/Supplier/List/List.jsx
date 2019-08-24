@@ -115,7 +115,7 @@ const SupplierList = ({
             {suppliers.map(supplier => {
               const { _id: id } = supplier;
               return (
-                <Col className="mb-4" sm={6} key={id}>
+                <Col className="mb-4" sm={4} key={id}>
                   <SupplierGrid supplier={supplier} />
                 </Col>
               );
