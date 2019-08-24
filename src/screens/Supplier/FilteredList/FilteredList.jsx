@@ -10,6 +10,7 @@ import 'rc-slider/assets/index.css';
 import backgroundImage from '../../../assets/images/venues-bg.png';
 
 import { WevedoServiceContext } from '../../../contexts';
+import config from '../../../config';
 
 import ScreensLayoutMain from '../../Layouts/Main';
 import SearchPanel from '../../../components/Search/Panel';
@@ -42,6 +43,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
         currentPage,
         filterOptions,
         supplierLocationQuery,
+        config.suppliersPerPage,
       );
 
       setSuppliers(newSuppliers);
