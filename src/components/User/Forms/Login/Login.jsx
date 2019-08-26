@@ -82,8 +82,10 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
             setErrors({ emailPhone: 'this email is used for supplier' });
           } catch (error) {
             const isLoginSuccessful = await login(wevedoService.login, {
-              email: isEmail ? values.emailPhone : null,
-              phoneNumber: isEmail ? null : values.emailPhone,
+              email: isEmail(values.emailPhone) ? values.emailPhone : null,
+              phoneNumber: isEmail(values.emailPhone)
+                ? null
+                : values.emailPhone,
               password: values.password,
               deviseOS: 'android', // TO-DO: 'web' should be later
             });

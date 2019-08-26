@@ -35,8 +35,8 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
         try {
           await checkProvider(values.emailPhone);
           const isLoginSuccessful = await login(wevedoService.login, {
-            email: isEmail ? values.emailPhone : null,
-            phoneNumber: isEmail ? null : values.emailPhone,
+            email: isEmail(values.emailPhone) ? values.emailPhone : null,
+            phoneNumber: isEmail(values.emailPhone) ? null : values.emailPhone,
             password: values.password,
             deviseOS: 'android', // TO-DO: 'web' should be later
           });
