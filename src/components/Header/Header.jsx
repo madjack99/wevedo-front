@@ -114,7 +114,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
           }`}
         >
           <Row>
-            <Col className="border-right text-center">
+            <Col className="border-right">
               {UKLocations['Largest Regions'].slice(0, 4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -123,7 +123,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 />
               ))}
             </Col>
-            <Col className="text-center">
+            <Col>
               {UKLocations['Largest Regions'].slice(4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -133,9 +133,10 @@ const LocationDropdown = ({ UKLocations, t }) => {
               ))}
             </Col>
           </Row>
-          <div className="text-center mt-3">
+          <div className="mt-3">
             <Link to="/locations/regionName" className="view-all-btn">
-              View more regions >
+              View more regions
+              <i className="fa fa-arrow-right" />
             </Link>
           </div>
         </Col>
@@ -145,7 +146,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
           }`}
         >
           <Row>
-            <Col className="border-right text-center">
+            <Col className="border-right">
               {UKLocations['Largest Counties'].slice(0, 4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -154,7 +155,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 />
               ))}
             </Col>
-            <Col className="text-center">
+            <Col>
               {UKLocations['Largest Counties'].slice(4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -164,9 +165,10 @@ const LocationDropdown = ({ UKLocations, t }) => {
               ))}
             </Col>
           </Row>
-          <div className="text-center mt-3">
+          <div className="mt-3">
             <Link to="/locations/county" className="view-all-btn">
-              View more counties >
+              View more counties
+              <i className="fa fa-arrow-right" />
             </Link>
           </div>
         </Col>
@@ -176,7 +178,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
           }`}
         >
           <Row>
-            <Col className="border-right text-center">
+            <Col className="border-right">
               {UKLocations['Largest Cities'].slice(0, 4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -185,7 +187,7 @@ const LocationDropdown = ({ UKLocations, t }) => {
                 />
               ))}
             </Col>
-            <Col className="text-center">
+            <Col>
               {UKLocations['Largest Cities'].slice(4).map(region => (
                 <LocationDropdownItem
                   key={uniqid()}
@@ -195,9 +197,10 @@ const LocationDropdown = ({ UKLocations, t }) => {
               ))}
             </Col>
           </Row>
-          <div className="text-center mt-3">
+          <div className="mt-3">
             <Link to="/locations/city" className="view-all-btn">
-              View more cities >
+              View more cities
+              <i className="fa fa-arrow-right" />
             </Link>
           </div>
         </Col>
