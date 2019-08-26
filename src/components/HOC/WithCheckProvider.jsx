@@ -9,8 +9,8 @@ const withBookstoreService = () => Wrapped => props => {
 
   const checkProvider = async emailPhone =>
     wevedoService.checkProvider({
-      email: isEmail ? emailPhone : null,
-      phoneNumber: isEmail ? null : emailPhone,
+      email: isEmail(emailPhone) ? emailPhone : null,
+      phoneNumber: isEmail(emailPhone) ? null : emailPhone,
     });
 
   return <Wrapped checkProvider={checkProvider} {...props} />;
