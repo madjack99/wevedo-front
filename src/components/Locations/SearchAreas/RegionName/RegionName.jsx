@@ -57,7 +57,7 @@ function LocationsSearchAreasRegionName() {
             <Nav.Item
               key={uniqid()}
               className={`navItem ${
-                country === stateCountry ? 'active' : null
+                country === stateCountry ? 'activeLocationNavItem' : null
               }`}
             >
               <Nav.Link
