@@ -24,8 +24,12 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
   const [filterOptions, setFilterOptions] = useState({});
   const supplierListContainer = useRef(null);
 
-  const supplierLocationQuery =
-    queryString.parse(location.search).supplier || '';
+  // It's an object: {city/regionName/county: 'London'} or ''
+  const supplierLocationQuery = queryString.parse(location.search) || '';
+
+  const supplierLocationQueryString = JSON.stringify(
+    queryString.parse(location.search) || '',
+  );
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.category;
@@ -42,7 +46,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
         supplierCategory,
         currentPage,
         filterOptions,
-        supplierLocationQuery,
+        supplierLocationQueryString,
         config.suppliersPerPage,
       );
 
@@ -55,7 +59,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     currentPage,
     supplierCategory,
     filterOptions,
-    supplierLocationQuery,
+    supplierLocationQueryString,
   ]);
 
   const scrollToSupplierList = () => {

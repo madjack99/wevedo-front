@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import {
   Nav,
@@ -17,8 +18,8 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
+import * as UK from '../../countryLib/UK.json';
 import './Header.scss';
-
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
@@ -27,6 +28,8 @@ import config from '../../config';
 
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
+  const [locationModalShow, setLocationModalShow] = useState(false);
+  const UKLocations = UK.default;
 
   return (
     <Navbar fixed="top" bg="light" variant="light" expand="lg">
@@ -38,6 +41,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               {t('header.venues')}
             </Nav.Link>
           </LinkContainer>
+
           <CategoryDropdown categories={categories} t={t} />
           <Nav.Link
             onClick={() => setModalShow(true)}
@@ -53,7 +57,24 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
             categories={categories}
             t={t}
           />
+
+          <LocationDropdown UKLocations={UKLocations} t={t} />
+          <Nav.Link
+            onClick={() => setLocationModalShow(true)}
+            className="d-block d-lg-none"
+          >
+            <span className="font-weight-bold">
+              Locations <i className="fa fa-chevron-right ml-2" />
+            </span>
+          </Nav.Link>
+          <LocationSubMenu
+            show={locationModalShow}
+            onHide={() => setLocationModalShow(false)}
+            UKLocations={UKLocations}
+            t={t}
+          />
         </Nav>
+
         {isLoggedIn ? <ProfileArea user={user} /> : <EnterButtons t={t} />}
       </Navbar.Collapse>
       <Navbar.Brand>
@@ -62,6 +83,133 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
         </Link>
       </Navbar.Brand>
     </Navbar>
+  );
+};
+
+const LocationDropdown = ({ UKLocations, t }) => {
+  const [currentlyOver, setCurrentlyOver] = useState('region');
+  return (
+    <NavDropdown title="Locations" className="d-none d-lg-block">
+      <Row>
+        <div className="active-menu d-none d-lg-block" />
+        <Col sm="auto" className="text-left">
+          <NavDropdown.Item
+            className="search-label mb-3"
+            onMouseOver={e => setCurrentlyOver('region')}
+          >
+            Search by Region
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            className="search-label mb-3"
+            onMouseOver={e => setCurrentlyOver('county')}
+          >
+            Search by County
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            className="search-label mb-3"
+            onMouseOver={e => setCurrentlyOver('town')}
+          >
+            Search by Town
+          </NavDropdown.Item>
+        </Col>
+        <Col
+          className={`search-result region-areas ${
+            currentlyOver === 'region' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right">
+              {UKLocations['Largest Regions'].slice(0, 4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="regionName"
+                />
+              ))}
+            </Col>
+            <Col>
+              {UKLocations['Largest Regions'].slice(4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="regionName"
+                />
+              ))}
+            </Col>
+          </Row>
+          <div className="mt-3">
+            <Link to="/locations/regionName" className="view-all-btn">
+              View more regions
+              <i className="fa fa-arrow-right" />
+            </Link>
+          </div>
+        </Col>
+        <Col
+          className={`search-result county-areas ${
+            currentlyOver === 'county' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right">
+              {UKLocations['Largest Counties'].slice(0, 4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="county"
+                />
+              ))}
+            </Col>
+            <Col>
+              {UKLocations['Largest Counties'].slice(4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="county"
+                />
+              ))}
+            </Col>
+          </Row>
+          <div className="mt-3">
+            <Link to="/locations/county" className="view-all-btn">
+              View more counties
+              <i className="fa fa-arrow-right" />
+            </Link>
+          </div>
+        </Col>
+        <Col
+          className={`search-result town-areas ${
+            currentlyOver === 'town' ? 'search-result-active' : ''
+          }`}
+        >
+          <Row>
+            <Col className="border-right">
+              {UKLocations['Largest Cities'].slice(0, 4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="city"
+                />
+              ))}
+            </Col>
+            <Col>
+              {UKLocations['Largest Cities'].slice(4).map(region => (
+                <LocationDropdownItem
+                  key={uniqid()}
+                  name={region}
+                  searchArea="city"
+                />
+              ))}
+            </Col>
+          </Row>
+          <div className="mt-3">
+            <Link to="/locations/city" className="view-all-btn">
+              View more cities
+              <i className="fa fa-arrow-right" />
+            </Link>
+          </div>
+        </Col>
+      </Row>
+    </NavDropdown>
   );
 };
 
@@ -109,6 +257,14 @@ const CategoryDropdown = ({ categories, t }) => {
 function CategoryDropdownItem({ name }) {
   return (
     <LinkContainer to={`/suppliers/${name}`}>
+      <NavDropdown.Item>{name}</NavDropdown.Item>
+    </LinkContainer>
+  );
+}
+
+function LocationDropdownItem({ name, searchArea }) {
+  return (
+    <LinkContainer to={`/suppliers/Venue?${searchArea}=${name}`}>
       <NavDropdown.Item>{name}</NavDropdown.Item>
     </LinkContainer>
   );
@@ -191,6 +347,69 @@ function ProfileArea({ user }) {
     </div>
   );
 }
+
+const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
+  <Modal
+    {...rest}
+    size="lg"
+    aria-labelledby="location-submenu"
+    centered
+    className="location-submenu"
+  >
+    <Modal.Body>
+      <Row className="pt-2">
+        <Col xs={2} className="ml-4" onClick={onHide}>
+          <i className="fas fa-arrow-left fa-2x" />
+        </Col>
+        <Col>
+          <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
+          {UKLocations['Largest Regions'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?regionName=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="/locations/regionName" className="view-all-btn">
+            View all regions
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
+          {UKLocations['Largest Counties'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?county=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="/locations/county" className="view-all-btn">
+            View all counties
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+          <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
+          {UKLocations['Largest Cities'].map(name => (
+            <LinkContainer
+              key={uniqid()}
+              to={`/suppliers/Venue?city=${name}`}
+              onClick={onHide}
+            >
+              <p>{name}</p>
+            </LinkContainer>
+          ))}
+          <Link to="/locations/city" className="view-all-btn">
+            View all cities
+            <i className="fa fa-arrow-right ml-3" />
+          </Link>
+        </Col>
+      </Row>
+    </Modal.Body>
+  </Modal>
+);
 
 const SubMenu = ({ categories, onHide, t, ...rest }) => (
   <Modal

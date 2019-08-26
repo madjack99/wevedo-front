@@ -3,10 +3,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import countries from '../../../countryLib';
+import * as UK from '../../../countryLib/UK.json';
 
 const SearchPanel = ({
   title,
@@ -16,7 +17,13 @@ const SearchPanel = ({
   supplierLocationQuery,
   onSearch = () => {},
 }) => {
-  const UKCities = countries.GB.default.provinces;
+  const UKLocations = UK.default.UK;
+  const UKCountries = Object.keys(UKLocations);
+  let allRegionNames = [];
+  UKCountries.forEach(country => {
+    const countryRegionNames = Object.keys(UKLocations[country]);
+    allRegionNames = allRegionNames.concat(countryRegionNames);
+  });
 
   const [supplierCategory, setSupplierCategory] = useState('Venue');
   const [supplierLocation, setSupplierLocation] = useState('Location');
@@ -24,7 +31,7 @@ const SearchPanel = ({
     e.preventDefault();
     if (supplierCategory !== '' && supplierLocation !== '') {
       history.push(
-        `/suppliers/${supplierCategory}?supplier=${supplierLocation}`,
+        `/suppliers/${supplierCategory}?regionName=${supplierLocation}`,
       );
     }
     onSearch();
@@ -35,7 +42,9 @@ const SearchPanel = ({
   // which is set as a value for city select input
   // useEffect is used to prevent infinite rerender
   useEffect(() => {
-    setSupplierLocation(supplierLocationQuery);
+    if (supplierLocationQuery && supplierLocationQuery.regionName) {
+      setSupplierLocation(supplierLocationQuery.regionName);
+    }
   }, [supplierLocationQuery]);
 
   return (
@@ -71,14 +80,15 @@ const SearchPanel = ({
                 <div className="divider d-none d-sm-none d-md-inline" />
                 <Col sm={6} md>
                   <Form.Control
+                    type="text"
                     as="select"
                     onChange={e => setSupplierLocation(e.target.value)}
                     value={supplierLocation}
                   >
-                    <option value="Location">Location</option>
+                    <option value={supplierLocation}>{supplierLocation}</option>
                     <option value="All">All</option>
-                    {UKCities.map((city, index) => (
-                      <option key={index}>{city}</option>
+                    {allRegionNames.map(regionName => (
+                      <option key={uniqid()}>{regionName}</option>
                     ))}
                   </Form.Control>
                 </Col>

@@ -1,0 +1,26 @@
+.navItem {
+  background: #e9ecef;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  .navLink {
+    .navParagraph {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Proxima Nova Bold';
+      margin-bottom: 0;
+    }
+  }
+}
+
+.activeLocationNavItem {
+  background-image: linear-gradient(30deg, #ffafbd, #ffc3a0);
+}
+
+.areaSelect {
+  font-size: 14px;
+}
+
+.areaTitle {
+  font-size: 13px;
+}

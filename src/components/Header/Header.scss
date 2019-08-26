@@ -1,3 +1,11 @@
+.search-result {
+  display: none;
+}
+
+.search-result-active {
+  display: block;
+}
+
 .header__unread-message-badge {
   position: absolute;
   top: 0;
