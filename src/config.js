@@ -8,7 +8,7 @@ export default {
   facebookAppId: '2867895813227533',
   googleAppId:
     '692103359776-fin2edefs5entl9ulje563slm29hu62m.apps.googleusercontent.com',
-  suppliersPerPage: 10,
+  suppliersPerPage: 18,
   pageRangeDisplayed: 3,
   cloudinary: {
     apiKey: '294357151451223',

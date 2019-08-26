@@ -3,24 +3,42 @@ import { Row, Container, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import rn from 'random-number';
 import { Link } from 'react-router-dom';
+import ClampLines from 'react-clamp-lines';
 
-import countries from '../../countryLib';
+import * as UK from '../../countryLib/UK.json';
 
-function getRandomLinks(UKCities) {
+function getRandomLinks(UKLocations) {
+  const UKCountries = Object.keys(UKLocations);
+  let allRegionNames = [];
+  UKCountries.forEach(country => {
+    const countryRegionNames = Object.keys(UKLocations[country]);
+    allRegionNames = allRegionNames.concat(countryRegionNames);
+  });
   const randomNumbersArray = [];
   const randomLinks = [];
   while (randomNumbersArray.length < 12) {
-    const randomNumber = rn({ min: 0, max: UKCities.length, integer: true });
+    const randomNumber = rn({
+      min: 0,
+      max: allRegionNames.length - 1,
+      integer: true,
+    });
     if (randomNumbersArray.includes(randomNumber)) continue;
     else {
-      const randomCity = UKCities[randomNumber];
+      const randomRegionName = allRegionNames[randomNumber];
       randomLinks.push(
         <li key={randomNumber}>
           <Link
-            to={`/suppliers/Venue?supplier=${randomCity}`}
+            to={`/suppliers/Venue?regionName=${randomRegionName}`}
             onClick={() => window.scrollTo(0, 0)}
           >
-            {randomCity}
+            <ClampLines
+              text={randomRegionName}
+              id={randomNumber}
+              lines={1}
+              ellipsis="..."
+              innerElement="p"
+              buttons={false}
+            />
           </Link>
         </li>,
       );
@@ -31,9 +49,9 @@ function getRandomLinks(UKCities) {
 }
 
 function PopularSearches({ t }) {
-  const UKCities = countries.GB.default.provinces;
+  const UKLocations = UK.default.UK;
 
-  const randomLinks = useMemo(() => getRandomLinks(UKCities), [UKCities]);
+  const randomLinks = useMemo(() => getRandomLinks(UKLocations), [UKLocations]);
 
   return (
     <div className="popularsearches">

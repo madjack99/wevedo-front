@@ -13,6 +13,7 @@ import ScreensBusinessDashboardProfile from './Business/Dashboard/Profile';
 import ScreensSupplierCategories from './Supplier/Categories';
 import ScreensSupplierFilteredList from './Supplier/FilteredList';
 import ScreensSupplierDetails from './Supplier/Details';
+import ScreensSupplierLocations from './Supplier/Locations';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
@@ -39,6 +40,10 @@ const ScreensRoot = () => {
         <Route
           path="/dashboard/business/profile"
           component={ScreensBusinessDashboardProfile}
+        />
+        <Route
+          path="/locations/:searchArea"
+          component={ScreensSupplierLocations}
         />
         <Route
           path="/suppliers/categories"
