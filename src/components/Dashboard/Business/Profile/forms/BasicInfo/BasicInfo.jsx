@@ -1,14 +1,12 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, InputGroup } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
+
+import './BasicInfo.scss';
 import '../Forms.scss';
 
-const DashboardBusinessProfileFormsBasicInfo = ({
-  user,
-  updateUser,
-  updateProfile,
-}) => {
+const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
   return (
     <Formik
       className="form"
@@ -19,30 +17,9 @@ const DashboardBusinessProfileFormsBasicInfo = ({
         maxPrice: user.maxPrice || '',
         facilities: user.facilities || '',
       }}
-      onSubmit={async (values, { setSubmitting, setErrors }) => {
-        try {
-          await updateUser(updateProfile)({
-            bio: values.bio,
-            minPrice: values.minPrice,
-            maxPrice: values.maxPrice,
-            facilities: values.facilities,
-          });
-          setSubmitting(false);
-        } catch (err) {
-          console.log(err.message);
-          setSubmitting(false);
-        }
-      }}
       validationSchema={basicInfoSchema}
     >
-      {({
-        values,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        touched,
-        errors,
-      }) => {
+      {({ values, handleChange, handleSubmit, errors }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-5">
@@ -58,6 +35,11 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                         value={values.bio}
                         className=" form__control__account "
                         onChange={handleChange}
+                        onBlur={() =>
+                          updateUser()({
+                            bio: values.bio,
+                          })
+                        }
                         isValid={values.bio && !errors.bio}
                       />
                       {errors.bio && (
@@ -69,28 +51,54 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                     <p className="text-muted">Pricing</p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
-                        <Form.Control
-                          name="minPrice"
-                          value={values.minPrice}
-                          className=" form__control__account "
-                          onChange={handleChange}
-                          isValid={values.minPrice && !errors.minPrice}
-                        />
-                        {errors.minPrice && (
-                          <p className="errorMessage">{errors.minPrice}</p>
-                        )}
+                        <InputGroup>
+                          <InputGroup.Prepend className="basic-info__currency">
+                            <InputGroup.Text id="inputGroupPrepend">
+                              £
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            className="basic-info__pricing form__control__account"
+                            name="minPrice"
+                            value={values.minPrice}
+                            onChange={handleChange}
+                            onBlur={() =>
+                              updateUser()({
+                                minPrice: values.minPrice,
+                              })
+                            }
+                            isValid={values.minPrice && !errors.minPrice}
+                            placeholder="0"
+                          />
+                          {errors.minPrice && (
+                            <p className="errorMessage">{errors.minPrice}</p>
+                          )}
+                        </InputGroup>
                       </Col>
                       <Col sm={4}>
-                        <Form.Control
-                          name="maxPrice"
-                          value={values.maxPrice}
-                          className=" form__control__account "
-                          onChange={handleChange}
-                          isValid={values.maxPrice && !errors.maxPrice}
-                        />
-                        {errors.maxPrice && (
-                          <p className="errorMessage">{errors.maxPrice}</p>
-                        )}
+                        <InputGroup>
+                          <InputGroup.Prepend className="basic-info__currency">
+                            <InputGroup.Text id="inputGroupPrepend">
+                              £
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            className="basic-info__pricing form__control__account"
+                            name="maxPrice"
+                            value={values.maxPrice}
+                            onChange={handleChange}
+                            onBlur={() =>
+                              updateUser()({
+                                maxPrice: values.maxPrice,
+                              })
+                            }
+                            isValid={values.maxPrice && !errors.maxPrice}
+                            placeholder="100000"
+                          />
+                          {errors.maxPrice && (
+                            <p className="errorMessage">{errors.maxPrice}</p>
+                          )}
+                        </InputGroup>
                       </Col>
                     </Row>
                   </Col>
@@ -118,16 +126,16 @@ const DashboardBusinessProfileFormsBasicInfo = ({
                       value={values.facilities}
                       className=" form__control__account "
                       onChange={handleChange}
+                      onBlur={() =>
+                        updateUser()({
+                          facilities: values.facilities,
+                        })
+                      }
                       isValid={values.facilities && !errors.facilities}
                     />
                     {errors.facilities && (
                       <p className="errorMessage">{errors.facilities}</p>
                     )}
-                  </Col>
-                  <Col sm={12} className="text-uppercase mt-2 mb-4">
-                    <Button size="lg" type="submit" disabled={isSubmitting}>
-                      Save
-                    </Button>
                   </Col>
                 </div>
               </Col>

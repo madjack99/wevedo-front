@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import {
   Row,
   Col,
   Modal,
+  Badge,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
@@ -21,6 +22,9 @@ import * as UK from '../../countryLib/UK.json';
 import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
+
+import { WevedoServiceContext } from '../../contexts';
+import config from '../../config';
 
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -282,19 +286,61 @@ function EnterButtons({ t }) {
 }
 
 function ProfileArea({ user }) {
+  const [numberOfUnreadMessages, setNumberOfUnreadMessages] = useState(0);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const { data: newRooms } = await wevedoService.getRooms();
+      setNumberOfUnreadMessages(
+        newRooms
+          .filter(room =>
+            user.isProvider
+              ? room.unreadByProvider.length !== 0
+              : room.unreadByUser.length !== 0,
+          )
+          .reduce(
+            (acc, room) =>
+              acc +
+              (user.isProvider
+                ? room.unreadByProvider.length
+                : room.unreadByUser.length),
+            0,
+          ),
+      );
+    };
+
+    fetchRooms();
+
+    const intervalId = setInterval(
+      () => fetchRooms(),
+      config.timeForServerRequest,
+    );
+    return () => clearInterval(intervalId);
+  }, [wevedoService, user]);
+
   return (
     <div className="dashboard-header__user ml-auto">
       <Link
         to="/dashboard/account"
         className="d-flex justify-content-between align-items-center"
       >
-        <img
-          src={user.profileImageURL || defaultAvatar}
-          width="40"
-          height="40"
-          alt="Wevedo Login"
-          className="mr-2"
-        />
+        <div className="position-relative">
+          <img
+            src={user.profileImageURL || defaultAvatar}
+            width="40"
+            height="40"
+            alt="Wevedo Login"
+            className="mr-2"
+          />
+          <Badge
+            className="header__unread-message-badge"
+            variant="success"
+            pill
+          >
+            {numberOfUnreadMessages}
+          </Badge>
+        </div>
         <b className="ml-3 mr-4">{user.fullName || 'User'}</b>
         <i className="fa fa-chevron-down ml-2" />
       </Link>

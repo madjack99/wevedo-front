@@ -7,13 +7,17 @@ export default class WevedoService extends ApiBase {
     this.login = async body => this.create('login', body);
     this.register = async body => this.create('register', body);
     this.socialLogin = async body => this.create('social-login', body);
-    this.resetPassword = async body =>
+    this.resetPassword = async body => this.create('reset-password', body);
+    this.resetPasswordEmail = async body =>
       this.create('reset-password-email', body);
     this.checkResetCode = async body =>
+      this.create('check-reset-password', body);
+    this.checkResetCodeEmail = async body =>
       this.create('check-reset-password-email', body);
     this.checkEmail = async body => this.create('check-email', body);
     this.checkPhone = async body => this.create('check-phone', body);
     this.checkPassword = async body => this.create('check-password', body);
+    this.checkProvider = async body => this.create('check-provider', body);
     this.signOut = async () => this.get('signout');
 
     this.getProfile = async () => this.get('users/me');
@@ -25,10 +29,11 @@ export default class WevedoService extends ApiBase {
       page,
       filterOptions,
       supplierLocationQueryString,
+      suppliersPerPage,
     ) => {
       const filterString = JSON.stringify(filterOptions);
       return this.get(
-        `providers/by-category/${category}?page=${page}&filterOptions=${filterString}&providerLocationQuery=${supplierLocationQueryString}`,
+        `providers/by-category/${category}?page=${page}&filterOptions=${filterString}&providerLocationQuery=${supplierLocationQueryString}&providersPerPage=${suppliersPerPage}`,
       );
     };
     this.getSupplierById = id => this.get(`providers/${id}`);

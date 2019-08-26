@@ -10,6 +10,7 @@ import 'rc-slider/assets/index.css';
 import backgroundImage from '../../../assets/images/venues-bg.png';
 
 import { WevedoServiceContext } from '../../../contexts';
+import config from '../../../config';
 
 import ScreensLayoutMain from '../../Layouts/Main';
 import SearchPanel from '../../../components/Search/Panel';
@@ -46,6 +47,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
         currentPage,
         filterOptions,
         supplierLocationQueryString,
+        config.suppliersPerPage,
       );
 
       setSuppliers(newSuppliers);
@@ -60,8 +62,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     supplierLocationQueryString,
   ]);
 
-  const onPaginationChange = pageNumber => {
-    history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
+  const scrollToSupplierList = () => {
     // there is timer to cancel scrolling in withScrollingToTop HOC
     setTimeout(() => {
       // keydown event cancels scrolling in withScrollingToTop HOC
@@ -76,6 +77,13 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     }, 0);
   };
 
+  const onSearch = () => scrollToSupplierList();
+
+  const onPaginationChange = pageNumber => {
+    history.push(`/suppliers/${supplierCategory}/${pageNumber}`);
+    scrollToSupplierList();
+  };
+
   return (
     <ScreensLayoutMain
       title={supplierCategory}
@@ -84,12 +92,18 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
       <Container ref={supplierListContainer}>
         <Row className="venues-filters d-flex d-sm-none pt-4 pb-4 mb-4">
           <Col className="d-inline">
-            <SearchPanelMobile setFilterOptions={setFilterOptions} />
+            <SearchPanelMobile
+              onSearch={onSearch}
+              setFilterOptions={setFilterOptions}
+            />
           </Col>
         </Row>
       </Container>
 
-      <SearchPanel supplierLocationQuery={supplierLocationQuery} />
+      <SearchPanel
+        onSearch={onSearch}
+        supplierLocationQuery={supplierLocationQuery}
+      />
       <Container className="venues-results">
         <Row>
           <Col sm={8} className="results-data">
