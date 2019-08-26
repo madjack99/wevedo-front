@@ -7,7 +7,7 @@ import uniqid from 'uniqid';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import * as UK from '../../../UK.json';
+import * as UK from '../../../countryLib/UK.json';
 
 const SearchPanel = ({
   title,

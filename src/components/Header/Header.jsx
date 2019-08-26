@@ -17,7 +17,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
-import * as UK from '../../UK.json';
+import * as UK from '../../countryLib/UK.json';
 import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';

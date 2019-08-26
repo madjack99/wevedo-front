@@ -5,7 +5,7 @@ import rn from 'random-number';
 import { Link } from 'react-router-dom';
 import ClampLines from 'react-clamp-lines';
 
-import * as UK from '../../UK.json';
+import * as UK from '../../countryLib/UK.json';
 
 function getRandomLinks(UKLocations) {
   const UKCountries = Object.keys(UKLocations);

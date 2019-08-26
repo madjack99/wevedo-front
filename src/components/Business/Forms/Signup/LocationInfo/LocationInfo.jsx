@@ -10,7 +10,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
-import * as UK from '../../../../../UK.json';
+import * as UK from '../../../../../countryLib/UK.json';
 
 import {
   updateUser,

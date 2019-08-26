@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import { Link } from 'react-router-dom';
 import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
-import * as UK from '../../../../UK.json';
+import * as UK from '../../../../countryLib/UK.json';
 
 function LocationsSearchAreasCity() {
   const [stateCountry, setStateCountry] = useState('England');

@@ -7,7 +7,7 @@ import contactDetailsSchema from './contactDetailsSchema';
 
 import '../Forms.scss';
 
-import * as UK from '../../../../../../UK.json';
+import * as UK from '../../../../../../countryLib/UK.json';
 
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
