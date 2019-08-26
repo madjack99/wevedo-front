@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Row, Container, Col, Nav } from 'react-bootstrap';
 import uniqid from 'uniqid';
 import { Link } from 'react-router-dom';
+import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
 import * as UK from '../../../../UK.json';
 
 function LocationsSearchAreasCity() {
-  const [country, setCountry] = useState('England');
+  const [stateCountry, setStateCountry] = useState('England');
   const countriesObj = UK.default.UK;
   const countries = Object.keys(UK.default.UK);
 
@@ -30,21 +31,27 @@ function LocationsSearchAreasCity() {
         <Col xs={6} md={4}>
           {cities.slice(0, firstCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>
+                <span className="areaTitle">{city}</span>
+              </Link>
             </div>
           ))}
         </Col>
         <Col xs={6} md={4}>
           {cities.slice(firstCol, secondCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>
+                <span className="areaTitle">{city}</span>
+              </Link>
             </div>
           ))}
         </Col>
         <Col xs={6} md={4}>
           {cities.slice(secondCol).map(city => (
             <div key={uniqid()} className="p-1">
-              <Link to={`/suppliers/Venue?city=${city}`}>{city}</Link>
+              <Link to={`/suppliers/Venue?city=${city}`}>
+                <span className="areaTitle">{city}</span>
+              </Link>
             </div>
           ))}
         </Col>
@@ -55,19 +62,27 @@ function LocationsSearchAreasCity() {
   return (
     <div>
       <Container className="pb-5 pt-3">
-        <Nav variant="tabs" defaultActiveKey="England">
+        <Nav>
           {countries.map(country => (
-            <Nav.Item key={uniqid()}>
-              <Nav.Link eventKey={country} onClick={() => setCountry(country)}>
-                <h6>{country}</h6>
+            <Nav.Item
+              key={uniqid()}
+              className={`navItem ${
+                country === stateCountry ? 'active' : null
+              }`}
+            >
+              <Nav.Link
+                onClick={() => setStateCountry(country)}
+                className="navLink"
+              >
+                <p className="navParagraph">{country}</p>
               </Nav.Link>
             </Nav.Item>
           ))}
         </Nav>
-        <div className="font-weight-bold mt-2 mb-2 text-uppercase">
-          Choose city
+        <div className="font-weight-bold mt-3 mb-3 text-uppercase">
+          <span className="areaSelect">Choose city</span>
         </div>
-        {displayCityInCols(country)}
+        {displayCityInCols(stateCountry)}
       </Container>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Row, Container, Col, Nav } from 'react-bootstrap';
 import uniqid from 'uniqid';
 import { Link } from 'react-router-dom';
-import './RegionName.scss';
+import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
 import * as UK from '../../../../UK.json';
 
