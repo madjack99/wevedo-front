@@ -23,7 +23,6 @@ function LocationsSearchAreasCounty() {
     counties.sort();
     const firstCol = Math.ceil(counties.length / 3);
     const secondCol = Math.ceil((counties.length / 3) * 2);
-    console.log(counties.length, firstCol, secondCol);
     return (
       <Row>
         <Col xs={6} md={4}>

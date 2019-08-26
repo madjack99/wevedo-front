@@ -15,7 +15,6 @@ function LocationsSearchAreasRegionName() {
     const regionNames = Object.keys(countriesObj[selectedCountry]);
     const firstCol = Math.ceil(regionNames.length / 3);
     const secondCol = Math.ceil((regionNames.length / 3) * 2);
-    console.log(regionNames.length, firstCol, secondCol);
     regionNames.sort();
     return (
       <Row>

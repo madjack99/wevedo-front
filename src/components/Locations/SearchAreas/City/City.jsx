@@ -25,7 +25,6 @@ function LocationsSearchAreasCity() {
     cities.sort();
     const firstCol = Math.floor(cities.length / 3);
     const secondCol = Math.floor((cities.length / 3) * 2);
-    console.log(cities.length, firstCol, secondCol);
     return (
       <Row>
         <Col xs={6} md={4}>
