@@ -198,5 +198,9 @@
     "whatFacilities": "Which facilities do you provide?",
     "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
     "save": "Save"
+  },
+  "dashboard": {
+    "nameWasChanged": "full name successfully changed",
+    "emailWasChanged": "email successfully changed"
   }
 }

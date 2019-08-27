@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import nameSchema from './schema';
 
@@ -8,6 +9,7 @@ const DashboardAccountFormsNameChange = ({
   fullName,
   updateProfile,
   updateUser,
+  t,
 }) => {
   const [nameIsChanged, setNameIsChanged] = useState(false);
 
@@ -64,7 +66,7 @@ const DashboardAccountFormsNameChange = ({
               )}
               {nameIsChanged && (
                 <p style={{ color: '#28a745' }}>
-                  full name successfully changed
+                  {t('dashboard.nameWasChanged')}
                 </p>
               )}
             </Form.Group>
@@ -78,4 +80,4 @@ const DashboardAccountFormsNameChange = ({
   );
 };
 
-export default DashboardAccountFormsNameChange;
+export default withTranslation('common')(DashboardAccountFormsNameChange);
