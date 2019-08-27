@@ -71,9 +71,6 @@ class Contact extends React.Component {
             <Col sm={8} className="text-center">
               <h4 className="text-uppercase">{t('contact.title')}</h4>
               <hr />
-              <p className="mr-5 pr-5 ml-5 pl-5 text-muted">
-                {t('contact.text')}
-              </p>
               <Form className="mt-5" onSubmit={this.handleSubmit}>
                 <Row>
                   <Col sm={6}>
