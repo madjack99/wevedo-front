@@ -1,8 +1,7 @@
 {
   "contact": {
     "jumbotron": "Contact Us",
-    "title": "Contact to wevedo",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "title": "Contact us",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
     "messagePlaceholder": "Message",
@@ -43,7 +42,7 @@
       "boxThree": "Message suppliers directly through the app to make enquiries or bookings."
     },
     "findForm": {
-      "title": "Find your best wedding supplier by Location",
+      "title": "Find your best wedding supplier by location",
       "category": "Category",
       "options": "...",
       "supplierTitlePlaceholder": "Supplier Title",
@@ -199,5 +198,9 @@
     "whatFacilities": "Which facilities do you provide?",
     "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
     "save": "Save"
+  },
+  "dashboard": {
+    "nameWasChanged": "full name successfully changed",
+    "emailWasChanged": "email successfully changed"
   }
 }

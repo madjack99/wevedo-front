@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Formik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 import emailSchema from './schema';
@@ -9,6 +10,7 @@ const DashboardAccountFormsEmailChange = ({
   email,
   updateProfile,
   updateUser,
+  t,
 }) => {
   const [mailIsChanging, setMailIsChanging] = useState(false);
   const [emailIsChanged, setEmailIsChanged] = useState(false);
@@ -91,7 +93,7 @@ const DashboardAccountFormsEmailChange = ({
               )}
               {emailIsChanged && (
                 <p style={{ color: '#28a745' }}>
-                  email was successfuly changed
+                  {t('dashboard.emailWasChanged')}
                 </p>
               )}
             </div>
@@ -147,7 +149,7 @@ const DashboardAccountFormsEmailChange = ({
                 )}
                 {emailIsChanged && (
                   <p style={{ color: '#28a745' }}>
-                    email was successfuly changed
+                    {t('dashboard.emailWasChanged')}
                   </p>
                 )}
                 <Button
@@ -166,4 +168,4 @@ const DashboardAccountFormsEmailChange = ({
   );
 };
 
-export default DashboardAccountFormsEmailChange;
+export default withTranslation('common')(DashboardAccountFormsEmailChange);
