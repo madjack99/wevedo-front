@@ -146,9 +146,7 @@ const DashboardAccountFormsEmailChange = ({
                   <p style={{ color: '#dc3545' }}>{errors.email}</p>
                 )}
                 {emailIsChanged && (
-                  <p style={{ color: '#28a745' }}>
-                    email was successfuly changed
-                  </p>
+                  <p style={{ color: '#28a745' }}>email successfully changed</p>
                 )}
                 <Button
                   className="mt-2"

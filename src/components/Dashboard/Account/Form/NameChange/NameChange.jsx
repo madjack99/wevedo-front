@@ -64,7 +64,7 @@ const DashboardAccountFormsNameChange = ({
               )}
               {nameIsChanged && (
                 <p style={{ color: '#28a745' }}>
-                  full name was successfuly changed
+                  full name successfully changed
                 </p>
               )}
             </Form.Group>
