@@ -56,7 +56,7 @@ const SearchPanel = ({
       }
     >
       <Col sm={12}>
-        {title ? <h1>Find your best wedding supplier by Location</h1> : null}
+        {title ? <h1>Find your best wedding supplier by location</h1> : null}
         <Form onSubmit={handleSubmit}>
           <Form.Row>
             <Col className="boxed-form">
