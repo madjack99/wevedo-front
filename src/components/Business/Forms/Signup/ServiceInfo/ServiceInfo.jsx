@@ -32,8 +32,8 @@ const BusinessFormsSignupServiceInfo = ({
       className="form dashboard-form"
       initialValues={{
         bio: '',
-        minPrice: '',
-        maxPrice: '',
+        minPrice: '0',
+        maxPrice: '100000',
         facilities: '',
       }}
       onSubmit={async (
