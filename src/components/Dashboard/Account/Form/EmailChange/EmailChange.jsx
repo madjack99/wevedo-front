@@ -67,7 +67,9 @@ const DashboardAccountFormsEmailChange = ({
       }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
-            <p className="text-muted">E-Mail address</p>
+            <p className="text-muted">
+              E-Mail address<span className="form__asterisks">*</span>
+            </p>
             {/* Desktop */}
             <div className={mailIsChanging ? 'd-none' : 'd-none d-sm-block'}>
               <InputGroup>

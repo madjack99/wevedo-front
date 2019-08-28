@@ -124,6 +124,7 @@ const BusinessFormsSignupLocationInfo = ({
               <Form.Label className="form__label mb-0">
                 {' '}
                 {t('business-signup.form.emailPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -143,6 +144,7 @@ const BusinessFormsSignupLocationInfo = ({
             <Form.Group className="mb-5" controlId="formPhoneNumber">
               <Form.Label className="form__label mb-0">
                 {t('business-signup.form.numberPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -162,6 +164,7 @@ const BusinessFormsSignupLocationInfo = ({
             <Form.Group className="mb-5" controlId="formPostcode">
               <Form.Label className="form__label mb-0">
                 {t('business-signup.form.postcodePlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -181,6 +184,7 @@ const BusinessFormsSignupLocationInfo = ({
             <Form.Group className="mb-5" controlId="formAddress">
               <Form.Label className="form__label mb-0">
                 {t('business-signup.form.addressPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -200,6 +204,7 @@ const BusinessFormsSignupLocationInfo = ({
             <Form.Group className="mb-5" controlId="formCountry">
               <Form.Label className="form__label mb-0">
                 {t('business-signup.form.countryPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -228,7 +233,9 @@ const BusinessFormsSignupLocationInfo = ({
             </Form.Group>
 
             <Form.Group className="mb-5" controlId="formRegionName">
-              <Form.Label className="form__label mb-0">Region Name</Form.Label>
+              <Form.Label className="form__label mb-0">
+                Region Name<span className="form__asterisks">*</span>
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"
@@ -256,7 +263,9 @@ const BusinessFormsSignupLocationInfo = ({
             </Form.Group>
 
             <Form.Group className="mb-5" controlId="formCounty">
-              <Form.Label className="form__label mb-0">County</Form.Label>
+              <Form.Label className="form__label mb-0">
+                Country<span className="form__asterisks">*</span>
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"
@@ -283,7 +292,9 @@ const BusinessFormsSignupLocationInfo = ({
             </Form.Group>
 
             <Form.Group className="mb-5" controlId="formCity">
-              <Form.Label className="form__label mb-0">City</Form.Label>
+              <Form.Label className="form__label mb-0">
+                City<span className="form__asterisks">*</span>
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"

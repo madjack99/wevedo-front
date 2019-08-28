@@ -62,7 +62,9 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
                 <div className="dashboard-business__profile__whitebox">
                   <Row className="p-3">
                     <Col sm={6} className="mb-4">
-                      <p className="text-muted">Service Name</p>
+                      <p className="text-muted">
+                        Service Name<span className="form__asterisks">*</span>
+                      </p>
                       <Form.Control
                         className=" form__control__account "
                         value={values.fullName}
@@ -98,7 +100,9 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
-                      <p className="text-muted">Email Address</p>
+                      <p className="text-muted">
+                        Email Address<span className="form__asterisks">*</span>
+                      </p>
                       <Form.Control
                         className=" form__control__account "
                         value={values.email}
@@ -116,7 +120,9 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
-                      <p className="text-muted">Mobile Number</p>
+                      <p className="text-muted">
+                        Mobile Number<span className="form__asterisks">*</span>
+                      </p>
                       <Form.Control
                         className=" form__control__account "
                         value={values.phoneNumber}
@@ -135,7 +141,9 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
                     </Col>
                   </Row>
                   <Col className="mb-4">
-                    <p className="text-muted">Address</p>
+                    <p className="text-muted">
+                      Address<span className="form__asterisks">*</span>
+                    </p>
                     <Row className="mb-sm-3">
                       <Col sm={4} className="mb-2">
                         <Form.Control

@@ -27,7 +27,9 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                 <div className="dashboard-business__profile__whitebox">
                   <Col sm={12} className="mb-4">
                     <Form.Group>
-                      <p className="text-muted">Description</p>
+                      <p className="text-muted">
+                        Description<span className="form__asterisks">*</span>
+                      </p>
                       <Form.Control
                         as="textarea"
                         rows="3"
@@ -48,7 +50,9 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                     </Form.Group>
                   </Col>
                   <Col sm={12} className="mb-4">
-                    <p className="text-muted">Pricing</p>
+                    <p className="text-muted">
+                      Pricing<span className="form__asterisks">*</span>
+                    </p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
                         <InputGroup>
@@ -103,7 +107,9 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                     </Row>
                   </Col>
                   <Col sm={12} className="mb-4 d-none">
-                    <p className="text-muted">Guests Capacity</p>
+                    <p className="text-muted">
+                      Guests Capacity<span className="form__asterisks">*</span>
+                    </p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
                         <Form.Control
@@ -120,7 +126,9 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                     </Row>
                   </Col>
                   <Col sm={12} className="mb-4">
-                    <p className="text-muted">Facilities</p>
+                    <p className="text-muted">
+                      Facilities<span className="form__asterisks">*</span>
+                    </p>
                     <Form.Control
                       name="facilities"
                       value={values.facilities}
