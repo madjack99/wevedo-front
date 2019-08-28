@@ -59,7 +59,6 @@ function PopularSearches({ t }) {
         <Row>
           <Col sm={6}>
             <h3 className="text-uppercase">{t('popularSearches.title')}</h3>
-            <p className="d-none d-sm-block">{t('popularSearches.text')}</p>
           </Col>
           <Col sm={6}>
             <Row>
