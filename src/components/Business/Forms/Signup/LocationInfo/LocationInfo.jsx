@@ -263,7 +263,9 @@ const BusinessFormsSignupLocationInfo = ({
             </Form.Group>
 
             <Form.Group className="mb-5" controlId="formCounty">
-              <Form.Label className="form__label mb-0">County</Form.Label>
+              <Form.Label className="form__label mb-0">
+                Country<span className="form__asterisks">*</span>
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"
@@ -290,7 +292,9 @@ const BusinessFormsSignupLocationInfo = ({
             </Form.Group>
 
             <Form.Group className="mb-5" controlId="formCity">
-              <Form.Label className="form__label mb-0">City</Form.Label>
+              <Form.Label className="form__label mb-0">
+                City<span className="form__asterisks">*</span>
+              </Form.Label>
               <Form.Control
                 className="form__control"
                 type="text"
