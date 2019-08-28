@@ -50,7 +50,9 @@ const DashboardAccountFormsNameChange = ({
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
-              <p className="text-muted">Full Name</p>
+              <p className="text-muted">
+                Full Name<span className="form__asterisks">*</span>
+              </p>
               <Form.Control
                 className="form__control__account"
                 type="text"

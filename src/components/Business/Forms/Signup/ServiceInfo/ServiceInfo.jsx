@@ -75,6 +75,7 @@ const BusinessFormsSignupServiceInfo = ({
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
               {t('serviceInfo.describeService')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__textarea dashboard-form__control"
@@ -94,6 +95,7 @@ const BusinessFormsSignupServiceInfo = ({
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
               {t('serviceInfo.startingPrice')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Text className="dashboard-form__text">
               {t('serviceInfo.startingPriceDescription')}
@@ -139,6 +141,7 @@ const BusinessFormsSignupServiceInfo = ({
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
               {t('serviceInfo.whatFacilities')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="dashboard-form__control"

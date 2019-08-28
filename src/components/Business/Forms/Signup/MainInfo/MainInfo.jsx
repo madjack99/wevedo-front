@@ -67,6 +67,7 @@ const BusinessFormsSignupMainInfo = ({
           <Form.Group className="mb-5" controlId="formUsername">
             <Form.Label className="form__label mb-0">
               {t('business-signup.form.usernamePlaceholder')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -86,6 +87,7 @@ const BusinessFormsSignupMainInfo = ({
           <Form.Group className="mb-5" controlId="formPassword">
             <Form.Label className="form__label mb-0">
               {t('business-signup.form.passwordPlaceholder')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -105,6 +107,7 @@ const BusinessFormsSignupMainInfo = ({
           <Form.Group className="mb-5" controlId="formConfirmPassword">
             <Form.Label className="form__label mb-0">
               {t('business-signup.form.passwordConfirmationPlaceholder')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -124,6 +127,7 @@ const BusinessFormsSignupMainInfo = ({
           <Form.Group className="mb-5" controlId="formName">
             <Form.Label className="form__label mb-0">
               {t('business-signup.form.businessNamePlaceholder')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__control"
@@ -143,6 +147,7 @@ const BusinessFormsSignupMainInfo = ({
           <Form.Group className="mb-5" controlId="formCategory">
             <Form.Label className="form__label mb-0">
               {t('business-signup.form.categoryPlaceholder')}
+              <span className="form__asterisks">*</span>
             </Form.Label>
             <Form.Control
               className="form__control first-step__dropdown"

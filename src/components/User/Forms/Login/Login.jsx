@@ -113,6 +113,7 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
               <Form.Group className="mb-5" controlId="formEmail">
                 <Form.Label className="form__label mb-0">
                   {t('signAndLogForm.emailLabel')}
+                  <span className="form__asterisks">*</span>
                 </Form.Label>
                 <Form.Control
                   className="form__control"
@@ -135,6 +136,7 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
               <Form.Group controlId="formPassword">
                 <Form.Label className="form__label mb-0">
                   {t('signAndLogForm.passwordLabel')}
+                  <span className="form__asterisks">*</span>
                 </Form.Label>
                 <Form.Control
                   className="form__control"
