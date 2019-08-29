@@ -1,6 +1,6 @@
 {
   "contact": {
-    "jumbotron": "Contact Us",
+    "jumbotron": "Contact us",
     "title": "Contact us",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
@@ -71,15 +71,15 @@
       "modalTitle": "Send a message to Supplier Name",
       "namePlaceholder": "Name",
       "emailPlaceholder": "Email",
-      "mobilePlaceholder": "Mobile Number",
+      "mobilePlaceholder": "Mobile number",
       "messagePlaceholder": "Message",
       "sendBtn": "Send"
     },
     "results": {
       "budget": "Budget",
-      "amount": "$8.500 - $50.000",
+      "amount": "£8.500 - £50.000",
       "services": "Services",
-      "servicesList": "Photography, pre wedding, post wedding, albums, mini albums, digital album, high resolution photos."
+      "servicesList": "Photography, Ballroom, Spa On-Site, albums, mini albums, digital album, high resolution photos."
     },
     "nextResult": "Next result"
   },
@@ -99,20 +99,20 @@
   },
 
   "pricing": {
-    "mainTitle": "Pricing Plans",
+    "mainTitle": "Pricing plans",
     "mainText": "Sign up to the the UK's most popular wedding planning web site and get access to more than 100,000 registered wedding couples. Start growing your wedding business today.",
-    "dollarSign": "$",
+    "dollarSign": "£",
     "standard": {
       "title": "Standard",
       "pOne": "You will feature above Standard listings",
       "pTwo": "3x more couples will view your listing than the Standard listing",
-      "getStarted": "Get Started"
+      "getStarted": "Get started"
     },
     "enhanced": {
       "title": "Enhanced",
       "pOne": "You will feature above Standard listings",
       "pTwo": "3x more couples will view your listing than the Standard listing",
-      "getStarted": "Get Started"
+      "getStarted": "Get started"
     },
     "premium": {
       "title": "Premium",
@@ -126,14 +126,14 @@
     "form": {
       "usernamePlaceholder": "Username",
       "passwordPlaceholder": "Password",
-      "passwordConfirmationPlaceholder": "Confirm Password",
-      "businessNamePlaceholder": "Business Name",
-      "categoryPlaceholder": "Select Category",
-      "websitePlaceholder": "Business Website",
-      "emailPlaceholder": "Business Email",
-      "numberPlaceholder": "Business Phone Number",
-      "postcodePlaceholder": "Your Postcode",
-      "addressPlaceholder": "Business Address",
+      "passwordConfirmationPlaceholder": "Confirm password",
+      "businessNamePlaceholder": "Business name",
+      "categoryPlaceholder": "Select category",
+      "websitePlaceholder": "Business website",
+      "emailPlaceholder": "Business email",
+      "numberPlaceholder": "Business phone number",
+      "postcodePlaceholder": "Your postcode",
+      "addressPlaceholder": "Business address",
       "cityPlaceholder": "Town/City",
       "countryPlaceholder": "Country",
       "nextStepBtn": "Next step"
@@ -150,12 +150,12 @@
     "venues": "Venues",
     "viewAllSuppliers": "View all suppliers",
     "login": "Login",
-    "businessLogin": "Bussiness Login",
+    "businessLogin": "Business Login",
     "signOut": "Sign Out"
   },
 
   "signAndLogForm": {
-    "emailLabel": "Email Address",
+    "emailLabel": "Email or mobile number",
     "passwordLabel": "Password",
     "rememberMe": "Remember me",
     "signUp": "Sign up",
@@ -184,22 +184,22 @@
   },
 
   "imgUpload": {
-    "uploadPhotos": "Upload Photos",
+    "uploadPhotos": "Upload photos",
     "dragAndDrop": "or just drag and drop",
     "addAtLeast": "+ Add at least 1 photo"
   },
   "serviceInfo": {
-    "describeService": "Describe your business and services",
+    "describeService": "Please describe your business and services",
     "startingPrice": "Please add your price range?",
-    "startingPriceDescription": "Enter your average pricing in order for your Shopfont to appear in results when couples search by price",
+    "startingPriceDescription": " Please enter your minimum and maximum to appear in results when couples search by price",
     "minPricePlaceholder": "Minimum price",
     "maxPricePlaceholder": "Maximum price",
     "whatFacilities": "Which facilities do you provide?",
-    "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
+    "facilitiesDescriptionPlaceholder": "Eg. Ballroom, Spa On-Site, ...",
     "save": "Save"
   },
   "dashboard": {
-    "nameWasChanged": "full name successfully changed",
-    "emailWasChanged": "email successfully changed"
+    "nameWasChanged": "Successfully updated",
+    "emailWasChanged": "Successfully changed"
   }
 }
