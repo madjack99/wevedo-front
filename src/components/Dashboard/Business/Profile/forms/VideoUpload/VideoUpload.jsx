@@ -38,7 +38,7 @@ const DashboardBusinessProfileFormsVideoUpload = ({ user, updateUser }) => {
                         isValid={
                           values.profileVideoURL && !errors.profileVideoURL
                         }
-                        placeholder="Enter video URL"
+                        placeholder="Enter YouTube link i.e. https://www.youtube.com/watch?v=YOdZu5mjJjM"
                       />
                       {errors.profileVideoURL && (
                         <p className="errorMessage">{errors.profileVideoURL}</p>
