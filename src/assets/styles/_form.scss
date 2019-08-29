@@ -30,6 +30,12 @@
     border: 0;
     border-bottom: 1px solid $form-border-color;
     border-radius: 0;
+
+    &_phone-number {
+      &::placeholder {
+        font-style: italic;
+      }
+    }
   }
 
   &__control__account {
