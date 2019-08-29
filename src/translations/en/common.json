@@ -190,7 +190,7 @@
   },
   "serviceInfo": {
     "describeService": "Describe your business and services",
-    "startingPrice": "From which price can I hire Service name?",
+    "startingPrice": "Please add your price range?",
     "startingPriceDescription": "Enter your average pricing in order for your Shopfont to appear in results when couples search by price",
     "minPricePlaceholder": "Minimum price",
     "maxPricePlaceholder": "Maximum price",
