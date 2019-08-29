@@ -11,9 +11,9 @@ export default Yup.object().shape({
       }
       return true;
     })
-    .required('email or mobile number is required!'),
+    .required('required'),
   password: Yup.string()
     .min(6, 'minimum 6 characters')
     .max(50, 'maximum 50 characters')
-    .required('password is required!'),
+    .required('required'),
 });
