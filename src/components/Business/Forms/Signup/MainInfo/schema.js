@@ -17,5 +17,5 @@ export default Yup.object().shape({
     .max(50, 'maximum 50 characters')
     .required('name is required'),
   categories: Yup.string().required('category is required'),
-  website: Yup.string().url('enter a valid URL'),
+  website: Yup.string(),
 });

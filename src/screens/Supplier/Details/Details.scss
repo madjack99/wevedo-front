@@ -50,8 +50,20 @@
 }
 
 .carousel {
-  &-image {
+  &-image,
+  &-video {
     height: 400px;
+  }
+
+  &-video {
+    div {
+      display: flex;
+      height: 100%;
+
+      iframe {
+        margin: auto;
+      }
+    }
   }
 
   &-control-prev-icon,

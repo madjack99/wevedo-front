@@ -264,7 +264,7 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formCounty">
               <Form.Label className="form__label mb-0">
-                Country<span className="form__asterisks">*</span>
+                County<span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
