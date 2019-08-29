@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
+import YouTube from 'react-youtube';
 
 import './Details.scss';
 
@@ -47,7 +48,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
         <Row className="mt-5 mb-5">
           <Col>
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel>
+              <Carousel interval={null}>
                 {[supplier.profileImageURL, ...providerImagesList].map(
                   image => (
                     <Carousel.Item className="carousel-image" key={uniqid()}>
@@ -59,6 +60,11 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                     </Carousel.Item>
                   ),
                 )}
+                {/* {supplier.profileVideoURL && ( */}
+                <Carousel.Item className="carousel-video">
+                  <YouTube videoId="2g811Eo7K8U" />
+                </Carousel.Item>
+                {/* )} */}
               </Carousel>
             ) : null}
           </Col>
