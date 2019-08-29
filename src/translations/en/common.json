@@ -192,8 +192,8 @@
     "describeService": "Describe your business and services",
     "startingPrice": "From which price can I hire Service name?",
     "startingPriceDescription": "Enter your average pricing in order for your Shopfont to appear in results when couples search by price",
-    "minPricePlaceholder": "Minimum Price",
-    "maxPricePlaceholder": "Maximum Price",
+    "minPricePlaceholder": "Minimum price",
+    "maxPricePlaceholder": "Maximum price",
     "whatFacilities": "Which facilities do you provide?",
     "facilitiesDescriptionPlaceholder": "Eg. Pre wedding, Post wedding, ...",
     "save": "Save"
