@@ -10,7 +10,7 @@ import '../Forms.scss';
 
 import * as UK from '../../../../../../countryLib/UK.json';
 
-const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
+const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser, t }) => {
   const UKLocations = UK.default.UK;
 
   const defineCountries = () => {
@@ -101,12 +101,14 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser }) => {
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Email Address<span className="form__asterisks">*</span>
+                        Email or phone number including country code
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         className=" form__control__account "
                         value={values.email}
                         name="email"
+                        placeholder={t('signAndLogForm.countryCodeLabel')}
                         onChange={handleChange}
                         onBlur={() =>
                           updateUser()({

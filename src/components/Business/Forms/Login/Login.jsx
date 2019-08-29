@@ -48,7 +48,7 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
             });
           }
         } catch (error) {
-          setErrors({ emailPhone: 'this email is used for customer' });
+          setErrors({ emailPhone: 'wrong credentials' });
         }
         setSubmitting(false);
       }}
@@ -72,6 +72,7 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
                 className="form__control"
                 type="email"
                 name="emailPhone"
+                placeholder={t('signAndLogForm.countryCodeLabel')}
                 value={values.emailPhone}
                 onChange={handleChange}
                 isValid={values.emailPhone && !errors.emailPhone}
