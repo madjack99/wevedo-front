@@ -35,6 +35,16 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
   const supplierCategory = match.params.category;
   const currentPage = +match.params.pageNumber || 1;
 
+  // use useEffect to overcome the influence of
+  // WithScrollToTop HOC, which scrolls to top each time
+  // the pathname changes. Now with each search the page
+  // moves to the search resuls area
+  useEffect(() => {
+    if (location.pathname !== '/suppliers/Venue') {
+      Scroll.animateScroll.scrollTo(supplierListContainer.current.offsetTop);
+    }
+  });
+
   useEffect(() => {
     const fetchSuppliers = async () => {
       const {
@@ -104,6 +114,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
         onSearch={onSearch}
         supplierLocationQuery={supplierLocationQuery}
       />
+
       <Container className="venues-results">
         <Row>
           <Col sm={8} className="results-data">
