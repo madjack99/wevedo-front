@@ -116,9 +116,10 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
                   <span className="form__asterisks">*</span>
                 </Form.Label>
                 <Form.Control
-                  className="form__control"
+                  className="form__control form__control_phone-number"
                   type="email"
                   name="emailPhone"
+                  placeholder={t('signAndLogForm.countryCodeLabel')}
                   value={values.emailPhone}
                   onChange={handleChange}
                   isValid={values.emailPhone && !errors.emailPhone}

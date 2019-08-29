@@ -147,9 +147,10 @@ const BusinessFormsSignupLocationInfo = ({
                 <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
-                className="form__control"
+                className="form__control form__control_phone-number"
                 type="text"
                 name="phoneNumber"
+                placeholder={t('signAndLogForm.countryCodeLabel')}
                 value={values.phoneNumber}
                 onChange={handleChange}
                 isValid={values.phoneNumber && !errors.phoneNumber}
