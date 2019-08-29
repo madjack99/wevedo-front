@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
+import getVideoId from 'get-video-id';
 import uniqid from 'uniqid';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
@@ -60,11 +61,13 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                     </Carousel.Item>
                   ),
                 )}
-                {/* {supplier.profileVideoURL && ( */}
-                <Carousel.Item className="carousel-video">
-                  <YouTube videoId="2g811Eo7K8U" />
-                </Carousel.Item>
-                {/* )} */}
+                {supplier.profileVideoURL && (
+                  <Carousel.Item className="carousel-video">
+                    <YouTube
+                      videoId={getVideoId(supplier.profileVideoURL).id}
+                    />
+                  </Carousel.Item>
+                )}
               </Carousel>
             ) : null}
           </Col>
