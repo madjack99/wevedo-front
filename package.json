@@ -72,6 +72,7 @@
     "react-scroll": "^1.7.12",
     "react-social-login": "^3.4.4",
     "react-time-ago": "^5.0.4",
+    "react-youtube": "^7.9.0",
     "redux": "^4.0.1",
     "remove-webpack-plugin": "^1.2.2",
     "styled-components": "^4.3.2",
