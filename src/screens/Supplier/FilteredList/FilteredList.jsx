@@ -45,8 +45,6 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
     }
   });
 
-  console.log(location);
-
   useEffect(() => {
     const fetchSuppliers = async () => {
       const {
