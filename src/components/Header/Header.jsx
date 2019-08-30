@@ -273,6 +273,11 @@ function LocationDropdownItem({ name, searchArea }) {
 function EnterButtons({ t }) {
   return (
     <ButtonToolbar className="d-flex d-lg-block flex-column-reverse">
+      <LinkContainer to="/signup">
+        <Button variant="primary" className="mr-2">
+          {t('header.signup')}
+        </Button>
+      </LinkContainer>
       <LinkContainer to="/login">
         <Button variant="primary" className="mr-2">
           {t('header.login')}
