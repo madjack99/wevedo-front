@@ -49,18 +49,16 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
         <Row className="mt-5 mb-5">
           <Col sm={12} lg={8}>
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel interval={5000}>
-                {[supplier.profileImageURL, ...providerImagesList].map(
-                  image => (
-                    <Carousel.Item className="carousel-image" key={uniqid()}>
-                      <img
-                        className="d-block mx-auto"
-                        src={image}
-                        alt="supplier-slide"
-                      />
-                    </Carousel.Item>
-                  ),
-                )}
+              <Carousel interval={5000} className="mb-2">
+                {[...providerImagesList].map(image => (
+                  <Carousel.Item className="carousel-image" key={uniqid()}>
+                    <img
+                      className="d-block mx-auto"
+                      src={image}
+                      alt="supplier-slide"
+                    />
+                  </Carousel.Item>
+                ))}
                 {supplier.profileVideoURL && (
                   <Carousel.Item className="carousel-video">
                     <YouTube
@@ -70,54 +68,6 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 )}
               </Carousel>
             ) : null}
-          </Col>
-          <Col sm={12} lg={4}>
-            <Row>
-              {!user.isProvider && (
-                <Col sm={12}>
-                  <Button
-                    className="text-uppercase mb-4"
-                    block
-                    size="lg"
-                    onClick={() =>
-                      isLoggedIn ? setModalShow(true) : history.push('/login')
-                    }
-                  >
-                    {`Send a message to ${supplier.fullName}`}
-                  </Button>
-                  <SupplierMessageDialog
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    supplier={supplier}
-                  />
-                </Col>
-              )}
-              <Col sm={12}>
-                {(supplier.minPrice && supplier.maxPrice) ||
-                supplier.facilities ? (
-                  <div className="supplier-results-side-box">
-                    {supplier.minPrice && supplier.maxPrice ? (
-                      <div className="mb-4">
-                        <b className="text-uppercase text-muted">Budget</b>
-                        <hr className="hr-xs" />
-                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
-                      </div>
-                    ) : null}
-                    {supplier.facilities ? (
-                      <div>
-                        <b className="text-uppercase text-muted">Services</b>
-                        <hr className="hr-xs" />
-                        <b>{supplier.facilities}</b>
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className="mt-5 mb-5">
-          <Col sm={12}>
             <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
             {
               <b>
@@ -165,9 +115,53 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               <div className="divider d-sm-none" />
             </div>
           </Col>
+          <Col sm={12} lg={4}>
+            <Row style={{ position: 'sticky', top: 80 }}>
+              {!user.isProvider && (
+                <Col sm={12}>
+                  <Button
+                    className="text-uppercase mb-4"
+                    block
+                    size="lg"
+                    onClick={() =>
+                      isLoggedIn ? setModalShow(true) : history.push('/login')
+                    }
+                  >
+                    {`Send a message to ${supplier.fullName}`}
+                  </Button>
+                  <SupplierMessageDialog
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    supplier={supplier}
+                  />
+                </Col>
+              )}
+              <Col sm={12}>
+                {(supplier.minPrice && supplier.maxPrice) ||
+                supplier.facilities ? (
+                  <div className="supplier-results-side-box">
+                    {supplier.minPrice && supplier.maxPrice ? (
+                      <div className="mb-4">
+                        <b className="text-uppercase text-muted">Budget</b>
+                        <hr className="hr-xs" />
+                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
+                      </div>
+                    ) : null}
+                    {supplier.facilities ? (
+                      <div>
+                        <b className="text-uppercase text-muted">Services</b>
+                        <hr className="hr-xs" />
+                        <b>{supplier.facilities}</b>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </Col>
+            </Row>
+          </Col>
 
           {/* Hidden next result */}
-          <Col sm={12} className="text-right d-none">
+          <Col sm={12} lg={8} className="text-right d-none">
             <div className="divider" />
             <b className="supplier-results-next-btn">
               {t('supplier.nextResult')}
