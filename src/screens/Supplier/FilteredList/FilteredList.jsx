@@ -40,7 +40,7 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
   // the pathname changes. Now with each search the page
   // moves to the search resuls area
   useEffect(() => {
-    if (location.pathname !== '/suppliers/Venue') {
+    if (location.pathname !== '/suppliers/Venue' || location.search !== '') {
       Scroll.animateScroll.scrollTo(supplierListContainer.current.offsetTop);
     }
   });
