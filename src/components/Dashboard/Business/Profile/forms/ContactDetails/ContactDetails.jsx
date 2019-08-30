@@ -3,6 +3,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form } from 'react-bootstrap';
 import uniqid from 'uniqid';
+import { withTranslation } from 'react-i18next';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
@@ -10,7 +11,11 @@ import '../Forms.scss';
 
 import * as UK from '../../../../../../countryLib/UK.json';
 
-const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser, t }) => {
+const DashboardBusinessProfileFormsContactDetails = ({
+  user,
+  updateUser,
+  t,
+}) => {
   const UKLocations = UK.default.UK;
 
   const defineCountries = () => {
@@ -329,4 +334,6 @@ const DashboardBusinessProfileFormsContactDetails = ({ user, updateUser, t }) =>
   );
 };
 
-export default DashboardBusinessProfileFormsContactDetails;
+export default withTranslation('common')(
+  DashboardBusinessProfileFormsContactDetails,
+);
