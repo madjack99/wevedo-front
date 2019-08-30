@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-import { fetchSignUp, fetchLogin } from '../../../../../actions';
+import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../../contexts';
 import formSchema from './schema';
 
@@ -18,6 +18,7 @@ const BusinessFormsSignupServiceInfo = ({
   isLoggedIn,
   login,
   signUp,
+  updateUser,
   t,
   nextStep,
 }) => {
@@ -46,17 +47,19 @@ const BusinessFormsSignupServiceInfo = ({
           minPrice,
           maxPrice,
           facilities,
-          isProvider: true,
           profileImageURL:
             'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
-          isApproved: true, // TO-DO: must be false before payment
-          deviceOS: 'android', // TO-DO: 'web' should be later
+          deviceOS: 'android', // TO-DO: 'web' should be later,
         };
 
-        const isRegisterSuccessful = await signUp(wevedoService.register, body);
+        const newProvider = await signUp(wevedoService.register, body);
 
-        if (isRegisterSuccessful) {
+        if (newProvider) {
           await login(wevedoService.login, body);
+          await updateUser(wevedoService.updateProfile)({
+            ...newProvider,
+            isProvider: true,
+          });
           return nextStep();
         }
 
@@ -181,6 +184,7 @@ const mapStateToProps = ({ sessionData, userData }) => ({
 const mapDispatchToProps = dispatch => ({
   login: fetchLogin(dispatch),
   signUp: fetchSignUp(dispatch),
+  updateUser: updateUser(dispatch),
 });
 
 export default withRouter(
