@@ -47,9 +47,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     >
       <Container className="supplier-results">
         <Row className="mt-5 mb-5">
-          <Col>
+          <Col sm={12} lg={8}>
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel interval={null}>
+              <Carousel interval={5000}>
                 {[supplier.profileImageURL, ...providerImagesList].map(
                   image => (
                     <Carousel.Item className="carousel-image" key={uniqid()}>
@@ -71,9 +71,53 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               </Carousel>
             ) : null}
           </Col>
+          <Col sm={12} lg={4}>
+            <Row>
+              {!user.isProvider && (
+                <Col sm={12}>
+                  <Button
+                    className="text-uppercase mb-4"
+                    block
+                    size="lg"
+                    onClick={() =>
+                      isLoggedIn ? setModalShow(true) : history.push('/login')
+                    }
+                  >
+                    {`Send a message to ${supplier.fullName}`}
+                  </Button>
+                  <SupplierMessageDialog
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    supplier={supplier}
+                  />
+                </Col>
+              )}
+              <Col sm={12}>
+                {(supplier.minPrice && supplier.maxPrice) ||
+                supplier.facilities ? (
+                  <div className="supplier-results-side-box">
+                    {supplier.minPrice && supplier.maxPrice ? (
+                      <div className="mb-4">
+                        <b className="text-uppercase text-muted">Budget</b>
+                        <hr className="hr-xs" />
+                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
+                      </div>
+                    ) : null}
+                    {supplier.facilities ? (
+                      <div>
+                        <b className="text-uppercase text-muted">Services</b>
+                        <hr className="hr-xs" />
+                        <b>{supplier.facilities}</b>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </Col>
+            </Row>
+          </Col>
         </Row>
         <Row className="mt-5 mb-5">
-          <Col sm={7}>
+          <Col sm={12}>
             <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
             {
               <b>
@@ -121,50 +165,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               <div className="divider d-sm-none" />
             </div>
           </Col>
-          <Col>
-            <Row>
-              {!user.isProvider && (
-                <Col sm={12}>
-                  <Button
-                    className="text-uppercase mb-4"
-                    block
-                    size="lg"
-                    onClick={() =>
-                      isLoggedIn ? setModalShow(true) : history.push('/login')
-                    }
-                  >
-                    {t('supplier.sendAMessage.button')}
-                  </Button>
-                  <SupplierMessageDialog
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    supplier={supplier}
-                  />
-                </Col>
-              )}
-              <Col sm={12}>
-                {(supplier.minPrice && supplier.maxPrice) ||
-                supplier.facilities ? (
-                  <div className="supplier-results-side-box">
-                    {supplier.minPrice && supplier.maxPrice ? (
-                      <div className="mb-4">
-                        <b className="text-uppercase text-muted">Budget</b>
-                        <hr className="hr-xs" />
-                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
-                      </div>
-                    ) : null}
-                    {supplier.facilities ? (
-                      <div>
-                        <b className="text-uppercase text-muted">Services</b>
-                        <hr className="hr-xs" />
-                        <b>{supplier.facilities}</b>
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </Col>
-            </Row>
-          </Col>
+
           {/* Hidden next result */}
           <Col sm={12} className="text-right d-none">
             <div className="divider" />
