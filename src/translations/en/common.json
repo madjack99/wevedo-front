@@ -150,6 +150,7 @@
     "venues": "Venues",
     "viewAllSuppliers": "View all suppliers",
     "login": "Login",
+    "signup": "Signup",
     "businessLogin": "Business Login",
     "signOut": "Sign Out"
   },
@@ -164,7 +165,8 @@
     "logIn": "Login",
     "noAccount": "Don't have an account?",
     "or": "OR",
-    "alreadyHaveAccount": "Already have an account?"
+    "alreadyHaveAccount": "Already have an account?",
+    "businessAccount": "Business account?"
   },
   "businessAndUserLogin": {
     "jumbotron": {

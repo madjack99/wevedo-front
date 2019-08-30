@@ -165,6 +165,11 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
                 {t('signAndLogForm.alreadyHaveAccount')}{' '}
                 <Link to="/login">{t('signAndLogForm.logIn')}</Link>
               </span>
+              <br />
+              <span>
+                {t('signAndLogForm.businessAccount')}{' '}
+                <Link to="/business/signup">{t('signAndLogForm.signUp')}</Link>
+              </span>
             </div>
           </Form>
         )}
