@@ -32,6 +32,7 @@ const Footer = ({ t }) => (
             <LinkContainer to="/privacy-policy">
               <Nav.Link>{t('footer.privacy')}</Nav.Link>
             </LinkContainer>
+            <span className="footer-dot" />
             <LinkContainer to="/cookie-policy">
               <Nav.Link>{t('footer.cookie')}</Nav.Link>
             </LinkContainer>
