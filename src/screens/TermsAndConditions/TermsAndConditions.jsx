@@ -658,8 +658,9 @@ const TermsAndConditions = ({ t }) => (
           minimum extent necessary to make it valid, legal and enforceable. If
           such modification is not possible, the relevant provision or
           part-provision shall be deemed deleted. Any modification to or
-          deletion of a provision or part-provision under this clause shall not
-          affect the validity and enforceability of the rest of this agreement.
+          deletion of a provision or part-provision under this <b>clause</b>{' '}
+          shall not affect the validity and enforceability of the rest of this
+          agreement.
         </p>
         <p className="document__text">
           If one party gives notice to the other of the possibility that any
