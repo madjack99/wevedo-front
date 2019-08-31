@@ -33,6 +33,10 @@ const Footer = ({ t }) => (
               <Nav.Link>{t('footer.privacy')}</Nav.Link>
             </LinkContainer>
             <span className="footer-dot" />
+            <LinkContainer to="/cookie-policy">
+              <Nav.Link>{t('footer.cookie')}</Nav.Link>
+            </LinkContainer>
+            <span className="footer-dot" />
             <a
               className="footer__app-link mx-3"
               href="https://goo.gl/Vnw14E"

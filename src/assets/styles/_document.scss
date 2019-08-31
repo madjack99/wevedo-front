@@ -1,0 +1,61 @@
+.document {
+  &__name,
+  &__title {
+    text-align: center;
+  }
+
+  &__name,
+  &__title,
+  &__subtitle {
+    font-weight: bold;
+  }
+
+  &__name,
+  &__subtitle {
+    text-transform: uppercase;
+  }
+
+  &__title,
+  &__subtitle,
+  &__text {
+    font-family: 'Proxima Nova', sans-serif;
+  }
+
+  &__name {
+    font-size: 1.75rem;
+  }
+
+  &__block {
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  &__subtitle {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+  }
+
+  &__table,
+  &__text {
+    color: #6c757d;
+  }
+
+  &__table {
+    margin-bottom: 1rem;
+
+    tr,
+    th,
+    td {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 10px;
+    }
+  }
+
+  &__text {
+    margin-bottom: 0.7rem;
+  }
+}
