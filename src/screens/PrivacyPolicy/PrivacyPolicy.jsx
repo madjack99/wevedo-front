@@ -486,8 +486,10 @@ const PrivacyPolicy = ({ t }) => (
           <tbody>
             <tr>
               <td>
-                Request access to your personal data (commonly known as a “data
-                subject access request”).
+                <b>
+                  Request access to your personal data (commonly known as a
+                  “data subject access request”).
+                </b>
               </td>
               <td>
                 This will enable you to receive a copy of the personal data we
@@ -496,7 +498,10 @@ const PrivacyPolicy = ({ t }) => (
             </tr>
             <tr>
               <td>
-                Request correction of the personal data that we hold about you.
+                <b>
+                  Request correction of the personal data that we hold about
+                  you.
+                </b>
               </td>
               <td>
                 This will enable you to have any incomplete or inaccurate data
@@ -505,7 +510,9 @@ const PrivacyPolicy = ({ t }) => (
               </td>
             </tr>
             <tr>
-              <td>Request erasure of your personal data.</td>
+              <td>
+                <b>Request erasure of your personal data.</b>
+              </td>
               <td>
                 This will enable you to ask us to delete or remove personal data
                 where there is no good reason for us continuing to process it.
@@ -521,11 +528,13 @@ const PrivacyPolicy = ({ t }) => (
             </tr>
             <tr>
               <td>
-                Object to the processing of your personal data where we are
-                relying on a legitimate interest (or those of a third party) and
-                there is something about your particular situation which makes
-                you want to object to processing on this ground as you feel it
-                impacts on your fundamental rights and freedoms.
+                <b>
+                  Object to the processing of your personal data where we are
+                  relying on a legitimate interest (or those of a third party)
+                  and there is something about your particular situation which
+                  makes you want to object to processing on this ground as you
+                  feel it impacts on your fundamental rights and freedoms.
+                </b>
               </td>
               <td>
                 You also have the right to object where we are processing your
@@ -536,7 +545,9 @@ const PrivacyPolicy = ({ t }) => (
               </td>
             </tr>
             <tr>
-              <td>Request restriction of processing of your personal data.</td>
+              <td>
+                <b>Request restriction of processing of your personal data.</b>
+              </td>
               <td>
                 This will enable you to ask us to suspend the processing of your
                 personal data in the following scenarios: (a) if you want us to
@@ -550,8 +561,10 @@ const PrivacyPolicy = ({ t }) => (
             </tr>
             <tr>
               <td>
-                Request the transfer of your personal data to you or to a third
-                party.
+                <b>
+                  Request the transfer of your personal data to you or to a
+                  third party.
+                </b>
               </td>
               <td>
                 We will always, when asked, provide to you, or a third party you
