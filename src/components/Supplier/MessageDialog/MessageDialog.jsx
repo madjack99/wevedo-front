@@ -31,7 +31,11 @@ const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
       body: message,
     };
 
+    console.log(body);
+
     await wevedoService.addMessage(roomId, body);
+
+    await wevedoService.sendEmailToSupplier(body);
 
     history.push('/dashboard/messages');
   };
