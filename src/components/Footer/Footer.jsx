@@ -32,6 +32,9 @@ const Footer = ({ t }) => (
             <LinkContainer to="/privacy-policy">
               <Nav.Link>{t('footer.privacy')}</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/cookie-policy">
+              <Nav.Link>{t('footer.cookie')}</Nav.Link>
+            </LinkContainer>
             <span className="footer-dot" />
             <a
               className="footer__app-link mx-3"

@@ -17,6 +17,7 @@ import ScreensSupplierLocations from './Supplier/Locations';
 import ScreensContact from './Contact';
 import ScreensTermsAndConditions from './TermsAndConditions';
 import ScreensPrivacyPolicy from './PrivacyPolicy';
+import ScreensCookiePolicy from './CookiePolicy';
 
 const ScreensRoot = () => {
   return (
@@ -67,6 +68,7 @@ const ScreensRoot = () => {
           component={ScreensTermsAndConditions}
         />
         <Route path="/privacy-policy" component={ScreensPrivacyPolicy} />
+        <Route path="/cookie-policy" component={ScreensCookiePolicy} />
       </Switch>
     </Router>
   );
