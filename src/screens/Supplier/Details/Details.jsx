@@ -42,6 +42,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     : [];
 
   const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
+  console.log('bookedDates', bookedDates);
 
   return (
     <ScreensLayoutMain
@@ -146,10 +147,11 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   tileDisabled={({ date, view }) =>
                     view === 'month' &&
                     bookedDates.some(
-                      dis =>
-                        date.getFullYear() === dis.getFullYear() &&
-                        date.getMonth() === dis.getMonth() &&
-                        date.getDate() === dis.getDate(),
+                      disabledDate =>
+                        date.getFullYear() ===
+                          new Date(disabledDate).getFullYear() &&
+                        date.getMonth() === new Date(disabledDate).getMonth() &&
+                        date.getDate() === new Date(disabledDate).getDate(),
                     )
                   }
                 />
