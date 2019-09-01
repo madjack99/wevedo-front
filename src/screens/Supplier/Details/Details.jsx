@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import getVideoId from 'get-video-id';
 import uniqid from 'uniqid';
+import Calendar from 'react-calendar';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 import YouTube from 'react-youtube';
@@ -40,6 +41,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     ? Object.values(supplier.providerImages)
     : [];
 
+  const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
+  console.log('bookedDates', bookedDates);
+
   return (
     <ScreensLayoutMain
       title={`${supplier.fullName}`}
@@ -47,20 +51,18 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     >
       <Container className="supplier-results">
         <Row className="mt-5 mb-5">
-          <Col>
+          <Col sm={12} lg={8}>
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel interval={null}>
-                {[supplier.profileImageURL, ...providerImagesList].map(
-                  image => (
-                    <Carousel.Item className="carousel-image" key={uniqid()}>
-                      <img
-                        className="d-block mx-auto"
-                        src={image}
-                        alt="supplier-slide"
-                      />
-                    </Carousel.Item>
-                  ),
-                )}
+              <Carousel interval={5000} className="mb-4">
+                {[...providerImagesList].map(image => (
+                  <Carousel.Item className="carousel-image" key={uniqid()}>
+                    <img
+                      className="d-block mx-auto"
+                      src={image}
+                      alt="supplier-slide"
+                    />
+                  </Carousel.Item>
+                ))}
                 {supplier.profileVideoURL && (
                   <Carousel.Item className="carousel-video">
                     <YouTube
@@ -70,10 +72,6 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 )}
               </Carousel>
             ) : null}
-          </Col>
-        </Row>
-        <Row className="mt-5 mb-5">
-          <Col sm={7}>
             <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
             {
               <b>
@@ -121,8 +119,8 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               <div className="divider d-sm-none" />
             </div>
           </Col>
-          <Col>
-            <Row>
+          <Col sm={12} lg={4}>
+            <Row style={{ position: 'sticky', top: 80 }}>
               {!user.isProvider && (
                 <Col sm={12}>
                   <Button
@@ -133,7 +131,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                       isLoggedIn ? setModalShow(true) : history.push('/login')
                     }
                   >
-                    {t('supplier.sendAMessage.button')}
+                    {`Send a message to ${supplier.fullName}`}
                   </Button>
                   <SupplierMessageDialog
                     show={modalShow}
@@ -142,7 +140,23 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   />
                 </Col>
               )}
-              <Col sm={12}>
+              <Col sm={6} lg={12}>
+                <Calendar
+                  className="mb-4"
+                  value={new Date()}
+                  tileDisabled={({ date, view }) =>
+                    view === 'month' &&
+                    bookedDates.some(
+                      disabledDate =>
+                        date.getFullYear() ===
+                          new Date(disabledDate).getFullYear() &&
+                        date.getMonth() === new Date(disabledDate).getMonth() &&
+                        date.getDate() === new Date(disabledDate).getDate(),
+                    )
+                  }
+                />
+              </Col>
+              <Col sm={6} lg={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||
                 supplier.facilities ? (
                   <div className="supplier-results-side-box">
@@ -165,8 +179,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
               </Col>
             </Row>
           </Col>
+
           {/* Hidden next result */}
-          <Col sm={12} className="text-right d-none">
+          <Col sm={12} lg={8} className="text-right d-none">
             <div className="divider" />
             <b className="supplier-results-next-btn">
               {t('supplier.nextResult')}

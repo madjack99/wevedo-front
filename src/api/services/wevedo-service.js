@@ -46,5 +46,8 @@ export default class WevedoService extends ApiBase {
     this.createRoom = body => this.create(`chat/rooms`, body);
     this.addMessage = (roomId, body) =>
       this.create(`chat/rooms/${roomId}/messages`, body);
+    this.sendEmailToSupplier = body => {
+      this.create('send-email-to-supplier', body);
+    };
   }
 }
