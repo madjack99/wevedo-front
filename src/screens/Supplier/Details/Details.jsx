@@ -52,7 +52,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
         <Row className="mt-5 mb-5">
           <Col sm={12} lg={8}>
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel interval={5000} className="mb-2">
+              <Carousel interval={5000} className="mb-4">
                 {[...providerImagesList].map(image => (
                   <Carousel.Item className="carousel-image" key={uniqid()}>
                     <img
@@ -139,8 +139,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   />
                 </Col>
               )}
-              <Col sm={12}>
+              <Col sm={6} lg={12}>
                 <Calendar
+                  className="mb-4"
                   value={new Date()}
                   tileDisabled={({ date, view }) =>
                     view === 'month' &&
@@ -153,7 +154,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   }
                 />
               </Col>
-              <Col sm={12}>
+              <Col sm={6} lg={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||
                 supplier.facilities ? (
                   <div className="supplier-results-side-box">
