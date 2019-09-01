@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import getVideoId from 'get-video-id';
 import uniqid from 'uniqid';
+import Calendar from 'react-calendar';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 import YouTube from 'react-youtube';
@@ -39,6 +40,8 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const providerImagesList = supplier.providerImages
     ? Object.values(supplier.providerImages)
     : [];
+
+  const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
 
   return (
     <ScreensLayoutMain
@@ -136,6 +139,20 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   />
                 </Col>
               )}
+              <Col sm={12}>
+                <Calendar
+                  value={new Date()}
+                  tileDisabled={({ date, view }) =>
+                    view === 'month' &&
+                    bookedDates.some(
+                      dis =>
+                        date.getFullYear() === dis.getFullYear() &&
+                        date.getMonth() === dis.getMonth() &&
+                        date.getDate() === dis.getDate(),
+                    )
+                  }
+                />
+              </Col>
               <Col sm={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||
                 supplier.facilities ? (
