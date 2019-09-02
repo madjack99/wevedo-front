@@ -32,13 +32,13 @@
     "jumbotron": {
       "smallTitle": "Your day, your way",
       "largeTitleOne": "Plan and book your wedding",
-      "largeTitleTwo": "in real time"
+      "largeTitleTwo": "in real-time"
     },
     "mainSectionTitle": "How it works",
     "howItWorks": {
       "boxOne": "Search for your perfect venue or supplier by category, location and budget.",
-      "boxTwo": "See real time availability for your venue or supplier booking.",
-      "boxThree": "Message suppliers directly through the app to make enquiries or bookings."
+      "boxTwo": "See real-time availability for your venue or supplier booking.",
+      "boxThree": "Message suppliers directly in real-time through the app to make enquiries or bookings."
     },
     "findForm": {
       "title": "Find your best wedding supplier by location",
