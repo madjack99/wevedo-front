@@ -176,7 +176,9 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           }
                           isValid={values.country && !errors.country}
                         >
-                          <option value="" disabled />
+                          <option value="" disabled>
+                            United Kingdom
+                          </option>
                           {defineCountries().map(country => (
                             <option key={uniqid()}>{country}</option>
                           ))}
