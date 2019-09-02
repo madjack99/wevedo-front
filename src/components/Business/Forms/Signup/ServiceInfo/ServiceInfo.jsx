@@ -1,29 +1,23 @@
 /* eslint-disable no-shadow */
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
-import { WevedoServiceContext } from '../../../../../contexts';
+import { updateUser } from '../../../../../actions';
 import formSchema from './schema';
 
 const BusinessFormsSignupServiceInfo = ({
-  user,
   isLoggedIn,
-  login,
-  signUp,
   updateUser,
   t,
   nextStep,
 }) => {
-  const wevedoService = useContext(WevedoServiceContext);
-
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
@@ -37,33 +31,17 @@ const BusinessFormsSignupServiceInfo = ({
         maxPrice: '100000',
         facilities: '',
       }}
-      onSubmit={async (
-        { bio, minPrice, maxPrice, facilities },
-        { setSubmitting },
-      ) => {
-        const body = {
-          ...user,
+      onSubmit={async ({ bio, minPrice, maxPrice, facilities }) => {
+        await updateUser()({
           bio,
           minPrice,
           maxPrice,
           facilities,
           profileImageURL:
             'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
-          deviceOS: 'android', // TO-DO: 'web' should be later,
-        };
+        });
 
-        const newProvider = await signUp(wevedoService.register, body);
-
-        if (newProvider) {
-          await login(wevedoService.login, body);
-          await updateUser(wevedoService.updateProfile)({
-            ...newProvider,
-            isProvider: true,
-          });
-          return nextStep();
-        }
-
-        return setSubmitting(false);
+        nextStep();
       }}
       validationSchema={formSchema}
       render={({
@@ -182,17 +160,13 @@ const mapStateToProps = ({ sessionData, userData }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: fetchLogin(dispatch),
-  signUp: fetchSignUp(dispatch),
   updateUser: updateUser(dispatch),
 });
 
-export default withRouter(
-  compose(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps,
-    ),
-    withTranslation('common'),
-  )(BusinessFormsSignupServiceInfo),
-);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(BusinessFormsSignupServiceInfo);

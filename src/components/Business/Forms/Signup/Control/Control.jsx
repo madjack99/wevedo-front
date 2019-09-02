@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import ScreensBusinessFormsSignupMainInfo from '../MainInfo';
-import ScreensBusinessFormsSignupLocationInfo from '../LocationInfo';
-import ScreensBusinessFormsSignupImageUpload from '../ImageUpload';
-import ScreensBusinessFormsSignupServiceInfo from '../ServiceInfo';
+import { WevedoServiceContext } from '../../../../../contexts';
+import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
 
-const ScreensBusinessFormsSignupControl = ({ history }) => {
+import ScreensBusinessFormsSignupMainInfo from '../../../../../screens/Business/Forms/Signup/MainInfo';
+import ScreensBusinessFormsSignupLocationInfo from '../../../../../screens/Business/Forms/Signup/LocationInfo';
+import ScreensBusinessFormsSignupImageUpload from '../../../../../screens/Business/Forms/Signup/ImageUpload';
+import ScreensBusinessFormsSignupServiceInfo from '../../../../../screens/Business/Forms/Signup/ServiceInfo';
+
+const ScreensBusinessFormsSignupControl = ({
+  history,
+  user,
+  login,
+  signUp,
+  updateUser,
+}) => {
+  const wevedoService = useContext(WevedoServiceContext);
+
   const SCREENS = {
     MAIN_INFO: 'main-info',
     LOCATION_INFO: 'location-info',
@@ -14,7 +28,28 @@ const ScreensBusinessFormsSignupControl = ({ history }) => {
   };
   const [currentScreen, setCurrentScreen] = useState(SCREENS.MAIN_INFO);
 
-  const nextStep = () => {
+  const register = async () => {
+    const body = {
+      ...user,
+      deviceOS: 'android', // TO-DO: 'web' should be later,
+    };
+
+    try {
+      const newProvider = await signUp(wevedoService.register, body);
+
+      if (newProvider) {
+        await login(wevedoService.login, body);
+        await updateUser(wevedoService.updateProfile)({
+          ...newProvider,
+          isProvider: true,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const nextStep = async () => {
     switch (currentScreen) {
       case SCREENS.MAIN_INFO:
         setCurrentScreen(SCREENS.LOCATION_INFO);
@@ -26,6 +61,9 @@ const ScreensBusinessFormsSignupControl = ({ history }) => {
         setCurrentScreen(SCREENS.SERVICE_INFO);
         break;
       case SCREENS.SERVICE_INFO:
+        await register();
+        history.push('/');
+        break;
       default:
         history.push('/');
     }
@@ -49,4 +87,23 @@ const ScreensBusinessFormsSignupControl = ({ history }) => {
   return showScene();
 };
 
-export default ScreensBusinessFormsSignupControl;
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: fetchLogin(dispatch),
+  signUp: fetchSignUp(dispatch),
+  updateUser: updateUser(dispatch),
+});
+
+export default withRouter(
+  compose(
+    withRouter,
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    ),
+  )(ScreensBusinessFormsSignupControl),
+);
