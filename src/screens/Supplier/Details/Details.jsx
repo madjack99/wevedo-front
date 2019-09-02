@@ -19,6 +19,10 @@ import { WevedoServiceContext } from '../../../contexts';
 
 import ScreensLayoutMain from '../../Layouts/Main';
 import SupplierMessageDialog from '../../../components/Supplier/MessageDialog';
+import Header from '../../../components/Header';
+import PopularSearches from '../../../components/PopularSearches';
+import PromotedProviders from '../../../components/PromotedSuppliers';
+import Footer from '../../../components/Footer';
 
 const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const [supplier, setSupplier] = useState({});
@@ -45,24 +49,33 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   console.log('bookedDates', bookedDates);
 
   return (
-    <ScreensLayoutMain
-      title={`${supplier.fullName}`}
-      backgroundImage={backgroundImage}
-    >
+    <React.Fragment>
+      <Header />
       <Container className="supplier-results">
         <Row className="mt-5 mb-5">
           <Col sm={12} lg={8}>
+            <h4 className="text-uppercase mt-5">{`${supplier.fullName}`}</h4>
+            {
+              <b>
+                {`${supplier.address || ''} ${supplier.city ||
+                  ''} ${supplier.county || ''} ${supplier.regionName ||
+                  ''} ${supplier.country || ''} ${supplier.postcode || ''}
+                `}
+              </b>
+            }
             {supplier.profileImageURL || supplier.providerImages ? (
-              <Carousel interval={5000} className="mb-4">
-                {[...providerImagesList].map(image => (
-                  <Carousel.Item className="carousel-image" key={uniqid()}>
-                    <img
-                      className="d-block mx-auto"
-                      src={image}
-                      alt="supplier-slide"
-                    />
-                  </Carousel.Item>
-                ))}
+              <Carousel interval={5000} className="mb-4 mt-4">
+                {[supplier.profileImageURL, ...providerImagesList].map(
+                  image => (
+                    <Carousel.Item className="carousel-image" key={uniqid()}>
+                      <img
+                        className="d-block mx-auto"
+                        src={image}
+                        alt="supplier-slide"
+                      />
+                    </Carousel.Item>
+                  ),
+                )}
                 {supplier.profileVideoURL && (
                   <Carousel.Item className="carousel-video">
                     <YouTube
@@ -72,15 +85,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 )}
               </Carousel>
             ) : null}
-            <h4 className="text-uppercase">{`${supplier.fullName}`}</h4>
-            {
-              <b>
-                {`${supplier.address || ''} ${supplier.city ||
-                  ''} ${supplier.county || ''} ${supplier.regionName ||
-                  ''} ${supplier.country || ''} ${supplier.postcode || ''}
-                `}
-              </b>
-            }
+
             <hr className="hr-sm m-0 mt-4 mb-4" />
             <p>{supplier.bio}</p>
             <div className="divider" />
@@ -140,10 +145,11 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   />
                 </Col>
               )}
-              <Col sm={6} lg={12}>
+              <Col sm={6} lg={12} className="d-flex justify-content-center">
                 <Calendar
                   className="mb-4"
                   value={new Date()}
+                  calendarType="ISO 8601"
                   tileDisabled={({ date, view }) =>
                     view === 'month' &&
                     bookedDates.some(
@@ -190,7 +196,10 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
           </Col>
         </Row>
       </Container>
-    </ScreensLayoutMain>
+      <PopularSearches />
+      <PromotedProviders />
+      <Footer />
+    </React.Fragment>
   );
 };
 
