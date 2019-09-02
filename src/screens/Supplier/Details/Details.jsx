@@ -140,10 +140,11 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   />
                 </Col>
               )}
-              <Col sm={6} lg={12}>
+              <Col sm={6} lg={12} className="d-flex justify-content-center">
                 <Calendar
                   className="mb-4"
                   value={new Date()}
+                  calendarType="ISO 8601"
                   tileDisabled={({ date, view }) =>
                     view === 'month' &&
                     bookedDates.some(
