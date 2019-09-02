@@ -61,11 +61,11 @@ function LocationsSearchAreasCity() {
   return (
     <div>
       <Container className="pb-5 pt-3">
-        <Nav>
+        <Nav className="flex-column flex-md-row">
           {countries.map(country => (
             <Nav.Item
               key={uniqid()}
-              className={`navItem ${
+              className={`navItem mb-1 ${
                 country === stateCountry ? 'activeLocationNavItem' : null
               }`}
             >
