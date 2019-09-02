@@ -12,12 +12,10 @@ import YouTube from 'react-youtube';
 
 import './Details.scss';
 
-import backgroundImage from '../../../assets/images/supplier-bg.png';
 import map from '../../../assets/images/map.png';
 
 import { WevedoServiceContext } from '../../../contexts';
 
-import ScreensLayoutMain from '../../Layouts/Main';
 import SupplierMessageDialog from '../../../components/Supplier/MessageDialog';
 import Header from '../../../components/Header';
 import PopularSearches from '../../../components/PopularSearches';
