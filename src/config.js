@@ -23,4 +23,6 @@ export default {
     '5bcd935fb111ee00167fa3b8',
     '5bacccad6b70be001a0dcb29',
   ],
+  publishableKey: 'pk_test_bBxEwbKUaiLX7Zq2i7Tygp5Y00qvApTpqA',
+  secretKey: 'sk_test_4UdOCRM6biyJzil2H1ECqL5500pZv0wiSU',
 };
