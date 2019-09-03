@@ -86,7 +86,9 @@ const SearchPanel = ({
                     value={supplierLocation}
                   >
                     <option value={supplierLocation}>{supplierLocation}</option>
-                    <option value="All">All</option>
+                    {supplierLocation !== 'All' && (
+                      <option value="All">All</option>
+                    )}
                     {allRegionNames.map(regionName => (
                       <option key={uniqid()}>{regionName}</option>
                     ))}

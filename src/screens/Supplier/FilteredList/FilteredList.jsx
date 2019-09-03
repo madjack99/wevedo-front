@@ -127,7 +127,9 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
             />
           </Col>
           <Col sm={4} className="results-filters d-none d-sm-inline">
-            <FilterPanel setFilterOptions={setFilterOptions} />
+            <div style={{ position: 'sticky', top: 70 }}>
+              <FilterPanel setFilterOptions={setFilterOptions} />
+            </div>
           </Col>
         </Row>
       </Container>
