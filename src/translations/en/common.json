@@ -200,6 +200,7 @@
     "maxPricePlaceholder": "Maximum price",
     "whatFacilities": "Which facilities do you provide?",
     "facilitiesDescriptionPlaceholder": "Eg. Ballroom, Spa On-Site, ...",
+    "availabilityCalendar": "Availability Calendar",
     "save": "Save"
   },
   "dashboard": {

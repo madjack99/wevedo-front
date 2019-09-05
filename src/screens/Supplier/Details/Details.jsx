@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import getVideoId from 'get-video-id';
 import uniqid from 'uniqid';
-import Calendar from 'react-calendar';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 import YouTube from 'react-youtube';
