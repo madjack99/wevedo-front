@@ -1,29 +1,46 @@
 /* eslint-disable no-shadow */
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
-import { withRouter, Redirect } from 'react-router-dom';
-import { Formik } from 'formik';
-
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { Formik } from 'formik';
+import StripeCheckout from 'react-stripe-checkout';
 
-import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
+import config from '../../../../../config';
 import { WevedoServiceContext } from '../../../../../contexts';
+import { updateUser } from '../../../../../actions';
 import formSchema from './schema';
 import MyCalendar from '../../../../Calendar';
 
 const BusinessFormsSignupServiceInfo = ({
-  user,
   isLoggedIn,
-  login,
-  signUp,
   updateUser,
+  user,
   t,
   nextStep,
 }) => {
+  const [price, setPrice] = useState(0);
+  const [paymentMade, setPaymentMade] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      const { data: newPrice } = await wevedoService.getPrice(
+        'registrationFee',
+      );
+      setPrice(newPrice);
+    };
+    fetchPrice();
+  }, [wevedoService]);
+
+  const handleToken = async token => {
+    await updateUser()({ paymentToken: token.id });
+    setPaymentMade(true);
+    nextStep();
+  };
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -40,33 +57,19 @@ const BusinessFormsSignupServiceInfo = ({
         facilities: '',
         bookedDates: user.bookedDates || [],
       }}
-      onSubmit={async (
-        { bio, minPrice, maxPrice, facilities },
-        { setSubmitting },
-      ) => {
-        const body = {
-          ...user,
+      onSubmit={({ bio, minPrice, maxPrice, facilities }) => {
+        updateUser()({
           bio,
           minPrice,
           maxPrice,
           facilities,
           profileImageURL:
             'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
-          deviceOS: 'android', // TO-DO: 'web' should be later,
-        };
+        });
 
-        const newProvider = await signUp(wevedoService.register, body);
-
-        if (newProvider) {
-          await login(wevedoService.login, body);
-          await updateUser(wevedoService.updateProfile)({
-            ...newProvider,
-            isProvider: true,
-          });
-          return nextStep();
+        if (!config.publishableKey) {
+          nextStep();
         }
-
-        return setSubmitting(false);
       }}
       validationSchema={formSchema}
       render={({
@@ -174,14 +177,34 @@ const BusinessFormsSignupServiceInfo = ({
           </Form.Group>
 
           <Form.Group className="text-center text-md-right text-uppercase">
-            <Button
-              variant="primary"
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
-            >
-              {t('serviceInfo.save')}
-            </Button>
+            {config.publishableKey ? (
+              <StripeCheckout
+                stripeKey={config.publishableKey}
+                token={handleToken}
+                amount={price * 100} // price is in cents
+                name="Registration Fee"
+                email={user.email}
+                allowRememberMe={false}
+              >
+                <Button
+                  variant="primary"
+                  type="submit"
+                  size="lg"
+                  disabled={paymentMade}
+                >
+                  Proceed to payment
+                </Button>
+              </StripeCheckout>
+            ) : (
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                {t('serviceInfo.save')}
+              </Button>
+            )}
           </Form.Group>
         </Form>
       )}
@@ -195,17 +218,13 @@ const mapStateToProps = ({ sessionData, userData }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: fetchLogin(dispatch),
-  signUp: fetchSignUp(dispatch),
   updateUser: updateUser(dispatch),
 });
 
-export default withRouter(
-  compose(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps,
-    ),
-    withTranslation('common'),
-  )(BusinessFormsSignupServiceInfo),
-);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
+)(BusinessFormsSignupServiceInfo);

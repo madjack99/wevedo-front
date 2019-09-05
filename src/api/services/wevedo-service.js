@@ -49,5 +49,7 @@ export default class WevedoService extends ApiBase {
     this.sendEmailToSupplier = body => {
       this.create('send-email-to-supplier', body);
     };
+
+    this.getPrice = type => this.get(`payments/getPrice?type=${type}`);
   }
 }
