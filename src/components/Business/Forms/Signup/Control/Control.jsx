@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
@@ -40,7 +40,6 @@ const ScreensBusinessFormsSignupControl = ({
         break;
       case SCREENS.SERVICE_INFO:
         setIsAllDataEntered(true);
-        history.push('/');
         break;
       default:
         history.push('/');
@@ -75,6 +74,7 @@ const ScreensBusinessFormsSignupControl = ({
 
         if (newProvider) {
           await login(wevedoService.login, body);
+          history.push('/');
         }
       } catch (err) {
         console.error(err);
@@ -84,11 +84,7 @@ const ScreensBusinessFormsSignupControl = ({
     if (isAllDataEntered) {
       register();
     }
-  }, [isAllDataEntered, wevedoService, user, signUp, login]);
-
-  if (isAllDataEntered) {
-    return <Redirect to="/" />;
-  }
+  }, [isAllDataEntered, wevedoService, user, signUp, login, history]);
 
   return showScene();
 };

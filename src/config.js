@@ -23,8 +23,9 @@ export default {
     '5bcd935fb111ee00167fa3b8',
     '5bacccad6b70be001a0dcb29',
   ],
-  publishableKey:
-    process.env.REACT_APP_STAGE === 'PROD'
-      ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
-      : 'pk_test_JP05nCrL2SdWW7oRRekbdZrq',
+  publishableKey: null,
+  // remove null and uncomment to turn on payment
+  // process.env.REACT_APP_STAGE === 'PROD'
+  //   ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
+  //   : 'pk_test_JP05nCrL2SdWW7oRRekbdZrq',
 };

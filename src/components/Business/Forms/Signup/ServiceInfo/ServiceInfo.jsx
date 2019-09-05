@@ -22,6 +22,7 @@ const BusinessFormsSignupServiceInfo = ({
   nextStep,
 }) => {
   const [price, setPrice] = useState(0);
+  const [paymentMade, setPaymentMade] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const BusinessFormsSignupServiceInfo = ({
 
   const handleToken = async token => {
     await updateUser()({ paymentToken: token.id });
+    setPaymentMade(true);
     nextStep();
   };
 
@@ -52,8 +54,8 @@ const BusinessFormsSignupServiceInfo = ({
         maxPrice: '100000',
         facilities: '',
       }}
-      onSubmit={async ({ bio, minPrice, maxPrice, facilities }) => {
-        await updateUser()({
+      onSubmit={({ bio, minPrice, maxPrice, facilities }) => {
+        updateUser()({
           bio,
           minPrice,
           maxPrice,
@@ -61,9 +63,20 @@ const BusinessFormsSignupServiceInfo = ({
           profileImageURL:
             'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
         });
+
+        if (!config.publishableKey) {
+          nextStep();
+        }
       }}
       validationSchema={formSchema}
-      render={({ handleSubmit, handleChange, values, touched, errors }) => (
+      render={({
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting,
+      }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
@@ -151,18 +164,34 @@ const BusinessFormsSignupServiceInfo = ({
           </Form.Group>
 
           <Form.Group className="text-center text-md-right text-uppercase">
-            <StripeCheckout
-              stripeKey={config.publishableKey}
-              token={handleToken}
-              amount={price * 100} // price is in cents
-              name="Registration Fee"
-              email={user.email}
-              allowRememberMe={false}
-            >
-              <Button variant="primary" type="submit" size="lg">
-                Proceed to payment
+            {config.publishableKey ? (
+              <StripeCheckout
+                stripeKey={config.publishableKey}
+                token={handleToken}
+                amount={price * 100} // price is in cents
+                name="Registration Fee"
+                email={user.email}
+                allowRememberMe={false}
+              >
+                <Button
+                  variant="primary"
+                  type="submit"
+                  size="lg"
+                  disabled={paymentMade}
+                >
+                  Proceed to payment
+                </Button>
+              </StripeCheckout>
+            ) : (
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                {t('serviceInfo.save')}
               </Button>
-            </StripeCheckout>
+            )}
           </Form.Group>
         </Form>
       )}
