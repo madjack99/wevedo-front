@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import getVideoId from 'get-video-id';
 import uniqid from 'uniqid';
-import Calendar from 'react-calendar';
 
 import { Row, Container, Col, Button, Carousel } from 'react-bootstrap';
 import YouTube from 'react-youtube';
@@ -21,6 +20,7 @@ import Header from '../../../components/Header';
 import PopularSearches from '../../../components/PopularSearches';
 import PromotedProviders from '../../../components/PromotedSuppliers';
 import Footer from '../../../components/Footer';
+import MyCalendar from '../../../components/Calendar';
 
 const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const [supplier, setSupplier] = useState({});
@@ -44,7 +44,6 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     : [];
 
   const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
-  console.log('bookedDates', bookedDates);
 
   return (
     <React.Fragment>
@@ -144,21 +143,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 </Col>
               )}
               <Col sm={6} lg={12} className="d-flex justify-content-center">
-                <Calendar
-                  className="mb-4"
-                  value={new Date()}
-                  calendarType="ISO 8601"
-                  tileDisabled={({ date, view }) =>
-                    view === 'month' &&
-                    bookedDates.some(
-                      disabledDate =>
-                        date.getFullYear() ===
-                          new Date(disabledDate).getFullYear() &&
-                        date.getMonth() === new Date(disabledDate).getMonth() &&
-                        date.getDate() === new Date(disabledDate).getDate(),
-                    )
-                  }
-                />
+                <MyCalendar bookedDates={bookedDates} onCalendarClick="null" />
               </Col>
               <Col sm={6} lg={12}>
                 {(supplier.minPrice && supplier.maxPrice) ||

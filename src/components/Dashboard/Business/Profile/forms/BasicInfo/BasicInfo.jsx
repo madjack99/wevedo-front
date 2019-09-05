@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form, InputGroup } from 'react-bootstrap';
 import basicInfoSchema from './basicInfoSchema';
+import MyCalendar from '../../../../../Calendar';
 
 import './BasicInfo.scss';
 import '../Forms.scss';
@@ -16,6 +17,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
         minPrice: user.minPrice || '',
         maxPrice: user.maxPrice || '',
         facilities: user.facilities || '',
+        bookedDates: user.bookedDates || [],
       }}
       validationSchema={basicInfoSchema}
     >
@@ -105,6 +107,13 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                         </InputGroup>
                       </Col>
                     </Row>
+                  </Col>
+                  <Col sm={12} className="mb-4">
+                    <p className="text-muted">
+                      Availability calendar
+                      <span className="form__asterisks">*</span>
+                    </p>
+                    <MyCalendar bookedDates={values.bookedDates} />
                   </Col>
                   <Col sm={12} className="mb-4 d-none">
                     <p className="text-muted">

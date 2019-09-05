@@ -12,6 +12,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../../contexts';
 import formSchema from './schema';
+import MyCalendar from '../../../../Calendar';
 
 const BusinessFormsSignupServiceInfo = ({
   user,
@@ -31,11 +32,13 @@ const BusinessFormsSignupServiceInfo = ({
   return (
     <Formik
       className="form dashboard-form"
+      enableReinitialize
       initialValues={{
         bio: '',
         minPrice: '0',
         maxPrice: '100000',
         facilities: '',
+        bookedDates: user.bookedDates || [],
       }}
       onSubmit={async (
         { bio, minPrice, maxPrice, facilities },
@@ -75,6 +78,16 @@ const BusinessFormsSignupServiceInfo = ({
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
+          <Form.Group className="dashboard-form__group">
+            <Form.Label className="dashboard-form__label">
+              {t('serviceInfo.availabilityCalendar')}
+              <span className="form__asterisks">*</span>
+            </Form.Label>
+            <div className="mt-4">
+              <MyCalendar bookedDates={values.bookedDates} />
+            </div>
+          </Form.Group>
+
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
               {t('serviceInfo.describeService')}
