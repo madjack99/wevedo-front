@@ -10,7 +10,6 @@ import ScreensBusinessFormsSignupMainInfo from '../../../../../screens/Business/
 import ScreensBusinessFormsSignupLocationInfo from '../../../../../screens/Business/Forms/Signup/LocationInfo';
 import ScreensBusinessFormsSignupImageUpload from '../../../../../screens/Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormsSignupServiceInfo from '../../../../../screens/Business/Forms/Signup/ServiceInfo';
-import ScreensBusinessFormsSignupPayment from '../../../../../screens/Business/Forms/Signup/Payment';
 
 const ScreensBusinessFormsSignupControl = ({
   history,
@@ -23,7 +22,6 @@ const ScreensBusinessFormsSignupControl = ({
     LOCATION_INFO: 'location-info',
     IMAGE_UPLOAD: 'image-upload',
     SERVICE_INFO: 'service-info',
-    PAYMENT: 'payment',
   };
   const [currentScreen, setCurrentScreen] = useState(SCREENS.MAIN_INFO);
   const [isAllDataEntered, setIsAllDataEntered] = useState(false);
@@ -41,9 +39,6 @@ const ScreensBusinessFormsSignupControl = ({
         setCurrentScreen(SCREENS.SERVICE_INFO);
         break;
       case SCREENS.SERVICE_INFO:
-        setCurrentScreen(SCREENS.PAYMENT);
-        break;
-      case SCREENS.PAYMENT:
         setIsAllDataEntered(true);
         history.push('/');
         break;
@@ -62,8 +57,6 @@ const ScreensBusinessFormsSignupControl = ({
         return <ScreensBusinessFormsSignupImageUpload nextStep={nextStep} />;
       case SCREENS.SERVICE_INFO:
         return <ScreensBusinessFormsSignupServiceInfo nextStep={nextStep} />;
-      case SCREENS.PAYMENT:
-        return <ScreensBusinessFormsSignupPayment nextStep={nextStep} />;
       default:
         return history.push('/');
     }

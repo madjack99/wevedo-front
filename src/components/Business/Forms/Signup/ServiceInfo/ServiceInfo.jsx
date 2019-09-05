@@ -1,23 +1,44 @@
 /* eslint-disable no-shadow */
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
+import StripeCheckout from 'react-stripe-checkout';
 
-import { Form, Row, Col, Button } from 'react-bootstrap';
-
+import config from '../../../../../config';
+import { WevedoServiceContext } from '../../../../../contexts';
 import { updateUser } from '../../../../../actions';
 import formSchema from './schema';
 
 const BusinessFormsSignupServiceInfo = ({
   isLoggedIn,
   updateUser,
+  user,
   t,
   nextStep,
 }) => {
+  const [price, setPrice] = useState(0);
+  const wevedoService = useContext(WevedoServiceContext);
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      const { data: newPrice } = await wevedoService.getPrice(
+        'registrationFee',
+      );
+      setPrice(newPrice);
+    };
+    fetchPrice();
+  }, [wevedoService]);
+
+  const handleToken = async token => {
+    await updateUser()({ paymentToken: token.id });
+    nextStep();
+  };
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
@@ -40,18 +61,9 @@ const BusinessFormsSignupServiceInfo = ({
           profileImageURL:
             'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
         });
-
-        nextStep();
       }}
       validationSchema={formSchema}
-      render={({
-        handleSubmit,
-        handleChange,
-        values,
-        touched,
-        errors,
-        isSubmitting,
-      }) => (
+      render={({ handleSubmit, handleChange, values, touched, errors }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
@@ -139,14 +151,18 @@ const BusinessFormsSignupServiceInfo = ({
           </Form.Group>
 
           <Form.Group className="text-center text-md-right text-uppercase">
-            <Button
-              variant="primary"
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
+            <StripeCheckout
+              stripeKey={config.publishableKey}
+              token={handleToken}
+              amount={price * 100} // price is in cents
+              name="Registration Fee"
+              email={user.email}
+              allowRememberMe={false}
             >
-              {t('serviceInfo.save')}
-            </Button>
+              <Button variant="primary" type="submit" size="lg">
+                Proceed to payment
+              </Button>
+            </StripeCheckout>
           </Form.Group>
         </Form>
       )}
