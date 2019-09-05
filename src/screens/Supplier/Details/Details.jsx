@@ -44,7 +44,6 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     : [];
 
   const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
-  console.log('bookedDates', bookedDates);
 
   return (
     <React.Fragment>

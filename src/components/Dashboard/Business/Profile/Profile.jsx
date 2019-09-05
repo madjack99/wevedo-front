@@ -33,6 +33,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
       postcode: user.postcode,
       providerImages: user.providerImages,
       profileVideoURL: user.profileVideoURL,
+      bookedDates: user.bookedDates,
     });
 
     setIsSaving(false);
