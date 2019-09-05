@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
@@ -10,44 +10,24 @@ import ScreensBusinessFormsSignupMainInfo from '../../../../../screens/Business/
 import ScreensBusinessFormsSignupLocationInfo from '../../../../../screens/Business/Forms/Signup/LocationInfo';
 import ScreensBusinessFormsSignupImageUpload from '../../../../../screens/Business/Forms/Signup/ImageUpload';
 import ScreensBusinessFormsSignupServiceInfo from '../../../../../screens/Business/Forms/Signup/ServiceInfo';
+import ScreensBusinessFormsSignupPayment from '../../../../../screens/Business/Forms/Signup/Payment';
 
 const ScreensBusinessFormsSignupControl = ({
   history,
   user,
   login,
   signUp,
-  updateUser,
 }) => {
-  const wevedoService = useContext(WevedoServiceContext);
-
   const SCREENS = {
     MAIN_INFO: 'main-info',
     LOCATION_INFO: 'location-info',
     IMAGE_UPLOAD: 'image-upload',
     SERVICE_INFO: 'service-info',
+    PAYMENT: 'payment',
   };
   const [currentScreen, setCurrentScreen] = useState(SCREENS.MAIN_INFO);
-
-  const register = async () => {
-    const body = {
-      ...user,
-      deviceOS: 'android', // TO-DO: 'web' should be later,
-    };
-
-    try {
-      const newProvider = await signUp(wevedoService.register, body);
-
-      if (newProvider) {
-        await login(wevedoService.login, body);
-        await updateUser(wevedoService.updateProfile)({
-          ...newProvider,
-          isProvider: true,
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const [isAllDataEntered, setIsAllDataEntered] = useState(false);
+  const wevedoService = useContext(WevedoServiceContext);
 
   const nextStep = async () => {
     switch (currentScreen) {
@@ -61,7 +41,10 @@ const ScreensBusinessFormsSignupControl = ({
         setCurrentScreen(SCREENS.SERVICE_INFO);
         break;
       case SCREENS.SERVICE_INFO:
-        await register();
+        setCurrentScreen(SCREENS.PAYMENT);
+        break;
+      case SCREENS.PAYMENT:
+        setIsAllDataEntered(true);
         history.push('/');
         break;
       default:
@@ -79,10 +62,40 @@ const ScreensBusinessFormsSignupControl = ({
         return <ScreensBusinessFormsSignupImageUpload nextStep={nextStep} />;
       case SCREENS.SERVICE_INFO:
         return <ScreensBusinessFormsSignupServiceInfo nextStep={nextStep} />;
+      case SCREENS.PAYMENT:
+        return <ScreensBusinessFormsSignupPayment nextStep={nextStep} />;
       default:
         return history.push('/');
     }
   };
+
+  useEffect(() => {
+    const register = async () => {
+      const body = {
+        ...user,
+        isProvider: true,
+        deviceOS: 'android', // TO-DO: 'web' should be later,
+      };
+
+      try {
+        const newProvider = await signUp(wevedoService.register, body);
+
+        if (newProvider) {
+          await login(wevedoService.login, body);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (isAllDataEntered) {
+      register();
+    }
+  }, [isAllDataEntered, wevedoService, user, signUp, login]);
+
+  if (isAllDataEntered) {
+    return <Redirect to="/" />;
+  }
 
   return showScene();
 };
