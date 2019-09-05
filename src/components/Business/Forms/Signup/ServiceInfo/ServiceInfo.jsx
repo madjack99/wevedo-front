@@ -80,6 +80,16 @@ const BusinessFormsSignupServiceInfo = ({
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Group className="dashboard-form__group">
             <Form.Label className="dashboard-form__label">
+              {t('serviceInfo.availabilityCalendar')}
+              <span className="form__asterisks">*</span>
+            </Form.Label>
+            <div className="mt-4">
+              <MyCalendar bookedDates={values.bookedDates} />
+            </div>
+          </Form.Group>
+
+          <Form.Group className="dashboard-form__group">
+            <Form.Label className="dashboard-form__label">
               {t('serviceInfo.describeService')}
               <span className="form__asterisks">*</span>
             </Form.Label>
@@ -161,16 +171,6 @@ const BusinessFormsSignupServiceInfo = ({
             <Form.Control.Feedback className="form__feedback" type="invalid">
               {errors.facilities}
             </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group className="dashboard-form__group">
-            <Form.Label className="dashboard-form__label">
-              {t('serviceInfo.availabilityCalendar')}
-              <span className="form__asterisks">*</span>
-            </Form.Label>
-            <div className="mt-4">
-              <MyCalendar bookedDates={values.bookedDates} />
-            </div>
           </Form.Group>
 
           <Form.Group className="text-center text-md-right text-uppercase">
