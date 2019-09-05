@@ -23,5 +23,8 @@ export default {
     '5bcd935fb111ee00167fa3b8',
     '5bacccad6b70be001a0dcb29',
   ],
-  publishableKey: 'pk_test_bBxEwbKUaiLX7Zq2i7Tygp5Y00qvApTpqA',
+  publishableKey:
+    process.env.REACT_APP_STAGE === 'PROD'
+      ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
+      : 'pk_test_JP05nCrL2SdWW7oRRekbdZrq',
 };
