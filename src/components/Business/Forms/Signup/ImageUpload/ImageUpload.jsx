@@ -108,7 +108,7 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
         <Col md={4} xs={12} key={uniqid()}>
           <div className="position-relative">
             <Image
-              className="preview-zone__photo my-2"
+              className="signup-preview-zone__photo my-2"
               src={photoURL}
               rounded
             />
