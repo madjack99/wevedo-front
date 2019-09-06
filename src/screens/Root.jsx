@@ -5,7 +5,7 @@ import ScreensHome from './Home';
 import ScreensUserFormsLogin from './User/Forms/Login';
 import ScreensUserFormsSignup from './User/Forms/Signup';
 import ScreensBusinessFormsLogin from './Business/Forms/Login';
-import ScreensBusinessFormsSignupControl from './Business/Forms/Signup/Control';
+import ScreensBusinessFormsSignupControl from '../components/Business/Forms/Signup/Control';
 // import ScreensUserDashboardHome from './User/Dashboard/Home';
 import ScreensDashboardAccount from './Dashboard/Account';
 import ScreensDashboardMessages from './Dashboard/Messages';
