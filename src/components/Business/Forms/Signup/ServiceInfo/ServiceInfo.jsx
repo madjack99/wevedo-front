@@ -191,7 +191,7 @@ const BusinessFormsSignupServiceInfo = ({
                     size="lg"
                     disabled={paymentMade}
                   >
-                    Proceed to payment
+                    {t('serviceInfo.proceedToPayment')}
                   </Button>
                 </StripeCheckout>
               ) : (
