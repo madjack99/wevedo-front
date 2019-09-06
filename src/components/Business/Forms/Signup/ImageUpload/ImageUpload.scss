@@ -30,12 +30,13 @@
   }
 }
 
-.preview-zone {
+.signup-preview-zone {
   &__photo {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     overflow: hidden;
+    border: 1px solid black;
 
     &_loading {
       background-color: #ecf1f6;
