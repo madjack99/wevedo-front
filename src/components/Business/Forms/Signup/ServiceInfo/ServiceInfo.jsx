@@ -25,6 +25,7 @@ const BusinessFormsSignupServiceInfo = ({
   const [price, setPrice] = useState(0);
   const [paymentMade, setPaymentMade] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
+  const { profileImageURL } = config;
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -71,8 +72,7 @@ const BusinessFormsSignupServiceInfo = ({
             minPrice,
             maxPrice,
             facilities,
-            profileImageURL:
-              'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
+            profileImageURL,
           });
 
           if (!config.publishableKey) {

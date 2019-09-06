@@ -23,6 +23,8 @@ export default {
     '5bcd935fb111ee00167fa3b8',
     '5bacccad6b70be001a0dcb29',
   ],
+  profileImageURL:
+    'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
   publishableKey: null,
   // remove null and uncomment to turn on payment
   // process.env.REACT_APP_STAGE === 'PROD'
