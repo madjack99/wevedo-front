@@ -27,70 +27,92 @@ const CatergoryGrid = () => (
       </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Media">
-        <img src={media} alt="Media" />
-        <p>Media</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Media">
+          <img src={media} alt="Media" />
+          <p>Media</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Beauty">
-        <img src={beauty} alt="Beauty" />
-        <p>Beauty</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Beauty">
+          <img src={beauty} alt="Beauty" />
+          <p>Beauty</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Catering">
-        <img src={catering} alt="Catering" />
-        <p>Catering</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Catering">
+          <img src={catering} alt="Catering" />
+          <p>Catering</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Entertainment">
-        <img src={entertainment} alt="Entertainment" />
-        <p>Entertainment</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Entertainment">
+          <img src={entertainment} alt="Entertainment" />
+          <p>Entertainment</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Boutique">
-        <img src={boutique} alt="Boutique" />
-        <p>Boutique</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Boutique">
+          <img src={boutique} alt="Boutique" />
+          <p>Boutique</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Decoration">
-        <img src={decoration} alt="Decoration" />
-        <p>Decoration</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Decoration">
+          <img src={decoration} alt="Decoration" />
+          <p>Decoration</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Cake">
-        <img src={cake} alt="Cake" />
-        <p>Cake</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Cake">
+          <img src={cake} alt="Cake" />
+          <p>Cake</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Transport">
-        <img src={transport} alt="Transport" />
-        <p>Transport</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Transport">
+          <img src={transport} alt="Transport" />
+          <p>Transport</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Jewelry">
-        <img src={jewelry} alt="Jewelry" />
-        <p>Jewelry</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Jewelry">
+          <img src={jewelry} alt="Jewelry" />
+          <p>Jewelry</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Stationery">
-        <img src={stationery} alt="Stationery" />
-        <p>Stationery</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Stationery">
+          <img src={stationery} alt="Stationery" />
+          <p>Stationery</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Honeymoon">
-        <img src={honeymoon} alt="Honeymoon" />
-        <p>Honeymoon</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Honeymoon">
+          <img src={honeymoon} alt="Honeymoon" />
+          <p>Honeymoon</p>
+        </Link>
+      </div>
     </Col>
   </Row>
 );
