@@ -19,10 +19,12 @@ import honeymoon from '../../../assets/images/w-honeymoon.png';
 const CatergoryGrid = () => (
   <Row className="wedding-suppliers-grid">
     <Col sm={4} className="wedding-suppliers-grid__child">
-      <Link to="/suppliers/Venue">
-        <img src={venue} alt="Venue" />
-        <p>Venue</p>
-      </Link>
+      <div>
+        <Link to="/suppliers/Venue">
+          <img src={venue} alt="Venue" />
+          <p>Venue</p>
+        </Link>
+      </div>
     </Col>
     <Col sm={4} className="wedding-suppliers-grid__child">
       <Link to="/suppliers/Media">
