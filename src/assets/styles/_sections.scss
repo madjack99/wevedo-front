@@ -125,16 +125,24 @@
 .wedding-suppliers-grid {
   .wedding-suppliers-grid__child {
     margin-bottom: 30px;
-    img {
-      width: 100%;
-    }
-    p {
-      position: absolute;
-      bottom: 5px;
-      left: 40px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
+    div {
+      position: relative;
+      border: 1px solid $gray-300;
+      &:hover {
+        border-color: #ffafbd;
+        box-shadow: 0px 8px 20px $gray-400;
+      }
+      img {
+        width: 100%;
+      }
+      p {
+        position: absolute;
+        bottom: 5px;
+        left: 40px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+      }
     }
   }
 }
