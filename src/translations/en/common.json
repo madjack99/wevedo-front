@@ -159,6 +159,7 @@
   "signAndLogForm": {
     "emailLabel": "Email",
     "phoneNumberLabel": "Mobile number including country code",
+    "emailAndPhoneNumberLabel": "Email or mobile number including country code",
     "countryCodePlaceholder": "Example: +447801234567",
     "passwordLabel": "Password",
     "rememberMe": "Remember me",
