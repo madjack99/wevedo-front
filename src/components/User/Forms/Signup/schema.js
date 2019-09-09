@@ -4,10 +4,10 @@ const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]
 
 export default Yup.object().shape({
   email: Yup.string()
-    .email('invalid email or mobile number')
+    .email('invalid email')
     .required('required'),
   phoneNumber: Yup.string()
-    .matches(phoneRegex, 'invalid number')
+    .matches(phoneRegex, 'invalid mobile number')
     .required('required'),
   password: Yup.string()
     .min(6, 'minimum 6 characters')
