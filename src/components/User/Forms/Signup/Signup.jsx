@@ -91,6 +91,7 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
           if (isNewEmail && isNewPhone) {
             const body = {
               email,
+              phoneNumber,
               password,
               profileImageURL:
                 'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
@@ -137,7 +138,7 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-5" controlId="formEmail">
+            <Form.Group className="mb-5" controlId="formPhoneNumber">
               <Form.Label className="form__label mb-0">
                 {t('signAndLogForm.phoneNumberLabel')}
                 <span className="form__asterisks">*</span>
