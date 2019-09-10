@@ -72,7 +72,7 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
                 className="form__control form__control_phone-number"
                 type="email"
                 name="emailPhone"
-                placeholder={t('signAndLogForm.countryCodeLabel')}
+                placeholder={t('signAndLogForm.emailAndPhoneNumberLabel')}
                 value={values.emailPhone}
                 onChange={handleChange}
                 isValid={values.emailPhone && !errors.emailPhone}
