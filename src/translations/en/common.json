@@ -208,6 +208,7 @@
   },
   "dashboard": {
     "nameWasChanged": "Successfully updated",
-    "emailWasChanged": "Successfully changed"
+    "emailWasChanged": "Successfully changed",
+    "phoneNumberWasChanged": "Successfully updated"
   }
 }
