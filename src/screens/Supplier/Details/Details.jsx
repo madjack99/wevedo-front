@@ -60,19 +60,17 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                 `}
               </b>
             }
-            {supplier.profileImageURL || supplier.providerImages ? (
+            {supplier.providerImages ? (
               <Carousel interval={5000} className="mb-4 mt-4">
-                {[supplier.profileImageURL, ...providerImagesList].map(
-                  image => (
-                    <Carousel.Item className="carousel-image" key={uniqid()}>
-                      <img
-                        className="d-block mx-auto"
-                        src={image}
-                        alt="supplier-slide"
-                      />
-                    </Carousel.Item>
-                  ),
-                )}
+                {providerImagesList.map(image => (
+                  <Carousel.Item className="carousel-image" key={uniqid()}>
+                    <img
+                      className="d-block mx-auto"
+                      src={image}
+                      alt="supplier-slide"
+                    />
+                  </Carousel.Item>
+                ))}
                 {supplier.profileVideoURL && (
                   <Carousel.Item className="carousel-video">
                     <YouTube
