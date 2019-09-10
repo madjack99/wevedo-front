@@ -111,6 +111,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                       </p>
                       <Form.Control
                         className=" form__control__account "
+                        disabled
                         value={values.email}
                         name="email"
                         placeholder={t('signAndLogForm.countryCodeLabel')}
