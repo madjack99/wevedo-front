@@ -103,8 +103,12 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
           }
 
           setSubmitting(false);
+          if (!isNewEmail) {
+            return setErrors({
+              email: 'email is already in use',
+            });
+          }
           return setErrors({
-            email: 'email is already in use',
             phoneNumber: 'number is already in use',
           });
         }}
