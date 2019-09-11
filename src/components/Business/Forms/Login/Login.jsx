@@ -8,7 +8,12 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 
-import { fetchSignUp, fetchLogin } from '../../../../actions';
+import {
+  fetchSignUp,
+  fetchLogin,
+  fetchEmailStatus,
+  fetchPhoneStatus,
+} from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import { withCheckProvider } from '../../../HOC/index';
 import formSchema from './schema';
@@ -17,12 +22,31 @@ import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 import ResetPasswordDialogError from '../../../ResetPassword/Dialog/Error';
 import Checkbox from '../../../UI/Checkbox';
 
-const UserFormsLogin = ({ login, t, checkProvider }) => {
+const UserFormsLogin = ({
+  login,
+  t,
+  checkProvider,
+  emailStatus,
+  phoneStatus,
+}) => {
   const [showResetDialog, setShowResetDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [emailPhoneNotRegistered, setEmailPhoneNotRegistered] = useState(false);
+
   const wevedoService = useContext(WevedoServiceContext);
 
   const isEmail = email => email.includes('@');
+
+  // The function returns 'null' if there is user in
+  // the database otherwise returns {status: ok}
+  const doesEmailPhoneExist = async emailPhone => {
+    return isEmail(emailPhone)
+      ? await emailStatus({ email: emailPhone }, wevedoService.checkEmail)
+      : await phoneStatus(
+          { phoneNumber: emailPhone },
+          wevedoService.checkPhone,
+        );
+  };
 
   return (
     <Formik
@@ -74,7 +98,10 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
                 name="emailPhone"
                 placeholder={t('signAndLogForm.emailAndPhoneNumberLabel')}
                 value={values.emailPhone}
-                onChange={handleChange}
+                onChange={e => {
+                  handleChange(e);
+                  setEmailPhoneNotRegistered(false);
+                }}
                 isValid={values.emailPhone && !errors.emailPhone}
                 isInvalid={touched.emailPhone && !!errors.emailPhone}
                 autoComplete="current-email"
@@ -115,16 +142,27 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
                 <Col md={6} className="text-right">
                   <Button
                     bsPrefix="password-btn"
-                    onClick={() => {
+                    onClick={async () => {
                       if (values.emailPhone && !errors.emailPhone) {
-                        setShowResetDialog(true);
+                        if (!(await doesEmailPhoneExist(values.emailPhone))) {
+                          setEmailPhoneNotRegistered(false);
+                          setShowResetDialog(true);
+                        } else {
+                          setEmailPhoneNotRegistered(true);
+                        }
                       } else {
+                        setEmailPhoneNotRegistered(false);
                         setShowErrorDialog(true);
                       }
                     }}
                   >
                     {t('signAndLogForm.forgotPassword')}
                   </Button>
+                  {emailPhoneNotRegistered && (
+                    <p className="text-right" style={{ color: '#dc3545' }}>
+                      Not registered email or phone number
+                    </p>
+                  )}
                 </Col>
               </Row>
             </FormGroup>
@@ -169,6 +207,8 @@ const mapStateToProps = ({ sessionData }) => sessionData;
 const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
+  emailStatus: fetchEmailStatus(dispatch),
+  phoneStatus: fetchPhoneStatus(dispatch),
 });
 
 export default compose(
