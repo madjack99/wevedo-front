@@ -46,6 +46,18 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
 
   const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
 
+  const transformUrl = str => {
+    let updatedStr = '';
+    if (!str.includes('https')) {
+      updatedStr = `https://${str}`;
+    }
+    return (
+      <a href={updatedStr || str}>
+        <b>{` ${str}`}</b>
+      </a>
+    );
+  };
+
   return (
     <React.Fragment>
       <Header />
@@ -92,7 +104,11 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             {supplier.website ? (
               <div className="d-block mb-4">
                 <b className="text-uppercase text-muted">Website:</b>
-                {isUrl(supplier.website)}
+                {isUrl(supplier.website) ? (
+                  transformUrl(supplier.website)
+                ) : (
+                  <b>{` ${supplier.website}`}</b>
+                )}
               </div>
             ) : null}
             {supplier.email ? (
