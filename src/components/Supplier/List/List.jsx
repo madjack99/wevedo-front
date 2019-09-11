@@ -34,7 +34,13 @@ const SupplierList = ({
           <Card.Img
             className="supplier-list__image supplier-list__image_grid"
             variant="top"
-            src={supplier.profileImageURL}
+            src={
+              supplier.providerImages
+                ? supplier.providerImages[
+                    Object.keys(supplier.providerImages)[0]
+                  ]
+                : supplier.profileImageURL
+            }
             alt="Wevedo Venues"
           />
           <Card.Body>
@@ -77,7 +83,13 @@ const SupplierList = ({
           <Col className="h-100" sm={5}>
             <img
               className="supplier-list__image supplier-list__image_card"
-              src={supplier.profileImageURL}
+              src={
+                supplier.providerImages
+                  ? supplier.providerImages[
+                      Object.keys(supplier.providerImages)[0]
+                    ]
+                  : supplier.profileImageURL
+              }
               alt=""
             />
           </Col>
