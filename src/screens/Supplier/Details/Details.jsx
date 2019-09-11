@@ -99,7 +99,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             {supplier.email ? (
               <div className="d-block mb-4">
                 <b className="text-uppercase text-muted mb-4">Email:</b>
-                <b>{` ${supplier.email}`}</b>
+                <a href={`mailto:${supplier.email}`}>
+                  <b>{` ${supplier.email}`}</b>
+                </a>
               </div>
             ) : null}
             {supplier.phoneNumber ? (
