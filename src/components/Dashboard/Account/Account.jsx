@@ -7,6 +7,7 @@ import DashboardAccountFormsNameChange from './Form/NameChange';
 import DashboardAccountFormsEmailChange from './Form/EmailChange';
 import DashboardAccountFormsImageChange from './Form/ImageChange';
 import DashboardAccountFormPasswordChange from './Form/PasswordChange';
+import DashboardAccountFormsPhoneNumberChange from './Form/PhoneNumberChange';
 
 import { WevedoServiceContext } from '../../../contexts';
 
@@ -36,6 +37,14 @@ const DashboardAccount = ({ user, updateUser }) => {
                   <Col sm={12} className="mb-4">
                     <DashboardAccountFormsNameChange
                       fullName={user.fullName}
+                      updateProfile={wevedoService.updateProfile}
+                      updateUser={updateUser}
+                    />
+                  </Col>
+
+                  <Col sm={12} className="mb-4">
+                    <DashboardAccountFormsPhoneNumberChange
+                      phoneNumber={user.phoneNumber}
                       updateProfile={wevedoService.updateProfile}
                       updateUser={updateUser}
                     />
