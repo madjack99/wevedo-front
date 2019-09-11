@@ -91,7 +91,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             {supplier.website ? (
               <div className="d-block mb-4">
                 <b className="text-uppercase text-muted">Website:</b>
-                <b>{` ${supplier.website}`}</b>
+                <a href={supplier.website}>
+                  <b>{` ${supplier.website}`}</b>
+                </a>
               </div>
             ) : null}
             {supplier.email ? (
