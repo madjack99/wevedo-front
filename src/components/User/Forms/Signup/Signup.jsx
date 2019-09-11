@@ -12,12 +12,17 @@ import config from '../../../../config';
 
 import Checkbox from '../../../UI/Checkbox';
 
-import { fetchSignUp, fetchLogin, fetchEmailStatus } from '../../../../actions';
+import {
+  fetchSignUp,
+  fetchLogin,
+  fetchEmailStatus,
+  fetchPhoneStatus,
+} from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 import SocialButton from '../../../SocialButton';
 
-const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
+const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({
@@ -67,16 +72,26 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
         initialValues={{
           email: '',
           password: '',
+          phoneNumber: '',
         }}
-        onSubmit={async ({ email, password }, { setSubmitting, setErrors }) => {
+        onSubmit={async (
+          { email, password, phoneNumber },
+          { setSubmitting, setErrors },
+        ) => {
           const isNewEmail = await emailStatus(
             { email },
             wevedoService.checkEmail,
           );
 
-          if (isNewEmail) {
+          const isNewPhone = await phoneStatus(
+            { phoneNumber },
+            wevedoService.checkPhone,
+          );
+
+          if (isNewEmail && isNewPhone) {
             const body = {
               email,
+              phoneNumber,
               password,
               profileImageURL:
                 'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
@@ -88,7 +103,14 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
           }
 
           setSubmitting(false);
-          return setErrors({ email: 'email is already in use' });
+          if (!isNewEmail) {
+            return setErrors({
+              email: 'email is already in use',
+            });
+          }
+          return setErrors({
+            phoneNumber: 'number is already in use',
+          });
         }}
         validationSchema={formSchema}
         render={({
@@ -109,7 +131,6 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
                 className="form__control form__control_phone-number"
                 type="email"
                 name="email"
-                placeholder={t('signAndLogForm.countryCodeLabel')}
                 value={values.email}
                 onChange={handleChange}
                 isValid={values.email && !errors.email}
@@ -118,6 +139,27 @@ const UserFormsSignup = ({ signUp, login, emailStatus, t }) => {
               />
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-5" controlId="formPhoneNumber">
+              <Form.Label className="form__label mb-0">
+                {t('signAndLogForm.phoneNumberLabel')}
+                <span className="form__asterisks">*</span>
+              </Form.Label>
+              <Form.Control
+                className="form__control form__control_phone-number"
+                type="string"
+                name="phoneNumber"
+                placeholder={t('signAndLogForm.countryCodePlaceholder')}
+                value={values.phoneNumber}
+                onChange={handleChange}
+                isValid={values.phoneNumber && !errors.phoneNumber}
+                isInvalid={touched.phoneNumber && !!errors.phoneNumber}
+                autoComplete="new-phoneNumber"
+              />
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.phoneNumber}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -184,6 +226,7 @@ const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),
   login: fetchLogin(dispatch),
   emailStatus: fetchEmailStatus(dispatch),
+  phoneStatus: fetchPhoneStatus(dispatch),
 });
 
 export default compose(

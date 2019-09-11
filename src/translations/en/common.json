@@ -157,8 +157,10 @@
   },
 
   "signAndLogForm": {
-    "emailLabel": "Email or mobile number including country code",
-    "countryCodeLabel": "Example: +447801234567",
+    "emailLabel": "Email",
+    "phoneNumberLabel": "Mobile number including country code",
+    "emailAndPhoneNumberLabel": "Email or mobile number including country code",
+    "countryCodePlaceholder": "Example: +447801234567",
     "passwordLabel": "Password",
     "rememberMe": "Remember me",
     "signUp": "Sign up",
@@ -206,6 +208,7 @@
   },
   "dashboard": {
     "nameWasChanged": "Successfully updated",
-    "emailWasChanged": "Successfully changed"
+    "emailWasChanged": "Successfully changed",
+    "phoneNumberWasChanged": "Successfully updated"
   }
 }

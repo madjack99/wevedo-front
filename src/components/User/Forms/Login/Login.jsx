@@ -112,14 +112,14 @@ const UserFormsLogin = ({ login, t, checkProvider }) => {
             <Form noValidate onSubmit={handleSubmit}>
               <Form.Group className="mb-5" controlId="formEmail">
                 <Form.Label className="form__label mb-0">
-                  {t('signAndLogForm.emailLabel')}
+                  {t('signAndLogForm.emailAndPhoneNumberLabel')}
                   <span className="form__asterisks">*</span>
                 </Form.Label>
                 <Form.Control
                   className="form__control form__control_phone-number"
                   type="email"
                   name="emailPhone"
-                  placeholder={t('signAndLogForm.countryCodeLabel')}
+                  placeholder={t('signAndLogForm.countryCodePlaceholder')}
                   value={values.emailPhone}
                   onChange={handleChange}
                   isValid={values.emailPhone && !errors.emailPhone}
