@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
+
 import { Link } from 'react-router-dom';
 import { Row, Col, Button, ButtonToolbar, Card } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
@@ -35,7 +37,7 @@ const SupplierList = ({
             className="supplier-list__image supplier-list__image_grid"
             variant="top"
             src={
-              supplier.providerImages
+              !_.isEmpty(supplier.providerImages)
                 ? supplier.providerImages[
                     Object.keys(supplier.providerImages)[0]
                   ]
@@ -84,7 +86,7 @@ const SupplierList = ({
             <img
               className="supplier-list__image supplier-list__image_card"
               src={
-                supplier.providerImages
+                !_.isEmpty(supplier.providerImages)
                   ? supplier.providerImages[
                       Object.keys(supplier.providerImages)[0]
                     ]
