@@ -21,6 +21,7 @@ import PopularSearches from '../../../components/PopularSearches';
 import PromotedProviders from '../../../components/PromotedSuppliers';
 import Footer from '../../../components/Footer';
 import MyCalendar from '../../../components/Calendar';
+import { isUrl } from '../../../helpers';
 
 const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
   const [supplier, setSupplier] = useState({});
@@ -44,6 +45,18 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
     : [];
 
   const bookedDates = supplier.bookedDates ? supplier.bookedDates : [];
+
+  const transformUrl = str => {
+    let updatedStr = '';
+    if (!str.includes('https')) {
+      updatedStr = `https://${str}`;
+    }
+    return (
+      <a href={updatedStr || str}>
+        <b>{` ${str}`}</b>
+      </a>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -91,13 +104,19 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             {supplier.website ? (
               <div className="d-block mb-4">
                 <b className="text-uppercase text-muted">Website:</b>
-                <b>{` ${supplier.website}`}</b>
+                {isUrl(supplier.website) ? (
+                  transformUrl(supplier.website)
+                ) : (
+                  <b>{` ${supplier.website}`}</b>
+                )}
               </div>
             ) : null}
             {supplier.email ? (
               <div className="d-block mb-4">
                 <b className="text-uppercase text-muted mb-4">Email:</b>
-                <b>{` ${supplier.email}`}</b>
+                <a href={`mailto:${supplier.email}`}>
+                  <b>{` ${supplier.email}`}</b>
+                </a>
               </div>
             ) : null}
             {supplier.phoneNumber ? (

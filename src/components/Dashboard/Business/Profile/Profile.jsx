@@ -22,7 +22,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
       maxPrice: user.maxPrice,
       facilities: user.facilities,
       fullName: user.fullName,
-      website: user.websiteo,
+      website: user.website,
       email: user.email,
       phoneNumber: user.phoneNumber,
       address: user.address,
