@@ -48,7 +48,7 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
 
   const transformUrl = str => {
     let updatedStr = '';
-    if (!str.includes('https')) {
+    if (!str.startsWith('http')) {
       updatedStr = `https://${str}`;
     }
     return (
