@@ -33,6 +33,7 @@ const ShowAlert = ({ variant, text }) => {
       </Alert>
     );
   }
+  return null;
 };
 
 export default StickyNotification;
