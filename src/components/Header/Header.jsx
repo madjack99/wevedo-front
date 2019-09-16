@@ -22,6 +22,7 @@ import * as UK from '../../countryLib/UK.json';
 import './Header.scss';
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
+import StickyNotification from '../StickyNotification';
 
 import { WevedoServiceContext } from '../../contexts';
 import config from '../../config';
@@ -32,57 +33,60 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   const UKLocations = UK.default;
 
   return (
-    <Navbar fixed="top" bg="light" variant="light" expand="lg">
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        <Nav className="text-uppercase mr-auto">
-          <LinkContainer to="/suppliers/Venue">
-            <Nav.Link className="font-weight-bold">
-              {t('header.venues')}
+    <React.Fragment>
+      <Navbar fixed="top" bg="light" variant="light" expand="lg">
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav className="text-uppercase mr-auto">
+            <LinkContainer to="/suppliers/Venue">
+              <Nav.Link className="font-weight-bold">
+                {t('header.venues')}
+              </Nav.Link>
+            </LinkContainer>
+
+            <CategoryDropdown categories={categories} t={t} />
+            <Nav.Link
+              onClick={() => setModalShow(true)}
+              className="d-block d-lg-none"
+            >
+              <span className="font-weight-bold">
+                Suppliers <i className="fa fa-chevron-right ml-2" />
+              </span>
             </Nav.Link>
-          </LinkContainer>
+            <SubMenu
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              categories={categories}
+              t={t}
+            />
 
-          <CategoryDropdown categories={categories} t={t} />
-          <Nav.Link
-            onClick={() => setModalShow(true)}
-            className="d-block d-lg-none"
-          >
-            <span className="font-weight-bold">
-              Suppliers <i className="fa fa-chevron-right ml-2" />
-            </span>
-          </Nav.Link>
-          <SubMenu
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            categories={categories}
-            t={t}
-          />
+            <LocationDropdown UKLocations={UKLocations} t={t} />
+            <Nav.Link
+              onClick={() => setLocationModalShow(true)}
+              className="d-block d-lg-none"
+            >
+              <span className="font-weight-bold">
+                Locations <i className="fa fa-chevron-right ml-2" />
+              </span>
+            </Nav.Link>
+            <LocationSubMenu
+              show={locationModalShow}
+              onHide={() => setLocationModalShow(false)}
+              UKLocations={UKLocations}
+              t={t}
+            />
+          </Nav>
 
-          <LocationDropdown UKLocations={UKLocations} t={t} />
-          <Nav.Link
-            onClick={() => setLocationModalShow(true)}
-            className="d-block d-lg-none"
-          >
-            <span className="font-weight-bold">
-              Locations <i className="fa fa-chevron-right ml-2" />
-            </span>
-          </Nav.Link>
-          <LocationSubMenu
-            show={locationModalShow}
-            onHide={() => setLocationModalShow(false)}
-            UKLocations={UKLocations}
-            t={t}
-          />
-        </Nav>
-
-        {isLoggedIn ? <ProfileArea user={user} /> : <EnterButtons t={t} />}
-      </Navbar.Collapse>
-      <Navbar.Brand>
-        <Link to="/">
-          <img src={logo} alt="logo" />
-        </Link>
-      </Navbar.Brand>
-    </Navbar>
+          {isLoggedIn ? <ProfileArea user={user} /> : <EnterButtons t={t} />}
+        </Navbar.Collapse>
+        <Navbar.Brand>
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+        </Navbar.Brand>
+      </Navbar>
+      <StickyNotification />
+    </React.Fragment>
   );
 };
 
