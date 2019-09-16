@@ -7,6 +7,15 @@ function StickyNotification({ user }) {
     const text = 'Your account under review';
     return <ShowAlert variant="warning" text={text} />;
   }
+  if (user.fullName && !user.isApproved && user.isRejected) {
+    const text =
+      'Something is not right with your account. Please contact us on info@wevedo.com';
+    return <ShowAlert variant="danger" text={text} />;
+  }
+  if (user.fullName && user.isApproved && !user.isRejected) {
+    const text = 'Your account is active';
+    return <ShowAlert variant="success" text={text} />;
+  }
   return null;
 }
 
