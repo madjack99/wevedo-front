@@ -85,7 +85,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
           </Link>
         </Navbar.Brand>
       </Navbar>
-      <StickyNotification />
+      <StickyNotification user={user} />
     </React.Fragment>
   );
 };
