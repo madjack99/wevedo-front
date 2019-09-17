@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import { withTranslation } from 'react-i18next';
 import Alert from 'react-bootstrap/Alert';
 import './StickyNotification.scss';
 
-function StickyNotification({ user }) {
+function StickyNotification({ user, t }) {
   if (user.fullName && !user.isApproved && !user.isRejected) {
-    const text = 'Your account under review';
+    const text = t('stickyNotification.warning');
     return <ShowAlert variant="warning" text={text} />;
   }
   if (user.fullName && !user.isApproved && user.isRejected) {
-    const text =
-      'Something is not right with your account. Please contact us on info@wevedo.com';
+    const text = t('stickyNotification.danger');
     return <ShowAlert variant="danger" text={text} />;
   }
   if (
@@ -19,7 +19,7 @@ function StickyNotification({ user }) {
     !user.isRejected &&
     Cookies.get('isNew')
   ) {
-    const text = 'Your account is active';
+    const text = t('stickyNotification.success');
     return <ShowAlert variant="success" text={text} />;
   }
   return null;
@@ -49,4 +49,4 @@ const ShowAlert = ({ variant, text }) => {
   return null;
 };
 
-export default StickyNotification;
+export default withTranslation('common')(StickyNotification);

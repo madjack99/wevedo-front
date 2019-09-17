@@ -210,5 +210,10 @@
     "nameWasChanged": "Successfully updated",
     "emailWasChanged": "Successfully changed",
     "phoneNumberWasChanged": "Successfully updated"
+  },
+  "stickyNotification": {
+    "warning": "Your account under review",
+    "danger": "Something is not right with your account. Please contact us on info@wevedo.com",
+    "success": "Your account is active"
   }
 }
