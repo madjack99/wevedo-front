@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import Alert from 'react-bootstrap/Alert';
 import './StickyNotification.scss';
 
@@ -12,7 +13,12 @@ function StickyNotification({ user }) {
       'Something is not right with your account. Please contact us on info@wevedo.com';
     return <ShowAlert variant="danger" text={text} />;
   }
-  if (user.fullName && user.isApproved && !user.isRejected) {
+  if (
+    user.fullName &&
+    user.isApproved &&
+    !user.isRejected &&
+    Cookies.get('isNew')
+  ) {
     const text = 'Your account is active';
     return <ShowAlert variant="success" text={text} />;
   }
@@ -27,7 +33,14 @@ const ShowAlert = ({ variant, text }) => {
         variant={variant}
         dismissible
         className="position-fixed text-center my-alert"
-        onClose={() => setShow(false)}
+        onClose={
+          variant === 'success'
+            ? () => {
+                setShow(false);
+                Cookies.remove('isNew');
+              }
+            : () => setShow(false)
+        }
       >
         {text}
       </Alert>
