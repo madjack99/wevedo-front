@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
@@ -82,6 +83,7 @@ const ScreensBusinessFormsSignupControl = ({
     };
 
     if (isAllDataEntered) {
+      Cookies.set('isNew', true);
       register();
     }
   }, [isAllDataEntered, wevedoService, user, signUp, login, history]);
