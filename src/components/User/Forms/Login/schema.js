@@ -13,7 +13,7 @@ export default Yup.object().shape({
     })
     .required('required'),
   password: Yup.string()
-    .min(6, 'minimum 6 characters')
+    .min(8, 'minimum 8 characters')
     .max(50, 'maximum 50 characters')
     .required('required'),
 });
