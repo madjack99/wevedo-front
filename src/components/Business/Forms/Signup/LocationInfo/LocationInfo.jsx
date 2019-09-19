@@ -10,7 +10,12 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
-import * as UK from '../../../../../countryLib/UK.json';
+import {
+  getCountries,
+  getRegionNames,
+  getCounties,
+  getCities,
+} from '../../../../../helpers';
 
 import {
   updateUser,
@@ -22,6 +27,7 @@ import formScheme from './schema';
 
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
+  user,
   updateUser,
   emailStatus,
   phoneStatus,
@@ -30,27 +36,9 @@ const BusinessFormsSignupLocationInfo = ({
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
-  const UKLocations = UK.default.UK;
-
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
-
-  const defineCountries = () => {
-    return Object.keys(UKLocations);
-  };
-
-  const defineRegionNames = country => {
-    return Object.keys(UKLocations[country]);
-  };
-
-  const defineCounties = (country, regionName) => {
-    return Object.keys(UKLocations[country][regionName]);
-  };
-
-  const defineCities = (country, regionName, county) => {
-    return UKLocations[country][regionName][county];
-  };
 
   return (
     <Formik
@@ -224,7 +212,7 @@ const BusinessFormsSignupLocationInfo = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {defineCountries().map(country => (
+                {getCountries(user && user.appearInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
@@ -254,7 +242,9 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.country &&
-                  defineRegionNames(values.country).map(regionName => (
+                  getRegionNames(user && user.appearInCountries)(
+                    values.country,
+                  ).map(regionName => (
                     <option key={uniqid()}>{regionName}</option>
                   ))}
               </Form.Control>
@@ -283,9 +273,10 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.regionName &&
-                  defineCounties(values.country, values.regionName).map(
-                    county => <option key={uniqid()}>{county}</option>,
-                  )}
+                  getCounties(user && user.appearInCountries)(
+                    values.country,
+                    values.regionName,
+                  ).map(county => <option key={uniqid()}>{county}</option>)}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.county}
@@ -309,7 +300,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.county &&
-                  defineCities(
+                  getCities(user && user.appearInCountries)(
                     values.country,
                     values.regionName,
                     values.county,
@@ -338,7 +329,10 @@ const BusinessFormsSignupLocationInfo = ({
   );
 };
 
-const mapStateToProps = ({ sessionData }) => sessionData;
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
 
 const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),

@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
+import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
-
 import config from '../../../../config';
+import { getLocation, getCountries } from '../../../../helpers';
 
 import Checkbox from '../../../UI/Checkbox';
 
@@ -22,7 +23,14 @@ import { WevedoServiceContext } from '../../../../contexts';
 import formSchema from './schema';
 import SocialButton from '../../../SocialButton';
 
-const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
+const UserFormsSignup = ({
+  signUp,
+  login,
+  emailStatus,
+  phoneStatus,
+  user,
+  t,
+}) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const handleSocialSignUp = async ({
@@ -73,9 +81,10 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
           email: '',
           password: '',
           phoneNumber: '',
+          country: '',
         }}
         onSubmit={async (
-          { email, password, phoneNumber },
+          { email, password, phoneNumber, country },
           { setSubmitting, setErrors },
         ) => {
           const isNewEmail = await emailStatus(
@@ -93,6 +102,8 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
               email,
               phoneNumber,
               password,
+              country,
+              appearInCountries: getLocation(country),
               profileImageURL:
                 'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
               deviceOS: 'android', // TO-DO: 'web' should be later
@@ -163,7 +174,7 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="formPassword">
+            <Form.Group className="mb-5" controlId="formPassword">
               <Form.Label className="form__label mb-0">
                 {t('signAndLogForm.passwordLabel')}
                 <span className="form__asterisks">*</span>
@@ -182,6 +193,34 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
+
+            <FormGroup controlId="formCountry">
+              <Form.Label className="form__label mb-0">
+                {t('business-signup.form.countryPlaceholder')}
+                <span className="form__asterisks">*</span>
+              </Form.Label>
+              <Form.Control
+                className="form__control"
+                type="text"
+                name="country"
+                as="select"
+                value={values.country}
+                onChange={e => {
+                  handleChange(e);
+                }}
+                isValid={values.country && !errors.country}
+                isInvalid={touched.country && !!errors.country}
+                autoComplete="new-country"
+              >
+                <option value="" disabled />
+                {getCountries(user && user.appearInCountries).map(country => (
+                  <option key={uniqid()}>{country}</option>
+                ))}
+              </Form.Control>
+              <Form.Control.Feedback className="form__feedback" type="invalid">
+                {errors.country}
+              </Form.Control.Feedback>
+            </FormGroup>
 
             <FormGroup className="text-left">
               <Checkbox
@@ -220,7 +259,10 @@ const UserFormsSignup = ({ signUp, login, emailStatus, phoneStatus, t }) => {
   );
 };
 
-const mapStateToProps = ({ sessionData }) => sessionData;
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
 
 const mapDispatchToProps = dispatch => ({
   signUp: fetchSignUp(dispatch),

@@ -7,21 +7,23 @@ import uniqid from 'uniqid';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import * as UK from '../../../countryLib/UK.json';
+import { getCountries, getRegionNames } from '../../../helpers';
 
 const SearchPanel = ({
   title,
   categories,
+  user,
   t,
   history,
   supplierLocationQuery,
   onSearch = () => {},
 }) => {
-  const UKLocations = UK.default.UK;
-  const UKCountries = Object.keys(UKLocations);
+  const countries = getCountries(user && user.appearInCountries);
   let allRegionNames = [];
-  UKCountries.forEach(country => {
-    const countryRegionNames = Object.keys(UKLocations[country]);
+  countries.forEach(country => {
+    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
+      country,
+    );
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 

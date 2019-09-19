@@ -1,41 +1,30 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import uniqid from 'uniqid';
 
 import { Formik } from 'formik';
 import { Row, Col, Form } from 'react-bootstrap';
-import uniqid from 'uniqid';
-import { withTranslation } from 'react-i18next';
-
-import contactDetailsSchema from './contactDetailsSchema';
 
 import '../Forms.scss';
 
-import * as UK from '../../../../../../countryLib/UK.json';
+import contactDetailsSchema from './contactDetailsSchema';
+
+import {
+  getCountries,
+  getRegionNames,
+  getCounties,
+  getCities,
+} from '../../../../../../helpers';
 
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
   t,
 }) => {
-  const UKLocations = UK.default.UK;
-
-  const defineCountries = () => {
-    return Object.keys(UKLocations);
-  };
-
-  const defineRegionNames = country => {
-    return Object.keys(UKLocations[country]);
-  };
-
-  const defineCounties = (country, regionName) => {
-    return Object.keys(UKLocations[country][regionName]);
-  };
-
-  const defineCities = (country, regionName, county) => {
-    return UKLocations[country][regionName][county];
-  };
-
   const allowSpecificCountries = country => {
-    if (defineCountries().includes(country)) {
+    if (getCountries(user && user.appearInCountries).includes(country)) {
       return country;
     }
     return '';
@@ -180,9 +169,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled>
                             United Kingdom
                           </option>
-                          {defineCountries().map(country => (
-                            <option key={uniqid()}>{country}</option>
-                          ))}
+                          {getCountries(user && user.appearInCountries).map(
+                            country => (
+                              <option key={uniqid()}>{country}</option>
+                            ),
+                          )}
                         </Form.Control>
                         {values.country === '' ? (
                           <p className="errorMessage">
@@ -217,11 +208,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         >
                           <option value="" disabled />
                           {values.country &&
-                            defineRegionNames(values.country).map(
-                              regionName => (
-                                <option key={uniqid()}>{regionName}</option>
-                              ),
-                            )}
+                            getRegionNames(user && user.appearInCountries)(
+                              values.country,
+                            ).map(regionName => (
+                              <option key={uniqid()}>{regionName}</option>
+                            ))}
                         </Form.Control>
                         {errors.regionName && (
                           <p className="errorMessage">{errors.regionName}</p>
@@ -249,11 +240,10 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           }
                           isValid={values.county && !errors.county}
                         >
-                          {console.log(values.country, values.regionName)}
                           <option value="" disabled />
                           {values.country &&
                             values.regionName &&
-                            defineCounties(
+                            getCounties(user && user.appearInCountries)(
                               values.country,
                               values.regionName,
                             ).map(county => (
@@ -281,7 +271,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.county &&
-                            defineCities(
+                            getCities(user && user.appearInCountries)(
                               values.country,
                               values.regionName,
                               values.county,
@@ -337,6 +327,9 @@ const DashboardBusinessProfileFormsContactDetails = ({
   );
 };
 
-export default withTranslation('common')(
-  DashboardBusinessProfileFormsContactDetails,
-);
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(DashboardBusinessProfileFormsContactDetails);
