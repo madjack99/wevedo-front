@@ -12,15 +12,18 @@ import { getCountries, getRegionNames } from '../../../helpers';
 const SearchPanel = ({
   title,
   categories,
+  user,
   t,
   history,
   supplierLocationQuery,
   onSearch = () => {},
 }) => {
-  const countries = getCountries();
+  const countries = getCountries(user && user.appearInCountries);
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(country);
+    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
+      country,
+    );
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 

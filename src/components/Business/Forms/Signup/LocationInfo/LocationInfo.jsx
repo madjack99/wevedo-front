@@ -27,6 +27,7 @@ import formScheme from './schema';
 
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
+  user,
   updateUser,
   emailStatus,
   phoneStatus,
@@ -211,7 +212,7 @@ const BusinessFormsSignupLocationInfo = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {getCountries().map(country => (
+                {getCountries(user && user.appearInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
@@ -241,7 +242,9 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.country &&
-                  getRegionNames(values.country).map(regionName => (
+                  getRegionNames(user && user.appearInCountries)(
+                    values.country,
+                  ).map(regionName => (
                     <option key={uniqid()}>{regionName}</option>
                   ))}
               </Form.Control>
@@ -270,9 +273,10 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.regionName &&
-                  getCounties(values.country, values.regionName).map(county => (
-                    <option key={uniqid()}>{county}</option>
-                  ))}
+                  getCounties(user && user.appearInCountries)(
+                    values.country,
+                    values.regionName,
+                  ).map(county => <option key={uniqid()}>{county}</option>)}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.county}
@@ -296,7 +300,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.county &&
-                  getCities(
+                  getCities(user && user.appearInCountries)(
                     values.country,
                     values.regionName,
                     values.county,
@@ -325,7 +329,10 @@ const BusinessFormsSignupLocationInfo = ({
   );
 };
 
-const mapStateToProps = ({ sessionData }) => sessionData;
+const mapStateToProps = ({ sessionData, userData }) => ({
+  ...sessionData,
+  ...userData,
+});
 
 const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),

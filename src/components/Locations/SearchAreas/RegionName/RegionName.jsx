@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { Row, Container, Col, Nav } from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+
+import { Row, Container, Col, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
 import { getCountries, getRegionNames } from '../../../../helpers';
 
-function LocationsSearchAreasRegionName() {
+function LocationsSearchAreasRegionName({ user }) {
   const [stateCountry, setStateCountry] = useState('England');
 
   const displayRegionNameInCols = selectedCountry => {
-    const regionNames = getRegionNames(selectedCountry);
+    const regionNames = getRegionNames(user && user.appearInCountries)(
+      selectedCountry,
+    );
     const firstCol = Math.ceil(regionNames.length / 3);
     const secondCol = Math.ceil((regionNames.length / 3) * 2);
     regionNames.sort();
@@ -51,7 +57,7 @@ function LocationsSearchAreasRegionName() {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {getCountries().map(country => (
+          {getCountries(user && user.appearInCountries).map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${
@@ -76,4 +82,9 @@ function LocationsSearchAreasRegionName() {
   );
 }
 
-export default LocationsSearchAreasRegionName;
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(LocationsSearchAreasRegionName);

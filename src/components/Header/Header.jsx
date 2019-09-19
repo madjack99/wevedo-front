@@ -65,7 +65,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               t={t}
             />
 
-            <LocationDropdown t={t} />
+            <LocationDropdown user={user} t={t} />
             <Nav.Link
               onClick={() => setLocationModalShow(true)}
               className="d-block d-lg-none"
@@ -77,6 +77,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
             <LocationSubMenu
               show={locationModalShow}
               onHide={() => setLocationModalShow(false)}
+              user={user}
               t={t}
             />
           </Nav>
@@ -94,7 +95,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   );
 };
 
-const LocationDropdown = ({ t }) => {
+const LocationDropdown = ({ user, t }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
     <NavDropdown title="Locations" className="d-none d-lg-block">
@@ -127,7 +128,7 @@ const LocationDropdown = ({ t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestRegions()
+              {getLargestRegions(user && user.appearInCountries)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -138,7 +139,7 @@ const LocationDropdown = ({ t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestRegions()
+              {getLargestRegions(user && user.appearInCountries)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -163,7 +164,7 @@ const LocationDropdown = ({ t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCounties()
+              {getLargestCounties(user && user.appearInCountries)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -174,7 +175,7 @@ const LocationDropdown = ({ t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCounties()
+              {getLargestCounties(user && user.appearInCountries)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -199,7 +200,7 @@ const LocationDropdown = ({ t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCities()
+              {getLargestCities(user && user.appearInCountries)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -210,7 +211,7 @@ const LocationDropdown = ({ t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCities()
+              {getLargestCities(user && user.appearInCountries)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -373,7 +374,7 @@ function ProfileArea({ user }) {
   );
 }
 
-const LocationSubMenu = ({ onHide, t, ...rest }) => (
+const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
   <Modal
     {...rest}
     size="lg"
@@ -389,7 +390,7 @@ const LocationSubMenu = ({ onHide, t, ...rest }) => (
         <Col>
           <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
           <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
-          {getLargestRegions().map(name => (
+          {getLargestRegions(user && user.appearInCountries).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?regionName=${name}`}
@@ -403,7 +404,7 @@ const LocationSubMenu = ({ onHide, t, ...rest }) => (
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
-          {getLargestCounties().map(name => (
+          {getLargestCounties(user && user.appearInCountries).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?county=${name}`}
@@ -417,7 +418,7 @@ const LocationSubMenu = ({ onHide, t, ...rest }) => (
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
-          {getLargestCities().map(name => (
+          {getLargestCities(user && user.appearInCountries).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?city=${name}`}

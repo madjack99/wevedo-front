@@ -1,16 +1,21 @@
 import React, { useMemo } from 'react';
-import { Row, Container, Col } from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import rn from 'random-number';
+
+import { Row, Container, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ClampLines from 'react-clamp-lines';
 
 import { getCountries, getRegionNames } from '../../helpers';
 
-function getRandomLinks(countries) {
+function getRandomLinks(user, countries) {
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(country);
+    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
+      country,
+    );
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
   const randomNumbersArray = [];
@@ -47,10 +52,13 @@ function getRandomLinks(countries) {
   return randomLinks;
 }
 
-function PopularSearches({ t }) {
-  const countries = getCountries();
+function PopularSearches({ user, t }) {
+  const countries = getCountries(user && user.appearInCountries);
 
-  const randomLinks = useMemo(() => getRandomLinks(countries), [countries]);
+  const randomLinks = useMemo(() => getRandomLinks(user, countries), [
+    user,
+    countries,
+  ]);
 
   return (
     <div className="popularsearches">
@@ -78,4 +86,9 @@ function PopularSearches({ t }) {
   );
 }
 
-export default withTranslation('common')(PopularSearches);
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(PopularSearches);

@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Row, Container, Col, Nav } from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+
+import { Row, Container, Col, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
 import {
@@ -11,17 +16,26 @@ import {
   getCities,
 } from '../../../../helpers';
 
-function LocationsSearchAreasCity() {
+function LocationsSearchAreasCity({ user }) {
   const [stateCountry, setStateCountry] = useState('England');
 
   const displayCityInCols = selectedCountry => {
-    const regionNames = getRegionNames(selectedCountry);
+    const regionNames = getRegionNames(user && user.appearInCountries)(
+      selectedCountry,
+    );
     let cities = [];
     regionNames.forEach(regionName =>
-      getCounties(selectedCountry, regionName).forEach(
+      getCounties(user && user.appearInCountries)(
+        selectedCountry,
+        regionName,
+      ).forEach(
         county =>
           (cities = cities.concat(
-            getCities(selectedCountry, regionName, county),
+            getCities(user && user.appearInCountries)(
+              selectedCountry,
+              regionName,
+              county,
+            ),
           )),
       ),
     );
@@ -65,7 +79,7 @@ function LocationsSearchAreasCity() {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {getCountries().map(country => (
+          {getCountries(user && user.appearInCountries).map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${
@@ -90,4 +104,9 @@ function LocationsSearchAreasCity() {
   );
 }
 
-export default LocationsSearchAreasCity;
+const mapStateToProps = ({ userData }) => userData;
+
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(LocationsSearchAreasCity);
