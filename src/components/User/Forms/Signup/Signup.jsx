@@ -32,6 +32,7 @@ const UserFormsSignup = ({
   t,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+  const { profileImageURL } = config;
 
   const handleSocialSignUp = async ({
     _profile: profile,
@@ -104,8 +105,7 @@ const UserFormsSignup = ({
               password,
               country,
               appearInCountries: getLocation(country),
-              profileImageURL:
-                'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
+              profileImageURL,
               deviceOS: 'android', // TO-DO: 'web' should be later
             };
 
