@@ -5,13 +5,12 @@ import rn from 'random-number';
 import { Link } from 'react-router-dom';
 import ClampLines from 'react-clamp-lines';
 
-import * as UK from '../../countryLib/UK.json';
+import { getCountries, getRegionNames } from '../../helpers';
 
-function getRandomLinks(UKLocations) {
-  const UKCountries = Object.keys(UKLocations);
+function getRandomLinks(countries) {
   let allRegionNames = [];
-  UKCountries.forEach(country => {
-    const countryRegionNames = Object.keys(UKLocations[country]);
+  countries.forEach(country => {
+    const countryRegionNames = getRegionNames(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
   const randomNumbersArray = [];
@@ -49,9 +48,9 @@ function getRandomLinks(UKLocations) {
 }
 
 function PopularSearches({ t }) {
-  const UKLocations = UK.default.UK;
+  const countries = getCountries();
 
-  const randomLinks = useMemo(() => getRandomLinks(UKLocations), [UKLocations]);
+  const randomLinks = useMemo(() => getRandomLinks(countries), [countries]);
 
   return (
     <div className="popularsearches">

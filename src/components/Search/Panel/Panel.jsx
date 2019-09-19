@@ -7,7 +7,7 @@ import uniqid from 'uniqid';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import * as UK from '../../../countryLib/UK.json';
+import { getCountries, getRegionNames } from '../../../helpers';
 
 const SearchPanel = ({
   title,
@@ -17,11 +17,10 @@ const SearchPanel = ({
   supplierLocationQuery,
   onSearch = () => {},
 }) => {
-  const UKLocations = UK.default.UK;
-  const UKCountries = Object.keys(UKLocations);
+  const countries = getCountries();
   let allRegionNames = [];
-  UKCountries.forEach(country => {
-    const countryRegionNames = Object.keys(UKLocations[country]);
+  countries.forEach(country => {
+    const countryRegionNames = getRegionNames(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 

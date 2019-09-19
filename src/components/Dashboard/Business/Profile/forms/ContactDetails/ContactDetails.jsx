@@ -9,33 +9,20 @@ import contactDetailsSchema from './contactDetailsSchema';
 
 import '../Forms.scss';
 
-import * as UK from '../../../../../../countryLib/UK.json';
+import {
+  getCountries,
+  getRegionNames,
+  getCounties,
+  getCities,
+} from '../../../../../../helpers';
 
 const DashboardBusinessProfileFormsContactDetails = ({
   user,
   updateUser,
   t,
 }) => {
-  const UKLocations = UK.default.UK;
-
-  const defineCountries = () => {
-    return Object.keys(UKLocations);
-  };
-
-  const defineRegionNames = country => {
-    return Object.keys(UKLocations[country]);
-  };
-
-  const defineCounties = (country, regionName) => {
-    return Object.keys(UKLocations[country][regionName]);
-  };
-
-  const defineCities = (country, regionName, county) => {
-    return UKLocations[country][regionName][county];
-  };
-
   const allowSpecificCountries = country => {
-    if (defineCountries().includes(country)) {
+    if (getCountries().includes(country)) {
       return country;
     }
     return '';
@@ -180,7 +167,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled>
                             United Kingdom
                           </option>
-                          {defineCountries().map(country => (
+                          {getCountries().map(country => (
                             <option key={uniqid()}>{country}</option>
                           ))}
                         </Form.Control>
@@ -217,11 +204,9 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         >
                           <option value="" disabled />
                           {values.country &&
-                            defineRegionNames(values.country).map(
-                              regionName => (
-                                <option key={uniqid()}>{regionName}</option>
-                              ),
-                            )}
+                            getRegionNames(values.country).map(regionName => (
+                              <option key={uniqid()}>{regionName}</option>
+                            ))}
                         </Form.Control>
                         {errors.regionName && (
                           <p className="errorMessage">{errors.regionName}</p>
@@ -253,12 +238,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.regionName &&
-                            defineCounties(
-                              values.country,
-                              values.regionName,
-                            ).map(county => (
-                              <option key={uniqid()}>{county}</option>
-                            ))}
+                            getCounties(values.country, values.regionName).map(
+                              county => (
+                                <option key={uniqid()}>{county}</option>
+                              ),
+                            )}
                         </Form.Control>
                         {errors.county && (
                           <p className="errorMessage">{errors.county}</p>
@@ -281,7 +265,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.county &&
-                            defineCities(
+                            getCities(
                               values.country,
                               values.regionName,
                               values.county,

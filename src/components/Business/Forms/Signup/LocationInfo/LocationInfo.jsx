@@ -10,7 +10,12 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
-import * as UK from '../../../../../countryLib/UK.json';
+import {
+  getCountries,
+  getRegionNames,
+  getCounties,
+  getCities,
+} from '../../../../../helpers';
 
 import {
   updateUser,
@@ -30,27 +35,9 @@ const BusinessFormsSignupLocationInfo = ({
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
-  const UKLocations = UK.default.UK;
-
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
-
-  const defineCountries = () => {
-    return Object.keys(UKLocations);
-  };
-
-  const defineRegionNames = country => {
-    return Object.keys(UKLocations[country]);
-  };
-
-  const defineCounties = (country, regionName) => {
-    return Object.keys(UKLocations[country][regionName]);
-  };
-
-  const defineCities = (country, regionName, county) => {
-    return UKLocations[country][regionName][county];
-  };
 
   return (
     <Formik
@@ -224,7 +211,7 @@ const BusinessFormsSignupLocationInfo = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {defineCountries().map(country => (
+                {getCountries().map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
@@ -254,7 +241,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.country &&
-                  defineRegionNames(values.country).map(regionName => (
+                  getRegionNames(values.country).map(regionName => (
                     <option key={uniqid()}>{regionName}</option>
                   ))}
               </Form.Control>
@@ -283,9 +270,9 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.regionName &&
-                  defineCounties(values.country, values.regionName).map(
-                    county => <option key={uniqid()}>{county}</option>,
-                  )}
+                  getCounties(values.country, values.regionName).map(county => (
+                    <option key={uniqid()}>{county}</option>
+                  ))}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.county}
@@ -309,7 +296,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.county &&
-                  defineCities(
+                  getCities(
                     values.country,
                     values.regionName,
                     values.county,

@@ -4,21 +4,17 @@ import uniqid from 'uniqid';
 import { Link } from 'react-router-dom';
 import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
-import * as UK from '../../../../countryLib/UK.json';
+import { getCountries, getRegionNames, getCounties } from '../../../../helpers';
 
 function LocationsSearchAreasCounty() {
   const [stateCountry, setStateCountry] = useState('England');
-  const countriesObj = UK.default.UK;
-  const countries = Object.keys(UK.default.UK);
 
   const displayCountyInCols = selectedCountry => {
-    const regionNames = Object.keys(countriesObj[selectedCountry]);
+    const regionNames = getRegionNames(selectedCountry);
     let counties = [];
     regionNames.forEach(
       regionName =>
-        (counties = counties.concat(
-          Object.keys(countriesObj[selectedCountry][regionName]),
-        )),
+        (counties = counties.concat(getCounties(selectedCountry, regionName))),
     );
     counties.sort();
     const firstCol = Math.ceil(counties.length / 3);
@@ -60,7 +56,7 @@ function LocationsSearchAreasCounty() {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {countries.map(country => (
+          {getCountries().map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${

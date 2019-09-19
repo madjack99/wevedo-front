@@ -18,10 +18,16 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
-import * as UK from '../../countryLib/UK.json';
 import './Header.scss';
+
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
+
+import {
+  getLargestRegions,
+  getLargestCounties,
+  getLargestCities,
+} from '../../helpers';
 import StickyNotification from '../StickyNotification';
 
 import { WevedoServiceContext } from '../../contexts';
@@ -30,7 +36,6 @@ import config from '../../config';
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
-  const UKLocations = UK.default;
 
   return (
     <React.Fragment>
@@ -60,7 +65,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               t={t}
             />
 
-            <LocationDropdown UKLocations={UKLocations} t={t} />
+            <LocationDropdown t={t} />
             <Nav.Link
               onClick={() => setLocationModalShow(true)}
               className="d-block d-lg-none"
@@ -72,7 +77,6 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
             <LocationSubMenu
               show={locationModalShow}
               onHide={() => setLocationModalShow(false)}
-              UKLocations={UKLocations}
               t={t}
             />
           </Nav>
@@ -90,7 +94,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   );
 };
 
-const LocationDropdown = ({ UKLocations, t }) => {
+const LocationDropdown = ({ t }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
     <NavDropdown title="Locations" className="d-none d-lg-block">
@@ -123,22 +127,26 @@ const LocationDropdown = ({ UKLocations, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {UKLocations['Largest Regions'].slice(0, 4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="regionName"
-                />
-              ))}
+              {getLargestRegions()
+                .slice(0, 4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="regionName"
+                  />
+                ))}
             </Col>
             <Col>
-              {UKLocations['Largest Regions'].slice(4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="regionName"
-                />
-              ))}
+              {getLargestRegions()
+                .slice(4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="regionName"
+                  />
+                ))}
             </Col>
           </Row>
           <div className="mt-3">
@@ -155,22 +163,26 @@ const LocationDropdown = ({ UKLocations, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {UKLocations['Largest Counties'].slice(0, 4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="county"
-                />
-              ))}
+              {getLargestCounties()
+                .slice(0, 4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="county"
+                  />
+                ))}
             </Col>
             <Col>
-              {UKLocations['Largest Counties'].slice(4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="county"
-                />
-              ))}
+              {getLargestCounties()
+                .slice(4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="county"
+                  />
+                ))}
             </Col>
           </Row>
           <div className="mt-3">
@@ -187,22 +199,26 @@ const LocationDropdown = ({ UKLocations, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {UKLocations['Largest Cities'].slice(0, 4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="city"
-                />
-              ))}
+              {getLargestCities()
+                .slice(0, 4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="city"
+                  />
+                ))}
             </Col>
             <Col>
-              {UKLocations['Largest Cities'].slice(4).map(region => (
-                <LocationDropdownItem
-                  key={uniqid()}
-                  name={region}
-                  searchArea="city"
-                />
-              ))}
+              {getLargestCities()
+                .slice(4)
+                .map(region => (
+                  <LocationDropdownItem
+                    key={uniqid()}
+                    name={region}
+                    searchArea="city"
+                  />
+                ))}
             </Col>
           </Row>
           <div className="mt-3">
@@ -357,7 +373,7 @@ function ProfileArea({ user }) {
   );
 }
 
-const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
+const LocationSubMenu = ({ onHide, t, ...rest }) => (
   <Modal
     {...rest}
     size="lg"
@@ -373,7 +389,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
         <Col>
           <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
           <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
-          {UKLocations['Largest Regions'].map(name => (
+          {getLargestRegions().map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?regionName=${name}`}
@@ -387,7 +403,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
-          {UKLocations['Largest Counties'].map(name => (
+          {getLargestCounties().map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?county=${name}`}
@@ -401,7 +417,7 @@ const LocationSubMenu = ({ UKLocations, onHide, t, ...rest }) => (
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
-          {UKLocations['Largest Cities'].map(name => (
+          {getLargestCities().map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?city=${name}`}
