@@ -1,4 +1,5 @@
 import {
+  getLocation,
   getCountries,
   getRegionNames,
   getCounties,
@@ -17,6 +18,7 @@ const isUrl = str => {
 };
 
 export {
+  getLocation,
   getCountries,
   getRegionNames,
   getCounties,

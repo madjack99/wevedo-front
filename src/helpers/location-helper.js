@@ -3,6 +3,11 @@ import * as GB from '../countryLib/GB.json';
 const locations = { GB: GB.default.GB };
 const largestLocations = { GB: GB.default };
 
+export const getLocation = country =>
+  Object.keys(locations).find(location =>
+    Object.keys(locations[location]).includes(country),
+  );
+
 export const getCountries = (appearInCountries = 'GB') =>
   Object.keys(locations[appearInCountries]);
 
