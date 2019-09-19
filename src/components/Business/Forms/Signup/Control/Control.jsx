@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 import { fetchSignUp, fetchLogin, updateUser } from '../../../../../actions';
+import { getLocation } from '../../../../../helpers';
 
 import ScreensBusinessFormsSignupMainInfo from '../../../../../screens/Business/Forms/Signup/MainInfo';
 import ScreensBusinessFormsSignupLocationInfo from '../../../../../screens/Business/Forms/Signup/LocationInfo';
@@ -66,6 +67,7 @@ const ScreensBusinessFormsSignupControl = ({
     const register = async () => {
       const body = {
         ...user,
+        appearInCountries: getLocation(user.country),
         isProvider: true,
         deviceOS: 'android', // TO-DO: 'web' should be later,
       };
