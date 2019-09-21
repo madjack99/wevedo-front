@@ -5,7 +5,7 @@ export default Yup.object().shape({
     .email('invalid email')
     .required('required'),
   password: Yup.string()
-    .min(6, 'minimum 6 characters')
+    .min(6, 'minimum 8 characters')
     .max(50, 'maximum 50 characters')
     .required('required'),
 });
