@@ -9,6 +9,8 @@ import DashboardMessagesRoomItemRecipient from '../../Item/Recipient';
 import DashboardMessagesRoomItemSender from '../../Item/Sender';
 import DashboardMessagesInput from '../../Input';
 
+import config from '../../../../../../config';
+
 const DashboardMessagesRoomViewMobile = ({
   room,
   messages,
@@ -23,6 +25,8 @@ const DashboardMessagesRoomViewMobile = ({
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
+
+  const { profileImageURL } = config;
 
   useEffect(() => {
     if (!scrollbars.current) {
@@ -49,7 +53,7 @@ const DashboardMessagesRoomViewMobile = ({
           <Col xs={2} className="align-self-center">
             <img
               className="username-circle"
-              src={sender.profileImageURL}
+              src={sender.profileImageURL || profileImageURL}
               alt="Sender avatar"
             />
           </Col>

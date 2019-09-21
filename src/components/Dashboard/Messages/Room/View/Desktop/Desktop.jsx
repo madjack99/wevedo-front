@@ -9,6 +9,8 @@ import DashboardMessagesRoomItemRecipient from '../../Item/Recipient';
 import DashboardMessagesRoomItemSender from '../../Item/Sender';
 import DashboardMessagesInput from '../../Input';
 
+import config from '../../../../../../config';
+
 const DashboardMessagesRoomViewDesktop = ({
   room,
   messages,
@@ -21,6 +23,7 @@ const DashboardMessagesRoomViewDesktop = ({
   const sender = authUser.isProvider ? user : supplier;
   const { _id: senderId } = sender;
   const { _id: userId } = authUser;
+  const { profileImageURL } = config;
 
   useEffect(() => scrollbars.current.scrollToBottom(), [messages.length]);
 
@@ -29,7 +32,7 @@ const DashboardMessagesRoomViewDesktop = ({
       <div className="d-flex align-items-center dashboard-business__messageBox-header pl-4 pb-0">
         <img
           className="dashboard-business__messageBox-img dashboard-business__messageBox-img-sm"
-          src={sender.profileImageURL}
+          src={sender.profileImageURL || profileImageURL}
           alt="Sender avatar"
         />
         {sender.isProvider ? (
