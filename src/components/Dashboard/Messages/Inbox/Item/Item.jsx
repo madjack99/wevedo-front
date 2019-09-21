@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { Row, Col, Badge } from 'react-bootstrap';
 import ReactTimeAgo from 'react-time-ago';
 import ClampLines from 'react-clamp-lines';
+import config from '../../../../../config';
 
 const DashboardMessagesInboxItem = ({ room, user: authUser }) => {
   const { user, provider: supplier } = room;
   const sender = authUser.isProvider ? user : supplier;
+  const { profileImageURL } = config;
 
   const lastMessage = room.messages[room.messages.length - 1];
   const numberOfUnreadMessages = authUser.isProvider
@@ -21,7 +23,7 @@ const DashboardMessagesInboxItem = ({ room, user: authUser }) => {
         <Col xs={2}>
           <img
             className="dashboard-business__messageBox-img"
-            src={sender.profileImageURL}
+            src={sender.profileImageURL || profileImageURL}
             alt="Sender avatar"
           />
         </Col>
