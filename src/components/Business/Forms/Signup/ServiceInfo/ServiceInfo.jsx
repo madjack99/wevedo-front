@@ -29,10 +29,10 @@ const BusinessFormsSignupServiceInfo = ({
 
   useEffect(() => {
     const fetchPrice = async () => {
-      const { data: newPrice } = await wevedoService.getPrice(
-        'registrationFee',
-      );
-      setPrice(newPrice);
+      const {
+        data: { price: newPrice },
+      } = await wevedoService.getPrice('registrationFee');
+      setPrice(+newPrice);
     };
     fetchPrice();
   }, [wevedoService]);
@@ -75,7 +75,7 @@ const BusinessFormsSignupServiceInfo = ({
             profileImageURL,
           });
 
-          if (!config.publishableKey) {
+          if (price === 0) {
             nextStep();
           }
         }}
@@ -176,7 +176,7 @@ const BusinessFormsSignupServiceInfo = ({
             </Form.Group>
 
             <Form.Group className="text-center text-md-right text-uppercase">
-              {config.publishableKey ? (
+              {price !== 0 ? (
                 <StripeCheckout
                   stripeKey={config.publishableKey}
                   token={handleToken}
