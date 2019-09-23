@@ -25,9 +25,8 @@ export default {
   ],
   profileImageURL:
     'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
-  publishableKey: null,
-  // remove null and uncomment to turn on payment
-  // process.env.REACT_APP_STAGE === 'PROD'
-  //   ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
-  //   : 'pk_test_JP05nCrL2SdWW7oRRekbdZrq',
+  publishableKey:
+    process.env.REACT_APP_STAGE === 'PROD'
+      ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
+      : 'pk_test_JP05nCrL2SdWW7oRRekbdZrq',
 };
