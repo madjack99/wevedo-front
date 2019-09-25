@@ -1,0 +1,52 @@
+{
+  "Malaysia": {
+    "Malaysia": {
+      "Northern Region": {
+        "Perlis": ["Kangar", "Arau", "Padang Besar"],
+        "Kedah": ["Alor Setar", "Anak Bukit"],
+        "Penang": ["George Town"],
+        "Perak": ["Ipoh", "Kuala Kangsar"]
+      },
+      "East Coast Region": {
+        "Kelantan": ["Kota Bharu"],
+        "Terengganu": ["Kuala Terengganu", "Chukai", "Dungun", "Jerteh"],
+        "Pahang": ["Kuantan", "Pekan"]
+      },
+      "Central Region": {
+        "Selangor": ["Shah Alam", "Klang"],
+        "Kuala Lumpur and Putrajaya": ["Kuala Lumpur", "Putrajaya"]
+      },
+      "Southern Region": {
+        "Negeri Sembilan": ["Seremban", "Seri Menanti"],
+        "Malacca": ["Malacca City"],
+        "Johor": ["Johor Bahru", "Muar"]
+      }
+    }
+  },
+  "Largest Regions": [
+    "Northern Region",
+    "East Coast Region",
+    "Central Region",
+    "Southern Region"
+  ],
+  "Largest Counties": [
+    "Selangor",
+    "Johor",
+    "Kelantan",
+    "Perak",
+    "Kedah",
+    "Kelantan",
+    "Penang",
+    "Pahang"
+  ],
+  "Largest Cities": [
+    "Kuala Lumpur",
+    "George Town",
+    "Ipoh",
+    "Shah Alam",
+    "Malacca City",
+    "Kuantan",
+    "Kota Bharu",
+    "Putrajaya"
+  ]
+}
