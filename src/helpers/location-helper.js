@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as GB from '../countryLib/GB.json';
 
 const locations = { GB: GB.default.GB };
@@ -33,3 +34,16 @@ export const getLargestCounties = (appearInCountries = 'GB') =>
 
 export const getLargestCities = (appearInCountries = 'GB') =>
   largestLocations[appearInCountries]['Largest Cities'];
+
+export const getGeoInfo = async () => {
+  let country;
+  try {
+    const response = await axios.get('https://ipapi.co/json/');
+    const { data } = response;
+    country = data.country_name;
+  } catch (err) {
+    country = null;
+  }
+  console.log(country);
+  return country;
+};

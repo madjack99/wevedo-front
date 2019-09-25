@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
 
+import { getGeoInfo } from '../../helpers';
+
 import {
   Nav,
   Navbar,
@@ -36,6 +38,8 @@ import config from '../../config';
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
+
+  getGeoInfo();
 
   return (
     <React.Fragment>
