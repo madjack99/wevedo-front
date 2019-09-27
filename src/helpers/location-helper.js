@@ -10,12 +10,14 @@ export const getLocation = country =>
     Object.keys(locations[location]).includes(country),
   );
 
-export const getCountries = (appearInCountries = 'GB') => {
+export const getCountries = appearInCountries => {
   let countryList = [];
   if (Array.isArray(appearInCountries)) {
     appearInCountries.forEach(country => {
       countryList = countryList.concat(Object.keys(locations[country]));
     });
+  } else if (!appearInCountries) {
+    countryList = Object.keys(locations.GB);
   } else {
     countryList = Object.keys(locations[appearInCountries]);
   }

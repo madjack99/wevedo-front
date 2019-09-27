@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+import Cookies from 'js-cookie';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
@@ -18,7 +19,8 @@ const SearchPanel = ({
   supplierLocationQuery,
   onSearch = () => {},
 }) => {
-  const countries = getCountries(user && user.appearInCountries);
+  console.log(Cookies.get('currentIPCountry'));
+  const countries = getCountries(Cookies.get('currentIPCountry'));
   let allRegionNames = [];
   countries.forEach(country => {
     const countryRegionNames = getRegionNames(user && user.appearInCountries)(

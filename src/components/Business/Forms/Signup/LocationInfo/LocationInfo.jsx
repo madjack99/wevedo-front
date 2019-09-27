@@ -10,6 +10,8 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
+import config from '../../../../../config';
+
 import {
   getCountries,
   getRegionNames,
@@ -35,6 +37,8 @@ const BusinessFormsSignupLocationInfo = ({
   nextStep,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+
+  const { allowedInCountries } = config;
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -212,7 +216,7 @@ const BusinessFormsSignupLocationInfo = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {getCountries(user && user.appearInCountries).map(country => (
+                {getCountries(allowedInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
