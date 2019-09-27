@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as GB from '../countryLib/GB.json';
+import * as Malaysia from '../countryLib/Malaysia.json';
 
-const locations = { GB: GB.default.GB };
+const locations = { GB: GB.default.GB, MY: Malaysia.default.MY };
 const largestLocations = { GB: GB.default };
 
 export const getLocation = country =>
@@ -9,8 +10,17 @@ export const getLocation = country =>
     Object.keys(locations[location]).includes(country),
   );
 
-export const getCountries = (appearInCountries = 'GB') =>
-  Object.keys(locations[appearInCountries]);
+export const getCountries = (appearInCountries = 'GB') => {
+  let countryList = [];
+  if (Array.isArray(appearInCountries)) {
+    appearInCountries.forEach(country => {
+      countryList = countryList.concat(Object.keys(locations[country]));
+    });
+  } else {
+    countryList = Object.keys(locations[appearInCountries]);
+  }
+  return countryList;
+};
 
 export const getRegionNames = (appearInCountries = 'GB') => country =>
   Object.keys(locations[appearInCountries][country]);
@@ -35,12 +45,15 @@ export const getLargestCounties = (appearInCountries = 'GB') =>
 export const getLargestCities = (appearInCountries = 'GB') =>
   largestLocations[appearInCountries]['Largest Cities'];
 
+// Returns 2 letter abbreviation of a country according
+// to the IP of the browser:
+// GB - for Great Britain, MY - for Malaysia
 export const getGeoInfo = async () => {
   let country;
   try {
     const response = await axios.get('https://ipapi.co/json/');
     const { data } = response;
-    country = data.country_name;
+    country = data.country;
   } catch (err) {
     country = null;
   }

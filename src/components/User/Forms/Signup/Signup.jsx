@@ -34,6 +34,8 @@ const UserFormsSignup = ({
   const wevedoService = useContext(WevedoServiceContext);
   const { profileImageURL } = config;
 
+  const { allowedInCountries } = config;
+
   const handleSocialSignUp = async ({
     _profile: profile,
     _provider: provider,
@@ -213,7 +215,9 @@ const UserFormsSignup = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {getCountries(user && user.appearInCountries).map(country => (
+                {/* for signup use an array of allowed countries from config to 
+                allow all countries for registrations disregarding the IP */}
+                {getCountries(allowedInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
