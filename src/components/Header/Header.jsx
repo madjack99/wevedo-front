@@ -183,7 +183,7 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCounties(user && user.appearInCountries)
+              {getLargestCounties(Cookies.get('currentIPCountry'))
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -194,7 +194,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCounties(user && user.appearInCountries)
+              {getLargestCounties(Cookies.get('currentIPCountry'))
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -219,7 +219,7 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCities(user && user.appearInCountries)
+              {getLargestCities(Cookies.get('currentIPCountry'))
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -230,7 +230,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCities(user && user.appearInCountries)
+              {getLargestCities(Cookies.get('currentIPCountry'))
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem

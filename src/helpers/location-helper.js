@@ -43,11 +43,19 @@ export const getLargestRegions = appearInCountries => {
   return largestLocations[appearInCountries]['Largest Regions'];
 };
 
-export const getLargestCounties = (appearInCountries = 'GB') =>
-  largestLocations[appearInCountries]['Largest Counties'];
+export const getLargestCounties = appearInCountries => {
+  if (!appearInCountries) {
+    return largestLocations.GB['Largest Regions'];
+  }
+  return largestLocations[appearInCountries]['Largest Counties'];
+};
 
-export const getLargestCities = (appearInCountries = 'GB') =>
-  largestLocations[appearInCountries]['Largest Cities'];
+export const getLargestCities = appearInCountries => {
+  if (!appearInCountries) {
+    return largestLocations.GB['Largest Regions'];
+  }
+  return largestLocations[appearInCountries]['Largest Cities'];
+};
 
 // Returns 2 letter abbreviation of a country according
 // to the IP of the browser:
