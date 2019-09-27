@@ -58,8 +58,6 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
         {},
       );
 
-      console.log(photoObject);
-
       updateUser()({ providerImages: photoObject });
       nextStep();
     } catch (err) {
