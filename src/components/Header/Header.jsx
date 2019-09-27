@@ -40,7 +40,17 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   const [locationModalShow, setLocationModalShow] = useState(false);
   const [countryByIP, setCountryByIP] = useState('');
 
-  Cookies.set('currentIPCountry', countryByIP);
+  const { allowedInCountries } = config;
+
+  // Put country into cookie only if this country
+  // is included into the list of allowed countries,
+  // otherwise put empty string which renders UK
+  // locations by default
+  if (allowedInCountries.includes(countryByIP)) {
+    Cookies.set('currentIPCountry', countryByIP);
+  } else {
+    Cookies.set('currentIPCountry', '');
+  }
 
   // use getIPCountry to find out current country by IP,
   // put this country to state which will be later added
