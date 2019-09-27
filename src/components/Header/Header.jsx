@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
-
-import { getGeoInfo } from '../../helpers';
+import Cookies from 'js-cookie';
 
 import {
   Nav,
@@ -19,17 +18,18 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
+import {
+  getGeoInfo,
+  getLargestRegions,
+  getLargestCounties,
+  getLargestCities,
+} from '../../helpers';
 
 import './Header.scss';
 
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
-import {
-  getLargestRegions,
-  getLargestCounties,
-  getLargestCities,
-} from '../../helpers';
 import StickyNotification from '../StickyNotification';
 
 import { WevedoServiceContext } from '../../contexts';
@@ -38,8 +38,21 @@ import config from '../../config';
 const Header = ({ isLoggedIn, categories, user, t }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
+  const [countryByIP, setCountryByIP] = useState('');
 
-  getGeoInfo();
+  Cookies.set('currentIPCountry', countryByIP);
+
+  // use getIPCountry to find out current country by IP,
+  // put this country to state which will be later added
+  // to cookies. Depending of current country show different
+  // places in getLargestRegions and etc.
+  useEffect(() => {
+    const getIPCountry = async () => {
+      const currentIPCountry = await getGeoInfo();
+      setCountryByIP(currentIPCountry);
+    };
+    getIPCountry();
+  }, []);
 
   return (
     <React.Fragment>
@@ -132,7 +145,9 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestRegions(user && user.appearInCountries)
+              {/* Show different regions depending on the country put into cookies,
+              by default show regions in the UK */}
+              {getLargestRegions(Cookies.get('currentIPCountry'))
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -143,7 +158,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestRegions(user && user.appearInCountries)
+              {getLargestRegions(Cookies.get('currentIPCountry'))
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem

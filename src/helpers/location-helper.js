@@ -3,7 +3,7 @@ import * as GB from '../countryLib/GB.json';
 import * as Malaysia from '../countryLib/Malaysia.json';
 
 const locations = { GB: GB.default.GB, MY: Malaysia.default.MY };
-const largestLocations = { GB: GB.default };
+const largestLocations = { GB: GB.default, MY: Malaysia.default };
 
 export const getLocation = country =>
   Object.keys(locations).find(location =>
@@ -36,8 +36,12 @@ export const getCities = (appearInCountries = 'GB') => (
   county,
 ) => locations[appearInCountries][country][regionName][county];
 
-export const getLargestRegions = (appearInCountries = 'GB') =>
-  largestLocations[appearInCountries]['Largest Regions'];
+export const getLargestRegions = appearInCountries => {
+  if (!appearInCountries) {
+    return largestLocations.GB['Largest Regions'];
+  }
+  return largestLocations[appearInCountries]['Largest Regions'];
+};
 
 export const getLargestCounties = (appearInCountries = 'GB') =>
   largestLocations[appearInCountries]['Largest Counties'];
@@ -57,6 +61,5 @@ export const getGeoInfo = async () => {
   } catch (err) {
     country = null;
   }
-  console.log(country);
   return country;
 };
