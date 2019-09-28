@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
   getLocation,
   getCountries,
@@ -17,6 +19,8 @@ const isUrl = str => {
   return false;
 };
 
+const limitArray = (array, limit) => _.take(array, limit);
+
 export {
   getLocation,
   getCountries,
@@ -27,4 +31,5 @@ export {
   getLargestCounties,
   getLargestCities,
   isUrl,
+  limitArray,
 };
