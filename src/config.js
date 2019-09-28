@@ -25,6 +25,7 @@ export default {
   ],
   profileImageURL:
     'https://res.cloudinary.com/wevedo/image/upload/v1540042022/profileImages/rlcvvysjjmxwfbuddrx2.png',
+  maximumNumberOfProviderPhotos: 6,
   publishableKey:
     process.env.REACT_APP_STAGE === 'PROD'
       ? 'pk_live_Zy9lmCUOLdt3ZotxuRAON1fd'
