@@ -11,6 +11,9 @@ import './ImageUpload.scss';
 
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
+import config from '../../../../../../config';
+import { limitArray } from '../../../../../../helpers';
+
 const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
   const [photos, setPhotos] = useState([]);
   const [isLoadingPhotos, setIsLoadingPhotos] = useState(false);
@@ -46,13 +49,16 @@ const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
 
     const photosOnServer = await loadPhotosToServer(acceptedFiles);
     updateUser()({
-      providerImages: [
-        ...photos,
-        ...photosOnServer.map(({ secure_url: secureURL }) => secureURL),
-      ],
+      providerImages: limitArray(
+        [
+          ...photos,
+          ...photosOnServer.map(({ secure_url: secureURL }) => secureURL),
+        ],
+        config.maximumNumberOfProviderPhotos,
+      ),
     });
 
-    setPhotos(updatedPhotos);
+    setPhotos(limitArray(updatedPhotos, config.maximumNumberOfProviderPhotos));
     setIsLoadingPhotos(false);
   };
 
@@ -128,41 +134,43 @@ const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
   return (
     <Form>
       <FormGroup className="image-upload__form">
-        <Dropzone accept="image/*" onDrop={onDrop}>
-          {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
-            return (
-              <Container {...getRootProps({ isDragAccept, isDragReject })}>
-                <input {...getInputProps()} />
-                <img
-                  className={
-                    photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
-                  }
-                  src={imageUpload}
-                  alt="Upload icon"
-                />
-                <div
-                  className={`d-flex flex-column ${
-                    photos.length > 0 ? 'text-left' : 'text-center'
-                  }`}
-                >
-                  <p
-                    className={`image-upload__title mb-2 ${
-                      photos.length === 0 ? 'mt-4' : 'mt-0'
+        {photos.length < config.maximumNumberOfProviderPhotos && (
+          <Dropzone accept="image/*" onDrop={onDrop}>
+            {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
+              return (
+                <Container {...getRootProps({ isDragAccept, isDragReject })}>
+                  <input {...getInputProps()} />
+                  <img
+                    className={
+                      photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
+                    }
+                    src={imageUpload}
+                    alt="Upload icon"
+                  />
+                  <div
+                    className={`d-flex flex-column ${
+                      photos.length > 0 ? 'text-left' : 'text-center'
                     }`}
                   >
-                    <b>{t('imgUpload.uploadPhotos')}</b>{' '}
-                    <span className="text-muted d-none d-md-inline">
-                      {t('imgUpload.dragAndDrop')}
+                    <p
+                      className={`image-upload__title mb-2 ${
+                        photos.length === 0 ? 'mt-4' : 'mt-0'
+                      }`}
+                    >
+                      <b>{t('imgUpload.uploadPhotos')}</b>{' '}
+                      <span className="text-muted d-none d-md-inline">
+                        {t('imgUpload.dragAndDrop')}
+                      </span>
+                    </p>
+                    <span className="text-muted">
+                      {t('imgUpload.addAtLeast')}
                     </span>
-                  </p>
-                  <span className="text-muted">
-                    {t('imgUpload.addAtLeast')}
-                  </span>
-                </div>
-              </Container>
-            );
-          }}
-        </Dropzone>
+                  </div>
+                </Container>
+              );
+            }}
+          </Dropzone>
+        )}
         <Row className="mt-4">
           <PreviewZone />
         </Row>
