@@ -216,7 +216,7 @@ const UserFormsSignup = ({
               >
                 <option value="" disabled />
                 {/* for signup use an array of allowed countries from config to 
-                allow all countries for registrations disregarding the IP */}
+                allow all countries for registrations disregarding IP */}
                 {getCountries(allowedInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}

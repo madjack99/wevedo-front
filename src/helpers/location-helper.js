@@ -1,13 +1,13 @@
 import axios from 'axios';
-import * as GB from '../countryLib/GB.json';
+import * as unitedKingdom from '../countryLib/GB.json';
 import * as Malaysia from '../countryLib/Malaysia.json';
 
 const locations = {
-  'United Kingdom': GB.default['United Kingdom'],
+  'United Kingdom': unitedKingdom.default['United Kingdom'],
   Malaysia: Malaysia.default.Malaysia,
 };
 const largestLocations = {
-  'United Kingdom': GB.default,
+  'United Kingdom': unitedKingdom.default,
   Malaysia: Malaysia.default,
 };
 
@@ -30,20 +30,44 @@ export const getCountries = appearInCountries => {
   return countryList;
 };
 
-export const getRegionNames = (
-  appearInCountries = 'United Kingdom',
-) => country => Object.keys(locations[appearInCountries][country]);
+// Because United Kingdom is a country itself and at the same time
+// it includes four other countries we need to specify the initial
+// bigger country like UK to get correct regions and counties in
+// locations object and countryLib (only for UK)
+const getCountriesForUKOnly = country => {
+  const arrayOfUKCountries = [
+    'England',
+    'Scotland',
+    'Wales',
+    'Northern Ireland',
+  ];
+  if (arrayOfUKCountries.includes(country)) {
+    return 'United Kingdom';
+  }
+  return country;
+};
 
-export const getCounties = (appearInCountries = 'United Kingdom') => (
+export const getRegionNames = (chosenCountry = 'United Kingdom') => country => {
+  chosenCountry = getCountriesForUKOnly(country);
+  return Object.keys(locations[chosenCountry][country]);
+};
+
+export const getCounties = (chosenCountry = 'United Kingdom') => (
   country,
   regionName,
-) => Object.keys(locations[appearInCountries][country][regionName]);
+) => {
+  chosenCountry = getCountriesForUKOnly(country);
+  return Object.keys(locations[chosenCountry][country][regionName]);
+};
 
-export const getCities = (appearInCountries = 'United Kingdom') => (
+export const getCities = (chosenCountry = 'United Kingdom') => (
   country,
   regionName,
   county,
-) => locations[appearInCountries][country][regionName][county];
+) => {
+  chosenCountry = getCountriesForUKOnly(country);
+  return locations[chosenCountry][country][regionName][county];
+};
 
 export const getLargestRegions = appearInCountries => {
   if (!appearInCountries) {
@@ -68,7 +92,7 @@ export const getLargestCities = appearInCountries => {
 
 // Returns full name of a country according
 // to the IP of the browser:
-// GB - for Great Britain, MY - for Malaysia
+// United Kingdom, Malaysia
 export const getGeoInfo = async () => {
   let countryName;
   try {
