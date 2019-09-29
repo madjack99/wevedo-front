@@ -54,7 +54,7 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
 
   // use getIPCountry to find out current country by IP,
   // put this country to state which will be later added
-  // to cookies. Depending of current country show different
+  // to cookies. Depending on current country show different
   // places in getLargestRegions and etc.
   useEffect(() => {
     const getIPCountry = async () => {

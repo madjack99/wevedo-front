@@ -2,8 +2,14 @@ import axios from 'axios';
 import * as GB from '../countryLib/GB.json';
 import * as Malaysia from '../countryLib/Malaysia.json';
 
-const locations = { GB: GB.default.GB, MY: Malaysia.default.MY };
-const largestLocations = { GB: GB.default, MY: Malaysia.default };
+const locations = {
+  'United Kingdom': GB.default['United Kingdom'],
+  Malaysia: Malaysia.default.Malaysia,
+};
+const largestLocations = {
+  'United Kingdom': GB.default,
+  Malaysia: Malaysia.default,
+};
 
 export const getLocation = country =>
   Object.keys(locations).find(location =>
@@ -17,22 +23,23 @@ export const getCountries = appearInCountries => {
       countryList = countryList.concat(Object.keys(locations[country]));
     });
   } else if (!appearInCountries) {
-    countryList = Object.keys(locations.GB);
+    countryList = Object.keys(locations['United Kingdom']);
   } else {
     countryList = Object.keys(locations[appearInCountries]);
   }
   return countryList;
 };
 
-export const getRegionNames = (appearInCountries = 'GB') => country =>
-  Object.keys(locations[appearInCountries][country]);
+export const getRegionNames = (
+  appearInCountries = 'United Kingdom',
+) => country => Object.keys(locations[appearInCountries][country]);
 
-export const getCounties = (appearInCountries = 'GB') => (
+export const getCounties = (appearInCountries = 'United Kingdom') => (
   country,
   regionName,
 ) => Object.keys(locations[appearInCountries][country][regionName]);
 
-export const getCities = (appearInCountries = 'GB') => (
+export const getCities = (appearInCountries = 'United Kingdom') => (
   country,
   regionName,
   county,
@@ -40,36 +47,37 @@ export const getCities = (appearInCountries = 'GB') => (
 
 export const getLargestRegions = appearInCountries => {
   if (!appearInCountries) {
-    return largestLocations.GB['Largest Regions'];
+    return largestLocations['United Kingdom']['Largest Regions'];
   }
   return largestLocations[appearInCountries]['Largest Regions'];
 };
 
 export const getLargestCounties = appearInCountries => {
   if (!appearInCountries) {
-    return largestLocations.GB['Largest Regions'];
+    return largestLocations['United Kingdom']['Largest Regions'];
   }
   return largestLocations[appearInCountries]['Largest Counties'];
 };
 
 export const getLargestCities = appearInCountries => {
   if (!appearInCountries) {
-    return largestLocations.GB['Largest Regions'];
+    return largestLocations['United Kingdom']['Largest Regions'];
   }
   return largestLocations[appearInCountries]['Largest Cities'];
 };
 
-// Returns 2 letter abbreviation of a country according
+// Returns full name of a country according
 // to the IP of the browser:
 // GB - for Great Britain, MY - for Malaysia
 export const getGeoInfo = async () => {
-  let country;
+  let countryName;
   try {
     const response = await axios.get('https://ipapi.co/json/');
     const { data } = response;
-    country = data.country;
+    countryName = data.country_name;
   } catch (err) {
-    country = null;
+    countryName = null;
   }
-  return country;
+  console.log(countryName);
+  return countryName;
 };
