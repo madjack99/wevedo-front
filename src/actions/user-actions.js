@@ -1,4 +1,6 @@
 import * as actionTypes from './types';
+import { getGeoInfo } from '../helpers';
+import config from '../config';
 
 const userRequested = () => ({
   type: actionTypes.FETCH_USER_REQUEST,
@@ -61,3 +63,42 @@ export const updateUser = dispatch => update => async body => {
 export const removeUser = () => ({
   type: actionTypes.REMOVE_USER,
 });
+
+export const detectCountryByIp = () => {
+  return async () => {
+    const detectedCountry = await getGeoInfo();
+    // Put country into store only if this country
+    // is included into the list of allowed countries,
+    // otherwise put empty string which renders UK
+    // locations by default
+    if (!config.allowedInCountries.includes(detectedCountry)) {
+      detectedCountry = '';
+    }
+    return {
+      type: actionTypes.DETECT_COUNTRY_BY_IP,
+      payload: detectedCountry,
+    };
+  };
+};
+
+// use getIPCountry to find out current country by IP,
+// put this country to state which will be later added
+// to cookies. Depending on current country show different
+// places in getLargestRegions and etc.
+// useEffect(() => {
+//   const getIPCountry = async () => {
+//     const currentIPCountry = await getGeoInfo();
+//     setCountryByIP(currentIPCountry);
+//   };
+//   getIPCountry();
+// }, []);
+
+// Put country into cookie only if this country
+// is included into the list of allowed countries,
+// otherwise put empty string which renders UK
+// locations by default
+// if (allowedInCountries.includes(countryByIP)) {
+//   Cookies.set('currentIPCountry', countryByIP);
+// } else {
+//   Cookies.set('currentIPCountry', '');
+// }
