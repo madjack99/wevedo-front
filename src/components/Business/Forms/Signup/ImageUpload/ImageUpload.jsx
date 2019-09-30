@@ -15,7 +15,7 @@ import imageUpload from '../../../../../assets/images/uploadImg.png';
 import { updateUser } from '../../../../../actions/user-actions';
 import { WevedoServiceContext } from '../../../../../contexts';
 import config from '../../../../../config';
-import { limitArray } from '../../../../../helpers';
+import { limitArray, arrayToObject } from '../../../../../helpers';
 
 const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
   const [photos, setPhotos] = useState([]);
@@ -64,12 +64,8 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
 
       setIsLoading(false);
 
-      const photoObject = serverPhotos.reduce(
-        (acc, serverPhoto, index) => ({
-          ...acc,
-          [index]: serverPhoto.secure_url,
-        }),
-        {},
+      const photoObject = arrayToObject(
+        serverPhotos.map(({ secure_url: secureURL }) => secureURL),
       );
 
       updateUser()({ providerImages: photoObject });
