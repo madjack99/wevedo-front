@@ -21,6 +21,15 @@ const isUrl = str => {
 
 const limitArray = (array, limit) => _.take(array, limit);
 
+const arrayToObject = array =>
+  array.reduce(
+    (acc, element, index) => ({
+      ...acc,
+      [index]: element,
+    }),
+    {},
+  );
+
 export {
   getLocation,
   getCountries,
@@ -32,4 +41,5 @@ export {
   getLargestCities,
   isUrl,
   limitArray,
+  arrayToObject,
 };
