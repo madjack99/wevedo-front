@@ -5,6 +5,7 @@ const updateUserData = (state, action) => {
     return {
       user: {},
       userError: null,
+      ipDetectedCountry: '',
     };
   }
 
@@ -46,6 +47,11 @@ const updateUserData = (state, action) => {
       return {
         user: {},
         userError: null,
+      };
+    case actionTypes.DETECT_COUNTRY_BY_IP:
+      return {
+        ...state.userData,
+        ipDetectedCountry: action.payload,
       };
     default:
       return state.userData;
