@@ -12,7 +12,7 @@ import './ImageUpload.scss';
 import imageUpload from '../../../../../../assets/images/uploadImg.png';
 
 import config from '../../../../../../config';
-import { limitArray } from '../../../../../../helpers';
+import { limitArray, arrayToObject } from '../../../../../../helpers';
 
 const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
   const [photos, setPhotos] = useState([]);
@@ -49,12 +49,14 @@ const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
 
     const photosOnServer = await loadPhotosToServer(acceptedFiles);
     updateUser()({
-      providerImages: limitArray(
-        [
-          ...photos,
-          ...photosOnServer.map(({ secure_url: secureURL }) => secureURL),
-        ],
-        config.maximumNumberOfProviderPhotos,
+      providerImages: arrayToObject(
+        limitArray(
+          [
+            ...photos,
+            ...photosOnServer.map(({ secure_url: secureURL }) => secureURL),
+          ],
+          config.maximumNumberOfProviderPhotos,
+        ),
       ),
     });
 
