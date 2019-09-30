@@ -25,7 +25,7 @@ const ScreensBusinessFormsSignupControl = ({
     IMAGE_UPLOAD: 'image-upload',
     SERVICE_INFO: 'service-info',
   };
-  const [currentScreen, setCurrentScreen] = useState(SCREENS.LOCATION_INFO);
+  const [currentScreen, setCurrentScreen] = useState(SCREENS.MAIN_INFO);
   const [isAllDataEntered, setIsAllDataEntered] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
