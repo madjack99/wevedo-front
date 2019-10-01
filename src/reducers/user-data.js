@@ -5,23 +5,26 @@ const updateUserData = (state, action) => {
     return {
       user: {},
       userError: null,
-      ipDetectedCountry: '',
+      ipDetectedCountry: 'test',
     };
   }
 
   switch (action.type) {
     case actionTypes.FETCH_USER_REQUEST:
       return {
+        ...state.userData,
         user: {},
         userError: null,
       };
     case actionTypes.FETCH_USER_SUCCESS:
       return {
+        ...state.userData,
         user: action.payload,
         userError: null,
       };
     case actionTypes.FETCH_USER_FAILURE:
       return {
+        ...state.userData,
         user: {},
         userError: action.payload,
       };
@@ -32,6 +35,7 @@ const updateUserData = (state, action) => {
       };
     case actionTypes.UPDATE_USER_SUCCESS:
       return {
+        ...state.userData,
         user: {
           ...state.userData.user,
           ...action.payload,
@@ -45,6 +49,7 @@ const updateUserData = (state, action) => {
       };
     case actionTypes.REMOVE_USER:
       return {
+        ...state.userData,
         user: {},
         userError: null,
       };
