@@ -102,6 +102,6 @@ export const getGeoInfo = async () => {
   } catch (err) {
     countryName = null;
   }
-  console.log(countryName);
+  console.log('Current IP country: ', countryName);
   return countryName;
 };

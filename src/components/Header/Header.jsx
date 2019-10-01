@@ -37,35 +37,21 @@ import StickyNotification from '../StickyNotification';
 import { WevedoServiceContext } from '../../contexts';
 import config from '../../config';
 
-const Header = ({ isLoggedIn, categories, user, t, ipDetectedCountry }) => {
+const Header = ({
+  isLoggedIn,
+  categories,
+  user,
+  t,
+  ipDetectedCountry,
+  detectCountryByIp,
+}) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
   console.log(ipDetectedCountry);
-  // const [countryByIP, setCountryByIP] = useState('');
 
-  // const { allowedInCountries } = config;
-
-  // Put country into cookie only if this country
-  // is included into the list of allowed countries,
-  // otherwise put empty string which renders UK
-  // locations by default
-  // if (allowedInCountries.includes(countryByIP)) {
-  //   Cookies.set('currentIPCountry', countryByIP);
-  // } else {
-  //   Cookies.set('currentIPCountry', '');
-  // }
-
-  // use getIPCountry to find out current country by IP,
-  // put this country to state which will be later added
-  // to cookies. Depending on current country show different
-  // places in getLargestRegions and etc.
-  // useEffect(() => {
-  //   const getIPCountry = async () => {
-  //     const currentIPCountry = await getGeoInfo();
-  //     setCountryByIP(currentIPCountry);
-  //   };
-  //   getIPCountry();
-  // }, []);
+  useEffect(() => {
+    detectCountryByIp();
+  }, []);
 
   return (
     <React.Fragment>

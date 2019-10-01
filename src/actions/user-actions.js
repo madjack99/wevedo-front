@@ -66,7 +66,7 @@ export const removeUser = () => ({
 
 export const detectCountryByIp = () => {
   return async () => {
-    const detectedCountry = await getGeoInfo();
+    let detectedCountry = await getGeoInfo();
     // Put country into store only if this country
     // is included into the list of allowed countries,
     // otherwise put empty string which renders UK
@@ -74,6 +74,7 @@ export const detectCountryByIp = () => {
     if (!config.allowedInCountries.includes(detectedCountry)) {
       detectedCountry = '';
     }
+    console.log(detectedCountry);
     return {
       type: actionTypes.DETECT_COUNTRY_BY_IP,
       payload: detectedCountry,
