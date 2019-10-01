@@ -27,6 +27,8 @@ import {
 
 import './Header.scss';
 
+import { detectCountryByIp } from '../../actions/user-actions';
+
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
 
@@ -35,34 +37,35 @@ import StickyNotification from '../StickyNotification';
 import { WevedoServiceContext } from '../../contexts';
 import config from '../../config';
 
-const Header = ({ isLoggedIn, categories, user, t }) => {
+const Header = ({ isLoggedIn, categories, user, t, ipDetectedCountry }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
-  const [countryByIP, setCountryByIP] = useState('');
+  console.log(ipDetectedCountry);
+  // const [countryByIP, setCountryByIP] = useState('');
 
-  const { allowedInCountries } = config;
+  // const { allowedInCountries } = config;
 
   // Put country into cookie only if this country
   // is included into the list of allowed countries,
   // otherwise put empty string which renders UK
   // locations by default
-  if (allowedInCountries.includes(countryByIP)) {
-    Cookies.set('currentIPCountry', countryByIP);
-  } else {
-    Cookies.set('currentIPCountry', '');
-  }
+  // if (allowedInCountries.includes(countryByIP)) {
+  //   Cookies.set('currentIPCountry', countryByIP);
+  // } else {
+  //   Cookies.set('currentIPCountry', '');
+  // }
 
   // use getIPCountry to find out current country by IP,
   // put this country to state which will be later added
   // to cookies. Depending on current country show different
   // places in getLargestRegions and etc.
-  useEffect(() => {
-    const getIPCountry = async () => {
-      const currentIPCountry = await getGeoInfo();
-      setCountryByIP(currentIPCountry);
-    };
-    getIPCountry();
-  }, []);
+  // useEffect(() => {
+  //   const getIPCountry = async () => {
+  //     const currentIPCountry = await getGeoInfo();
+  //     setCountryByIP(currentIPCountry);
+  //   };
+  //   getIPCountry();
+  // }, []);
 
   return (
     <React.Fragment>
@@ -502,7 +505,14 @@ const mapStateToProps = ({ sessionData, categoryList, userData }) => ({
   ...userData,
 });
 
+const mapDispatchToProps = dispatch => ({
+  detectCountryByIp: () => dispatch(detectCountryByIp()),
+});
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   withTranslation('common'),
 )(Header);
