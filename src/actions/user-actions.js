@@ -64,8 +64,13 @@ export const removeUser = () => ({
   type: actionTypes.REMOVE_USER,
 });
 
+const setDetectedCountry = detectedCountry => ({
+  type: actionTypes.SET_DETECTED_COUNTRY,
+  payload: detectedCountry,
+});
+
 export const detectCountryByIp = () => {
-  return async () => {
+  return async dispatch => {
     let detectedCountry = await getGeoInfo();
     // Put country into store only if this country
     // is included into the list of allowed countries,
@@ -74,11 +79,7 @@ export const detectCountryByIp = () => {
     if (!config.allowedInCountries.includes(detectedCountry)) {
       detectedCountry = '';
     }
-    console.log(detectedCountry);
-    return {
-      type: actionTypes.DETECT_COUNTRY_BY_IP,
-      payload: detectedCountry,
-    };
+    dispatch(setDetectedCountry(detectedCountry));
   };
 };
 

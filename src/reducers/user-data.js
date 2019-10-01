@@ -53,8 +53,8 @@ const updateUserData = (state, action) => {
         user: {},
         userError: null,
       };
-    case actionTypes.DETECT_COUNTRY_BY_IP:
-      console.log('reducer');
+    case actionTypes.SET_DETECTED_COUNTRY:
+      console.log('Country set to store: ', action.payload);
       return {
         ...state.userData,
         ipDetectedCountry: action.payload,
