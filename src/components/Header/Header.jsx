@@ -91,7 +91,7 @@ const Header = ({
               className="d-block d-lg-none"
             >
               <span className="font-weight-bold">
-                Locations <i className="fa fa-chevron-right ml-2" />
+                {ipDetectedCountry} <i className="fa fa-chevron-right ml-2" />
               </span>
             </Nav.Link>
             <LocationSubMenu
@@ -118,7 +118,7 @@ const Header = ({
 const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
-    <NavDropdown title="Locations" className="d-none d-lg-block">
+    <NavDropdown title={ipDetectedCountry} className="d-none d-lg-block">
       <Row>
         <div className="active-menu d-none d-lg-block" />
         <Col sm="auto" className="text-left">
@@ -173,10 +173,13 @@ const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
                 ))}
             </Col>
           </Row>
-          <div className="mt-3">
+          <div className="mt-3 region-search-basement">
             <Link to="/locations/regionName" className="view-all-btn">
               View more regions
               <i className="fa fa-arrow-right" />
+            </Link>
+            <Link className="view-all-btn mr-5 text-danger">
+              Change region <i className="fa fa-arrow-right" />
             </Link>
           </div>
         </Col>
