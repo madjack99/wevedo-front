@@ -15,4 +15,8 @@
 .region-search-basement {
   display: flex;
   justify-content: space-between;
+
+  .country-modal {
+    cursor: pointer;
+  }
 }

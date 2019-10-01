@@ -115,6 +115,38 @@ const Header = ({
   );
 };
 
+const ChangeCountryModal = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  console.log(show);
+  return (
+    <React.Fragment>
+      <div
+        className="view-all-btn mr-5 text-danger country-modal"
+        onClick={handleShow}
+      >
+        Change region <i className="fa fa-arrow-right" />
+      </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Choose a country</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>List of countries</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleClose}>
+            Choose country
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </React.Fragment>
+  );
+};
+
 const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
@@ -178,9 +210,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
               View more regions
               <i className="fa fa-arrow-right" />
             </Link>
-            <Link className="view-all-btn mr-5 text-danger">
-              Change region <i className="fa fa-arrow-right" />
-            </Link>
+            <ChangeCountryModal />
           </div>
         </Col>
         <Col
