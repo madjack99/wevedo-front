@@ -73,7 +73,7 @@ export const detectCountryByIp = () => {
   return async dispatch => {
     let detectedCountry = await getGeoInfo();
     // Put country into store only if this country
-    // is included into the list of allowed countries,
+    // is included into the list of allowed countries in config,
     // otherwise put empty string which renders UK
     // locations by default
     if (!config.allowedInCountries.includes(detectedCountry)) {
@@ -82,25 +82,3 @@ export const detectCountryByIp = () => {
     dispatch(setDetectedCountry(detectedCountry));
   };
 };
-
-// use getIPCountry to find out current country by IP,
-// put this country to state which will be later added
-// to cookies. Depending on current country show different
-// places in getLargestRegions and etc.
-// useEffect(() => {
-//   const getIPCountry = async () => {
-//     const currentIPCountry = await getGeoInfo();
-//     setCountryByIP(currentIPCountry);
-//   };
-//   getIPCountry();
-// }, []);
-
-// Put country into cookie only if this country
-// is included into the list of allowed countries,
-// otherwise put empty string which renders UK
-// locations by default
-// if (allowedInCountries.includes(countryByIP)) {
-//   Cookies.set('currentIPCountry', countryByIP);
-// } else {
-//   Cookies.set('currentIPCountry', '');
-// }

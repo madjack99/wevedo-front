@@ -69,25 +69,25 @@ export const getCities = (chosenCountry = 'United Kingdom') => (
   return locations[chosenCountry][country][regionName][county];
 };
 
-export const getLargestRegions = appearInCountries => {
-  if (!appearInCountries) {
+export const getLargestRegions = country => {
+  if (!country) {
     return largestLocations['United Kingdom']['Largest Regions'];
   }
-  return largestLocations[appearInCountries]['Largest Regions'];
+  return largestLocations[country]['Largest Regions'];
 };
 
-export const getLargestCounties = appearInCountries => {
-  if (!appearInCountries) {
-    return largestLocations['United Kingdom']['Largest Regions'];
+export const getLargestCounties = country => {
+  if (!country) {
+    return largestLocations['United Kingdom']['Largest Counties'];
   }
-  return largestLocations[appearInCountries]['Largest Counties'];
+  return largestLocations[country]['Largest Counties'];
 };
 
-export const getLargestCities = appearInCountries => {
-  if (!appearInCountries) {
-    return largestLocations['United Kingdom']['Largest Regions'];
+export const getLargestCities = country => {
+  if (!country) {
+    return largestLocations['United Kingdom']['Largest Cities'];
   }
-  return largestLocations[appearInCountries]['Largest Cities'];
+  return largestLocations[country]['Largest Cities'];
 };
 
 // Returns full name of a country according
