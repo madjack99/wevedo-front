@@ -6,6 +6,7 @@ const updateUserData = (state, action) => {
       user: {},
       userError: null,
       ipDetectedCountry: '',
+      userSelectedCountry: '',
     };
   }
 
@@ -58,6 +59,11 @@ const updateUserData = (state, action) => {
       return {
         ...state.userData,
         ipDetectedCountry: action.payload,
+      };
+    case actionTypes.SET_COUNTRY_SELECTED_BY_USER:
+      return {
+        ...state.userData,
+        userSelectedCountry: action.payload,
       };
     default:
       return state.userData;

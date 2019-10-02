@@ -85,7 +85,7 @@ export const detectCountryByIp = () => {
 
 export const selectCountry = selectedCountry => {
   return {
-    type: 'SET_COUNTRY_CHOSEN_BY_USER',
+    type: 'SET_COUNTRY_SELECTED_BY_USER',
     payload: selectedCountry,
   };
 };
