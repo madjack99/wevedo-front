@@ -8,19 +8,21 @@ import { Row, Container, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ClampLines from 'react-clamp-lines';
 
-import { getCountries, getRegionNames } from '../../helpers';
+import {
+  getCountries,
+  getRegionNames,
+  showIpDetectedOrUserSelectedCountry,
+} from '../../helpers';
 
 function getRandomLinks(user, countries) {
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
-      country,
-    );
+    const countryRegionNames = getRegionNames(country)(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
   const randomNumbersArray = [];
   const randomLinks = [];
-  while (randomNumbersArray.length < 12) {
+  while (randomNumbersArray.length < Math.min(12, allRegionNames.length)) {
     const randomNumber = rn({
       min: 0,
       max: allRegionNames.length - 1,
@@ -52,8 +54,13 @@ function getRandomLinks(user, countries) {
   return randomLinks;
 }
 
-function PopularSearches({ user, t }) {
-  const countries = getCountries(user && user.appearInCountries);
+function PopularSearches({ user, t, ipDetectedCountry, userSelectedCountry }) {
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+  const countries = getCountries(calculatedCountry);
+  console.log(countries);
 
   const randomLinks = useMemo(() => getRandomLinks(user, countries), [
     user,
