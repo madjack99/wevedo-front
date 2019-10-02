@@ -8,7 +8,11 @@ import Cookies from 'js-cookie';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import { getCountries, getRegionNames } from '../../../helpers';
+import {
+  getCountries,
+  getRegionNames,
+  showIpDetectedOrUserSelectedCountry,
+} from '../../../helpers';
 
 const SearchPanel = ({
   title,
@@ -17,10 +21,15 @@ const SearchPanel = ({
   t,
   history,
   supplierLocationQuery,
+  ipDetectedCountry,
+  userSelectedCountry,
   onSearch = () => {},
 }) => {
-  console.log(Cookies.get('currentIPCountry'));
-  const countries = getCountries(Cookies.get('currentIPCountry'));
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+  const countries = getCountries(calculatedCountry);
   let allRegionNames = [];
   countries.forEach(country => {
     const countryRegionNames = getRegionNames(user && user.appearInCountries)(
@@ -112,7 +121,10 @@ const SearchPanel = ({
   );
 };
 
-const mapStateToProps = ({ categoryList }) => categoryList;
+const mapStateToProps = ({ categoryList, userData }) => ({
+  ...categoryList,
+  ...userData,
+});
 
 export default compose(
   connect(mapStateToProps),
