@@ -15,6 +15,7 @@ import {
   Col,
   Modal,
   Badge,
+  Form,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
@@ -119,7 +120,15 @@ const ChangeCountryModal = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(show);
+
+  const [selectedCountry, setSelectedCountry] = useState('');
+  console.log(selectedCountry);
+
+  const handleSelect = e => {
+    setSelectedCountry(e.target.value);
+  };
+
+  const { allowedInCountries } = config;
   return (
     <React.Fragment>
       <div
@@ -133,7 +142,24 @@ const ChangeCountryModal = () => {
         <Modal.Header closeButton>
           <Modal.Title>Choose a country</Modal.Title>
         </Modal.Header>
-        <Modal.Body>List of countries</Modal.Body>
+        <Modal.Body>
+          {allowedInCountries.map(country => {
+            return (
+              <div key={country} className="selected-country">
+                <label htmlFor={`${country}`}>
+                  <input
+                    type="radio"
+                    value={country}
+                    name="selectCountry"
+                    onClick={handleSelect}
+                    id={country}
+                  />
+                  {country}
+                </label>
+              </div>
+            );
+          })}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
             Close

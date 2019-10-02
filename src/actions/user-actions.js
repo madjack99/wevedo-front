@@ -77,7 +77,7 @@ export const detectCountryByIp = () => {
     // otherwise put empty string which renders UK
     // locations by default
     if (!config.allowedInCountries.includes(detectedCountry)) {
-      detectedCountry = '';
+      detectedCountry = 'United Kingdom';
     }
     dispatch(setDetectedCountry(detectedCountry));
   };
