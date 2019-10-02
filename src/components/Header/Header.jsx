@@ -28,7 +28,7 @@ import {
 
 import './Header.scss';
 
-import { detectCountryByIp } from '../../actions/user-actions';
+import { detectCountryByIp, selectCountry } from '../../actions/user-actions';
 
 import logo from '../../assets/images/symbol.png';
 import defaultAvatar from '../../assets/images/default-avatar.png';
@@ -45,10 +45,12 @@ const Header = ({
   t,
   ipDetectedCountry,
   detectCountryByIp,
+  userSelectedCountry,
+  selectCountry,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
-  console.log(ipDetectedCountry);
+  console.log('Country selected by user: ', userSelectedCountry);
 
   useEffect(() => {
     detectCountryByIp();
@@ -86,6 +88,7 @@ const Header = ({
               user={user}
               t={t}
               ipDetectedCountry={ipDetectedCountry}
+              selectCountry={selectCountry}
             />
             <Nav.Link
               onClick={() => setLocationModalShow(true)}
@@ -116,16 +119,22 @@ const Header = ({
   );
 };
 
-const ChangeCountryModal = () => {
+const ChangeCountryModal = ({ selectCountry }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [selectedCountry, setSelectedCountry] = useState('');
-  console.log(selectedCountry);
 
   const handleSelect = e => {
     setSelectedCountry(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    if (selectedCountry) {
+      selectCountry(selectedCountry);
+    }
+    handleClose();
   };
 
   const { allowedInCountries } = config;
@@ -164,7 +173,7 @@ const ChangeCountryModal = () => {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleClose}>
+          <Button variant="success" onClick={handleSubmit}>
             Choose country
           </Button>
         </Modal.Footer>
@@ -173,7 +182,7 @@ const ChangeCountryModal = () => {
   );
 };
 
-const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
+const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
     <NavDropdown title={ipDetectedCountry} className="d-none d-lg-block">
@@ -236,7 +245,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry }) => {
               View more regions
               <i className="fa fa-arrow-right" />
             </Link>
-            <ChangeCountryModal />
+            <ChangeCountryModal selectCountry={selectCountry} />
           </div>
         </Col>
         <Col
@@ -557,6 +566,7 @@ const mapStateToProps = ({ sessionData, categoryList, userData }) => ({
 
 const mapDispatchToProps = dispatch => ({
   detectCountryByIp: () => dispatch(detectCountryByIp()),
+  selectCountry: country => dispatch(selectCountry(country)),
 });
 
 export default compose(
