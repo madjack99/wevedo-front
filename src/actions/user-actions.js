@@ -82,3 +82,10 @@ export const detectCountryByIp = () => {
     dispatch(setDetectedCountry(detectedCountry));
   };
 };
+
+export const selectCountry = selectedCountry => {
+  return {
+    type: 'SET_COUNTRY_CHOSEN_BY_USER',
+    payload: selectedCountry,
+  };
+};
