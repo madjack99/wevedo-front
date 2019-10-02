@@ -8,6 +8,7 @@ import {
   getLargestCounties,
   getLargestCities,
   getGeoInfo,
+  showIpDetectedOrUserSelectedCountry,
 } from './location-helper';
 
 const isUrl = str => {
@@ -29,4 +30,5 @@ export {
   getLargestCities,
   isUrl,
   getGeoInfo,
+  showIpDetectedOrUserSelectedCountry,
 };

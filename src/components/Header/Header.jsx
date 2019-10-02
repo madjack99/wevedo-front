@@ -24,6 +24,7 @@ import {
   getLargestRegions,
   getLargestCounties,
   getLargestCities,
+  showIpDetectedOrUserSelectedCountry,
 } from '../../helpers';
 
 import './Header.scss';
@@ -51,6 +52,11 @@ const Header = ({
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
   console.log('Country selected by user: ', userSelectedCountry);
+
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
 
   useEffect(() => {
     detectCountryByIp();
@@ -87,7 +93,7 @@ const Header = ({
             <LocationDropdown
               user={user}
               t={t}
-              ipDetectedCountry={ipDetectedCountry}
+              calculatedCountry={calculatedCountry}
               selectCountry={selectCountry}
             />
             <Nav.Link
@@ -182,10 +188,10 @@ const ChangeCountryModal = ({ selectCountry }) => {
   );
 };
 
-const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
+const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
-    <NavDropdown title={ipDetectedCountry} className="d-none d-lg-block">
+    <NavDropdown title={calculatedCountry} className="d-none d-lg-block">
       <Row>
         <div className="active-menu d-none d-lg-block" />
         <Col sm="auto" className="text-left">
@@ -218,7 +224,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
               {/* Show different regions depending on the country detected
               by browser IP and set to store,
               by default show regions in the UK */}
-              {getLargestRegions(ipDetectedCountry)
+              {getLargestRegions(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -229,7 +235,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestRegions(ipDetectedCountry)
+              {getLargestRegions(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -255,7 +261,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCounties(ipDetectedCountry)
+              {getLargestCounties(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -266,7 +272,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCounties(ipDetectedCountry)
+              {getLargestCounties(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -291,7 +297,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCities(ipDetectedCountry)
+              {getLargestCities(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -302,7 +308,7 @@ const LocationDropdown = ({ user, t, ipDetectedCountry, selectCountry }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCities(ipDetectedCountry)
+              {getLargestCities(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem

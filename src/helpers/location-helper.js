@@ -105,3 +105,10 @@ export const getGeoInfo = async () => {
   console.log('Current IP country: ', countryName);
   return countryName;
 };
+
+export const showIpDetectedOrUserSelectedCountry = (
+  ipDetectedCountry,
+  userSelectedCountry,
+) => {
+  return userSelectedCountry || ipDetectedCountry;
+};
