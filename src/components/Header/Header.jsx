@@ -101,12 +101,14 @@ const Header = ({
               className="d-block d-lg-none"
             >
               <span className="font-weight-bold">
-                {ipDetectedCountry} <i className="fa fa-chevron-right ml-2" />
+                {calculatedCountry} <i className="fa fa-chevron-right ml-2" />
               </span>
             </Nav.Link>
             <LocationSubMenu
               show={locationModalShow}
               onHide={() => setLocationModalShow(false)}
+              calculatedCountry={calculatedCountry}
+              selectCountry={selectCountry}
               user={user}
               t={t}
             />
@@ -471,7 +473,14 @@ function ProfileArea({ user }) {
   );
 }
 
-const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
+const LocationSubMenu = ({
+  onHide,
+  user,
+  t,
+  calculatedCountry,
+  selectCountry,
+  ...rest
+}) => (
   <Modal
     {...rest}
     size="lg"
@@ -487,7 +496,7 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
         <Col>
           <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
           <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
-          {getLargestRegions(user && user.appearInCountries).map(name => (
+          {getLargestRegions(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?regionName=${name}`}
@@ -500,8 +509,9 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
             View all regions
             <i className="fa fa-arrow-right ml-3" />
           </Link>
+          <ChangeCountryModal selectCountry={selectCountry} />
           <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
-          {getLargestCounties(user && user.appearInCountries).map(name => (
+          {getLargestCounties(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?county=${name}`}
@@ -515,7 +525,7 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
-          {getLargestCities(user && user.appearInCountries).map(name => (
+          {getLargestCities(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?city=${name}`}
