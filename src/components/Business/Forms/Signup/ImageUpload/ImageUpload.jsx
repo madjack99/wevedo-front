@@ -14,6 +14,8 @@ import imageUpload from '../../../../../assets/images/uploadImg.png';
 
 import { updateUser } from '../../../../../actions/user-actions';
 import { WevedoServiceContext } from '../../../../../contexts';
+import config from '../../../../../config';
+import { limitArray, arrayToObject } from '../../../../../helpers';
 
 const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
   const [photos, setPhotos] = useState([]);
@@ -23,11 +25,23 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
   const wevedoService = useContext(WevedoServiceContext);
 
   const onDrop = acceptedFiles => {
-    setPhotos([...photos, ...acceptedFiles]);
-    setPhotosURL([
-      ...photosURL,
-      ...acceptedFiles.map(acceptedFile => URL.createObjectURL(acceptedFile)),
-    ]);
+    setPhotos(
+      limitArray(
+        [...photos, ...acceptedFiles],
+        config.maximumNumberOfProviderPhotos,
+      ),
+    );
+    setPhotosURL(
+      limitArray(
+        [
+          ...photosURL,
+          ...acceptedFiles.map(acceptedFile =>
+            URL.createObjectURL(acceptedFile),
+          ),
+        ],
+        config.maximumNumberOfProviderPhotos,
+      ),
+    );
   };
 
   const onDeletePhoto = photoIndex => {
@@ -50,15 +64,9 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
 
       setIsLoading(false);
 
-      const photoObject = serverPhotos.reduce(
-        (acc, serverPhoto, index) => ({
-          ...acc,
-          [index]: serverPhoto.secure_url,
-        }),
-        {},
+      const photoObject = arrayToObject(
+        serverPhotos.map(({ secure_url: secureURL }) => secureURL),
       );
-
-      console.log(photoObject);
 
       updateUser()({ providerImages: photoObject });
       nextStep();
@@ -128,41 +136,43 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
   return (
     <Form onSubmit={onSubmit}>
       <FormGroup className="image-upload__form">
-        <Dropzone accept="image/*" onDrop={onDrop}>
-          {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
-            return (
-              <Container {...getRootProps({ isDragAccept, isDragReject })}>
-                <input {...getInputProps()} />
-                <img
-                  className={
-                    photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
-                  }
-                  src={imageUpload}
-                  alt="Upload icon"
-                />
-                <div
-                  className={`d-flex flex-column ${
-                    photos.length > 0 ? 'text-left' : 'text-center'
-                  }`}
-                >
-                  <p
-                    className={`image-upload__title mb-2 ${
-                      photos.length === 0 ? 'mt-4' : 'mt-0'
+        {photos.length < config.maximumNumberOfProviderPhotos && (
+          <Dropzone accept="image/*" onDrop={onDrop}>
+            {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => {
+              return (
+                <Container {...getRootProps({ isDragAccept, isDragReject })}>
+                  <input {...getInputProps()} />
+                  <img
+                    className={
+                      photos.length > 0 ? 'mr-5 image-upload__image_small' : ''
+                    }
+                    src={imageUpload}
+                    alt="Upload icon"
+                  />
+                  <div
+                    className={`d-flex flex-column ${
+                      photos.length > 0 ? 'text-left' : 'text-center'
                     }`}
                   >
-                    <b>{t('imgUpload.uploadPhotos')}</b>{' '}
-                    <span className="text-muted d-none d-md-inline">
-                      {t('imgUpload.dragAndDrop')}
+                    <p
+                      className={`image-upload__title mb-2 ${
+                        photos.length === 0 ? 'mt-4' : 'mt-0'
+                      }`}
+                    >
+                      <b>{t('imgUpload.uploadPhotos')}</b>{' '}
+                      <span className="text-muted d-none d-md-inline">
+                        {t('imgUpload.dragAndDrop')}
+                      </span>
+                    </p>
+                    <span className="text-muted">
+                      {t('imgUpload.addAtLeast')}
                     </span>
-                  </p>
-                  <span className="text-muted">
-                    {t('imgUpload.addAtLeast')}
-                  </span>
-                </div>
-              </Container>
-            );
-          }}
-        </Dropzone>
+                  </div>
+                </Container>
+              );
+            }}
+          </Dropzone>
+        )}
         <PreviewZone className="mt-4" />
       </FormGroup>
       <FormGroup className="text-center text-md-right">
@@ -170,7 +180,11 @@ const BusinessFormsSignupImageUpload = ({ updateUser, t, nextStep }) => {
           className="mt-4"
           type="submit"
           size="lg"
-          disabled={!photos.length || isLoading}
+          disabled={
+            !photos.length ||
+            photos.length > config.maximumNumberOfProviderPhotos ||
+            isLoading
+          }
         >
           {isLoading ? 'Loading...' : t('business-signup.form.nextStepBtn')}
         </Button>

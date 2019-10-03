@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
   getLocation,
   getCountries,
@@ -19,6 +21,17 @@ const isUrl = str => {
   return false;
 };
 
+const limitArray = (array, limit) => _.take(array, limit);
+
+const arrayToObject = array =>
+  array.reduce(
+    (acc, element, index) => ({
+      ...acc,
+      [index]: element,
+    }),
+    {},
+  );
+
 export {
   getLocation,
   getCountries,
@@ -31,4 +44,6 @@ export {
   isUrl,
   getGeoInfo,
   showIpDetectedOrUserSelectedCountry,
+  limitArray,
+  arrayToObject,
 };
