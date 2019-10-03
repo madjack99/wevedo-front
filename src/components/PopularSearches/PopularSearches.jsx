@@ -60,7 +60,6 @@ function PopularSearches({ user, t, ipDetectedCountry, userSelectedCountry }) {
     userSelectedCountry,
   );
   const countries = getCountries(calculatedCountry);
-  console.log(countries);
 
   const randomLinks = useMemo(() => getRandomLinks(user, countries), [
     user,

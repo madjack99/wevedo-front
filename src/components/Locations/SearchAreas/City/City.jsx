@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -14,15 +14,31 @@ import {
   getRegionNames,
   getCounties,
   getCities,
+  showIpDetectedOrUserSelectedCountry,
 } from '../../../../helpers';
 
-function LocationsSearchAreasCity({ user }) {
+function LocationsSearchAreasCity({
+  user,
+  ipDetectedCountry,
+  userSelectedCountry,
+}) {
   const [stateCountry, setStateCountry] = useState('England');
 
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+
+  useEffect(() => {
+    if (calculatedCountry && calculatedCountry !== 'United Kingdom') {
+      setStateCountry(calculatedCountry);
+    } else {
+      setStateCountry('England');
+    }
+  }, [calculatedCountry]);
+
   const displayCityInCols = selectedCountry => {
-    const regionNames = getRegionNames(user && user.appearInCountries)(
-      selectedCountry,
-    );
+    const regionNames = getRegionNames(selectedCountry)(selectedCountry);
     let cities = [];
     regionNames.forEach(regionName =>
       getCounties(user && user.appearInCountries)(
@@ -79,7 +95,7 @@ function LocationsSearchAreasCity({ user }) {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {getCountries(user && user.appearInCountries).map(country => (
+          {getCountries(calculatedCountry).map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${

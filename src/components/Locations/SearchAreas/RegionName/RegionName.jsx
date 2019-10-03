@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -8,15 +8,34 @@ import { Row, Container, Col, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../CityCountyRegionStyles/CityCountyRegionStyles.scss';
 
-import { getCountries, getRegionNames } from '../../../../helpers';
+import {
+  getCountries,
+  getRegionNames,
+  showIpDetectedOrUserSelectedCountry,
+} from '../../../../helpers';
 
-function LocationsSearchAreasRegionName({ user }) {
+function LocationsSearchAreasRegionName({
+  user,
+  ipDetectedCountry,
+  userSelectedCountry,
+}) {
   const [stateCountry, setStateCountry] = useState('England');
 
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+
+  useEffect(() => {
+    if (calculatedCountry && calculatedCountry !== 'United Kingdom') {
+      setStateCountry(calculatedCountry);
+    } else {
+      setStateCountry('England');
+    }
+  }, [calculatedCountry]);
+
   const displayRegionNameInCols = selectedCountry => {
-    const regionNames = getRegionNames(user && user.appearInCountries)(
-      selectedCountry,
-    );
+    const regionNames = getRegionNames(selectedCountry)(selectedCountry);
     const firstCol = Math.ceil(regionNames.length / 3);
     const secondCol = Math.ceil((regionNames.length / 3) * 2);
     regionNames.sort();
@@ -57,7 +76,7 @@ function LocationsSearchAreasRegionName({ user }) {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {getCountries(user && user.appearInCountries).map(country => (
+          {getCountries(calculatedCountry).map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${
