@@ -22,10 +22,15 @@
 }
 
 .selected-country {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 input[type='radio'] {
   transform: scale(1.5);
   margin: 10px;
+}
+
+.sub-country-modal {
+  font-size: 25px;
+  margin-bottom: 20px;
 }

@@ -509,7 +509,9 @@ const LocationSubMenu = ({
             View all regions
             <i className="fa fa-arrow-right ml-3" />
           </Link>
-          <ChangeCountryModal selectCountry={selectCountry} />
+          <div className="sub-country-modal">
+            <ChangeCountryModal selectCountry={selectCountry} />
+          </div>
           <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
           {getLargestCounties(calculatedCountry).map(name => (
             <LinkContainer
