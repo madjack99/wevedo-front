@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
-import Cookies from 'js-cookie';
 
 import {
   Nav,
@@ -15,12 +14,10 @@ import {
   Col,
   Modal,
   Badge,
-  Form,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import {
-  getGeoInfo,
   getLargestRegions,
   getLargestCounties,
   getLargestCities,
@@ -51,7 +48,6 @@ const Header = ({
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
-  console.log('Country selected by user: ', userSelectedCountry);
 
   const calculatedCountry = showIpDetectedOrUserSelectedCountry(
     ipDetectedCountry,
@@ -60,7 +56,7 @@ const Header = ({
 
   useEffect(() => {
     detectCountryByIp();
-  }, []);
+  }, [detectCountryByIp]);
 
   return (
     <React.Fragment>

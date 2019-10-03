@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
-import Cookies from 'js-cookie';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
