@@ -275,10 +275,9 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.regionName &&
-                  getCounties(values.country)(
-                    values.country,
-                    values.regionName,
-                  ).map(county => <option key={uniqid()}>{county}</option>)}
+                  getCounties(values.country, values.regionName).map(county => (
+                    <option key={uniqid()}>{county}</option>
+                  ))}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.county}

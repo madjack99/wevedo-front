@@ -11,6 +11,8 @@ import '../Forms.scss';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
+import config from '../../../../../../config';
+
 import {
   getCountries,
   getRegionNames,
@@ -23,12 +25,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
   updateUser,
   t,
 }) => {
-  const allowSpecificCountries = country => {
-    if (getCountries(user && user.appearInCountries).includes(country)) {
-      return country;
-    }
-    return '';
-  };
+  const { allowedInCountries } = config;
 
   return (
     <Formik
@@ -40,7 +37,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
         email: user.email || '',
         phoneNumber: user.phoneNumber || '',
         address: user.address || '',
-        country: allowSpecificCountries(user.country),
+        country: user.country || '',
         regionName: user.regionName || '',
         county: user.county || '',
         city: user.city || '',
@@ -167,13 +164,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.country && !errors.country}
                         >
                           <option value="" disabled>
-                            United Kingdom
+                            {values.country}
                           </option>
-                          {getCountries(user && user.appearInCountries).map(
-                            country => (
-                              <option key={uniqid()}>{country}</option>
-                            ),
-                          )}
+                          {getCountries(allowedInCountries).map(country => (
+                            <option key={uniqid()}>{country}</option>
+                          ))}
                         </Form.Control>
                         {values.country === '' ? (
                           <p className="errorMessage">
@@ -208,9 +203,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         >
                           <option value="" disabled />
                           {values.country &&
-                            getRegionNames(user && user.appearInCountries)(
-                              values.country,
-                            ).map(regionName => (
+                            getRegionNames(values.country).map(regionName => (
                               <option key={uniqid()}>{regionName}</option>
                             ))}
                         </Form.Control>
