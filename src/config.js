@@ -16,7 +16,7 @@ export default {
     cloud: 'wevedo',
   },
   timeForServerRequest: 2500,
-  allowedInCountries: ['GB'],
+  allowedInCountries: ['United Kingdom', 'Malaysia'],
   promotedSuppliers: [
     '5badd83a0f58a3001009b5b8',
     '5bcd980cb111ee00167fa3b9',

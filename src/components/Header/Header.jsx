@@ -17,25 +17,46 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
-
-import './Header.scss';
-
-import logo from '../../assets/images/symbol.png';
-import defaultAvatar from '../../assets/images/default-avatar.png';
-
 import {
   getLargestRegions,
   getLargestCounties,
   getLargestCities,
+  showIpDetectedOrUserSelectedCountry,
 } from '../../helpers';
+
+import './Header.scss';
+
+import { detectCountryByIp, selectCountry } from '../../actions/user-actions';
+
+import logo from '../../assets/images/symbol.png';
+import defaultAvatar from '../../assets/images/default-avatar.png';
+
 import StickyNotification from '../StickyNotification';
 
 import { WevedoServiceContext } from '../../contexts';
 import config from '../../config';
 
-const Header = ({ isLoggedIn, categories, user, t }) => {
+const Header = ({
+  isLoggedIn,
+  categories,
+  user,
+  t,
+  ipDetectedCountry,
+  detectCountryByIp,
+  userSelectedCountry,
+  selectCountry,
+}) => {
   const [modalShow, setModalShow] = useState(false);
   const [locationModalShow, setLocationModalShow] = useState(false);
+
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+
+  useEffect(() => {
+    detectCountryByIp();
+  }, [detectCountryByIp]);
 
   return (
     <React.Fragment>
@@ -55,7 +76,8 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               className="d-block d-lg-none"
             >
               <span className="font-weight-bold">
-                Suppliers <i className="fa fa-chevron-right ml-2" />
+                {t('header.suppliers')}{' '}
+                <i className="fa fa-chevron-right ml-2" />
               </span>
             </Nav.Link>
             <SubMenu
@@ -65,18 +87,25 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
               t={t}
             />
 
-            <LocationDropdown user={user} t={t} />
+            <LocationDropdown
+              user={user}
+              t={t}
+              calculatedCountry={calculatedCountry}
+              selectCountry={selectCountry}
+            />
             <Nav.Link
               onClick={() => setLocationModalShow(true)}
               className="d-block d-lg-none"
             >
               <span className="font-weight-bold">
-                Locations <i className="fa fa-chevron-right ml-2" />
+                {calculatedCountry} <i className="fa fa-chevron-right ml-2" />
               </span>
             </Nav.Link>
             <LocationSubMenu
               show={locationModalShow}
               onHide={() => setLocationModalShow(false)}
+              calculatedCountry={calculatedCountry}
+              selectCountry={selectCountry}
               user={user}
               t={t}
             />
@@ -95,10 +124,73 @@ const Header = ({ isLoggedIn, categories, user, t }) => {
   );
 };
 
-const LocationDropdown = ({ user, t }) => {
+const ChangeCountryModal = ({ selectCountry, t }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [selectedCountry, setSelectedCountry] = useState('');
+
+  const handleSelect = e => {
+    setSelectedCountry(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    if (selectedCountry) {
+      selectCountry(selectedCountry);
+    }
+    handleClose();
+  };
+
+  const { allowedInCountries } = config;
+  return (
+    <React.Fragment>
+      <div
+        className="view-all-btn mr-5 text-danger country-modal"
+        onClick={handleShow}
+      >
+        {t('header.changeRegion')} <i className="fa fa-arrow-right" />
+      </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{t('header.chooseCountry')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {allowedInCountries.map(country => {
+            return (
+              <div key={country} className="selected-country">
+                <label htmlFor={`${country}`}>
+                  <input
+                    type="radio"
+                    value={country}
+                    name="selectCountry"
+                    onClick={handleSelect}
+                    id={country}
+                  />
+                  {country}
+                </label>
+              </div>
+            );
+          })}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            {t('header.close')}
+          </Button>
+          <Button variant="success" onClick={handleSubmit}>
+            {t('header.chooseCountry')}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </React.Fragment>
+  );
+};
+
+const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
   const [currentlyOver, setCurrentlyOver] = useState('region');
   return (
-    <NavDropdown title="Locations" className="d-none d-lg-block">
+    <NavDropdown title={calculatedCountry} className="d-none d-lg-block">
       <Row>
         <div className="active-menu d-none d-lg-block" />
         <Col sm="auto" className="text-left">
@@ -106,19 +198,19 @@ const LocationDropdown = ({ user, t }) => {
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('region')}
           >
-            Search by Region
+            {t('header.searchRegion')}
           </NavDropdown.Item>
           <NavDropdown.Item
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('county')}
           >
-            Search by County
+            {t('header.searchCounty')}
           </NavDropdown.Item>
           <NavDropdown.Item
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('town')}
           >
-            Search by Town
+            {t('header.searchTown')}
           </NavDropdown.Item>
         </Col>
         <Col
@@ -128,7 +220,10 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestRegions(user && user.appearInCountries)
+              {/* Show different regions depending on the country detected
+              by browser IP and set to store,
+              by default show regions in the UK */}
+              {getLargestRegions(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -139,7 +234,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestRegions(user && user.appearInCountries)
+              {getLargestRegions(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -150,11 +245,12 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
           </Row>
-          <div className="mt-3">
+          <div className="mt-3 region-search-basement">
             <Link to="/locations/regionName" className="view-all-btn">
-              View more regions
+              {t('header.viewMoreRegions')}
               <i className="fa fa-arrow-right" />
             </Link>
+            <ChangeCountryModal selectCountry={selectCountry} t={t} />
           </div>
         </Col>
         <Col
@@ -164,7 +260,7 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCounties(user && user.appearInCountries)
+              {getLargestCounties(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -175,7 +271,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCounties(user && user.appearInCountries)
+              {getLargestCounties(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -188,7 +284,7 @@ const LocationDropdown = ({ user, t }) => {
           </Row>
           <div className="mt-3">
             <Link to="/locations/county" className="view-all-btn">
-              View more counties
+              {t('header.viewMoreCounties')}
               <i className="fa fa-arrow-right" />
             </Link>
           </div>
@@ -200,7 +296,7 @@ const LocationDropdown = ({ user, t }) => {
         >
           <Row>
             <Col className="border-right">
-              {getLargestCities(user && user.appearInCountries)
+              {getLargestCities(calculatedCountry)
                 .slice(0, 4)
                 .map(region => (
                   <LocationDropdownItem
@@ -211,7 +307,7 @@ const LocationDropdown = ({ user, t }) => {
                 ))}
             </Col>
             <Col>
-              {getLargestCities(user && user.appearInCountries)
+              {getLargestCities(calculatedCountry)
                 .slice(4)
                 .map(region => (
                   <LocationDropdownItem
@@ -224,7 +320,7 @@ const LocationDropdown = ({ user, t }) => {
           </Row>
           <div className="mt-3">
             <Link to="/locations/city" className="view-all-btn">
-              View more cities
+              {t('header.viewMoreCities')}
               <i className="fa fa-arrow-right" />
             </Link>
           </div>
@@ -374,7 +470,14 @@ function ProfileArea({ user }) {
   );
 }
 
-const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
+const LocationSubMenu = ({
+  onHide,
+  user,
+  t,
+  calculatedCountry,
+  selectCountry,
+  ...rest
+}) => (
   <Modal
     {...rest}
     size="lg"
@@ -388,9 +491,13 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
           <i className="fas fa-arrow-left fa-2x" />
         </Col>
         <Col>
-          <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
-          {getLargestRegions(user && user.appearInCountries).map(name => (
+          <h4 className="text-uppercase text-proxima-bold mb-5">
+            {t('header.locations')}
+          </h4>
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.regions')}
+          </h5>
+          {getLargestRegions(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?regionName=${name}`}
@@ -400,11 +507,16 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
             </LinkContainer>
           ))}
           <Link to="/locations/regionName" className="view-all-btn">
-            View all regions
+            {t('header.viewMoreRegions')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
-          {getLargestCounties(user && user.appearInCountries).map(name => (
+          <div className="sub-country-modal">
+            <ChangeCountryModal selectCountry={selectCountry} t={t} />
+          </div>
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.counties')}
+          </h5>
+          {getLargestCounties(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?county=${name}`}
@@ -414,11 +526,13 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
             </LinkContainer>
           ))}
           <Link to="/locations/county" className="view-all-btn">
-            View all counties
+            {t('header.viewMoreCounties')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
-          {getLargestCities(user && user.appearInCountries).map(name => (
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.cities')}
+          </h5>
+          {getLargestCities(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
               to={`/suppliers/Venue?city=${name}`}
@@ -428,7 +542,7 @@ const LocationSubMenu = ({ onHide, user, t, ...rest }) => (
             </LinkContainer>
           ))}
           <Link to="/locations/city" className="view-all-btn">
-            View all cities
+            {t('header.viewMoreCities')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
         </Col>
@@ -451,7 +565,9 @@ const SubMenu = ({ categories, onHide, t, ...rest }) => (
           <i className="fas fa-arrow-left fa-2x" />
         </Col>
         <Col>
-          <h4 className="text-uppercase text-proxima-bold mb-5">Suppliers</h4>
+          <h4 className="text-uppercase text-proxima-bold mb-5">
+            {t('header.suppliers')}
+          </h4>
           {categories.map(({ _id, name }) => (
             <LinkContainer to={`/suppliers/${name}`} onClick={onHide} key={_id}>
               <p>{name}</p>
@@ -473,7 +589,15 @@ const mapStateToProps = ({ sessionData, categoryList, userData }) => ({
   ...userData,
 });
 
+const mapDispatchToProps = dispatch => ({
+  detectCountryByIp: () => dispatch(detectCountryByIp()),
+  selectCountry: country => dispatch(selectCountry(country)),
+});
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   withTranslation('common'),
 )(Header);

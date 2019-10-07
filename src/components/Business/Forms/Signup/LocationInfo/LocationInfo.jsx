@@ -10,6 +10,8 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
+import config from '../../../../../config';
+
 import {
   getCountries,
   getRegionNames,
@@ -35,6 +37,8 @@ const BusinessFormsSignupLocationInfo = ({
   nextStep,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+
+  const { allowedInCountries } = config;
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -212,7 +216,7 @@ const BusinessFormsSignupLocationInfo = ({
                 autoComplete="new-country"
               >
                 <option value="" disabled />
-                {getCountries(user && user.appearInCountries).map(country => (
+                {getCountries(allowedInCountries).map(country => (
                   <option key={uniqid()}>{country}</option>
                 ))}
               </Form.Control>
@@ -223,7 +227,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formRegionName">
               <Form.Label className="form__label mb-0">
-                Region Name<span className="form__asterisks">*</span>
+                {t('business-signup.form.regionPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -242,9 +247,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.country &&
-                  getRegionNames(user && user.appearInCountries)(
-                    values.country,
-                  ).map(regionName => (
+                  getRegionNames(values.country).map(regionName => (
                     <option key={uniqid()}>{regionName}</option>
                   ))}
               </Form.Control>
@@ -255,7 +258,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formCounty">
               <Form.Label className="form__label mb-0">
-                County<span className="form__asterisks">*</span>
+                {t('business-signup.form.countyPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -273,10 +277,9 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.regionName &&
-                  getCounties(user && user.appearInCountries)(
-                    values.country,
-                    values.regionName,
-                  ).map(county => <option key={uniqid()}>{county}</option>)}
+                  getCounties(values.country, values.regionName).map(county => (
+                    <option key={uniqid()}>{county}</option>
+                  ))}
               </Form.Control>
               <Form.Control.Feedback className="form__feedback" type="invalid">
                 {errors.county}
@@ -285,7 +288,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formCity">
               <Form.Label className="form__label mb-0">
-                City<span className="form__asterisks">*</span>
+                {t('business-signup.form.cityPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -300,7 +304,7 @@ const BusinessFormsSignupLocationInfo = ({
               >
                 <option value="" disabled />
                 {values.county &&
-                  getCities(user && user.appearInCountries)(
+                  getCities(
                     values.country,
                     values.regionName,
                     values.county,

@@ -11,3 +11,26 @@
   top: 0;
   right: 0;
 }
+
+.region-search-basement {
+  display: flex;
+  justify-content: space-between;
+
+  .country-modal {
+    cursor: pointer;
+  }
+}
+
+.selected-country {
+  font-size: 1.2rem;
+}
+
+input[type='radio'] {
+  transform: scale(1.5);
+  margin: 10px;
+}
+
+.sub-country-modal {
+  font-size: 25px;
+  margin-bottom: 20px;
+}

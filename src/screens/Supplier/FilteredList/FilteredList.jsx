@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import queryString from 'query-string';
+import { connect } from 'react-redux';
 
 import { Row, Container, Col } from 'react-bootstrap';
 import Scroll from 'react-scroll';
@@ -11,25 +12,42 @@ import backgroundImage from '../../../assets/images/venues-bg.png';
 
 import { WevedoServiceContext } from '../../../contexts';
 import config from '../../../config';
+import { showIpDetectedOrUserSelectedCountry } from '../../../helpers';
 
 import ScreensLayoutMain from '../../Layouts/Main';
 import SearchPanel from '../../../components/Search/Panel';
 import SearchPanelMobile from '../../../components/Search/Panel/Mobile';
 import FilterPanel from '../../../components/Filter/Panel';
 import SupplierList from '../../../components/Supplier/List';
+// import { connect } from 'net';
 
-const ScreensSupplierFilteredList = ({ history, location, match }) => {
+const ScreensSupplierFilteredList = ({
+  history,
+  location,
+  match,
+  ipDetectedCountry,
+  userSelectedCountry,
+}) => {
   const [suppliers, setSuppliers] = useState([]);
   const [numberOfSuppliers, setNumberOfSuppliers] = useState(0);
   const [filterOptions, setFilterOptions] = useState({});
   const supplierListContainer = useRef(null);
 
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+
   // It's an object: {city/regionName/county: 'London'} or ''
   const supplierLocationQuery = queryString.parse(location.search) || '';
 
   const supplierLocationQueryString = JSON.stringify(
-    queryString.parse(location.search) || '',
+    Object.assign({}, queryString.parse(location.search), {
+      country: calculatedCountry,
+    }),
   );
+
+  console.log(supplierLocationQueryString);
 
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.category;
@@ -137,4 +155,6 @@ const ScreensSupplierFilteredList = ({ history, location, match }) => {
   );
 };
 
-export default ScreensSupplierFilteredList;
+const mapStateToProps = ({ userData }) => userData;
+
+export default connect(mapStateToProps)(ScreensSupplierFilteredList);

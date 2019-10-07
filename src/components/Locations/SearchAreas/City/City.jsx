@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -14,28 +14,37 @@ import {
   getRegionNames,
   getCounties,
   getCities,
+  showIpDetectedOrUserSelectedCountry,
 } from '../../../../helpers';
 
-function LocationsSearchAreasCity({ user }) {
+function LocationsSearchAreasCity({
+  t,
+  ipDetectedCountry,
+  userSelectedCountry,
+}) {
   const [stateCountry, setStateCountry] = useState('England');
 
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+
+  useEffect(() => {
+    if (calculatedCountry && calculatedCountry !== 'United Kingdom') {
+      setStateCountry(calculatedCountry);
+    } else {
+      setStateCountry('England');
+    }
+  }, [calculatedCountry]);
+
   const displayCityInCols = selectedCountry => {
-    const regionNames = getRegionNames(user && user.appearInCountries)(
-      selectedCountry,
-    );
+    const regionNames = getRegionNames(selectedCountry);
     let cities = [];
     regionNames.forEach(regionName =>
-      getCounties(user && user.appearInCountries)(
-        selectedCountry,
-        regionName,
-      ).forEach(
+      getCounties(selectedCountry, regionName).forEach(
         county =>
           (cities = cities.concat(
-            getCities(user && user.appearInCountries)(
-              selectedCountry,
-              regionName,
-              county,
-            ),
+            getCities(selectedCountry, regionName, county),
           )),
       ),
     );
@@ -79,7 +88,7 @@ function LocationsSearchAreasCity({ user }) {
     <div>
       <Container className="pb-5 pt-3">
         <Nav className="flex-column flex-md-row">
-          {getCountries(user && user.appearInCountries).map(country => (
+          {getCountries(calculatedCountry).map(country => (
             <Nav.Item
               key={uniqid()}
               className={`navItem mb-1 ${
@@ -96,7 +105,7 @@ function LocationsSearchAreasCity({ user }) {
           ))}
         </Nav>
         <div className="font-weight-bold mt-3 mb-3 text-uppercase">
-          <span className="areaSelect">Choose city</span>
+          <span className="areaSelect">{t('header.chooseCity')}</span>
         </div>
         {displayCityInCols(stateCountry)}
       </Container>

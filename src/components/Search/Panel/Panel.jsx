@@ -7,7 +7,11 @@ import uniqid from 'uniqid';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-import { getCountries, getRegionNames } from '../../../helpers';
+import {
+  getCountries,
+  getRegionNames,
+  showIpDetectedOrUserSelectedCountry,
+} from '../../../helpers';
 
 const SearchPanel = ({
   title,
@@ -16,14 +20,18 @@ const SearchPanel = ({
   t,
   history,
   supplierLocationQuery,
+  ipDetectedCountry,
+  userSelectedCountry,
   onSearch = () => {},
 }) => {
-  const countries = getCountries(user && user.appearInCountries);
+  const calculatedCountry = showIpDetectedOrUserSelectedCountry(
+    ipDetectedCountry,
+    userSelectedCountry,
+  );
+  const countries = getCountries(calculatedCountry);
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
-      country,
-    );
+    const countryRegionNames = getRegionNames(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 
@@ -58,7 +66,7 @@ const SearchPanel = ({
       }
     >
       <Col sm={12}>
-        {title ? <h1>Find your best wedding supplier by location</h1> : null}
+        {title ? <h1>{t('home.findForm.title')}</h1> : null}
         <Form onSubmit={handleSubmit}>
           <Form.Row>
             <Col className="boxed-form">
@@ -70,7 +78,7 @@ const SearchPanel = ({
                     value={supplierCategory}
                   >
                     <option value="default" disabled>
-                      Category
+                      {t('home.findForm.category')}
                     </option>
                     {categories.map(({ _id, name }) => (
                       <option key={_id} style={{ color: 'black' }}>
@@ -89,7 +97,7 @@ const SearchPanel = ({
                   >
                     <option value={supplierLocation}>{supplierLocation}</option>
                     {supplierLocation !== 'All' && (
-                      <option value="All">All</option>
+                      <option value="All">{t('home.findForm.all')}</option>
                     )}
                     {allRegionNames.map(regionName => (
                       <option key={uniqid()}>{regionName}</option>
@@ -110,7 +118,10 @@ const SearchPanel = ({
   );
 };
 
-const mapStateToProps = ({ categoryList }) => categoryList;
+const mapStateToProps = ({ categoryList, userData }) => ({
+  ...categoryList,
+  ...userData,
+});
 
 export default compose(
   connect(mapStateToProps),

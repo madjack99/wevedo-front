@@ -45,7 +45,8 @@
       "category": "Category",
       "options": "...",
       "supplierTitlePlaceholder": "Supplier Title",
-      "searchBtn": "Search"
+      "searchBtn": "Search",
+      "all": "All"
     }
   },
   "weddingTools": {
@@ -134,9 +135,11 @@
       "numberPlaceholder": "Business phone number",
       "postcodePlaceholder": "Your postcode",
       "addressPlaceholder": "Business address",
-      "cityPlaceholder": "Town/City",
       "countryPlaceholder": "Country",
-      "nextStepBtn": "Next step"
+      "nextStepBtn": "Next step",
+      "regionPlaceholder": " Region Name",
+      "countyPlaceholder": "County",
+      "cityPlaceholder": "City"
     }
   },
   "footer": {
@@ -149,11 +152,28 @@
   },
   "header": {
     "venues": "Venues",
+    "suppliers": "Suppliers",
     "viewAllSuppliers": "View all suppliers",
     "login": "Login",
     "signup": "Signup",
     "businessLogin": "Business Login",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "changeRegion": "Change region",
+    "chooseCountry": "Choose a country",
+    "chooseCity": "Choose city",
+    "chooseCounty": "Choose county",
+    "chooseRegion": "Choose region",
+    "close": "Close",
+    "searchRegion": "Search by Region",
+    "searchCounty": "Search by County",
+    "searchTown": "Search by Town",
+    "viewMoreRegions": "View more regions",
+    "viewMoreCounties": "View more counties",
+    "viewMoreCities": "View more cities",
+    "locations": "Locations",
+    "regions": "Regions",
+    "counties": "Counties",
+    "cities": "Cities"
   },
 
   "signAndLogForm": {
@@ -169,7 +189,11 @@
     "noAccount": "Don't have an account?",
     "or": "OR",
     "alreadyHaveAccount": "Already have an account?",
-    "businessAccount": "Business account?"
+    "businessAccount": "Business account?",
+    "serviceName": "Service Name",
+    "mobileNumber": "Mobile Number",
+    "address": "Address",
+    "chooseCountry": "Choose a country from the list"
   },
   "businessAndUserLogin": {
     "jumbotron": {

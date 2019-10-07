@@ -11,6 +11,8 @@ import '../Forms.scss';
 
 import contactDetailsSchema from './contactDetailsSchema';
 
+import config from '../../../../../../config';
+
 import {
   getCountries,
   getRegionNames,
@@ -23,12 +25,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
   updateUser,
   t,
 }) => {
-  const allowSpecificCountries = country => {
-    if (getCountries(user && user.appearInCountries).includes(country)) {
-      return country;
-    }
-    return '';
-  };
+  const { allowedInCountries } = config;
 
   return (
     <Formik
@@ -40,7 +37,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
         email: user.email || '',
         phoneNumber: user.phoneNumber || '',
         address: user.address || '',
-        country: allowSpecificCountries(user.country),
+        country: user.country || '',
         regionName: user.regionName || '',
         county: user.county || '',
         city: user.city || '',
@@ -57,7 +54,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                   <Row className="p-3">
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Service Name<span className="form__asterisks">*</span>
+                        {t('signAndLogForm.serviceName')}
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         className=" form__control__account "
@@ -95,7 +93,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Email or phone number including country code
+                        {t('signAndLogForm.emailAndPhoneNumberLabel')}
                         <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
@@ -118,7 +116,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Mobile Number<span className="form__asterisks">*</span>
+                        {t('signAndLogForm.mobileNumber')}
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         className=" form__control__account "
@@ -139,7 +138,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                   </Row>
                   <Col className="mb-4">
                     <p className="text-muted">
-                      Address<span className="form__asterisks">*</span>
+                      {t('signAndLogForm.address')}
+                      <span className="form__asterisks">*</span>
                     </p>
                     <Row className="mb-sm-3">
                       <Col sm={4} className="mb-2">
@@ -167,17 +167,15 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           isValid={values.country && !errors.country}
                         >
                           <option value="" disabled>
-                            United Kingdom
+                            {values.country}
                           </option>
-                          {getCountries(user && user.appearInCountries).map(
-                            country => (
-                              <option key={uniqid()}>{country}</option>
-                            ),
-                          )}
+                          {getCountries(allowedInCountries).map(country => (
+                            <option key={uniqid()}>{country}</option>
+                          ))}
                         </Form.Control>
                         {values.country === '' ? (
                           <p className="errorMessage">
-                            Choose a country from the list
+                            {t('signAndLogForm.chooseCountry')}
                           </p>
                         ) : null}
                         {errors.country && (
@@ -208,9 +206,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         >
                           <option value="" disabled />
                           {values.country &&
-                            getRegionNames(user && user.appearInCountries)(
-                              values.country,
-                            ).map(regionName => (
+                            getRegionNames(values.country).map(regionName => (
                               <option key={uniqid()}>{regionName}</option>
                             ))}
                         </Form.Control>
@@ -243,12 +239,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.regionName &&
-                            getCounties(user && user.appearInCountries)(
-                              values.country,
-                              values.regionName,
-                            ).map(county => (
-                              <option key={uniqid()}>{county}</option>
-                            ))}
+                            getCounties(values.country, values.regionName).map(
+                              county => (
+                                <option key={uniqid()}>{county}</option>
+                              ),
+                            )}
                         </Form.Control>
                         {errors.county && (
                           <p className="errorMessage">{errors.county}</p>
@@ -271,7 +266,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.county &&
-                            getCities(user && user.appearInCountries)(
+                            getCities(
                               values.country,
                               values.regionName,
                               values.county,

@@ -1,4 +1,6 @@
 import * as actionTypes from './types';
+import { getGeoInfo } from '../helpers';
+import config from '../config';
 
 const userRequested = () => ({
   type: actionTypes.FETCH_USER_REQUEST,
@@ -61,3 +63,29 @@ export const updateUser = dispatch => update => async body => {
 export const removeUser = () => ({
   type: actionTypes.REMOVE_USER,
 });
+
+const setDetectedCountry = detectedCountry => ({
+  type: actionTypes.SET_DETECTED_COUNTRY,
+  payload: detectedCountry,
+});
+
+export const detectCountryByIp = () => {
+  return async dispatch => {
+    let detectedCountry = await getGeoInfo();
+    // Put country into store only if this country
+    // is included into the list of allowed countries in config,
+    // otherwise put empty string which renders UK
+    // locations by default
+    if (!config.allowedInCountries.includes(detectedCountry)) {
+      detectedCountry = 'United Kingdom';
+    }
+    dispatch(setDetectedCountry(detectedCountry));
+  };
+};
+
+export const selectCountry = selectedCountry => {
+  return {
+    type: 'SET_COUNTRY_SELECTED_BY_USER',
+    payload: selectedCountry,
+  };
+};

@@ -9,6 +9,8 @@ import {
   getLargestRegions,
   getLargestCounties,
   getLargestCities,
+  getGeoInfo,
+  showIpDetectedOrUserSelectedCountry,
 } from './location-helper';
 
 const isUrl = str => {
@@ -40,6 +42,8 @@ export {
   getLargestCounties,
   getLargestCities,
   isUrl,
+  getGeoInfo,
+  showIpDetectedOrUserSelectedCountry,
   limitArray,
   arrayToObject,
 };
