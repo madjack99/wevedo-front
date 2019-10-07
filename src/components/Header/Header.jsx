@@ -76,7 +76,8 @@ const Header = ({
               className="d-block d-lg-none"
             >
               <span className="font-weight-bold">
-                Suppliers <i className="fa fa-chevron-right ml-2" />
+                {t('header.suppliers')}{' '}
+                <i className="fa fa-chevron-right ml-2" />
               </span>
             </Nav.Link>
             <SubMenu
@@ -123,7 +124,7 @@ const Header = ({
   );
 };
 
-const ChangeCountryModal = ({ selectCountry }) => {
+const ChangeCountryModal = ({ selectCountry, t }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -148,12 +149,12 @@ const ChangeCountryModal = ({ selectCountry }) => {
         className="view-all-btn mr-5 text-danger country-modal"
         onClick={handleShow}
       >
-        Change region <i className="fa fa-arrow-right" />
+        {t('header.changeRegion')} <i className="fa fa-arrow-right" />
       </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Choose a country</Modal.Title>
+          <Modal.Title>{t('header.chooseCountry')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {allowedInCountries.map(country => {
@@ -175,10 +176,10 @@ const ChangeCountryModal = ({ selectCountry }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
-            Close
+            {t('header.close')}
           </Button>
           <Button variant="success" onClick={handleSubmit}>
-            Choose country
+            {t('header.chooseCountry')}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -197,19 +198,19 @@ const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('region')}
           >
-            Search by Region
+            {t('header.searchRegion')}
           </NavDropdown.Item>
           <NavDropdown.Item
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('county')}
           >
-            Search by County
+            {t('header.searchCounty')}
           </NavDropdown.Item>
           <NavDropdown.Item
             className="search-label mb-3"
             onMouseOver={e => setCurrentlyOver('town')}
           >
-            Search by Town
+            {t('header.searchTown')}
           </NavDropdown.Item>
         </Col>
         <Col
@@ -246,10 +247,10 @@ const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
           </Row>
           <div className="mt-3 region-search-basement">
             <Link to="/locations/regionName" className="view-all-btn">
-              View more regions
+              {t('header.viewMoreRegions')}
               <i className="fa fa-arrow-right" />
             </Link>
-            <ChangeCountryModal selectCountry={selectCountry} />
+            <ChangeCountryModal selectCountry={selectCountry} t={t} />
           </div>
         </Col>
         <Col
@@ -283,7 +284,7 @@ const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
           </Row>
           <div className="mt-3">
             <Link to="/locations/county" className="view-all-btn">
-              View more counties
+              {t('header.viewMoreCounties')}
               <i className="fa fa-arrow-right" />
             </Link>
           </div>
@@ -319,7 +320,7 @@ const LocationDropdown = ({ user, t, calculatedCountry, selectCountry }) => {
           </Row>
           <div className="mt-3">
             <Link to="/locations/city" className="view-all-btn">
-              View more cities
+              {t('header.viewMoreCities')}
               <i className="fa fa-arrow-right" />
             </Link>
           </div>
@@ -490,8 +491,12 @@ const LocationSubMenu = ({
           <i className="fas fa-arrow-left fa-2x" />
         </Col>
         <Col>
-          <h4 className="text-uppercase text-proxima-bold mb-5">Locations</h4>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Regions</h5>
+          <h4 className="text-uppercase text-proxima-bold mb-5">
+            {t('header.locations')}
+          </h4>
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.regions')}
+          </h5>
           {getLargestRegions(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
@@ -502,13 +507,15 @@ const LocationSubMenu = ({
             </LinkContainer>
           ))}
           <Link to="/locations/regionName" className="view-all-btn">
-            View all regions
+            {t('header.viewMoreRegions')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
           <div className="sub-country-modal">
-            <ChangeCountryModal selectCountry={selectCountry} />
+            <ChangeCountryModal selectCountry={selectCountry} t={t} />
           </div>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Counties</h5>
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.counties')}
+          </h5>
           {getLargestCounties(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
@@ -519,10 +526,12 @@ const LocationSubMenu = ({
             </LinkContainer>
           ))}
           <Link to="/locations/county" className="view-all-btn">
-            View all counties
+            {t('header.viewMoreCounties')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
-          <h5 className="text-uppercase text-proxima-bold mb-3">Cities</h5>
+          <h5 className="text-uppercase text-proxima-bold mb-3">
+            {t('header.cities')}
+          </h5>
           {getLargestCities(calculatedCountry).map(name => (
             <LinkContainer
               key={uniqid()}
@@ -533,7 +542,7 @@ const LocationSubMenu = ({
             </LinkContainer>
           ))}
           <Link to="/locations/city" className="view-all-btn">
-            View all cities
+            {t('header.viewMoreCities')}
             <i className="fa fa-arrow-right ml-3" />
           </Link>
         </Col>
@@ -556,7 +565,9 @@ const SubMenu = ({ categories, onHide, t, ...rest }) => (
           <i className="fas fa-arrow-left fa-2x" />
         </Col>
         <Col>
-          <h4 className="text-uppercase text-proxima-bold mb-5">Suppliers</h4>
+          <h4 className="text-uppercase text-proxima-bold mb-5">
+            {t('header.suppliers')}
+          </h4>
           {categories.map(({ _id, name }) => (
             <LinkContainer to={`/suppliers/${name}`} onClick={onHide} key={_id}>
               <p>{name}</p>

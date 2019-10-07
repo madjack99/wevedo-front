@@ -15,7 +15,7 @@ import {
 } from '../../../../helpers';
 
 function LocationsSearchAreasRegionName({
-  user,
+  t,
   ipDetectedCountry,
   userSelectedCountry,
 }) {
@@ -93,7 +93,7 @@ function LocationsSearchAreasRegionName({
           ))}
         </Nav>
         <div className="font-weight-bold mt-3 mb-3 text-uppercase">
-          <span className="areaSelect">Choose region</span>
+          <span className="areaSelect">{t('header.chooseRegion')}</span>
         </div>
         {displayRegionNameInCols(stateCountry)}
       </Container>

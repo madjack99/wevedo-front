@@ -54,7 +54,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                   <Row className="p-3">
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Service Name<span className="form__asterisks">*</span>
+                        {t('signAndLogForm.serviceName')}
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         className=" form__control__account "
@@ -92,7 +93,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Email or phone number including country code
+                        {t('signAndLogForm.emailAndPhoneNumberLabel')}
                         <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
@@ -115,7 +116,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                     </Col>
                     <Col sm={6} className="mb-4">
                       <p className="text-muted">
-                        Mobile Number<span className="form__asterisks">*</span>
+                        {t('signAndLogForm.mobileNumber')}
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         className=" form__control__account "
@@ -136,7 +138,8 @@ const DashboardBusinessProfileFormsContactDetails = ({
                   </Row>
                   <Col className="mb-4">
                     <p className="text-muted">
-                      Address<span className="form__asterisks">*</span>
+                      {t('signAndLogForm.address')}
+                      <span className="form__asterisks">*</span>
                     </p>
                     <Row className="mb-sm-3">
                       <Col sm={4} className="mb-2">
@@ -172,7 +175,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                         </Form.Control>
                         {values.country === '' ? (
                           <p className="errorMessage">
-                            Choose a country from the list
+                            {t('signAndLogForm.chooseCountry')}
                           </p>
                         ) : null}
                         {errors.country && (

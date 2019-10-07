@@ -17,7 +17,7 @@ import {
 } from '../../../../helpers';
 
 function LocationsSearchAreasCounty({
-  user,
+  t,
   ipDetectedCountry,
   userSelectedCountry,
 }) {
@@ -100,7 +100,7 @@ function LocationsSearchAreasCounty({
           ))}
         </Nav>
         <div className="font-weight-bold mt-3 mb-2 text-uppercase">
-          <span className="areaSelect">Choose county</span>
+          <span className="areaSelect">{t('header.chooseCounty')}</span>
         </div>
         {displayCountyInCols(stateCountry)}
       </Container>

@@ -227,7 +227,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formRegionName">
               <Form.Label className="form__label mb-0">
-                Region Name<span className="form__asterisks">*</span>
+                {t('business-signup.form.regionPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -257,7 +258,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formCounty">
               <Form.Label className="form__label mb-0">
-                County<span className="form__asterisks">*</span>
+                {t('business-signup.form.countyPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
@@ -286,7 +288,8 @@ const BusinessFormsSignupLocationInfo = ({
 
             <Form.Group className="mb-5" controlId="formCity">
               <Form.Label className="form__label mb-0">
-                City<span className="form__asterisks">*</span>
+                {t('business-signup.form.cityPlaceholder')}
+                <span className="form__asterisks">*</span>
               </Form.Label>
               <Form.Control
                 className="form__control"
