@@ -47,24 +47,24 @@ const getCountriesForUKOnly = country => {
   return country;
 };
 
-export const getRegionNames = (chosenCountry = 'United Kingdom') => country => {
+export const getRegionNames = (chosenCountry = 'United Kingdom') => {
+  const country = chosenCountry;
   chosenCountry = getCountriesForUKOnly(country);
   return Object.keys(locations[chosenCountry][country]);
 };
 
-export const getCounties = (chosenCountry = 'United Kingdom') => (
-  country,
-  regionName,
-) => {
+export const getCounties = (chosenCountry = 'United Kingdom', regionName) => {
+  const country = chosenCountry;
   chosenCountry = getCountriesForUKOnly(country);
   return Object.keys(locations[chosenCountry][country][regionName]);
 };
 
-export const getCities = (chosenCountry = 'United Kingdom') => (
-  country,
+export const getCities = (
+  chosenCountry = 'United Kingdom',
   regionName,
   county,
 ) => {
+  const country = chosenCountry;
   chosenCountry = getCountriesForUKOnly(country);
   return locations[chosenCountry][country][regionName][county];
 };

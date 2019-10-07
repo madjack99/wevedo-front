@@ -243,12 +243,11 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.regionName &&
-                            getCounties(user && user.appearInCountries)(
-                              values.country,
-                              values.regionName,
-                            ).map(county => (
-                              <option key={uniqid()}>{county}</option>
-                            ))}
+                            getCounties(values.country, values.regionName).map(
+                              county => (
+                                <option key={uniqid()}>{county}</option>
+                              ),
+                            )}
                         </Form.Control>
                         {errors.county && (
                           <p className="errorMessage">{errors.county}</p>
@@ -271,7 +270,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
                           <option value="" disabled />
                           {values.country &&
                             values.county &&
-                            getCities(user && user.appearInCountries)(
+                            getCities(
                               values.country,
                               values.regionName,
                               values.county,

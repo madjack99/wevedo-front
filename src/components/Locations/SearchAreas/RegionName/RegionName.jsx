@@ -35,7 +35,7 @@ function LocationsSearchAreasRegionName({
   }, [calculatedCountry]);
 
   const displayRegionNameInCols = selectedCountry => {
-    const regionNames = getRegionNames(selectedCountry)(selectedCountry);
+    const regionNames = getRegionNames(selectedCountry);
     const firstCol = Math.ceil(regionNames.length / 3);
     const secondCol = Math.ceil((regionNames.length / 3) * 2);
     regionNames.sort();

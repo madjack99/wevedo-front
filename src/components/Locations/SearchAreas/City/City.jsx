@@ -38,20 +38,13 @@ function LocationsSearchAreasCity({
   }, [calculatedCountry]);
 
   const displayCityInCols = selectedCountry => {
-    const regionNames = getRegionNames(selectedCountry)(selectedCountry);
+    const regionNames = getRegionNames(selectedCountry);
     let cities = [];
     regionNames.forEach(regionName =>
-      getCounties(user && user.appearInCountries)(
-        selectedCountry,
-        regionName,
-      ).forEach(
+      getCounties(selectedCountry, regionName).forEach(
         county =>
           (cities = cities.concat(
-            getCities(user && user.appearInCountries)(
-              selectedCountry,
-              regionName,
-              county,
-            ),
+            getCities(selectedCountry, regionName, county),
           )),
       ),
     );

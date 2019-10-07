@@ -17,7 +17,7 @@ import {
 function getRandomLinks(user, countries) {
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(country)(country);
+    const countryRegionNames = getRegionNames(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
   const randomNumbersArray = [];

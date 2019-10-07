@@ -31,9 +31,7 @@ const SearchPanel = ({
   const countries = getCountries(calculatedCountry);
   let allRegionNames = [];
   countries.forEach(country => {
-    const countryRegionNames = getRegionNames(user && user.appearInCountries)(
-      country,
-    );
+    const countryRegionNames = getRegionNames(country);
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 

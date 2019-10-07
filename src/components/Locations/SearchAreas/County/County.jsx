@@ -37,16 +37,11 @@ function LocationsSearchAreasCounty({
   }, [calculatedCountry]);
 
   const displayCountyInCols = selectedCountry => {
-    const regionNames = getRegionNames(selectedCountry)(selectedCountry);
+    const regionNames = getRegionNames(selectedCountry);
     let counties = [];
     regionNames.forEach(
       regionName =>
-        (counties = counties.concat(
-          getCounties(user && user.appearInCountries)(
-            selectedCountry,
-            regionName,
-          ),
-        )),
+        (counties = counties.concat(getCounties(selectedCountry, regionName))),
     );
     counties.sort();
     const firstCol = Math.ceil(counties.length / 3);
