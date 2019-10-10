@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -13,7 +15,7 @@ import { WevedoServiceContext } from '../../../contexts';
 
 import { updateUser } from '../../../actions/user-actions';
 
-const DashboardAccount = ({ user, updateUser }) => {
+const DashboardAccount = ({ user, updateUser, t }) => {
   const wevedoService = useContext(WevedoServiceContext);
   return (
     <div className="dashboard">
@@ -21,7 +23,7 @@ const DashboardAccount = ({ user, updateUser }) => {
       <Container className="dashboard-business__profile">
         <h6 className="mb-3 mb-sm-5 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
-          Your Account{' '}
+          {t('dashboard.account.yourAccount')}{' '}
         </h6>
         <Row>
           <Col>
@@ -76,7 +78,10 @@ const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
 )(DashboardAccount);

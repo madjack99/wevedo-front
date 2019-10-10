@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -16,13 +17,13 @@ import jewelry from '../../../assets/images/w-rings.png';
 import stationery from '../../../assets/images/w-stationery.png';
 import honeymoon from '../../../assets/images/w-honeymoon.png';
 
-const CatergoryGrid = () => (
+const CatergoryGrid = ({ t }) => (
   <Row className="wedding-suppliers-grid">
     <Col sm={4} className="wedding-suppliers-grid__child">
       <div>
         <Link to="/suppliers/Venue">
           <img src={venue} alt="Venue" />
-          <p>Venue</p>
+          <p>{t('home.categoryGrid.venue')}</p>
         </Link>
       </div>
     </Col>
@@ -30,7 +31,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Media">
           <img src={media} alt="Media" />
-          <p>Media</p>
+          <p>{t('home.categoryGrid.media')}</p>
         </Link>
       </div>
     </Col>
@@ -38,7 +39,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Beauty">
           <img src={beauty} alt="Beauty" />
-          <p>Beauty</p>
+          <p>{t('home.categoryGrid.beauty')}</p>
         </Link>
       </div>
     </Col>
@@ -46,7 +47,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Catering">
           <img src={catering} alt="Catering" />
-          <p>Catering</p>
+          <p>{t('home.categoryGrid.catering')}</p>
         </Link>
       </div>
     </Col>
@@ -54,7 +55,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Entertainment">
           <img src={entertainment} alt="Entertainment" />
-          <p>Entertainment</p>
+          <p>{t('home.categoryGrid.entertainment')}</p>
         </Link>
       </div>
     </Col>
@@ -62,7 +63,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Boutique">
           <img src={boutique} alt="Boutique" />
-          <p>Boutique</p>
+          <p>{t('home.categoryGrid.boutique')}</p>
         </Link>
       </div>
     </Col>
@@ -70,7 +71,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Decoration">
           <img src={decoration} alt="Decoration" />
-          <p>Decoration</p>
+          <p>{t('home.categoryGrid.decoration')}</p>
         </Link>
       </div>
     </Col>
@@ -78,7 +79,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Cake">
           <img src={cake} alt="Cake" />
-          <p>Cake</p>
+          <p>{t('home.categoryGrid.cake')}</p>
         </Link>
       </div>
     </Col>
@@ -86,7 +87,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Transport">
           <img src={transport} alt="Transport" />
-          <p>Transport</p>
+          <p>{t('home.categoryGrid.transport')}</p>
         </Link>
       </div>
     </Col>
@@ -94,7 +95,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Jewelry">
           <img src={jewelry} alt="Jewelry" />
-          <p>Jewelry</p>
+          <p>{t('home.categoryGrid.jewelry')}</p>
         </Link>
       </div>
     </Col>
@@ -102,7 +103,7 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Stationery">
           <img src={stationery} alt="Stationery" />
-          <p>Stationery</p>
+          <p>{t('home.categoryGrid.stationery')}</p>
         </Link>
       </div>
     </Col>
@@ -110,11 +111,11 @@ const CatergoryGrid = () => (
       <div>
         <Link to="/suppliers/Honeymoon">
           <img src={honeymoon} alt="Honeymoon" />
-          <p>Honeymoon</p>
+          <p>{t('home.categoryGrid.honeymoon')}</p>
         </Link>
       </div>
     </Col>
   </Row>
 );
 
-export default CatergoryGrid;
+export default withTranslation('common')(CatergoryGrid);

@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import { Formik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { WevedoServiceContext } from '../../../../../contexts';
-import emailSchema from './schema';
 
 const DashboardAccountFormsEmailChange = ({
   email,
@@ -29,7 +29,7 @@ const DashboardAccountFormsEmailChange = ({
           await wevedoService.checkEmail({ email: values.email });
         } catch (err) {
           setSubmitting(false);
-          return setErrors({ email: 'email is already in use' });
+          return setErrors({ email: t('dashboard.account.emailInUse') });
         }
         try {
           await wevedoService.checkPassword({
@@ -55,7 +55,15 @@ const DashboardAccountFormsEmailChange = ({
         setEmailIsChanged(true);
         return setSubmitting(false);
       }}
-      validationSchema={emailSchema}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email(t('dashboard.account.invalidEmail'))
+          .required(t('dashboard.account.required')),
+        password: Yup.string()
+          .min(6, t('dashboard.account.minimum8chars'))
+          .max(50, t('dashboard.account.maximum50chars'))
+          .required(t('dashboard.account.required')),
+      })}
     >
       {({
         handleSubmit,
@@ -68,7 +76,8 @@ const DashboardAccountFormsEmailChange = ({
         return (
           <Form noValidate onSubmit={handleSubmit}>
             <p className="text-muted">
-              E-Mail address<span className="form__asterisks">*</span>
+              {t('dashboard.account.emailAddress')}
+              <span className="form__asterisks">*</span>
             </p>
             {/* Desktop */}
             <div className={mailIsChanging ? 'd-none' : 'd-none d-sm-block'}>
@@ -86,7 +95,7 @@ const DashboardAccountFormsEmailChange = ({
 
                 <div className="input-group-append">
                   <Button onClick={() => setMailIsChanging(true)}>
-                    Change the email
+                    {t('dashboard.account.changeEmail')}
                   </Button>
                 </div>
               </InputGroup>
@@ -130,7 +139,7 @@ const DashboardAccountFormsEmailChange = ({
                 )}
               </Form.Group>
               <Button type="submit" disabled={isSubmitting} size="lg">
-                Save
+                {t('dashboard.account.save')}
               </Button>
             </div>
             {/* Mobile */}
@@ -151,7 +160,7 @@ const DashboardAccountFormsEmailChange = ({
                 )}
                 {emailIsChanged && (
                   <p style={{ color: '#28a745' }}>
-                    {t('dashboard.emailWasChanged')}
+                    {t('dashboard.account.emailWasChanged')}
                   </p>
                 )}
                 <Button
@@ -159,7 +168,7 @@ const DashboardAccountFormsEmailChange = ({
                   onClick={() => setMailIsChanging(true)}
                   size="lg"
                 >
-                  Change
+                  {t('dashboard.account.change')}
                 </Button>
               </Form.Group>
             </div>

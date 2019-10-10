@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-
-import nameSchema from './schema';
+import * as Yup from 'yup';
 
 const DashboardAccountFormsNameChange = ({
   fullName,
@@ -38,7 +37,12 @@ const DashboardAccountFormsNameChange = ({
           setSubmitting(false);
         }
       }}
-      validationSchema={nameSchema}
+      validationSchema={Yup.object().shape({
+        fullName: Yup.string()
+          .min(6, t('dashboard.account.minimum6chars'))
+          .max(50, t('dashboard.account.maximum50chars'))
+          .required(t('dashboard.account.enterAValidName')),
+      })}
       render={({
         handleSubmit,
         handleChange,
@@ -51,7 +55,8 @@ const DashboardAccountFormsNameChange = ({
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
               <p className="text-muted">
-                Full Name<span className="form__asterisks">*</span>
+                {t('dashboard.account.fullName')}
+                <span className="form__asterisks">*</span>
               </p>
               <Form.Control
                 className="form__control__account"
@@ -68,12 +73,12 @@ const DashboardAccountFormsNameChange = ({
               )}
               {nameIsChanged && (
                 <p style={{ color: '#28a745' }}>
-                  {t('dashboard.nameWasChanged')}
+                  {t('dashboard.account.nameWasChanged')}
                 </p>
               )}
             </Form.Group>
             <Button type="submit" size="lg" disabled={isSubmitting}>
-              Save
+              {t('dashboard.account.save')}
             </Button>
           </Form>
         );

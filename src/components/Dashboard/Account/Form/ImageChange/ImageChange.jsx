@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Col } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 import addImage from '../../../../../assets/images/addimg.png';
 
 const DashboardAccountFormsImageChange = ({
@@ -8,6 +9,7 @@ const DashboardAccountFormsImageChange = ({
   updateProfile,
   updateUser,
   loadImagesToServer,
+  t,
 }) => {
   const onDrop = async acceptedFiles => {
     const firstPhoto = acceptedFiles[0];
@@ -41,7 +43,7 @@ const DashboardAccountFormsImageChange = ({
                   src={profileImageURL || addImage}
                   alt="profile"
                 />
-                <p className="mt-2">Upload Photo</p>
+                <p className="mt-2">{t('dashboard.account.uploadPhoto')}</p>
               </div>
             </div>
           );
@@ -51,4 +53,4 @@ const DashboardAccountFormsImageChange = ({
   );
 };
 
-export default DashboardAccountFormsImageChange;
+export default withTranslation('common')(DashboardAccountFormsImageChange);

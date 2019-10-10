@@ -40,6 +40,20 @@
       "boxTwo": "See real-time availability for your venue or supplier booking.",
       "boxThree": "Message suppliers directly in real-time through the app to make enquiries or bookings."
     },
+    "categoryGrid": {
+      "venue": "Venue",
+      "media": "Media",
+      "beauty": "Beauty",
+      "catering": "Catering",
+      "entertainment": "Entertainment",
+      "boutique": "Boutique",
+      "decoration": "Decoration",
+      "cake": "Cake",
+      "transport": "Transport",
+      "jewelry": "Juwelry",
+      "stationery": "Stationery",
+      "honeymoon": "Honeymoon"
+    },
     "findForm": {
       "title": "Find your best wedding supplier by location",
       "category": "Category",
@@ -231,9 +245,38 @@
     "save": "Save"
   },
   "dashboard": {
-    "nameWasChanged": "Successfully updated",
-    "emailWasChanged": "Successfully changed",
-    "phoneNumberWasChanged": "Successfully updated"
+    "account": {
+      "yourAccount": "Your Account",
+      "uploadPhoto": "Upload Photo",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "emailInUse": "email is already in use",
+      "emailAddress": "E-Mail address",
+      "changeEmail": "Change the email",
+      "wrongCode": "wrong code provided",
+      "wantChangePassword": "Want to change your password?",
+      "passwordWasChanged": "password was successfully changed",
+      "youWillReceiveInstructions": "You will recieve an email with instructions.",
+      "changePassword": "Change password",
+      "newPasswordPlaceholder": "New password",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "sendResetCode": "Send reset code",
+      "checkYourEmail": "Check your email and enter reset code",
+      "resetCode": "Reset code",
+      "change": "Change",
+      "save": "Save",
+      "minimum6chars": "minimum 6 characters",
+      "minimum8chars": "minimum 8 characters",
+      "maximum50chars": "maximum 50 characters",
+      "enterAValidName": "Enter a valid name",
+      "invalidMobileNumber": "invalid mobile number",
+      "required": "required",
+      "invalidEmail": "invalid email",
+      "passwordDoesntMatch": "password does not match",
+      "nameWasChanged": "Successfully updated",
+      "emailWasChanged": "Successfully changed",
+      "phoneNumberWasChanged": "Successfully updated"
+    }
   },
   "stickyNotification": {
     "warning": "Your account under review",

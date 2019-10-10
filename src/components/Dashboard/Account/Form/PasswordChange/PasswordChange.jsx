@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-
-import passwordSchema from './schema';
+import { withTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { WevedoServiceContext } from '../../../../../contexts';
 
-const DashboardAccountFormPasswordChange = ({ email }) => {
+const DashboardAccountFormPasswordChange = ({ email, t }) => {
   const [changeRequested, setChangeRequested] = useState(false);
   const [resetCodeIsSended, setResetCodeIsSended] = useState(false);
   const [passwordWasChanged, setPasswordWasChanged] = useState(false);
@@ -43,13 +43,24 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
             setPasswordWasChanged(true);
           } catch (error) {
             setErrors({
-              resetCode: 'wrong code provided',
+              resetCode: t('dashboard.account.wrongCode'),
             });
           }
         }
         setSubmitting(false);
       }}
-      validationSchema={passwordSchema}
+      validationSchema={Yup.object().shape({
+        resetPassword: Yup.string()
+          .min(8, t('dashboard.account.minimum8chars'))
+          .max(50, t('dashboard.account.maximum50chars'))
+          .required(t('dashboard.account.required')),
+        confirmResetPassword: Yup.string()
+          .oneOf(
+            [Yup.ref('resetPassword'), null],
+            t('dashboard.account.passwordDoesntMatch'),
+          )
+          .required(t('dashboard.account.required')),
+      })}
       render={({
         handleSubmit,
         handleChange,
@@ -60,11 +71,13 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
       }) => {
         return (
           <Form noValidate onSubmit={handleSubmit}>
-            <p className="text-muted">Want to change your password?</p>
+            <p className="text-muted">
+              {t('dashboard.account.wantChangePassword')}
+            </p>
             <div className={changeRequested ? 'd-none' : 'd-block'}>
               {passwordWasChanged && (
                 <p style={{ color: '#28a745' }}>
-                  password was successfully changed
+                  {t('dashboard.account.passwordWasChanged')}
                 </p>
               )}
               <Form.Group className="mb-2">
@@ -73,10 +86,10 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                     passwordWasChanged ? 'd-none' : 'd-block'
                   }`}
                 >
-                  <b>You will recieve an email with instructions.</b>
+                  <b>{t('dashboard.account.youWillReceiveInstructions')}</b>
                 </div>
                 <Button onClick={() => setChangeRequested(true)} size="lg">
-                  Change password
+                  {t('dashboard.account.changePassword')}
                 </Button>
               </Form.Group>
             </div>
@@ -94,7 +107,7 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                   onChange={handleChange}
                   isValid={values.resetPassword && !errors.resetPassword}
                   isInvalid={touched.resetPassword && !!errors.resetPassword}
-                  placeholder="New password"
+                  placeholder={t('dashboard.account.newPasswordPlaceholder')}
                   size="lg"
                 />
                 {errors.resetPassword && (
@@ -113,7 +126,9 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                     touched.confirmResetPassword &&
                     !!errors.confirmResetPassword
                   }
-                  placeholder="Confirm password"
+                  placeholder={t(
+                    'dashboard.account.confirmPasswordPlaceholder',
+                  )}
                   size="lg"
                 />
                 {errors.confirmResetPassword && (
@@ -123,13 +138,13 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                 )}
               </Form.Group>
               <Button type="submit" disabled={isSubmitting} size="lg">
-                Send reset code
+                {t('dashboard.account.sendResetCode')}
               </Button>
             </div>
             <div className={resetCodeIsSended ? 'd-block' : 'd-none'}>
               <Form.Group className="mb-3">
                 <div className="mb-3">
-                  <b>Check your email and enter reset code</b>
+                  <b>{t('dashboard.account.checkYourEmail')}</b>
                 </div>
                 <Form.Control
                   className="form__control__account"
@@ -137,7 +152,7 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                   name="resetCode"
                   value={values.resetCode}
                   onChange={handleChange}
-                  placeholder="Reset code"
+                  placeholder={t('dashboard.account.resetCode')}
                   size="lg"
                 />
                 {errors.resetCode && (
@@ -145,7 +160,7 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
                 )}
               </Form.Group>
               <Button type="submit" disabled={isSubmitting} size="lg">
-                Save
+                {t('dashboard.account.save')}
               </Button>
             </div>
           </Form>
@@ -155,4 +170,4 @@ const DashboardAccountFormPasswordChange = ({ email }) => {
   );
 };
 
-export default DashboardAccountFormPasswordChange;
+export default withTranslation('common')(DashboardAccountFormPasswordChange);

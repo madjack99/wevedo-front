@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-
-import phoneNumberSchema from './schema';
+import * as Yup from 'yup';
 
 const DashboardAccountFormsPhoneNumberChange = ({
   phoneNumber,
@@ -12,6 +11,8 @@ const DashboardAccountFormsPhoneNumberChange = ({
   t,
 }) => {
   const [phoneNumberIsChanged, setPhoneNumberIsChanged] = useState(false);
+
+  const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   return (
     <Formik
@@ -35,7 +36,11 @@ const DashboardAccountFormsPhoneNumberChange = ({
           setSubmitting(false);
         }
       }}
-      validationSchema={phoneNumberSchema}
+      validationSchema={Yup.object().shape({
+        phoneNumber: Yup.string()
+          .matches(phoneRegex, t('dashboard.account.invalidMobileNumber'))
+          .required(t('dashboard.account.required')),
+      })}
       render={({
         handleSubmit,
         handleChange,
@@ -48,7 +53,8 @@ const DashboardAccountFormsPhoneNumberChange = ({
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
               <p className="text-muted">
-                Phone Number<span className="form__asterisks">*</span>
+                {t('dashboard.account.phoneNumber')}
+                <span className="form__asterisks">*</span>
               </p>
               <Form.Control
                 className="form__control__account"
@@ -65,12 +71,12 @@ const DashboardAccountFormsPhoneNumberChange = ({
               )}
               {phoneNumberIsChanged && (
                 <p style={{ color: '#28a745' }}>
-                  {t('dashboard.phoneNumberWasChanged')}
+                  {t('dashboard.account.phoneNumberWasChanged')}
                 </p>
               )}
             </Form.Group>
             <Button type="submit" size="lg" disabled={isSubmitting}>
-              Save
+              {t('dashboard.account.save')}
             </Button>
           </Form>
         );
