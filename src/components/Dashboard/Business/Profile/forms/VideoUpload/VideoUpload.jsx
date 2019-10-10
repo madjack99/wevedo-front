@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 import { Row, Col, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -6,7 +7,7 @@ import { Formik } from 'formik';
 import schema from './schema';
 import '../Forms.scss';
 
-const DashboardBusinessProfileFormsVideoUpload = ({ user, updateUser }) => {
+const DashboardBusinessProfileFormsVideoUpload = ({ user, updateUser, t }) => {
   return (
     <Formik
       className="form"
@@ -24,7 +25,9 @@ const DashboardBusinessProfileFormsVideoUpload = ({ user, updateUser }) => {
                 <div className="dashboard-business__profile__whitebox">
                   <Col sm={12}>
                     <Form.Group>
-                      <p className="text-muted">Add a Video</p>
+                      <p className="text-muted">
+                        {t('dashboard.profile.addAVideo')}
+                      </p>
                       <Form.Control
                         name="profileVideoURL"
                         value={values.profileVideoURL}
@@ -55,4 +58,6 @@ const DashboardBusinessProfileFormsVideoUpload = ({ user, updateUser }) => {
   );
 };
 
-export default DashboardBusinessProfileFormsVideoUpload;
+export default withTranslation('common')(
+  DashboardBusinessProfileFormsVideoUpload,
+);

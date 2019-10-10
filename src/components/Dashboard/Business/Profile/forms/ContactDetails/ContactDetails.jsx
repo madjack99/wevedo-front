@@ -3,13 +3,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 import { Row, Col, Form } from 'react-bootstrap';
 
 import '../Forms.scss';
-
-import contactDetailsSchema from './contactDetailsSchema';
 
 import config from '../../../../../../config';
 
@@ -26,6 +25,7 @@ const DashboardBusinessProfileFormsContactDetails = ({
   t,
 }) => {
   const { allowedInCountries } = config;
+  const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   return (
     <Formik
@@ -43,7 +43,25 @@ const DashboardBusinessProfileFormsContactDetails = ({
         city: user.city || '',
         postcode: user.postcode || '',
       }}
-      validationSchema={contactDetailsSchema}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email(t('dashboard.profile.invalidEmailOrMobileNumber'))
+          .required(t('dashboard.profile.required')),
+        phoneNumber: Yup.string()
+          .matches(phoneRegex, 'invalid number')
+          .required(t('dashboard.profile.required')),
+        postcode: Yup.string().required(t('dashboard.profile.required')),
+        address: Yup.string().required(t('dashboard.profile.required')),
+        country: Yup.string().required(t('dashboard.profile.required')),
+        regionName: Yup.string().required(t('dashboard.profile.required')),
+        county: Yup.string().required(t('dashboard.profile.required')),
+        city: Yup.string().required(t('dashboard.profile.required')),
+        fullName: Yup.string()
+          .min(6, t('dashboard.profile.minimum6chars'))
+          .max(50, t('dashboard.profile.maximum50chars'))
+          .required(t('dashboard.profile.required')),
+        website: Yup.string(),
+      })}
     >
       {({ values, handleChange, errors, handleSubmit }) => {
         return (
@@ -74,7 +92,9 @@ const DashboardBusinessProfileFormsContactDetails = ({
                       )}
                     </Col>
                     <Col sm={6} className="mb-4">
-                      <p className="text-muted">Website Url</p>
+                      <p className="text-muted">
+                        {t('dashboard.profile.websiteUrl')}
+                      </p>
                       <Form.Control
                         className=" form__control__account "
                         value={values.website}

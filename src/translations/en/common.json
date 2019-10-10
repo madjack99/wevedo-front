@@ -230,7 +230,8 @@
   "imgUpload": {
     "uploadPhotos": "Upload photos",
     "dragAndDrop": "or just drag and drop",
-    "addAtLeast": "+ Add at least 1 photo"
+    "addAtLeast": "+ Add at least 1 photo",
+    "loading": "Loading..."
   },
   "serviceInfo": {
     "describeService": "Please describe your business and services",
@@ -276,6 +277,29 @@
       "nameWasChanged": "Successfully updated",
       "emailWasChanged": "Successfully changed",
       "phoneNumberWasChanged": "Successfully updated"
+    },
+    "profile": {
+      "basicInfo": "Basic Info",
+      "contactDetails": "Contact Details",
+      "uploadPhotos": "Upload Photos",
+      "uploadVideo": "Upload Video",
+      "save": "Save",
+      "maximum500chars": "maximum 500 characters",
+      "required": "required",
+      "priceMustBeANumber": "price must be a number",
+      "priceCantBeLessThan0": "price can't be less than 0",
+      "maximumPriceMustBeGreaterThanMinimumPrice": "maximum price must be greater than minimum price",
+      "description": "Description",
+      "pricing": "Pricing",
+      "currencySign": "£",
+      "availabilityCalendar": "Availability calendar",
+      "facilities": "Facilities",
+      "invalidEmailOrMobileNumber": "invalid email or mobile number",
+      "invalidNumber": "invalid number",
+      "minimum6chars": "minimum 6 characters",
+      "maximum50chars": "maximum 50 characters",
+      "websiteUrl": "Website Url",
+      "addAVideo": "Add a Video"
     }
   },
   "stickyNotification": {

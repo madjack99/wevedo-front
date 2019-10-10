@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'redux';
 
 import { WevedoServiceContext } from '../../../../contexts';
 import { updateUser } from '../../../../actions/user-actions';
@@ -9,7 +11,7 @@ import DashboardBusinessProfileFormsContactDetails from './forms/ContactDetails'
 import DashboardBusinessProfileFormsImageUpload from './forms/ImageUpload';
 import DashboardBusinessProfileFormsVideoUpload from './forms/VideoUpload';
 
-const DashboardBusinessProfile = ({ user, updateUser }) => {
+const DashboardBusinessProfile = ({ user, updateUser, t }) => {
   const [isSaving, setIsSaving] = useState(false);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -45,7 +47,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
       <Container className="dashboard-business__profile">
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
-          Basic Info{' '}
+          {t('dashboard.profile.basicInfo')}
         </h6>
         <DashboardBusinessProfileFormsBasicInfo
           user={user}
@@ -54,7 +56,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
         />
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
-          Contact Details{' '}
+          {t('dashboard.profile.contactDetails')}{' '}
         </h6>
         <DashboardBusinessProfileFormsContactDetails
           user={user}
@@ -63,7 +65,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
         />
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
-          Upload Photos{' '}
+          {t('dashboard.profile.uploadPhotos')}{' '}
         </h6>
         <DashboardBusinessProfileFormsImageUpload
           user={user}
@@ -72,7 +74,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
         />
         <h6 className="mb-3 mb-sm-4 pl-3 pl-sm-0 text-proxima-bold">
           {' '}
-          Upload Video{' '}
+          {t('dashboard.profile.uploadVideo')}{' '}
         </h6>
         <DashboardBusinessProfileFormsVideoUpload
           user={user}
@@ -81,7 +83,7 @@ const DashboardBusinessProfile = ({ user, updateUser }) => {
         <Row>
           <Col className="text-uppercase mt-2 mb-4">
             <Button size="lg" onClick={handleSave} disabled={isSaving}>
-              Save
+              {t('dashboard.profile.save')}
             </Button>
           </Col>
         </Row>
@@ -96,7 +98,10 @@ const mapDispatchToProps = dispatch => ({
   updateUser: updateUser(dispatch),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withTranslation('common'),
 )(DashboardBusinessProfile);

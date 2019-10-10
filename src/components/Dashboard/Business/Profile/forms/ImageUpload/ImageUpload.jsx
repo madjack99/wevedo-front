@@ -125,7 +125,7 @@ const DashboardBusinessProfileFormsImageUpload = ({ user, updateUser, t }) => {
         <Col md={4} xs={12} key={uniqid()}>
           <div className="position-relative">
             <div className="preview-zone__photo preview-zone__photo_loading d-flex my-2 rounded">
-              <p className="m-auto">Loading...</p>
+              <p className="m-auto">{t('imgUpload.loading')}</p>
             </div>
           </div>
         </Col>

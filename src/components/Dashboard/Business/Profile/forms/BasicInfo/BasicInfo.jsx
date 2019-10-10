@@ -1,13 +1,15 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Row, Col, Form, InputGroup } from 'react-bootstrap';
-import basicInfoSchema from './basicInfoSchema';
+import * as Yup from 'yup';
+import { withTranslation } from 'react-i18next';
+
 import MyCalendar from '../../../../../Calendar';
 
 import './BasicInfo.scss';
 import '../Forms.scss';
 
-const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
+const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser, t }) => {
   return (
     <Formik
       className="form"
@@ -19,7 +21,23 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
         facilities: user.facilities || '',
         bookedDates: user.bookedDates || [],
       }}
-      validationSchema={basicInfoSchema}
+      validationSchema={Yup.object().shape({
+        bio: Yup.string()
+          .max(500, t('dashboard.profile.maximum500chars'))
+          .required(t('dashboard.profile.required')),
+        minPrice: Yup.number()
+          .typeError(t('dashboard.profile.priceMustBeANumber'))
+          .min(0, t('dashboard.profile.priceCantBeLessThan0'))
+          .required(t('dashboard.profile.required')),
+        maxPrice: Yup.number()
+          .typeError(t('dashboard.profile.priceMustBeANumber'))
+          .moreThan(
+            Yup.ref('minPrice'),
+            t('dashboard.profile.maximumPriceMustBeGreaterThanMinimumPrice'),
+          )
+          .required(t('dashboard.profile.required')),
+        facilities: Yup.string().required(t('dashboard.profile.required')),
+      })}
     >
       {({ values, handleChange, handleSubmit, errors }) => {
         return (
@@ -30,7 +48,8 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                   <Col sm={12} className="mb-4">
                     <Form.Group>
                       <p className="text-muted">
-                        Description<span className="form__asterisks">*</span>
+                        {t('dashboard.profile.description')}
+                        <span className="form__asterisks">*</span>
                       </p>
                       <Form.Control
                         as="textarea"
@@ -53,14 +72,15 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                   </Col>
                   <Col sm={12} className="mb-4">
                     <p className="text-muted">
-                      Pricing<span className="form__asterisks">*</span>
+                      {t('dashboard.profile.pricing')}
+                      <span className="form__asterisks">*</span>
                     </p>
                     <Row>
                       <Col sm={4} className="mb-2 mb-sm-0">
                         <InputGroup>
                           <InputGroup.Prepend className="basic-info__currency">
                             <InputGroup.Text id="inputGroupPrepend">
-                              £
+                              {t('dashboard.profile.currencySign')}
                             </InputGroup.Text>
                           </InputGroup.Prepend>
                           <Form.Control
@@ -85,7 +105,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                         <InputGroup>
                           <InputGroup.Prepend className="basic-info__currency">
                             <InputGroup.Text id="inputGroupPrepend">
-                              £
+                              {t('dashboard.profile.currencySign')}
                             </InputGroup.Text>
                           </InputGroup.Prepend>
                           <Form.Control
@@ -110,7 +130,7 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                   </Col>
                   <Col sm={12} className="mb-4">
                     <p className="text-muted">
-                      Availability calendar
+                      {t('dashboard.profile.availabilityCalendar')}
                       <span className="form__asterisks">*</span>
                     </p>
                     <MyCalendar bookedDates={values.bookedDates} />
@@ -136,7 +156,8 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
                   </Col>
                   <Col sm={12} className="mb-4">
                     <p className="text-muted">
-                      Facilities<span className="form__asterisks">*</span>
+                      {t('dashboard.profile.facilities')}
+                      <span className="form__asterisks">*</span>
                     </p>
                     <Form.Control
                       name="facilities"
@@ -164,4 +185,6 @@ const DashboardBusinessProfileFormsBasicInfo = ({ user, updateUser }) => {
   );
 };
 
-export default DashboardBusinessProfileFormsBasicInfo;
+export default withTranslation('common')(
+  DashboardBusinessProfileFormsBasicInfo,
+);
