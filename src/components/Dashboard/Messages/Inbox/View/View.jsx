@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { withTranslation } from 'react-i18next';
 
 import { Link } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ import config from '../../../../../config';
 import DashboardMessagesInboxViewDesktop from './Desktop';
 import DashboardMessagesInboxViewMobile from './Mobile';
 
-const DashboardMessagesInboxView = ({ onOpenRoom, onOpenModalRoom }) => {
+const DashboardMessagesInboxView = ({ t, onOpenRoom, onOpenModalRoom }) => {
   const [rooms, setRooms] = useState([]);
   const wevedoService = useContext(WevedoServiceContext);
 
@@ -38,11 +39,11 @@ const DashboardMessagesInboxView = ({ onOpenRoom, onOpenModalRoom }) => {
     <React.Fragment>
       {!rooms.length ? (
         <p className="text-center mx-auto mt-3">
-          You have no message.
+          {t('dashboard.messages.youHaveNoMessages')}
           <br />
-          To start a message, write to the{' '}
+          {t('dashboard.messages.toStartAMessage')}{' '}
           <Link to="/suppliers/categories">
-            <b>providers</b>
+            <b>{t('dashboard.messages.providers')}</b>
           </Link>
         </p>
       ) : (
@@ -61,4 +62,4 @@ const DashboardMessagesInboxView = ({ onOpenRoom, onOpenModalRoom }) => {
   );
 };
 
-export default DashboardMessagesInboxView;
+export default withTranslation('common')(DashboardMessagesInboxView);

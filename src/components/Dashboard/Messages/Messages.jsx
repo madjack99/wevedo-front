@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
 import DashboardMessagesInboxView from './Inbox/View';
 import DashboardMessagesRoomView from './Room/View';
 
-const DashboardMessages = () => {
+const DashboardMessages = ({ t }) => {
   const [currentRoom, setCurrentRoom] = useState(null);
   const [showRoom, setShowRoom] = useState(false);
 
@@ -17,7 +18,10 @@ const DashboardMessages = () => {
       <Container className="dashboard-business__messages">
         <Row>
           <Col xs sm={3}>
-            <h6 className="text-proxima-bold"> All Messages </h6>
+            <h6 className="text-proxima-bold">
+              {' '}
+              {t('dashboard.messages.allMessages')}{' '}
+            </h6>
           </Col>
           <Col xs sm={1} className="text-right">
             <i className="fa fa-search" />
@@ -50,4 +54,7 @@ const DashboardMessages = () => {
 
 const mapStateToProps = ({ userData }) => userData;
 
-export default compose(connect(mapStateToProps))(DashboardMessages);
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('common'),
+)(DashboardMessages);

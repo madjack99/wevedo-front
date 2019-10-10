@@ -300,6 +300,12 @@
       "maximum50chars": "maximum 50 characters",
       "websiteUrl": "Website Url",
       "addAVideo": "Add a Video"
+    },
+    "messages": {
+      "allMessages": "All Messages",
+      "youHaveNoMessages": "You have no message.",
+      "toStartAMessage": "To start a message, write to the",
+      "providers": "providers"
     }
   },
   "stickyNotification": {
