@@ -207,7 +207,12 @@
     "serviceName": "Service Name",
     "mobileNumber": "Mobile Number",
     "address": "Address",
-    "chooseCountry": "Choose a country from the list"
+    "chooseCountry": "Choose a country from the list",
+    "emailPhoneNotRegistered": "Not registered email or phone number",
+    "invalidEmailOrMobileNumber": "invalid email or mobile number",
+    "required": "required",
+    "minimum8chars": "minimum 8 characters",
+    "maximum50chars": "maximum 50 characters"
   },
   "businessAndUserLogin": {
     "jumbotron": {
