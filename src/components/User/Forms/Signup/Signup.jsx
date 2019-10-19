@@ -21,7 +21,6 @@ import {
   fetchPhoneStatus,
 } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
-import formSchema from './schema';
 import SocialButton from '../../../SocialButton';
 
 const UserFormsSignup = ({

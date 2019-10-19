@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
@@ -12,7 +13,6 @@ import StripeCheckout from 'react-stripe-checkout';
 import config from '../../../../../config';
 import { WevedoServiceContext } from '../../../../../contexts';
 import { updateUser } from '../../../../../actions';
-import formSchema from './schema';
 import MyCalendar from '../../../../Calendar';
 
 const BusinessFormsSignupServiceInfo = ({
@@ -79,7 +79,21 @@ const BusinessFormsSignupServiceInfo = ({
             nextStep();
           }
         }}
-        validationSchema={formSchema}
+        validationSchema={Yup.object().shape({
+          bio: Yup.string()
+            .max(500, t('business-signup.form.maximum500chars'))
+            .required(t('business-signup.form.required')),
+          minPrice: Yup.number()
+            .min(0, t('business-signup.form.priceCantBeLessThan0'))
+            .required(t('business-signup.form.required')),
+          maxPrice: Yup.number()
+            .moreThan(
+              Yup.ref('minPrice'),
+              t('business-signup.form.maxPriceMustBeGreaterThanMinPrice'),
+            )
+            .required(t('business-signup.form.required')),
+          facilities: Yup.string().required(t('business-signup.form.required')),
+        })}
       >
         {({
           handleSubmit,

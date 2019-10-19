@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -25,7 +26,6 @@ import {
   fetchPhoneStatus,
 } from '../../../../../actions';
 import { WevedoServiceContext } from '../../../../../contexts';
-import formScheme from './schema';
 
 const BusinessFormsSignupLocationInfo = ({
   isLoggedIn,
@@ -37,6 +37,7 @@ const BusinessFormsSignupLocationInfo = ({
   nextStep,
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
+  const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const { allowedInCountries } = config;
 
@@ -96,12 +97,25 @@ const BusinessFormsSignupLocationInfo = ({
         }
 
         setErrors({
-          email: !isNewEmail ? 'email is already in use' : null,
-          phoneNumber: !isNewPhone ? 'number is already in use' : null,
+          email: !isNewEmail ? t('signAndLogForm.emailIsInUse') : null,
+          phoneNumber: !isNewPhone ? t('signAndLogForm.numberIsInUse') : null,
         });
         return setSubmitting(false);
       }}
-      validationSchema={formScheme}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email(t('signAndLogForm.invalidEmailOrMobileNumber'))
+          .required(t('signAndLogForm.required')),
+        phoneNumber: Yup.string()
+          .matches(phoneRegex, t('business-signup.form.invalidNumber'))
+          .required(t('signAndLogForm.required')),
+        postcode: Yup.string().required(t('signAndLogForm.required')),
+        address: Yup.string().required(t('signAndLogForm.required')),
+        country: Yup.string().required(t('signAndLogForm.required')),
+        regionName: Yup.string().required(t('signAndLogForm.required')),
+        county: Yup.string().required(t('signAndLogForm.required')),
+        city: Yup.string().required(t('signAndLogForm.required')),
+      })}
       render={({
         handleSubmit,
         handleChange,

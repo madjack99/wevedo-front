@@ -153,7 +153,16 @@
       "nextStepBtn": "Next step",
       "regionPlaceholder": " Region Name",
       "countyPlaceholder": "County",
-      "cityPlaceholder": "City"
+      "cityPlaceholder": "City",
+      "minimum6chars": "minimum 6 characters",
+      "maximum50chars": "maximum 50 characters",
+      "required": "required",
+      "minimum8chars": "minimum 8 characters",
+      "passwordDoesntMatch": "password does not match",
+      "invalidNumber": "invalid number",
+      "maximum500chars": "maximum 500 characters",
+      "priceCantBeLessThan0": "price can't be less than 0",
+      "maxPriceMustBeGreaterThanMinPrice": "maximum price should be greater than minimum price"
     }
   },
   "footer": {

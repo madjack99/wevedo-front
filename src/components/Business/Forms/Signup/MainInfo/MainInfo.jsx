@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -9,7 +10,6 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
 import { updateUser } from '../../../../../actions';
-import formSchema from './schema';
 
 const BusinessFormsSignupMainInfo = ({
   isLoggedIn,
@@ -54,7 +54,28 @@ const BusinessFormsSignupMainInfo = ({
 
         nextStep();
       }}
-      validationSchema={formSchema}
+      validationSchema={Yup.object().shape({
+        username: Yup.string()
+          .min(6, t('business-signup.form.minimum6chars'))
+          .max(50, t('business-signup.form.maximum50chars'))
+          .required(t('business-signup.form.required')),
+        password: Yup.string()
+          .min(8, t('business-signup.form.minimum8chars'))
+          .max(50, t('business-signup.form.maximum50chars'))
+          .required(t('business-signup.form.required')),
+        confirmPassword: Yup.string()
+          .oneOf(
+            [Yup.ref('password'), null],
+            t('business-signup.form.passwordDoesntMatch'),
+          )
+          .required(t('business-signup.form.required')),
+        fullName: Yup.string()
+          .min(6, t('business-signup.form.minimum6chars'))
+          .max(50, t('business-signup.form.maximum50chars'))
+          .required(t('business-signup.form.required')),
+        categories: Yup.string().required(t('business-signup.form.required')),
+        website: Yup.string(),
+      })}
       render={({
         handleSubmit,
         handleChange,
