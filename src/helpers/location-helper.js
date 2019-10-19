@@ -1,14 +1,17 @@
 import axios from 'axios';
 import * as unitedKingdom from '../countryLib/GB.json';
 import * as Malaysia from '../countryLib/Malaysia.json';
+import * as الأردن from '../countryLib/الأردن.json';
 
 const locations = {
   'United Kingdom': unitedKingdom.default['United Kingdom'],
   Malaysia: Malaysia.default.Malaysia,
+  الأردن: الأردن.default.الأردن,
 };
 const largestLocations = {
   'United Kingdom': unitedKingdom.default,
   Malaysia: Malaysia.default,
+  الأردن: الأردن.default,
 };
 
 export const getLocation = country =>
