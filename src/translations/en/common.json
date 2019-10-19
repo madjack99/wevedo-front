@@ -212,7 +212,13 @@
     "invalidEmailOrMobileNumber": "invalid email or mobile number",
     "required": "required",
     "minimum8chars": "minimum 8 characters",
-    "maximum50chars": "maximum 50 characters"
+    "maximum50chars": "maximum 50 characters",
+    "emailUsedForSupplier": "this email is used for supplier",
+    "wrongCredentials": "wrong credentials",
+    "emailIsInUse": "email is already in use",
+    "numberIsInUse": "number is already in use",
+    "invalidEmail": "invalid email",
+    "invalidMobile": "invalid mobile number"
   },
   "businessAndUserLogin": {
     "jumbotron": {

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
@@ -18,7 +19,6 @@ import {
 } from '../../../../actions';
 import { WevedoServiceContext } from '../../../../contexts';
 import { withCheckProvider } from '../../../HOC/index';
-import formSchema from './schema';
 
 import ResetPasswordDialog from '../../../ResetPassword/Dialog';
 import ResetPasswordDialogError from '../../../ResetPassword/Dialog/Error';
@@ -102,7 +102,7 @@ const UserFormsLogin = ({
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           try {
             await checkProvider(values.emailPhone);
-            setErrors({ emailPhone: 'this email is used for supplier' });
+            setErrors({ emailPhone: t('signAndLogForm.emailUsedForSupplier') });
           } catch (error) {
             const isLoginSuccessful = await login(wevedoService.login, {
               email: isEmail(values.emailPhone) ? values.emailPhone : null,
@@ -115,14 +115,34 @@ const UserFormsLogin = ({
 
             if (!isLoginSuccessful) {
               setErrors({
-                emailPhone: 'wrong credentials',
-                password: 'wrong credentials',
+                emailPhone: t('signAndLogForm.wrongCredentials'),
+                password: t('signAndLogForm.wrongCredentials'),
               });
             }
           }
           setSubmitting(false);
         }}
-        validationSchema={formSchema}
+        validationSchema={Yup.object().shape({
+          emailPhone: Yup.string()
+            .test(
+              'emailPhone',
+              t('signAndLogForm.invalidEmailOrMobileNumber'),
+              value => {
+                const emailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+                if (!emailRegex.test(value) && !phoneRegex.test(value)) {
+                  return false;
+                }
+                return true;
+              },
+            )
+            .required(t('signAndLogForm.required')),
+          password: Yup.string()
+            .min(8, t('signAndLogForm.minimum8chars'))
+            .max(50, t('signAndLogForm.maximum50chars'))
+            .required(t('signAndLogForm.required')),
+        })}
         render={({
           handleSubmit,
           handleChange,
@@ -212,7 +232,7 @@ const UserFormsLogin = ({
                     </Button>
                     {emailPhoneNotRegistered && (
                       <p className="text-right" style={{ color: '#dc3545' }}>
-                        Not registered email or phone number
+                        {t('signAndLogForm.emailPhoneNotRegistered')}
                       </p>
                     )}
                   </Col>

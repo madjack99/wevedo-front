@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import uniqid from 'uniqid';
+import * as Yup from 'yup';
 
 import { Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -33,6 +34,7 @@ const UserFormsSignup = ({
 }) => {
   const wevedoService = useContext(WevedoServiceContext);
   const { profileImageURL } = config;
+  const phoneRegex = /^\+?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const { allowedInCountries } = config;
 
@@ -118,14 +120,25 @@ const UserFormsSignup = ({
           setSubmitting(false);
           if (!isNewEmail) {
             return setErrors({
-              email: 'email is already in use',
+              email: t('signAndLogForm.emailIsInUse'),
             });
           }
           return setErrors({
-            phoneNumber: 'number is already in use',
+            phoneNumber: t('signAndLogForm.numberIsInUse'),
           });
         }}
-        validationSchema={formSchema}
+        validationSchema={Yup.object().shape({
+          email: Yup.string()
+            .email(t('signAndLogForm.invalidEmail'))
+            .required(t('signAndLogForm.required')),
+          phoneNumber: Yup.string()
+            .matches(phoneRegex, t('signAndLogForm.invalidMobile'))
+            .required(t('signAndLogForm.required')),
+          password: Yup.string()
+            .min(8, t('signAndLogForm.minimum8chars'))
+            .max(50, t('signAndLogForm.maximum50chars'))
+            .required(t('signAndLogForm.required')),
+        })}
         render={({
           handleSubmit,
           handleChange,

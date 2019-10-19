@@ -67,12 +67,12 @@ const UserFormsLogin = ({
 
           if (!isLoginSuccessful) {
             setErrors({
-              emailPhone: 'wrong credentials',
-              password: 'wrong credentials',
+              emailPhone: t('signAndLogForm.wrongCredentials'),
+              password: t('signAndLogForm.wrongCredentials'),
             });
           }
         } catch (error) {
-          setErrors({ emailPhone: 'wrong credentials' });
+          setErrors({ emailPhone: t('signAndLogForm.wrongCredentials') });
         }
         setSubmitting(false);
       }}
