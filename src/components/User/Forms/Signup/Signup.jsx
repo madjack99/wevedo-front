@@ -10,7 +10,11 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 
 import config from '../../../../config';
-import { getLocation, getCountries } from '../../../../helpers';
+import {
+  getLocation,
+  getCountries,
+  abbreviationMap,
+} from '../../../../helpers';
 
 import Checkbox from '../../../UI/Checkbox';
 
@@ -107,7 +111,7 @@ const UserFormsSignup = ({
               phoneNumber,
               password,
               country,
-              appearInCountries: getLocation(country),
+              countryCode: abbreviationMap[getLocation(country)],
               profileImageURL,
               deviceOS: 'android', // TO-DO: 'web' should be later
             };
