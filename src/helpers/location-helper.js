@@ -14,6 +14,16 @@ const largestLocations = {
   Jordan: Jordan.default,
 };
 
+// required for user and provider sign up.
+// 2 letter abbreviation will be put into
+// countryCode and appearInCountries and
+// will be used in mobile app
+export const abbreviationMap = {
+  'United Kingdom': 'GB',
+  Malaysia: 'MY',
+  Jordan: 'JO',
+};
+
 export const getLocation = country =>
   Object.keys(locations).find(location =>
     Object.keys(locations[location]).includes(country),

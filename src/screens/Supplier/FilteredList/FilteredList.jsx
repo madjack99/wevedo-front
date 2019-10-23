@@ -47,8 +47,6 @@ const ScreensSupplierFilteredList = ({
     }),
   );
 
-  console.log(supplierLocationQueryString);
-
   const wevedoService = useContext(WevedoServiceContext);
   const supplierCategory = match.params.category;
   const currentPage = +match.params.pageNumber || 1;

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import {
+  abbreviationMap,
   getLocation,
   getCountries,
   getRegionNames,
@@ -33,6 +34,7 @@ const arrayToObject = array =>
   );
 
 export {
+  abbreviationMap,
   getLocation,
   getCountries,
   getRegionNames,
