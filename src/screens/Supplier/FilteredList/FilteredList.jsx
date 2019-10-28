@@ -63,21 +63,23 @@ const ScreensSupplierFilteredList = ({
 
   useEffect(() => {
     const fetchSuppliers = async () => {
-      const {
-        data: {
-          providers: newSuppliers,
-          numberOfProviders: newNumberOfSuppliers,
-        },
-      } = await wevedoService.getSuppliersByFilters(
-        supplierCategory,
-        currentPage,
-        filterOptions,
-        supplierLocationQueryString,
-        config.suppliersPerPage,
-      );
+      if (calculatedCountry) {
+        const {
+          data: {
+            providers: newSuppliers,
+            numberOfProviders: newNumberOfSuppliers,
+          },
+        } = await wevedoService.getSuppliersByFilters(
+          supplierCategory,
+          currentPage,
+          filterOptions,
+          supplierLocationQueryString,
+          config.suppliersPerPage,
+        );
 
-      setSuppliers(newSuppliers);
-      setNumberOfSuppliers(newNumberOfSuppliers);
+        setSuppliers(newSuppliers);
+        setNumberOfSuppliers(newNumberOfSuppliers);
+      }
     };
     fetchSuppliers();
   }, [
@@ -85,7 +87,7 @@ const ScreensSupplierFilteredList = ({
     currentPage,
     supplierCategory,
     filterOptions,
-    supplierLocationQueryString,
+    calculatedCountry,
   ]);
 
   const scrollToSupplierList = () => {

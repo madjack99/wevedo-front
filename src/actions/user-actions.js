@@ -66,7 +66,7 @@ export const removeUser = () => ({
 
 const setDetectedCountry = detectedCountry => ({
   type: actionTypes.SET_DETECTED_COUNTRY,
-  payload: detectedCountry,
+  payload: detectedCountry || 'United Kingdom',
 });
 
 export const detectCountryByIp = () => {
