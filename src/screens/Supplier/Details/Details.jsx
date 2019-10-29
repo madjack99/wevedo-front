@@ -103,7 +103,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             <hr className="hr-xs" />
             {supplier.website ? (
               <div className="d-block mb-4">
-                <b className="text-uppercase text-muted">Website:</b>
+                <b className="text-uppercase text-muted">
+                  {t('supplier.contactSection.website')}
+                </b>
                 {isUrl(supplier.website) ? (
                   transformUrl(supplier.website)
                 ) : (
@@ -113,7 +115,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             ) : null}
             {supplier.email ? (
               <div className="d-block mb-4">
-                <b className="text-uppercase text-muted mb-4">Email:</b>
+                <b className="text-uppercase text-muted mb-4">
+                  {t('supplier.contactSection.email')}
+                </b>
                 <a href={`mailto:${supplier.email}`}>
                   <b>{` ${supplier.email}`}</b>
                 </a>
@@ -121,7 +125,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
             ) : null}
             {supplier.phoneNumber ? (
               <div className="d-block mb-4">
-                <b className="text-uppercase text-muted mb-4">Number:</b>
+                <b className="text-uppercase text-muted mb-4">
+                  {t('supplier.contactSection.number')}
+                </b>
                 <b>{` ${supplier.phoneNumber}`}</b>
               </div>
             ) : null}
@@ -150,7 +156,9 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                       isLoggedIn ? setModalShow(true) : history.push('/login')
                     }
                   >
-                    {`Send a message to ${supplier.fullName}`}
+                    {`${t('supplier.sendAMessage.button')} ${
+                      supplier.fullName
+                    }`}
                   </Button>
                   <SupplierMessageDialog
                     show={modalShow}
@@ -168,14 +176,22 @@ const SupplierDetails = ({ isLoggedIn, user, match, t, history }) => {
                   <div className="supplier-results-side-box">
                     {supplier.minPrice && supplier.maxPrice ? (
                       <div className="mb-4">
-                        <b className="text-uppercase text-muted">Budget</b>
+                        <b className="text-uppercase text-muted">
+                          {t('supplier.results.budget')}
+                        </b>
                         <hr className="hr-xs" />
-                        <b>{`£${supplier.minPrice} - £${supplier.maxPrice}`}</b>
+                        <b>{`${t('supplier.results.currency')}${
+                          supplier.minPrice
+                        } - ${t('supplier.results.currency')}${
+                          supplier.maxPrice
+                        }`}</b>
                       </div>
                     ) : null}
                     {supplier.facilities ? (
                       <div>
-                        <b className="text-uppercase text-muted">Services</b>
+                        <b className="text-uppercase text-muted">
+                          {t('supplier.results.services')}
+                        </b>
                         <hr className="hr-xs" />
                         <b>{supplier.facilities}</b>
                       </div>

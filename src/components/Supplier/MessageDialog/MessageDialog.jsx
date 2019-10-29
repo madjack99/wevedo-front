@@ -10,7 +10,14 @@ import modalimg from '../../../assets/images/wedding dress.png';
 
 import { WevedoServiceContext } from '../../../contexts';
 
-const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
+const SupplierMessageDialog = ({
+  show,
+  onHide,
+  supplier,
+  user,
+  history,
+  t,
+}) => {
   const [message, setMessage] = useState('');
 
   const wevedoService = useContext(WevedoServiceContext);
@@ -57,29 +64,42 @@ const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
           </Col>
           <Col sm={8}>
             <Form onSubmit={onSubmit}>
-              <h5>Send a message to {supplier.fullName}</h5>
+              <h5>
+                {t('supplier.sendAMessage.button')} {supplier.fullName}
+              </h5>
               <hr className="hr-sm m-0 mt-3 mb-4 d-none d-md-block" />
               <Row>
                 <Col sm={12} className="mb-4">
                   <Form.Group controlId="">
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control
+                      type="text"
+                      placeholder={t('supplier.sendAMessage.namePlaceholder')}
+                    />
                   </Form.Group>
                 </Col>
                 <Col sm={6}>
                   <Form.Group controlId="">
-                    <Form.Control type="email" placeholder="Email" />
+                    <Form.Control
+                      type="email"
+                      placeholder={t('supplier.sendAMessage.emailPlaceholder')}
+                    />
                   </Form.Group>
                 </Col>
                 <Col sm={6}>
                   <Form.Group controlId="">
-                    <Form.Control type="number" placeholder="Mobile Number" />
+                    <Form.Control
+                      type="number"
+                      placeholder={t('supplier.sendAMessage.mobilePlaceholder')}
+                    />
                   </Form.Group>
                 </Col>
                 <Col sm={12} className="mt-4 mb-4">
                   <Form.Group controlId="">
                     <Form.Control
                       as="textarea"
-                      placeholder="Message"
+                      placeholder={t(
+                        'supplier.sendAMessage.messagePlaceholder',
+                      )}
                       rows="3"
                       onChange={e => setMessage(e.target.value)}
                     />
@@ -87,7 +107,7 @@ const SupplierMessageDialog = ({ show, onHide, supplier, user, history }) => {
                 </Col>
                 <Col className="text-center text-uppercase">
                   <Button type="submit" size="lg">
-                    Send
+                    {t('supplier.sendAMessage.sendBtn')}
                   </Button>
                 </Col>
               </Row>

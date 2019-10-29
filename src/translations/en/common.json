@@ -13,17 +13,7 @@
   "privacy": {
     "jumbotron": "Privacy Policy",
     "mainTitle": "Data protection policy",
-    "wevedosPrivacyPolicy": "Wevedo’s Privacy Policy",
-    "firstText": {
-      "titleOne": "1. Controller",
-      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    },
-    "secondText": {
-      "titleOne": "2. Personal data",
-      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    }
+    "wevedosPrivacyPolicy": "Wevedo’s Privacy Policy"
   },
   "home": {
     "jumbotron": {
@@ -66,23 +56,16 @@
     "title": "Weddingtools page"
   },
   "supplier": {
-    "jumbotron": "Fulham Palace",
-    "section": {
-      "primaryTitle": "Fulham Palace",
-      "subTitle": "Church Road, Clearwell, Forest of Dean Gloucestershire, GL16 8LG",
-      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "pTwo": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
-    },
     "contactSection": {
       "title": "Contact",
-      "website": "Website",
-      "email": "Email",
-      "number": "Number",
+      "website": "Website:",
+      "email": "Email:",
+      "number": "Number:",
       "findUs": "Find us"
     },
     "sendAMessage": {
       "button": "Send a message to supplier",
-      "modalTitle": "Send a message to Supplier Name",
+      "modalTitle": "Send a message to",
       "namePlaceholder": "Name",
       "emailPlaceholder": "Email",
       "mobilePlaceholder": "Mobile number",
@@ -91,7 +74,7 @@
     },
     "results": {
       "budget": "Budget",
-      "amount": "£8.500 - £50.000",
+      "currency": "£",
       "services": "Services",
       "servicesList": "Photography, Ballroom, Spa On-Site, albums, mini albums, digital album, high resolution photos."
     },
@@ -100,17 +83,7 @@
   "terms": {
     "jumbotron": "Terms & Conditions",
     "mainTitle": "Legal terms and conditions for users of the wevedo website",
-    "wevedosTermsAndConditions": "Wevedo’s Terms & Conditions",
-    "firstText": {
-      "titleOne": "1. Legal Information",
-      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    },
-    "secondText": {
-      "titleOne": "2. Purpose",
-      "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pTwo": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    }
+    "wevedosTermsAndConditions": "Wevedo’s Terms & Conditions"
   },
 
   "pricing": {
@@ -242,8 +215,7 @@
   "businessAndUserSignup": {
     "jumbotron": {
       "largeTitle": "Hey,",
-      "smallTitle": "Glad to see you...",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "smallTitle": "Glad to see you..."
     }
   },
 
@@ -277,7 +249,7 @@
       "wrongCode": "wrong code provided",
       "wantChangePassword": "Want to change your password?",
       "passwordWasChanged": "password was successfully changed",
-      "youWillReceiveInstructions": "You will recieve an email with instructions.",
+      "youWillReceiveInstructions": "You will receive an email with instructions.",
       "changePassword": "Change password",
       "newPasswordPlaceholder": "New password",
       "confirmPasswordPlaceholder": "Confirm password",
