@@ -14,7 +14,7 @@ const PrivacyPolicy = ({ t }) => (
   >
     <Container className="document mt-2 mb-2 mt-md-5 mb-md-5">
       <div className="document__block">
-        <h2 className="document__name">Wevedo’s Privacy Policy</h2>
+        <h2 className="document__name">{t('privacy.wevedosPrivacyPolicy')}</h2>
         <hr />
         <p className="document__text">
           At Wevedo, your privacy is of the utmost importance to us and we are

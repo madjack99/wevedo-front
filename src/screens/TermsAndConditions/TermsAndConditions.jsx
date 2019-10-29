@@ -15,7 +15,9 @@ const TermsAndConditions = ({ t }) => (
   >
     <Container className="document mt-2 mb-2 mt-md-5 mb-md-5">
       <div className="document__block">
-        <h2 className="document__name">Wevedo’s Terms & Conditions</h2>
+        <h2 className="document__name">
+          {t('terms.wevedosTermsAndConditions')}
+        </h2>
         <hr />
       </div>
       <div className="document__block">

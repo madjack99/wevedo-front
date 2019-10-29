@@ -8,15 +8,12 @@
     "sendBtn": "Send"
   },
   "popularSearches": {
-    "title": "Popular venue searches",
-    "essex": "Essex",
-    "hertforshire": "Hertforshire",
-    "westMidlands": "West Midlands",
-    "hampshire": "Hampshire"
+    "title": "Popular venue searches"
   },
   "privacy": {
     "jumbotron": "Privacy Policy",
     "mainTitle": "Data protection policy",
+    "wevedosPrivacyPolicy": "Wevedo’s Privacy Policy",
     "firstText": {
       "titleOne": "1. Controller",
       "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -103,6 +100,7 @@
   "terms": {
     "jumbotron": "Terms & Conditions",
     "mainTitle": "Legal terms and conditions for users of the wevedo website",
+    "wevedosTermsAndConditions": "Wevedo’s Terms & Conditions",
     "firstText": {
       "titleOne": "1. Legal Information",
       "pOne": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
