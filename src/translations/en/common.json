@@ -55,6 +55,8 @@
       "honeymoon": "Honeymoon"
     },
     "findForm": {
+      "venue": "Venue",
+      "location": "Location",
       "title": "Find your best wedding supplier by location",
       "category": "Category",
       "options": "...",
@@ -332,5 +334,10 @@
     "warning": "Your account under review",
     "danger": "Something is not right with your account. Please contact us on info@wevedo.com",
     "success": "Your account is active"
+  },
+  "filterPanel": {
+    "budget": "Budget",
+    "applyFilter": "Apply Filter",
+    "clear": "Clear"
   }
 }

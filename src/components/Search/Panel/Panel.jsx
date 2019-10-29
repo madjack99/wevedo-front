@@ -35,8 +35,12 @@ const SearchPanel = ({
     allRegionNames = allRegionNames.concat(countryRegionNames);
   });
 
-  const [supplierCategory, setSupplierCategory] = useState('Venue');
-  const [supplierLocation, setSupplierLocation] = useState('Location');
+  const [supplierCategory, setSupplierCategory] = useState(
+    t('home.findForm.venue'),
+  );
+  const [supplierLocation, setSupplierLocation] = useState(
+    t('home.findForm.location'),
+  );
   const handleSubmit = e => {
     e.preventDefault();
     if (supplierCategory !== '' && supplierLocation !== '') {

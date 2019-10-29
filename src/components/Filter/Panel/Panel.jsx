@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import { Row, Col, Form, Button, ButtonToolbar } from 'react-bootstrap';
 import { Range } from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
+const FilterPanel = ({ setFilterOptions, onHideDialog, match, t }) => {
   const budgetDefaultValues = [0, 100000];
   const [budgetValues, setBudgetValues] = useState([...budgetDefaultValues]);
 
@@ -62,7 +63,7 @@ const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
       <Form>
         <div className="mb-5">
           <div className="mb-3">
-            <b>Budget</b>
+            <b>{t('filterPanel.budget')}</b>
           </div>
           <Row>
             <Col sm={12}>
@@ -182,14 +183,14 @@ const FilterPanel = ({ setFilterOptions, onHideDialog, match }) => {
             }
           }}
         >
-          Apply Filter
+          {t('filterPanel.applyFilter')}
         </Button>
         <Button variant="dark" onClick={handleClear}>
-          Clear
+          {t('filterPanel.clear')}
         </Button>
       </ButtonToolbar>
     </React.Fragment>
   );
 };
 
-export default withRouter(FilterPanel);
+export default withTranslation('common')(withRouter(FilterPanel));

@@ -340,7 +340,7 @@ const CategoryDropdown = ({ categories, t }) => {
   );
 
   return (
-    <NavDropdown title="Suppliers" className="d-none d-lg-block">
+    <NavDropdown title={t('header.suppliers')} className="d-none d-lg-block">
       <Row>
         <div className="active-menu d-none d-lg-block" />
         <Col sm={8}>
