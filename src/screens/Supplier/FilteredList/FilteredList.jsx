@@ -88,6 +88,7 @@ const ScreensSupplierFilteredList = ({
     supplierCategory,
     filterOptions,
     calculatedCountry,
+    supplierLocationQueryString
   ]);
 
   const scrollToSupplierList = () => {
